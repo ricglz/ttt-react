@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+h1{
+  font-size: 32px;
+}
+h2{
+  font-size: 28px;
+}
+
+#board {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+p{
+  font-size: 150%;
+}
+
+.oScore{
+  margin-right: 2%;
+}
+
+.oSign, .oScore{
+  color: #44E;
+  float: right;
+}
+
+.xSign{
+  margin-left: 2%;
+}
+
+.xScore, .xSign{
+  color: #E44;
+  float: left;
+}
+
+a{
+  color: #111;
+  font-size: 150%;
+}
+
+hr{
+  border: 0.38px solid;
+}
+
+.big-box{
+  height: 135px;
+  border: 2.5px solid black;
+  padding: 0px;
+}
+
+.box {
+  border: 1px solid black;
+  margin: auto 0;
+  font-size: 240%;
+  text-align: center;
+  height: 44px;
+}
+
+.X{
+  color: #E44;
+}
+
+.O{
+  color: #44E;
+}
+
+/*.last-play{
+  color: yellow;
+}*/
+
+.btn-danger{
+  background-color: blue;
+  border-color: black;
+}
