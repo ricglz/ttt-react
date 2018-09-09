@@ -9,7 +9,7 @@ class HomeButton extends Component {
   render() {
     return(
       <div className="row justify-content-center">
-        <button type="button" onClick = {this.props.func} className="btn"> 
+        <button type="button" onClick = {this.props.func} className="btn btn-home"> 
           {this.props.text} 
         </button>
       </div>
