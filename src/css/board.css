@@ -16,7 +16,7 @@ h2{
 }
 
 p{
-  font-size: 150%;
+  font-size: 18px;
 }
 
 .oScore{
@@ -68,11 +68,16 @@ hr{
   color: #44E;
 }
 
-/*.last-play{
-  color: yellow;
-}*/
+div.cell-row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
 
 .btn-danger{
   background-color: blue;
   border-color: black;
+}
+
+button.btn-game {
+  height: 65%;
 }
