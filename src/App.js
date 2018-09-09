@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Home from './Home';
+import Game from './Game';
 import './css/bootstrap.css'
 import './css/home.css'
+import './css/board.css'
 import './css/fonts.css'
 
 class App extends Component {
@@ -39,7 +41,9 @@ class App extends Component {
   render() {
     if (this.state.ai) {
       return (
-        <p> AI place</p>
+        <Game
+          back = {this.changeToHome}
+        />
       )
     } else if(this.state.pvp) {
       return (
