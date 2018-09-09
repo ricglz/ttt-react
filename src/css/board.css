@@ -68,9 +68,10 @@ hr{
   color: #44E;
 }
 
-/*.last-play{
-  color: yellow;
-}*/
+div.cell-row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
 
 .btn-danger{
   background-color: blue;
