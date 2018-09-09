@@ -76,3 +76,7 @@ hr{
   background-color: blue;
   border-color: black;
 }
+
+button.btn-game {
+  height: 65%;
+}
