@@ -5,9 +5,27 @@ class Row extends Component {
   render(){
     return (
       <div className="row cell-row">
-        <Cell/>
-        <Cell/>
-        <Cell/>
+        <Cell
+          cellNum={this.props.rowNum}
+          boardNum={this.props.boardNum}
+          boardGame={this.props.boardGame}
+          currentBoard={this.props.currentBoard}            
+          handleClick={this.props.handleClick}
+        />
+        <Cell
+          cellNum={this.props.rowNum + 1}
+          boardNum={this.props.boardNum}
+          boardGame={this.props.boardGame}
+          currentBoard={this.props.currentBoard}            
+          handleClick={this.props.handleClick}
+        />
+        <Cell
+          cellNum={this.props.rowNum + 2}
+          boardNum={this.props.boardNum}
+          boardGame={this.props.boardGame}
+          currentBoard={this.props.currentBoard}            
+          handleClick={this.props.handleClick}
+        />
       </div>
     );
   }
