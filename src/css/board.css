@@ -81,3 +81,7 @@ div.cell-row {
 button.btn-game {
   height: 65%;
 }
+
+.grey-bg {
+  background-color: #999;
+}
