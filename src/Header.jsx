@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import changeScore from './ChangeScore';
 
 class Header extends Component {
   constructor(props) {
     super();
     this.props = props;
-    this.state = {
-      oWins: 0,
-      xWins: 0
-    };
-    changeScore.bind(this);
   }
 
   render() {
@@ -24,10 +18,10 @@ class Header extends Component {
         <div className="col-12">
           <div className="row justify-content-between">
             <div className="col-2 xScore">
-              <p> X's score: {this.state.xWins} </p>
+              <p> X's score: {this.props.xScore} </p>
             </div>
             <div className="col-2 oScore">
-              <p> O's score: {this.state.oWins} </p>
+              <p> O's score: {this.props.oScore} </p>
             </div>
           </div>
         </div>  
