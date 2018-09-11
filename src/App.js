@@ -47,7 +47,9 @@ class App extends Component {
       )
     } else if(this.state.pvp) {
       return (
-        <p> PVP place </p>
+        <Game
+          back = {this.changeToHome}
+        />
       );
     }
     else {
