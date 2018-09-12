@@ -3,6 +3,7 @@ import Header from './Header';
 import BigBoard from './BigBoard';
 import ButtonsFooter from './ButtonsFooter';
 import { isOccupied, theresAWinner } from './Functions';
+import makeMove from './Ai';
 
 class Game extends Component {
   constructor(props) {
@@ -39,21 +40,35 @@ class Game extends Component {
         this.newGame();
       }
       else {
-        this.setState({
-          boardGame: boardCopy,
-          moveNumber: newMoveNumber,
-          currentBoard: id
-        })
-        if (this.state.currentPlayer === this.CONSTANTS.PLAYER1) {
+        if (this.props.ai) {
+          var aiMove =  makeMove(boardCopy[id]);
+          boardCopy[id][aiMove] = -1;
           this.setState({
-            currentPlayer: this.CONSTANTS.PLAYER2,
+            boardGame: boardCopy,
+            moveNumber: newMoveNumber + 1,
+            currentBoard: aiMove
           });
         } else {
-          this.setState({
-            currentPlayer: this.CONSTANTS.PLAYER1,
-          });
+          this.pvpMove(boardCopy, newMoveNumber, id); 
         }
       }
+    }
+  }
+
+  pvpMove(boardCopy, newMoveNumber, id) {
+    this.setState({
+      boardGame: boardCopy,
+      moveNumber: newMoveNumber,
+      currentBoard: id
+    })
+    if (this.state.currentPlayer === this.CONSTANTS.PLAYER1) {
+      this.setState({
+        currentPlayer: this.CONSTANTS.PLAYER2,
+      });
+    } else {
+      this.setState({
+        currentPlayer: this.CONSTANTS.PLAYER1,
+      });
     }
   }
 
