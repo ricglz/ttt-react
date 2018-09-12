@@ -27,9 +27,6 @@ class Game extends Component {
 
   handleSquareClick(board, id) {
     if (this.canClick(board, id)) {
-      console.log("Id " + id);
-      console.log("Board " + board);
-      console.log("CBoard " +this.state.currentBoard);
       var boardCopy = [...this.state.boardGame];
       var newMoveNumber = this.state.moveNumber + 1;
       boardCopy[board][id] = this.currentTurn();
