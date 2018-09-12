@@ -1,4 +1,4 @@
-import {isOccupied} from './Functions';
+import {isOccupied} from './HelperFunctions';
 
 var boardCopy = null;
 
