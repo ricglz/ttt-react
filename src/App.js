@@ -42,12 +42,14 @@ class App extends Component {
     if (this.state.ai) {
       return (
         <Game
+          ai = {true}
           back = {this.changeToHome}
         />
       )
     } else if(this.state.pvp) {
       return (
         <Game
+          ai = {false}
           back = {this.changeToHome}
         />
       );
