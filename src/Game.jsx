@@ -53,11 +53,17 @@ class Game extends Component {
   aiMove(boardCopy, id, newMoveNumber) {
     var aiMove =  makeMove(boardCopy[id]);
     boardCopy[id][aiMove] = -1;
-    this.setState({
-      boardGame: boardCopy,
-      moveNumber: newMoveNumber + 1,
-      currentBoard: aiMove
-    });
+    const winner = theresAWinner(boardCopy[id]);
+    if (winner) {
+      this.changeScore(winner);
+      this.newGame();
+    } else {
+      this.setState({
+        boardGame: boardCopy,
+        moveNumber: newMoveNumber + 1,
+        currentBoard: aiMove
+      });
+    }
   }
 
   pvpMove(boardCopy, newMoveNumber, id) {
