@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import Header from './Header';
 import BigBoard from './BigBoard';
 import ButtonsFooter from './ButtonsFooter';
-import { isOccupied, theresAWinner } from './Functions';
+import { isOccupied, theresAWinner, 
+        constructorState, initialState} from './HelperFunctions';
 import makeMove from './Ai';
 
 class Game extends Component {
   constructor(props) {
     super();
     this.props = props;
-    this.state = this.constructorState();
+    this.state = constructorState();
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.newGame = this.newGame.bind(this);
     this.changeScore = this.changeScore.bind(this);
   }
 
   CONSTANTS = {
-    PLAYER1: "Player 1",
-    PLAYER2: "COM"
+    PLAYER1: "X",
+    PLAYER2: "O"
   };
 
   canClick(board, id) {
@@ -31,7 +32,7 @@ class Game extends Component {
       var boardCopy = [...this.state.boardGame];
       var newMoveNumber = this.state.moveNumber + 1;
       boardCopy[board][id] = this.currentTurn();
-      const winner = this.existsWinner(boardCopy[board]);
+      const winner = theresAWinner(boardCopy[board]);
       if (winner) {
         this.changeScore(winner);
         this.newGame();
@@ -41,18 +42,22 @@ class Game extends Component {
       }
       else {
         if (this.props.ai) {
-          var aiMove =  makeMove(boardCopy[id]);
-          boardCopy[id][aiMove] = -1;
-          this.setState({
-            boardGame: boardCopy,
-            moveNumber: newMoveNumber + 1,
-            currentBoard: aiMove
-          });
+          this.aiMove(boardCopy, id, newMoveNumber);
         } else {
           this.pvpMove(boardCopy, newMoveNumber, id); 
         }
       }
     }
+  }
+
+  aiMove(boardCopy, id, newMoveNumber) {
+    var aiMove =  makeMove(boardCopy[id]);
+    boardCopy[id][aiMove] = -1;
+    this.setState({
+      boardGame: boardCopy,
+      moveNumber: newMoveNumber + 1,
+      currentBoard: aiMove
+    });
   }
 
   pvpMove(boardCopy, newMoveNumber, id) {
@@ -76,10 +81,6 @@ class Game extends Component {
     return this.state.currentPlayer === this.CONSTANTS.PLAYER1 ? 1 : -1;
   }
 
-  existsWinner(board) {
-    return theresAWinner(board);
-  }
-
   changeScore(value) {
     var newCount;
     if (value === -1) {
@@ -95,40 +96,8 @@ class Game extends Component {
     }
   }
 
-  newBoard() {
-    return [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0]];
-  }
-
-  initialState() {
-    return {
-      boardGame: this.newBoard(),
-      currentPlayer: this.CONSTANTS.PLAYER1,
-      moveNumber: 0,
-      currentBoard: -1
-    };
-  }
-
-  constructorState() {
-    return {
-      boardGame: this.newBoard(),
-      currentPlayer: this.CONSTANTS.PLAYER1,
-      moveNumber: 0,
-      currentBoard: -1,
-      oWins: 0,
-      xWins: 0
-    };
-  }
-
   newGame() {
-    this.setState(this.initialState());
+    this.setState(initialState());
   }
 
   render() {

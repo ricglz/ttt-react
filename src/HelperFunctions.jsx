@@ -30,3 +30,35 @@ export function theresAWinner(board) {
   boardCopy = board;
   return columnWin() || rowWin() || diagonalWin();
 }
+
+export function newBoard() {
+  return [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+}
+
+export function initialState() {
+  return {
+    boardGame: newBoard(),
+    currentPlayer: "X",
+    moveNumber: 0,
+    currentBoard: -1
+  };
+}
+
+export function constructorState() {
+  return {
+    boardGame: newBoard(),
+    currentPlayer: "X",
+    moveNumber: 0,
+    currentBoard: -1,
+    oWins: 0,
+    xWins: 0
+  };
+}
