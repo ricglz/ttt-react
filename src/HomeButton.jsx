@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
 class HomeButton extends Component {
   constructor(props) {
@@ -7,10 +7,14 @@ class HomeButton extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="row justify-content-center">
-        <button type="button" onClick = {this.props.func} className="btn btn-home"> 
-          {this.props.text} 
+        <button
+          type="button"
+          onClick={this.props.func}
+          className="btn btn-home"
+        >
+          {this.props.text}
         </button>
       </div>
     );

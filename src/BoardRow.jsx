@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Board from './Board';
+import React, { Component } from "react";
+import Board from "./Board";
 
 class BoardRow extends Component {
   constructor(props) {
@@ -7,25 +7,25 @@ class BoardRow extends Component {
     this.props = props;
   }
 
-  render(){
+  render() {
     return (
       <div className="row">
         <Board
           boardNum={this.props.rowNum}
           boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}            
+          currentBoard={this.props.currentBoard}
           handleClick={this.props.handleClick}
         />
         <Board
           boardNum={this.props.rowNum + 1}
           boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}            
+          currentBoard={this.props.currentBoard}
           handleClick={this.props.handleClick}
         />
         <Board
           boardNum={this.props.rowNum + 2}
           boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}            
+          currentBoard={this.props.currentBoard}
           handleClick={this.props.handleClick}
         />
       </div>

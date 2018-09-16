@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
-import Header from './Header';
-import BigBoard from './BigBoard';
-import ButtonsFooter from './ButtonsFooter';
-import { isOccupied, theresAWinner, 
-        constructorState, initialState} from './HelperFunctions';
-import makeMove from './Ai';
+import React, { Component } from "react";
+import Header from "./Header";
+import BigBoard from "./BigBoard";
+import ButtonsFooter from "./ButtonsFooter";
+import {
+  isOccupied,
+  theresAWinner,
+  constructorState,
+  initialState
+} from "./HelperFunctions";
+import makeMove from "./Ai";
 
 class Game extends Component {
   constructor(props) {
@@ -36,22 +40,20 @@ class Game extends Component {
       if (winner) {
         this.changeScore(winner);
         this.newGame();
-      }
-      else if(newMoveNumber === 81){
+      } else if (newMoveNumber === 81) {
         this.newGame();
-      }
-      else {
+      } else {
         if (this.props.ai) {
           this.aiMove(boardCopy, id, newMoveNumber);
         } else {
-          this.pvpMove(boardCopy, newMoveNumber, id); 
+          this.pvpMove(boardCopy, newMoveNumber, id);
         }
       }
     }
   }
 
   aiMove(boardCopy, id, newMoveNumber) {
-    var aiMove =  makeMove(boardCopy[id]);
+    var aiMove = makeMove(boardCopy[id]);
     boardCopy[id][aiMove] = -1;
     const winner = theresAWinner(boardCopy[id]);
     if (winner) {
@@ -71,14 +73,14 @@ class Game extends Component {
       boardGame: boardCopy,
       moveNumber: newMoveNumber,
       currentBoard: id
-    })
+    });
     if (this.state.currentPlayer === this.CONSTANTS.PLAYER1) {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER2,
+        currentPlayer: this.CONSTANTS.PLAYER2
       });
     } else {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER1,
+        currentPlayer: this.CONSTANTS.PLAYER1
       });
     }
   }
@@ -109,21 +111,15 @@ class Game extends Component {
   render() {
     return (
       <div className="container text-center">
-        <Header
-          oScore={ this.state.oWins }
-          xScore={ this.state.xWins }
-        />
-        <hr/>
+        <Header oScore={this.state.oWins} xScore={this.state.xWins} />
+        <hr />
         <BigBoard
           handleClick={this.handleSquareClick}
           boardGame={this.state.boardGame}
           currentBoard={this.state.currentBoard}
         />
-        <hr/>
-        <ButtonsFooter
-          back={this.props.back}
-          reset={this.newGame}
-        />
+        <hr />
+        <ButtonsFooter back={this.props.back} reset={this.newGame} />
       </div>
     );
   }

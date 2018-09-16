@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class BoardButton extends Component {
   constructor(props) {
@@ -7,12 +7,12 @@ class BoardButton extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="col-2">
-        <button 
+        <button
           className="btn btn-game btn-lg btn-danger"
-          onClick={this.props.func} 
-          >
+          onClick={this.props.func}
+        >
           <p>{this.props.text}</p>
         </button>
       </div>

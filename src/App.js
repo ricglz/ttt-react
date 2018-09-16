@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Home from './Home';
-import Game from './Game';
-import './css/bootstrap.css'
-import './css/home.css'
-import './css/board.css'
-import './css/fonts.css'
+import React, { Component } from "react";
+import Home from "./Home";
+import Game from "./Game";
+import "./css/bootstrap.css";
+import "./css/home.css";
+import "./css/board.css";
+import "./css/fonts.css";
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends Component {
 
   changeToAi() {
     this.setState({
-      ai: true,
+      ai: true
     });
   }
 
@@ -40,26 +40,12 @@ class App extends Component {
 
   render() {
     if (this.state.ai) {
+      return <Game ai={true} back={this.changeToHome} />;
+    } else if (this.state.pvp) {
+      return <Game ai={false} back={this.changeToHome} />;
+    } else {
       return (
-        <Game
-          ai = {true}
-          back = {this.changeToHome}
-        />
-      )
-    } else if(this.state.pvp) {
-      return (
-        <Game
-          ai = {false}
-          back = {this.changeToHome}
-        />
-      );
-    }
-    else {
-      return (
-        <Home
-          changeToAi = {this.changeToAi}
-          changeToPvp = {this.changeToPvp}
-        />
+        <Home changeToAi={this.changeToAi} changeToPvp={this.changeToPvp} />
       );
     }
   }

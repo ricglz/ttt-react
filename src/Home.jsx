@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import HomeButton from './HomeButton';
+import React, { Component } from "react";
+import HomeButton from "./HomeButton";
 
 class Home extends Component {
   constructor(props) {
@@ -8,23 +8,17 @@ class Home extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="container text-center">
-        <div className = "row">
-          <div className = "col">
+        <div className="row">
+          <div className="col">
             <h1>Home Page</h1>
           </div>
         </div>
-        <hr></hr>
-        <HomeButton
-          func = {this.props.changeToAi}
-          text = "Single Player"
-        />
-        <hr></hr>
-        <HomeButton
-          func = {this.props.changeToPvp}
-          text = "Local Multiplayer"
-        />
+        <hr />
+        <HomeButton func={this.props.changeToAi} text="Single Player" />
+        <hr />
+        <HomeButton func={this.props.changeToPvp} text="Local Multiplayer" />
       </div>
     );
   }
