@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import BoardButton from './BoardButton';
+import React, { Component } from "react";
+import BoardButton from "./BoardButton";
 
 class ButtonsFooter extends Component {
   constructor(props) {
@@ -8,16 +8,10 @@ class ButtonsFooter extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="row justify-content-center">
-        <BoardButton
-          text="Reset"
-          func={this.props.reset}
-        />
-        <BoardButton
-          text="Back"
-          func={this.props.back}
-        />
+        <BoardButton text="Reset" func={this.props.reset} />
+        <BoardButton text="Back" func={this.props.back} />
       </div>
     );
   }

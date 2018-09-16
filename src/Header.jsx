@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Header extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class Header extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="row">
         <div className="col-12">
           <h1>Single Player</h1>
@@ -24,7 +24,7 @@ class Header extends Component {
               <p> O's score: {this.props.oScore} </p>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     );
   }

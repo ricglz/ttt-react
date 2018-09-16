@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Cell extends Component {
   constructor(props) {
@@ -17,18 +17,19 @@ class Cell extends Component {
       case -1:
         return "O";
       default:
-        return  "";
+        return "";
     }
   }
 
-  render(){
+  render() {
     return (
-      <div className="col-4 box"
-        onClick={() => this.props.handleClick(this.props.boardNum, this.props.cellNum)}
+      <div
+        className="col-4 box"
+        onClick={() =>
+          this.props.handleClick(this.props.boardNum, this.props.cellNum)
+        }
       >
-        <p className={this.drawValue()}>
-          {this.drawValue()}
-        </p>
+        <p className={this.drawValue()}>{this.drawValue()}</p>
       </div>
     );
   }
