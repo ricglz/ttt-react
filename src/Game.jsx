@@ -8,7 +8,7 @@ import {
   constructorState,
   initialState
 } from "./HelperFunctions";
-import makeMove from "./Ai";
+import makeMove, { playerMadeAMove, cleanVariables, aiMadeAMove } from "./Ai";
 
 class Game extends Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class Game extends Component {
         this.newGame();
       } else {
         if (this.props.ai) {
+          playerMadeAMove(board, boardCopy[board]);
           this.aiMove(boardCopy, id, newMoveNumber);
         } else {
           this.pvpMove(boardCopy, newMoveNumber, id);
@@ -53,13 +54,14 @@ class Game extends Component {
   }
 
   aiMove(boardCopy, id, newMoveNumber) {
-    var aiMove = makeMove(boardCopy[id]);
+    var aiMove = makeMove(boardCopy[id], id);
     boardCopy[id][aiMove] = -1;
     const winner = theresAWinner(boardCopy[id]);
     if (winner) {
       this.changeScore(winner);
       this.newGame();
     } else {
+      aiMadeAMove(id, boardCopy[id]);
       this.setState({
         boardGame: boardCopy,
         moveNumber: newMoveNumber + 1,
@@ -105,6 +107,7 @@ class Game extends Component {
   }
 
   newGame() {
+    cleanVariables();
     this.setState(initialState());
   }
 
