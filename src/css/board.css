@@ -54,10 +54,13 @@ hr{
 
 .box {
   border: 1px solid black;
-  margin: auto 0;
-  font-size: 240%;
+  padding-left: 0.55em;
   text-align: center;
   height: 44px;
+}
+
+div.box p {
+  font-size: 1.5em;
 }
 
 .X{
@@ -84,4 +87,9 @@ button.btn-game {
 
 .grey-bg {
   background-color: #999;
+}
+
+.game.row .col-6, .game .row .col-4{
+  padding-left: 0px;
+  padding-right: 0px;
 }
