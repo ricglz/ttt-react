@@ -4,7 +4,7 @@ import Cell from "./Cell";
 class Row extends Component {
   render() {
     return (
-      <div className="row cell-row">
+      <div className="game row cell-row">
         <Cell
           cellNum={this.props.rowNum}
           boardNum={this.props.boardNum}

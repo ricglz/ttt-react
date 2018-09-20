@@ -17,10 +17,10 @@ class Header extends Component {
         </div>
         <div className="col-12">
           <div className="row justify-content-between">
-            <div className="col-2 xScore">
+            <div className="col xScore">
               <p> X's score: {this.props.xScore} </p>
             </div>
-            <div className="col-2 oScore">
+            <div className="col oScore">
               <p> O's score: {this.props.oScore} </p>
             </div>
           </div>

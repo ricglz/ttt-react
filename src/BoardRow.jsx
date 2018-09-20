@@ -9,7 +9,7 @@ class BoardRow extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="game row">
         <Board
           boardNum={this.props.rowNum}
           boardGame={this.props.boardGame}

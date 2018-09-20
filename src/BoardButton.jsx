@@ -8,7 +8,7 @@ class BoardButton extends Component {
 
   render() {
     return (
-      <div className="col-2">
+      <div className="col">
         <button
           className="btn btn-game btn-lg btn-danger"
           onClick={this.props.func}
