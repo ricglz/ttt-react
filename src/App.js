@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Home from "./Home";
-import Game from "./Game";
+import Home from "./components/Home";
+import Game from "./components/Game";
 import "./css/bootstrap.css";
 import "./css/home.css";
 import "./css/board.css";

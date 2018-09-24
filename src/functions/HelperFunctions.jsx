@@ -1,5 +1,5 @@
 export function isOccupied(value) {
-  return value !== 0; 
+  return value !== 0;
 }
 
 var boardCopy = null;
@@ -8,7 +8,11 @@ function allThree(first, second, third) {
   const firstValue = boardCopy[first];
   const secondValue = boardCopy[second];
   const thirdValue = boardCopy[third];
-  if (firstValue === secondValue && secondValue === thirdValue && isOccupied(firstValue)) {
+  if (
+    firstValue === secondValue &&
+    secondValue === thirdValue &&
+    isOccupied(firstValue)
+  ) {
     return firstValue;
   }
   return null;
@@ -32,15 +36,17 @@ export function theresAWinner(board) {
 }
 
 export function newBoard() {
-  return [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+  return [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
 }
 
 export function initialState() {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
-import BigBoard from "./BigBoard";
+import BigBoard from "./Board/BigBoard";
 import ButtonsFooter from "./ButtonsFooter";
 import DifficultySelect from "./DifficultySelect";
 import {
@@ -8,8 +8,8 @@ import {
   theresAWinner,
   constructorState,
   initialState
-} from "./HelperFunctions";
-import makeMove, { playerMadeAMove, cleanVariables, aiMadeAMove } from "./Ai";
+} from "../functions/HelperFunctions";
+import makeMove, { playerMadeAMove, cleanVariables, aiMadeAMove } from "../functions/Ai";
 
 class Game extends Component {
   constructor(props) {

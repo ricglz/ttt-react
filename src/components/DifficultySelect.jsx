@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import Select from 'react-select';
+import React, { Component } from "react";
+import Select from "react-select";
 
 const options = [
-  { value: 1, label: 'Easy'},
-  { value: 2, label: 'Medium'},
-  { value: 3, label: 'Hard'}
-]
+  { value: 1, label: "Easy" },
+  { value: 2, label: "Medium" },
+  { value: 3, label: "Hard" }
+];
 
 class DifficultySelect extends Component {
   constructor(props) {
