@@ -139,7 +139,7 @@ class Game extends Component {
     }
     return (
       <div className="container text-center">
-        <Header oScore={this.state.oWins} xScore={this.state.xWins} />
+        <Header ai={this.props.ai} oScore={this.state.oWins} xScore={this.state.xWins} />
         <hr />
         <BigBoard
           handleClick={this.handleSquareClick}
