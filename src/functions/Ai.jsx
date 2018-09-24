@@ -108,7 +108,7 @@ function negativeValues(pos) {
 
 function getValue(pos) {
   var value = positiveValues(pos);
-  if(currentDifficulty === 3) value -= negativeValues
+  if (currentDifficulty === 3) value -= negativeValues;
   return value;
 }
 
@@ -215,8 +215,8 @@ export default function makeMove(board, boardId, difficulty) {
   currentBoard = boardId;
   currentDifficulty = difficulty;
   var availableMoves = getAvailableMoves();
-  if (currentDifficulty >= 2) {  
-    availableMoves = deleteElements(availableMoves); 
+  if (currentDifficulty >= 2) {
+    availableMoves = deleteElements(availableMoves);
   }
   return availableMoves[Math.floor(Math.random() * availableMoves.length)].pos;
 }
