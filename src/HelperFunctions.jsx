@@ -54,6 +54,8 @@ export function initialState() {
 
 export function constructorState() {
   return {
+    selectedOption: null,
+    difficulty: 1,
     boardGame: newBoard(),
     currentPlayer: "X",
     moveNumber: 0,

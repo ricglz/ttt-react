@@ -2,6 +2,7 @@ import { isOccupied } from "./HelperFunctions";
 
 var boardCopy = null;
 var currentBoard = null;
+var currentDifficulty = null;
 var amountOccupied = emptyArray();
 var avoidBox = emptyArray();
 
@@ -106,7 +107,9 @@ function negativeValues(pos) {
 }
 
 function getValue(pos) {
-  return positiveValues(pos) - negativeValues(pos);
+  var value = positiveValues(pos);
+  if(currentDifficulty === 3) value -= negativeValues
+  return value;
 }
 
 //Checks which are the more factible actions to play
@@ -200,18 +203,20 @@ export function cleanVariables() {
   avoidBox = emptyArray();
 }
 
-function print(availableMoves) {
+/* function print(availableMoves) {
   for (let i = 0; i < availableMoves.length; i++) {
     const element = availableMoves[i];
     console.log(element.pos + ": " + element.value);
   }
-}
+} */
 
-export default function makeMove(board, boardId) {
+export default function makeMove(board, boardId, difficulty) {
   boardCopy = board;
   currentBoard = boardId;
+  currentDifficulty = difficulty;
   var availableMoves = getAvailableMoves();
-  print(availableMoves);
-  availableMoves = deleteElements(availableMoves);
+  if (currentDifficulty >= 2) {  
+    availableMoves = deleteElements(availableMoves); 
+  }
   return availableMoves[Math.floor(Math.random() * availableMoves.length)].pos;
 }

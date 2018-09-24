@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./Header";
 import BigBoard from "./BigBoard";
 import ButtonsFooter from "./ButtonsFooter";
+import DifficultySelect from "./DifficultySelect";
 import {
   isOccupied,
   theresAWinner,
@@ -18,6 +19,7 @@ class Game extends Component {
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.newGame = this.newGame.bind(this);
     this.changeScore = this.changeScore.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   CONSTANTS = {
@@ -53,8 +55,20 @@ class Game extends Component {
     }
   }
 
+  handleChange(selectedOption) {
+    var difficulty = selectedOption.value;
+    this.setState({
+      selectedOption: selectedOption,
+      difficulty: difficulty
+    });
+    if (this.state.moveNumber >= 0) {
+      this.newGame();
+    }
+  }
+
   aiMove(boardCopy, id, newMoveNumber) {
-    var aiMove = makeMove(boardCopy[id], id);
+    const difficulty = this.state.difficulty;
+    var aiMove = makeMove(boardCopy[id], id, difficulty);
     boardCopy[id][aiMove] = -1;
     const winner = theresAWinner(boardCopy[id]);
     if (winner) {
@@ -112,6 +126,17 @@ class Game extends Component {
   }
 
   render() {
+    let difficulty;
+    if (this.props.ai) {
+      difficulty = (
+        <DifficultySelect
+          selectedOption={this.state.selectedOption}
+          handleChange={this.handleChange}
+        />
+      );
+    } else {
+      difficulty = <div />;
+    }
     return (
       <div className="container text-center">
         <Header oScore={this.state.oWins} xScore={this.state.xWins} />
@@ -122,6 +147,7 @@ class Game extends Component {
           currentBoard={this.state.currentBoard}
         />
         <hr />
+        {difficulty}
         <ButtonsFooter back={this.props.back} reset={this.newGame} />
       </div>
     );
