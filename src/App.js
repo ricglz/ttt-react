@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   changeLocale(newLocale) {
-    console.log(newLocale);
     this.setState({
       locale: newLocale
     });
