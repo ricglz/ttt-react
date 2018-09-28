@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 
 class Header extends Component {
   constructor(props) {
@@ -9,25 +10,28 @@ class Header extends Component {
   render() {
     let text;
     if (this.props.ai) {
-      text = "Single Player";
+      text = <FormattedMessage id="shared.sp" default="Single Player" />;
     } else {
-      text = "Local Multiplayer";
+      text = <FormattedMessage id="shared.mp" default="Local Multiplayer" />;
     }
+    let score = <FormattedMessage id="game.score" default="Score" />;
+    let xScore = <FormattedMessage id="game.xScore" default="X's score" />;
+    let oScore = <FormattedMessage id="game.oScore" default="O's score" />;
     return (
       <div className="row">
         <div className="col-12">
           <h1>{text}</h1>
         </div>
         <div className="col-12">
-          <h2>Score</h2>
+          <h2>{score}</h2>
         </div>
         <div className="col-12">
           <div className="row justify-content-between">
             <div className="col xScore">
-              <p> X's score: {this.props.xScore} </p>
+              <p> {xScore}: {this.props.xScore} </p>
             </div>
             <div className="col oScore">
-              <p> O's score: {this.props.oScore} </p>
+              <p> {oScore}: {this.props.oScore} </p>
             </div>
           </div>
         </div>

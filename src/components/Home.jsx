@@ -9,8 +9,8 @@ class Home extends Component {
   }
 
   render() {
-    let spMessage = <FormattedMessage id="homePage.sp" default="Single Player" />
-    let mpMessage = <FormattedMessage id="homePage.mp" default="Local Multiplayer" />
+    let spMessage = <FormattedMessage id="shared.sp" default="Single Player" />
+    let mpMessage = <FormattedMessage id="shared.mp" default="Local Multiplayer" />
     return (
       <div className="container text-center">
         <div className="row">
