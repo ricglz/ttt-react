@@ -108,7 +108,7 @@ function negativeValues(pos) {
 
 function getValue(pos) {
   var value = positiveValues(pos);
-  if (currentDifficulty === 3) value -= negativeValues;
+  if (currentDifficulty === 3) value -= negativeValues(pos);
   return value;
 }
 
