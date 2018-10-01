@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {NotificationContainer} from "react-notifications";
+import 'react-notifications/lib/notifications.css';
 import Home from "./components/Home";
 import Game from "./components/Game";
 import LanguageFooter from "./components/LanguageFooter";
@@ -6,7 +8,6 @@ import "./css/bootstrap.css";
 import "./css/home.css";
 import "./css/board.css";
 import "./css/fonts.css";
-
 
 class Layout extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class Layout extends Component {
       <div>
         {returningComponent}
         <LanguageFooter changeLocale={this.props.changeLocale} />
+        <NotificationContainer/>
       </div>
     );
   }
