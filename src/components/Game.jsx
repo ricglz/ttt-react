@@ -7,7 +7,8 @@ import {
   isOccupied,
   theresAWinner,
   constructorState,
-  initialState
+  initialState,
+  alertWinner
 } from "../functions/HelperFunctions";
 import makeMove, { playerMadeAMove, cleanVariables, aiMadeAMove } from "../functions/Ai";
 
@@ -40,6 +41,7 @@ class Game extends Component {
       boardCopy[board][id] = this.currentTurn();
       const winner = theresAWinner(boardCopy[board]);
       if (winner) {
+        alertWinner(winner);
         this.changeScore(winner);
         this.newGame();
       } else if (newMoveNumber === 81) {
@@ -72,6 +74,7 @@ class Game extends Component {
     boardCopy[id][aiMove] = -1;
     const winner = theresAWinner(boardCopy[id]);
     if (winner) {
+      alertWinner(winner);
       this.changeScore(winner);
       this.newGame();
     } else {
