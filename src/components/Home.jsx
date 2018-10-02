@@ -9,8 +9,6 @@ class Home extends Component {
   }
 
   render() {
-    let spMessage = <FormattedMessage id="shared.sp" default="Single Player" />
-    let mpMessage = <FormattedMessage id="shared.mp" default="Local Multiplayer" />
     return (
       <div className="container text-center">
         <div className="row">
@@ -20,10 +18,9 @@ class Home extends Component {
             </h1>
           </div>
         </div>
-        <hr />
-        <HomeButton func={this.props.changeToAi} text={spMessage} />
-        <hr />
-        <HomeButton func={this.props.changeToPvp} text={mpMessage} />
+        <HomeButton func={this.props.changeToAi} text="shared.sp" />
+        <HomeButton func={this.props.changeToPvp} text="shared.mp" />
+        <HomeButton func={this.props.changeToTutorial} text="shared.tutorial" />
       </div>
     );
   }
