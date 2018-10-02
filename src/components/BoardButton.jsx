@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 
 class BoardButton extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class BoardButton extends Component {
           className="btn btn-game btn-lg btn-danger"
           onClick={this.props.func}
         >
-          <p>{this.props.text}</p>
+          <FormattedMessage id={this.props.text} default="Back" />
         </button>
       </div>
     );
