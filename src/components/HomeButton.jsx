@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 
 class HomeButton extends Component {
   constructor(props) {
@@ -8,13 +9,13 @@ class HomeButton extends Component {
 
   render() {
     return (
-      <div className="row justify-content-center">
+      <div className="row justify-content-center border-top py-3">
         <button
           type="button"
           onClick={this.props.func}
           className="btn btn-home"
         >
-          {this.props.text}
+          <FormattedMessage id={this.props.text} />
         </button>
       </div>
     );

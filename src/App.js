@@ -1,54 +1,44 @@
 import React, { Component } from "react";
-import Home from "./components/Home";
-import Game from "./components/Game";
-import "./css/bootstrap.css";
-import "./css/home.css";
-import "./css/board.css";
-import "./css/fonts.css";
+import { addLocaleData, IntlProvider } from "react-intl";
+import en from "react-intl/locale-data/en";
+import fr from "react-intl/locale-data/fr";
+import es from "react-intl/locale-data/es";
+import Messages from "./messages/Messages";
+import Layout from "./Layout";
+
+addLocaleData([...en, ...fr, ...es]);
 
 class App extends Component {
   constructor(props) {
     super();
     this.props = props;
     this.state = this.originalState();
-    this.changeToAi = this.changeToAi.bind(this);
-    this.changeToHome = this.changeToHome.bind(this);
-    this.changeToPvp = this.changeToPvp.bind(this);
+    this.changeLocale = this.changeLocale.bind(this);
   }
 
-  changeToAi() {
+  changeLocale(newLocale) {
     this.setState({
-      ai: true
+      locale: newLocale
     });
-  }
-
-  changeToPvp() {
-    this.setState({
-      pvp: true
-    });
-  }
-  changeToHome() {
-    this.setState(this.originalState());
   }
 
   originalState() {
     return {
-      ai: false,
-      pvp: false
+      locale: "en"
     };
   }
-
+  
   render() {
-    if (this.state.ai) {
-      return <Game ai={true} back={this.changeToHome} />;
-    } else if (this.state.pvp) {
-      return <Game ai={false} back={this.changeToHome} />;
-    } else {
-      return (
-        <Home changeToAi={this.changeToAi} changeToPvp={this.changeToPvp} />
-      );
-    }
+    return (
+      <IntlProvider
+        locale={this.state.locale}
+        messages={Messages[this.state.locale]}
+      >
+        <Layout changeLocale={this.changeLocale} />
+      </IntlProvider>
+    );
   }
 }
 
+//
 export default App;

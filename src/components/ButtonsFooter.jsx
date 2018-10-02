@@ -10,8 +10,8 @@ class ButtonsFooter extends Component {
   render() {
     return (
       <div className="row justify-content-center">
-        <BoardButton text="Reset" func={this.props.reset} />
-        <BoardButton text="Back" func={this.props.back} />
+        <BoardButton text="game.reset" func={this.props.reset} />
+        <BoardButton text="shared.back" func={this.props.back} />
       </div>
     );
   }

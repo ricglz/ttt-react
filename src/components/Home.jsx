@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import HomeButton from "./HomeButton";
+import { FormattedMessage } from "react-intl";
 
 class Home extends Component {
   constructor(props) {
@@ -12,13 +13,14 @@ class Home extends Component {
       <div className="container text-center">
         <div className="row">
           <div className="col">
-            <h1>Home Page</h1>
+            <h1>
+              <FormattedMessage id="homePage.title" default="Home Page" />
+            </h1>
           </div>
         </div>
-        <hr />
-        <HomeButton func={this.props.changeToAi} text="Single Player" />
-        <hr />
-        <HomeButton func={this.props.changeToPvp} text="Local Multiplayer" />
+        <HomeButton func={this.props.changeToAi} text="shared.sp" />
+        <HomeButton func={this.props.changeToPvp} text="shared.mp" />
+        <HomeButton func={this.props.changeToTutorial} text="shared.tutorial" />
       </div>
     );
   }

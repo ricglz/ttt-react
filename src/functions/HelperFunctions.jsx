@@ -1,3 +1,10 @@
+import { NotificationManager } from 'react-notifications';
+
+export function alertWinner(winner) {
+  const winnerLabel = winner === 1 ? 'X' : 'O';
+  NotificationManager.info('Player ' + winnerLabel + ' has won.');
+}
+
 export function isOccupied(value) {
   return value !== 0;
 }
