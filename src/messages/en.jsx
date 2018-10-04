@@ -20,7 +20,7 @@ const en = {
     "In the previous image we can see that the next move has to be at the left bottom grid, because it is the only grid with a white background. And that the previous move was done in the center or top right grid, because those are the only ones that have in the bottom left cell an X or an O.",
   "shared.sp": "Single Player",
   "shared.mp": "Local Multiplayer",
-  "shared.tutorial": "Tutorial",
+  "shared.tutorial": "How to play",
   "shared.back": "Back"
 };
 

@@ -20,7 +20,7 @@ const es = {
     "En la imagen anterior podemos ver que el siguiente movimiento tiene que ser en la matriz inferior izquierda, esto se debe a qeu es la única matriz que tiene un fondo blanco. De tal manera se puede saber que el anterior movimiento debió haber sido en la matriz de enmedio o la matriz superior izquierda, porque esas son las únicas que tienen la celda inferior izquierda ocupadas.",
   "shared.sp": "Un jugador",
   "shared.mp": "Multijugador local",
-  "shared.tutorial": "Tutorial",
+  "shared.tutorial": "Cómo jugar",
   "shared.back": "Atrás"
 };
 
