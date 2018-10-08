@@ -15,9 +15,9 @@ const es = {
   "tutorial.third":
     "El primer movimiento siempre va a ser dónde sea, sin importar la celda o matriz, con base en este movimiento se deciden los siguientes. Mira al ejemplo:",
   "tutorial.fourth":
-    "En el ejemplo anterior podía mover donde el quisiera, cabe destacar que el primer jugador siempre va a ser la X. En este caso escogió la celda que está abajo en el medio. Por consiguiente el jugador O va a tener que hacer su movimiento en la matriz que está bajo en medio.",
+    "En el ejemplo anterior podía mover donde él quisiera, cabe destacar que el primer jugador siempre va a ser la X. En este caso escogió la celda que está abajo en el medio. Por consiguiente, el jugador O va a tener que hacer su movimiento en la matriz que está bajo en medio.",
   "tutorial.fifth":
-    "En la imagen anterior podemos ver que el siguiente movimiento tiene que ser en la matriz inferior izquierda, esto se debe a qeu es la única matriz que tiene un fondo blanco. De tal manera se puede saber que el anterior movimiento debió haber sido en la matriz de enmedio o la matriz superior izquierda, porque esas son las únicas que tienen la celda inferior izquierda ocupadas.",
+    "En la imagen anterior podemos ver que el siguiente movimiento tiene que ser en la matriz inferior izquierda, esto se debe a que es la única matriz que tiene un fondo blanco. De tal manera se puede saber que el anterior movimiento debió haber sido en la matriz de en medio o la matriz superior izquierda, porque esas son las únicas que tienen la celda inferior izquierda ocupadas.",
   "shared.sp": "Un jugador",
   "shared.mp": "Multijugador local",
   "shared.tutorial": "Tutorial",
