@@ -71,7 +71,10 @@ class Layout extends Component {
     return (
       <div>
         {returningComponent}
-        <LanguageFooter changeLocale={this.props.changeLocale} />
+        <LanguageFooter
+          changeLocale={this.props.changeLocale}
+          locale={this.props.locale}
+        />
         <NotificationContainer />
       </div>
     );

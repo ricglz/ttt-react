@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-import exImage1 from "../images/example1.png";
+import exImage1 from "../images/example1.gif";
 import exImage2 from "../images/example2.png";
-import exImage3 from "../images/example3.png";
 import BoardButton from "./BoardButton";
 
 const Image = props => {
@@ -43,13 +42,12 @@ export default class Tutorial extends Component {
         {paragraphs}
         <div className="row text-center">
           <Image src={exImage1} />
-          <Image src={exImage2} />
         </div>
         <p>
           <FormattedMessage id="tutorial.fourth" />
         </p>
         <div className="row text-center">
-          <Image src={exImage3} />
+          <Image src={exImage2} />
         </div>
         <p>
           <FormattedMessage id="tutorial.fifth" />

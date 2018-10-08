@@ -15,9 +15,9 @@ const en = {
   "tutorial.third":
     "The first move is always in whatever grid and cell you want, after that the next move is decided based on the previous movement. Look at this example:",
   "tutorial.fourth":
-    "In this previous example the player X could make any move that it wants (the first player is always the X), it choose the middle cell at the bottom, then the player O has to make a move in the middle grid at the bottom.",
+    "In this previous example, the player X could make any move that it wants (the first player is always the X), it chooses the middle cell at the bottom, then the player O has to make a move in the middle grid at the bottom.",
   "tutorial.fifth":
-    "In the previous image we can see that the next move has to be at the left bottom grid, because it is the only grid with a white background. And that the previous move was done in the center or top right grid, because those are the only ones that have in the bottom left cell an X or an O.",
+    "In the previous image, we can see that the next move has to be at the left bottom grid because it is the only grid with a white background. And that the previous move was done in the center or top right grid because those are the only ones that have in the bottom left cell an X or an O.",
   "shared.sp": "Single Player",
   "shared.mp": "Local Multiplayer",
   "shared.tutorial": "How to play",

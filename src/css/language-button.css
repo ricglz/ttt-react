@@ -1,0 +1,11 @@
+button.locale-button {
+  font-family: 'Roboto';
+}
+
+button.locale-button:hover {
+  font-family: 'Roboto-Bold';
+}
+
+button.locale-button.current-locale {
+  font-family: 'Roboto-Bold';
+}

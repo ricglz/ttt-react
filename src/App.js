@@ -34,7 +34,7 @@ class App extends Component {
         locale={this.state.locale}
         messages={Messages[this.state.locale]}
       >
-        <Layout changeLocale={this.changeLocale} />
+        <Layout changeLocale={this.changeLocale} locale={this.state.locale} />
       </IntlProvider>
     );
   }
