@@ -10,9 +10,21 @@ class LanguageFooter extends Component {
   render() {
     return (
       <div className="row justify-content-center mt-5">
-        <LanguageButton changeLocale={this.props.changeLocale} locale="es" />
-        <LanguageButton changeLocale={this.props.changeLocale} locale="en" />
-        <LanguageButton changeLocale={this.props.changeLocale} locale="fr" />
+        <LanguageButton
+          changeLocale={this.props.changeLocale}
+          currentLocale={this.props.locale}
+          locale="es"
+        />
+        <LanguageButton
+          changeLocale={this.props.changeLocale}
+          currentLocale={this.props.locale}
+          locale="en"
+        />
+        <LanguageButton
+          changeLocale={this.props.changeLocale}
+          currentLocale={this.props.locale}
+          locale="fr"
+        />
       </div>
     );
   }
