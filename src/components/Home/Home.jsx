@@ -1,7 +1,6 @@
 import React from "react";
 import HomeButton from "./HomeButton";
 import { FormattedMessage } from "react-intl";
-import "./home.css"
 
 const Home = props => (
   <div className="container text-center">

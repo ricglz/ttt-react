@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import Game from "./components/Game/Game";
 import LanguageFooter from "./components/Layout/LanguageFooter";
 import "./css/bootstrap.css";
+import "./css/home.css";
 import "./css/board.css";
 import "./css/fonts.css";
 import Tutorial from "./components/Tutorial/Tutorial";
