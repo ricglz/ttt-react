@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
-import BigBoard from "./Board/BigBoard";
+import BigBoard from "../Board/BigBoard";
 import ButtonsFooter from "./ButtonsFooter";
 import DifficultySelect from "./DifficultySelect";
 import {
@@ -9,8 +9,12 @@ import {
   constructorState,
   initialState,
   alertWinner
-} from "../functions/HelperFunctions";
-import makeMove, { playerMadeAMove, cleanVariables, aiMadeAMove } from "../functions/Ai";
+} from "../../functions/HelperFunctions";
+import makeMove, {
+  playerMadeAMove,
+  cleanVariables,
+  aiMadeAMove
+} from "../../functions/Ai";
 
 class Game extends Component {
   constructor(props) {
@@ -142,7 +146,11 @@ class Game extends Component {
     }
     return (
       <div className="container text-center">
-        <Header ai={this.props.ai} oScore={this.state.oWins} xScore={this.state.xWins} />
+        <Header
+          ai={this.props.ai}
+          oScore={this.state.oWins}
+          xScore={this.state.xWins}
+        />
         <hr />
         <BigBoard
           handleClick={this.handleSquareClick}

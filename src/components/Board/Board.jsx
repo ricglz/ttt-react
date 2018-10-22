@@ -1,49 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 import Row from "./Row";
 
-class Board extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
+function boardClass(boardNum, currentBoard) {
+  var boardClass = "col-4 big-box";
+  if (!(boardNum === currentBoard || currentBoard === -1)) {
+    boardClass += " grey-bg";
   }
-
-  boardClass() {
-    var boardClass = "col-4 big-box";
-    const boardNum = this.props.boardNum;
-    const currentBoard = this.props.currentBoard;
-    if (!(boardNum === currentBoard || currentBoard === -1)) {
-      boardClass += " grey-bg";
-    }
-    return boardClass;
-  }
-
-  render() {
-    return (
-      <div className={this.boardClass()}>
-        <Row
-          rowNum={0}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-        <Row
-          rowNum={3}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-        <Row
-          rowNum={6}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-      </div>
-    );
-  }
+  return boardClass;
 }
+
+const Board = props => (
+  <div className={boardClass(props.boardNum, props.currentBoard)}>
+    <Row
+      rowNum={0}
+      boardNum={props.boardNum}
+      boardGame={props.boardGame}
+      currentBoard={props.currentBoard}
+      handleClick={props.handleClick}
+    />
+    <Row
+      rowNum={3}
+      boardNum={props.boardNum}
+      boardGame={props.boardGame}
+      currentBoard={props.currentBoard}
+      handleClick={props.handleClick}
+    />
+    <Row
+      rowNum={6}
+      boardNum={props.boardNum}
+      boardGame={props.boardGame}
+      currentBoard={props.currentBoard}
+      handleClick={props.handleClick}
+    />
+  </div>
+);
 
 export default Board;

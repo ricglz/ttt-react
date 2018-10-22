@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
-import Home from "./components/Home";
-import Game from "./components/Game";
-import LanguageFooter from "./components/LanguageFooter";
+import Home from "./components/Home/Home";
+import Game from "./components/Game/Game";
+import LanguageFooter from "./components/Layout/LanguageFooter";
 import "./css/bootstrap.css";
-import "./css/home.css";
 import "./css/board.css";
 import "./css/fonts.css";
-import Tutorial from "./components/Tutorial";
+import Tutorial from "./components/Tutorial/Tutorial";
 
 class Layout extends Component {
   constructor(props) {

@@ -1,38 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Cell extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
-  }
+const currentValue = (boardGame, boardNum, cellNum) =>
+  boardGame[boardNum][cellNum];
 
-  currentValue() {
-    return this.props.boardGame[this.props.boardNum][this.props.cellNum];
-  }
-
-  drawValue() {
-    switch (this.currentValue()) {
-      case 1:
-        return "X";
-      case -1:
-        return "O";
-      default:
-        return "";
-    }
-  }
-
-  render() {
-    return (
-      <div
-        className="col-4 box"
-        onClick={() =>
-          this.props.handleClick(this.props.boardNum, this.props.cellNum)
-        }
-      >
-        <p className={this.drawValue()}>{this.drawValue()}</p>
-      </div>
-    );
+function drawValue(boardGame, boardNum, cellNum) {
+  switch (currentValue(boardGame, boardNum, cellNum)) {
+    case 1:
+      return "X";
+    case -1:
+      return "O";
+    default:
+      return "";
   }
 }
+
+const Cell = props => {
+  var value = drawValue(props.boardGame, props.boardNum, props.cellNum);
+  return (
+    <div
+      className="col-4 box"
+      onClick={() =>
+        props.handleClick(props.boardNum, props.cellNum)
+      }
+    >
+      <p className={value}>{value}</p>
+    </div>
+  );
+};
 
 export default Cell;
