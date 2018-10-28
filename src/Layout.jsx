@@ -9,6 +9,7 @@ import "./css/home.css";
 import "./css/board.css";
 import "./css/fonts.css";
 import Tutorial from "./components/Tutorial/Tutorial";
+import LanguagePage from "./components/Languages/LanguagePage";
 
 class Layout extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class Layout extends Component {
     this.changeToHome = this.changeToHome.bind(this);
     this.changeToPvp = this.changeToPvp.bind(this);
     this.changeToTutorial = this.changeToTutorial.bind(this);
+    this.changeToLanguage = this.changeToLanguage.bind(this);
+    this.changeLocale = this.changeLocale.bind(this);
   }
 
   changeToAi() {
@@ -39,41 +42,64 @@ class Layout extends Component {
     });
   }
 
+  changeToLanguage() {
+    this.setState({
+      language: true
+    });
+  }
+
   changeToHome() {
     this.setState(this.originalState);
+  }
+
+  changeLocale(locale) {
+    this.props.changeLocale(locale);
+    this.changeToHome();
   }
 
   originalState() {
     return {
       ai: false,
       pvp: false,
-      tutorial: false
+      tutorial: false,
+      language: false
     };
   }
 
-  render() {
-    let returningComponent;
+  returningComponent() {
     if (this.state.ai) {
-      returningComponent = <Game ai={true} back={this.changeToHome} />;
-    } else if (this.state.pvp) {
-      returningComponent = <Game ai={false} back={this.changeToHome} />;
-    } else if (this.state.tutorial) {
-      returningComponent = <Tutorial back={this.changeToHome} />;
-    } else {
-      returningComponent = (
-        <Home
-          changeToAi={this.changeToAi}
-          changeToPvp={this.changeToPvp}
-          changeToTutorial={this.changeToTutorial}
+      return <Game ai={true} back={this.changeToHome} />;
+    }
+    if (this.state.pvp) {
+      return <Game ai={false} back={this.changeToHome} />;
+    }
+    if (this.state.tutorial) {
+      return <Tutorial back={this.changeToHome} />;
+    }
+    if (this.state.language) {
+      return (
+        <LanguagePage
+          locale={this.props.locale}
+          changeLocale={this.changeLocale}
         />
       );
     }
     return (
+      <Home
+        changeToAi={this.changeToAi}
+        changeToPvp={this.changeToPvp}
+        changeToTutorial={this.changeToTutorial}
+      />
+    );
+  }
+
+  render() {
+    return (
       <div>
-        {returningComponent}
+        {this.returningComponent()}
         <LanguageFooter
-          changeLocale={this.props.changeLocale}
           locale={this.props.locale}
+          changeToLanguage={this.changeToLanguage}
         />
         <NotificationContainer />
       </div>

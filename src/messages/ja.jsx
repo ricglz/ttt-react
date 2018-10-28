@@ -1,4 +1,4 @@
-const jp = {
+const ja = {
   "homePage.title": "ホームページ",
   "game.score": "点数",
   "game.xScore": "X 点数",
@@ -24,4 +24,4 @@ const jp = {
   "shared.back": "バック"
 };
 
-export default jp;
+export default ja;

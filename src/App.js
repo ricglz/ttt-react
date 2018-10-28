@@ -8,17 +8,20 @@ import uk from "react-intl/locale-data/uk";
 import id from "react-intl/locale-data/id";
 import sr from "react-intl/locale-data/sr";
 import da from "react-intl/locale-data/da";
-import kr from "react-intl/locale-data/kr";
-import jp from "react-intl/locale-data/jp";
+import ko from "react-intl/locale-data/ko";
+import ja from "react-intl/locale-data/ja";
 import mr from "react-intl/locale-data/mr";
 import hi from "react-intl/locale-data/hi";
-import it from "react-intl/locale-date/it";
+import it from "react-intl/locale-data/it";
+import de from "react-intl/locale-data/de";
+import ru from "react-intl/locale-data/ru";
+import sv from "react-intl/locale-data/sv";
 import Messages from "./messages/Messages";
 import Layout from "./Layout";
 
 addLocaleData(
-  [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...kr, ...jp, ...da,
-   ...sr, ...id, ...uk]
+  [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...ko, ...ja, ...da,
+   ...sr, ...id, ...uk, ...de, ...ru, ...sv]
 );
 
 class App extends Component {
@@ -37,7 +40,8 @@ class App extends Component {
 
   originalState() {
     return {
-      locale: "en"
+      locale: "en",
+      flag: "US"
     };
   }
 
