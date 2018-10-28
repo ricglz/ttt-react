@@ -23,6 +23,11 @@ const LanguageFooter = props => (
       currentLocale={props.locale}
       locale="pt"
     />
+    <LanguageButton
+      changeLocale={props.changeLocale}
+      currentLocale={props.locale}
+      locale="kr"
+    />
   </div>
 );
 
