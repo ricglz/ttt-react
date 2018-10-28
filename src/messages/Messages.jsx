@@ -6,8 +6,8 @@ import fr from './fr';
 import hi from './hi';
 import id from './id';
 import it from './it';
-import jp from './jp';
-import kr from './kr';
+import ja from './ja';
+import ko from './ko';
 import mr from './mr';
 import pt from './pt';
 import ru from './ru';
@@ -16,7 +16,7 @@ import sv from './sv';
 import uk from './uk';
 
 const Messages = {
-  en,  es,  fr,  pt, de, it, hi, mr, kr, jp, da, sr,
+  en,  es,  fr,  pt, de, it, hi, mr, ko, ja, da, sr,
   id, uk, ru, sv
 }
 

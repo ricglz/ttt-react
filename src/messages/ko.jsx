@@ -1,4 +1,4 @@
-const kr = {
+const ko = {
   "homePage.title": "홈페이지",
   "game.score": "점수",
   "game.xScore": "X의 점수",
@@ -24,4 +24,4 @@ const kr = {
   "shared.back": "뒤로가기"
 };
 
-export default kr;
+export default ko;
