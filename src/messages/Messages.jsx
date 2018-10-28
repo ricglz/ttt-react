@@ -8,6 +8,7 @@ const Messages = {
   es: es,
   fr: fr,
   pt: pt,
+  it: it,
 };
 
 export default Messages;
