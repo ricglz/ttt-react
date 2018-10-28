@@ -3,13 +3,13 @@ import es from './es';
 import fr from './fr';
 import pt from './pt';
 import kr from './kr';
+import mr from './mr';
+import de from './de';
+import it from './it';
+import hi from './hi';
 
 const Messages = {
-  en: en,
-  es: es,
-  fr: fr,
-  pt: pt,
-  kr: kr
-};
+  en,  es,  fr,  pt, de, it, hi, mr, kr
+}
 
 export default Messages;
