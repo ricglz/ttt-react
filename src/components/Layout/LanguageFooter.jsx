@@ -1,69 +1,20 @@
 import React from "react";
 import LanguageButton from "./LanguageButton";
+import LANGUAGES from "./Languages";
+
+const renderButtons = props => {
+  return LANGUAGES.map(lang => (
+    <LanguageButton
+      changeLocale={props.changeLocale}
+      currentLocale={props.locale}
+      locale={lang}
+      key={lang}
+    />
+  ));
+};
 
 const LanguageFooter = props => (
-  <div className="row justify-content-center mt-5">
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="es"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="en"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="fr"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="pt"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="it"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="hi"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="mr"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="kr"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="jp"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="da"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="sr"
-    />
-    <LanguageButton
-      changeLocale={props.changeLocale}
-      currentLocale={props.locale}
-      locale="id"
-    />
-  </div>
+  <div className="row justify-content-center mt-5">{renderButtons(props)}</div>
 );
 
 export default LanguageFooter;

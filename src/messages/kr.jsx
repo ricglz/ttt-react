@@ -1,4 +1,4 @@
-const en = {
+const kr = {
   "homePage.title": "홈페이지",
   "game.score": "점수",
   "game.xScore": "X의 점수",
