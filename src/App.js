@@ -5,13 +5,16 @@ import fr from "react-intl/locale-data/fr";
 import es from "react-intl/locale-data/es";
 import pt from "react-intl/locale-data/pt";
 import kr from "react-intl/locale-data/kr";
+import jp from "react-intl/locale-data/jp";
 import mr from "react-intl/locale-data/mr";
 import hi from "react-intl/locale-data/hi";
 import it from "react-intl/locale-date/it";
 import Messages from "./messages/Messages";
 import Layout from "./Layout";
 
-addLocaleData([...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...kr]);
+addLocaleData(
+  [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...kr, ...jp]
+);
 
 class App extends Component {
   constructor(props) {
