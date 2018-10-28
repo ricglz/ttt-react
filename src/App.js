@@ -5,10 +5,20 @@ import fr from "react-intl/locale-data/fr";
 import es from "react-intl/locale-data/es";
 import pt from "react-intl/locale-data/pt";
 import id from "react-intl/locale-data/id";
+import sr from "react-intl/locale-data/sr";
+import da from "react-intl/locale-data/da";
+import kr from "react-intl/locale-data/kr";
+import jp from "react-intl/locale-data/jp";
+import mr from "react-intl/locale-data/mr";
+import hi from "react-intl/locale-data/hi";
+import it from "react-intl/locale-date/it";
 import Messages from "./messages/Messages";
 import Layout from "./Layout";
 
-addLocaleData([...en, ...fr, ...es, ...pt, ...id]);
+addLocaleData(
+  [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...kr, ...jp, ...da,
+   ...sr, ...id]
+);
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +39,7 @@ class App extends Component {
       locale: "en"
     };
   }
-  
+
   render() {
     return (
       <IntlProvider
