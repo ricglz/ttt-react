@@ -16,11 +16,12 @@ import sr from './sr';
 import sv from './sv';
 import uk from './uk';
 import zh from './zh';
+import cs from './cs';
 import ca from './ca';
 
 const Messages = {
   en,  es,  fr,  pt, de, it, hi, mr, ko, ja, da, sr,
-  id, uk, ru, sv, zh, ar, ca
+  id, uk, ru, sv, zh, ar, ca, cs
 }
 
 export default Messages;
