@@ -17,12 +17,13 @@ import de from "react-intl/locale-data/de";
 import ru from "react-intl/locale-data/ru";
 import sv from "react-intl/locale-data/sv";
 import zh from "react-intl/locale-data/zh";
+import cs from "react-intl/locale-data/cs";
 import Messages from "./messages/Messages";
 import Layout from "./Layout";
 
 addLocaleData(
   [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...ko, ...ja, ...da,
-   ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh]
+   ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh, ...cs]
 );
 
 class App extends Component {
