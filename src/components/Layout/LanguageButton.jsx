@@ -10,7 +10,7 @@ function getClassName(props) {
 }
 
 const LanguageButton = props => (
-  <div className="col-1 border-right">
+  <div className="col-4 col-lg-4 col-xl-4 border-right border-top">
     <button
       onClick={() => props.changeLocale(props.locale)}
       className={getClassName(props)}
