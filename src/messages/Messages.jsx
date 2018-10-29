@@ -10,6 +10,7 @@ import ja from './ja';
 import ko from './ko';
 import mr from './mr';
 import pt from './pt';
+import ar from './ar';
 import ru from './ru';
 import sr from './sr';
 import sv from './sv';
@@ -18,7 +19,7 @@ import zh from './zh';
 
 const Messages = {
   en,  es,  fr,  pt, de, it, hi, mr, ko, ja, da, sr,
-  id, uk, ru, sv, zh
+  id, uk, ru, sv, zh, ar
 }
 
 export default Messages;
