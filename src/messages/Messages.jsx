@@ -18,10 +18,11 @@ import uk from './uk';
 import zh from './zh';
 import cs from './cs';
 import ca from './ca';
+import zh-CN from './zh-CN';
 
 const Messages = {
   en,  es,  fr,  pt, de, it, hi, mr, ko, ja, da, sr,
-  id, uk, ru, sv, zh, ar, ca, cs
+  id, uk, ru, sv, zh, zh-CN, ar, ca, cs
 }
 
 export default Messages;
