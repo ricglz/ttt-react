@@ -18,6 +18,7 @@ import de from "react-intl/locale-data/de";
 import ru from "react-intl/locale-data/ru";
 import sv from "react-intl/locale-data/sv";
 import zh from "react-intl/locale-data/zh";
+import zh-CN from "react-intl/locale-data/zh-CN";
 import cs from "react-intl/locale-data/cs";
 import tr from "react-intl/locale-data/tr";
 import Messages from "./messages/Messages";
@@ -25,7 +26,8 @@ import Layout from "./Layout";
 
 addLocaleData(
   [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...ko, ...ja, ...da,
-  ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh, ...ar, ...cs, ...tr]
+   ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh, ...zh_CN, ...ar, ...cs,
+   ...tr]
 );
 
 class App extends Component {
