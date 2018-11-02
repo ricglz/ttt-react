@@ -1,4 +1,4 @@
-const zh-CN = {
+const zhCN = {
   "homePage.title": "主页面",
   "game.score": "分数",
   "game.xScore": "X点数",
@@ -24,6 +24,6 @@ const zh-CN = {
   "shared.back": "返回"
 };
 
-export default zh-CN;
+export default zhCN;
 
 
