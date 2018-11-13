@@ -7,7 +7,7 @@
     "react-dom": "^16.5.0",
     "react-intl": "^2.6.0",
     "react-notifications": "^1.4.3",
-    "react-scripts": "1.1.5",
+    "react-scripts": "2.1.1",
     "react-select": "^2.0.0"
   },
   "scripts": {
