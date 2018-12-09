@@ -1,5 +1,5 @@
-import React from "react";
-import DefaultButton from "../Layout/DefaultButton";
+import React from 'react';
+import DefaultButton from '../Layout/DefaultButton';
 
 const ButtonsFooter = props => (
   <div className="row justify-content-center">

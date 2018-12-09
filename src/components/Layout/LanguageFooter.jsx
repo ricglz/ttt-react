@@ -1,5 +1,5 @@
-import React from "react";
-import LanguageButton from "./LanguageButton";
+import React from 'react';
+import LanguageButton from './LanguageButton';
 
 const LanguageFooter = props => (
   <div

@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import Header from "./Header";
-import BigBoard from "../Board/BigBoard";
-import ButtonsFooter from "./ButtonsFooter";
-import DifficultySelect from "./DifficultySelect";
+import React, { Component } from 'react';
+import Header from './Header';
+import BigBoard from '../Board/BigBoard';
+import ButtonsFooter from './ButtonsFooter';
+import DifficultySelect from './DifficultySelect';
 import {
   isOccupied,
   theresAWinner,
   constructorState,
   initialState,
-  alertWinner
-} from "../../functions/HelperFunctions";
+  alertWinner,
+} from '../../functions/HelperFunctions';
 import makeMove, {
   playerMadeAMove,
   cleanVariables,
-  aiMadeAMove
-} from "../../functions/Ai";
+  aiMadeAMove,
+} from '../../functions/Ai';
 
 class Game extends Component {
   constructor(props) {
@@ -28,8 +28,8 @@ class Game extends Component {
   }
 
   CONSTANTS = {
-    PLAYER1: "X",
-    PLAYER2: "O"
+    PLAYER1: 'X',
+    PLAYER2: 'O',
   };
 
   canClick(board, id) {
@@ -40,8 +40,8 @@ class Game extends Component {
 
   handleSquareClick(board, id) {
     if (this.canClick(board, id)) {
-      var boardCopy = [...this.state.boardGame];
-      var newMoveNumber = this.state.moveNumber + 1;
+      const boardCopy = [...this.state.boardGame];
+      const newMoveNumber = this.state.moveNumber + 1;
       boardCopy[board][id] = this.currentTurn();
       const winner = theresAWinner(boardCopy[board]);
       if (winner) {
@@ -50,22 +50,20 @@ class Game extends Component {
         this.newGame();
       } else if (newMoveNumber === 81) {
         this.newGame();
+      } else if (this.props.ai) {
+        playerMadeAMove(board, boardCopy[board]);
+        this.aiMove(boardCopy, id, newMoveNumber);
       } else {
-        if (this.props.ai) {
-          playerMadeAMove(board, boardCopy[board]);
-          this.aiMove(boardCopy, id, newMoveNumber);
-        } else {
-          this.pvpMove(boardCopy, newMoveNumber, id);
-        }
+        this.pvpMove(boardCopy, newMoveNumber, id);
       }
     }
   }
 
   handleChange(selectedOption) {
-    var difficulty = selectedOption.value;
+    const difficulty = selectedOption.value;
     this.setState({
-      selectedOption: selectedOption,
-      difficulty: difficulty
+      selectedOption,
+      difficulty,
     });
     if (this.state.moveNumber >= 0) {
       this.newGame();
@@ -74,7 +72,7 @@ class Game extends Component {
 
   aiMove(boardCopy, id, newMoveNumber) {
     const difficulty = this.state.difficulty;
-    var aiMove = makeMove(boardCopy[id], id, difficulty);
+    const aiMove = makeMove(boardCopy[id], id, difficulty);
     boardCopy[id][aiMove] = -1;
     const winner = theresAWinner(boardCopy[id]);
     if (winner) {
@@ -86,7 +84,7 @@ class Game extends Component {
       this.setState({
         boardGame: boardCopy,
         moveNumber: newMoveNumber + 1,
-        currentBoard: aiMove
+        currentBoard: aiMove,
       });
     }
   }
@@ -95,15 +93,15 @@ class Game extends Component {
     this.setState({
       boardGame: boardCopy,
       moveNumber: newMoveNumber,
-      currentBoard: id
+      currentBoard: id,
     });
     if (this.state.currentPlayer === this.CONSTANTS.PLAYER1) {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER2
+        currentPlayer: this.CONSTANTS.PLAYER2,
       });
     } else {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER1
+        currentPlayer: this.CONSTANTS.PLAYER1,
       });
     }
   }
@@ -113,16 +111,16 @@ class Game extends Component {
   }
 
   changeScore(value) {
-    var newCount;
+    let newCount;
     if (value === -1) {
       newCount = this.state.oWins + 1;
       this.setState({
-        oWins: newCount
+        oWins: newCount,
       });
     } else {
       newCount = this.state.xWins + 1;
       this.setState({
-        xWins: newCount
+        xWins: newCount,
       });
     }
   }

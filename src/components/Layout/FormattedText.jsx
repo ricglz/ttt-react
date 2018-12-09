@@ -1,5 +1,5 @@
-import React from "react";
-import { FormattedMessage } from "react-intl";
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 export const FormattedParagraph = props => (
   <p>
@@ -8,13 +8,13 @@ export const FormattedParagraph = props => (
 );
 
 export const FormattedHeader = props => (
-  <FormattedMessage id={props.locale} >
+  <FormattedMessage id={props.locale}>
     {txt => <h1>{txt}</h1>}
   </FormattedMessage>
-)
+);
 
 export const FormattedHeader2 = props => (
   <h2>
     <FormattedMessage id={props.locale} />
   </h2>
-)
+);

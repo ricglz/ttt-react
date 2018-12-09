@@ -1,5 +1,5 @@
-import React from "react";
-import BoardRow from "./BoardRow";
+import React from 'react';
+import BoardRow from './BoardRow';
 
 const BigBoard = props => (
   <div className="game row justify-content-center">

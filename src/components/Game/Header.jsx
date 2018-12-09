@@ -1,6 +1,6 @@
-import React from "react";
-import { FormattedMessage } from "react-intl";
-import { FormattedHeader, FormattedHeader2 } from "../Layout/FormattedText";
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { FormattedHeader, FormattedHeader2 } from '../Layout/FormattedText';
 
 const xScore = <FormattedMessage id="game.xScore" default="X's score" />;
 const oScore = <FormattedMessage id="game.oScore" default="O's score" />;
@@ -22,12 +22,16 @@ const Header = props => (
       <div className="row justify-content-between">
         <div className="col xScore">
           <p>
-            {xScore}: {props.xScore}
+            {xScore}
+:
+            {props.xScore}
           </p>
         </div>
         <div className="col oScore">
           <p>
-            {oScore}: {props.oScore}
+            {oScore}
+:
+            {props.oScore}
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
-import React from "react";
-import HomeButton from "./HomeButton";
-import { FormattedMessage } from "react-intl";
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import HomeButton from './HomeButton';
 
 const Home = props => (
   <div className="container text-center">

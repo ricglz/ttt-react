@@ -1,10 +1,10 @@
-import React from "react";
-import Row from "./Row";
+import React from 'react';
+import Row from './Row';
 
 function boardClass(boardNum, currentBoard) {
-  var boardClass = "col-4 big-box";
+  let boardClass = 'col-4 big-box';
   if (!(boardNum === currentBoard || currentBoard === -1)) {
-    boardClass += " grey-bg";
+    boardClass += ' grey-bg';
   }
   return boardClass;
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import "../../css/language-button.css";
+import React from 'react';
+import '../../css/language-button.css';
 
 function getClassName(props) {
-  var className = "btn w-100 locale-button";
+  let className = 'btn w-100 locale-button';
   if (props.locale === props.currentLocale) {
-    className += " current-locale";
+    className += ' current-locale';
   }
   return className;
 }

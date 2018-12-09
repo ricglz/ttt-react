@@ -1,6 +1,6 @@
-import React from "react";
-import Select from "react-select";
-import { FormattedMessage } from "react-intl";
+import React from 'react';
+import Select from 'react-select';
+import { FormattedMessage } from 'react-intl';
 
 const easy = <FormattedMessage id="game.easy" default="Easy" />;
 const medium = <FormattedMessage id="game.medium" default="Medium" />;
@@ -8,7 +8,7 @@ const hard = <FormattedMessage id="game.hard" default="Hard" />;
 const options = [
   { value: 1, label: easy },
   { value: 2, label: medium },
-  { value: 3, label: hard }
+  { value: 3, label: hard },
 ];
 const placeholder = (
   <FormattedMessage
