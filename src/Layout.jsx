@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import PropTypes from 'prop-types';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import LanguageFooter from './components/Layout/LanguageFooter';
@@ -106,5 +107,9 @@ class Layout extends Component {
   }
 }
 
-//
+Layout.propTypes = {
+  changeLocale: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
+};
+
 export default Layout;
