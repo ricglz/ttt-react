@@ -18,7 +18,7 @@
     "deploy": "react-scripts build && firebase deploy",
     "lint": "eslint src/*.jsx src/**/*.jsx",
     "fix-lint": "eslint --fix src/*.jsx src/**/*.jsx",
-    "stylelint": "stylelint src/*.css src/**/*.css",
+    "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css"
   },
   "devDependencies": {

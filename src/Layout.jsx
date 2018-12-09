@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { NotificationContainer } from "react-notifications";
-import "react-notifications/lib/notifications.css";
-import Home from "./components/Home/Home";
-import Game from "./components/Game/Game";
-import LanguageFooter from "./components/Layout/LanguageFooter";
-import "./css/bootstrap.css";
-import "./css/home.css";
-import "./css/board.css";
-import "./css/fonts.css";
-import Tutorial from "./components/Tutorial/Tutorial";
-import LanguagePage from "./components/Languages/LanguagePage";
+import React, { Component } from 'react';
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+import Home from './components/Home/Home';
+import Game from './components/Game/Game';
+import LanguageFooter from './components/Layout/LanguageFooter';
+import './css/bootstrap.css';
+import './css/home.css';
+import './css/board.css';
+import './css/fonts.css';
+import { layoutOriginalState } from './functions/HelperFunctions';
+import Tutorial from './components/Tutorial/Tutorial';
+import LanguagePage from './components/Languages/LanguagePage';
 
 class Layout extends Component {
   constructor(props) {
@@ -26,60 +27,57 @@ class Layout extends Component {
 
   changeToAi() {
     this.setState({
-      ai: true
+      ai: true,
     });
   }
 
   changeToPvp() {
     this.setState({
-      pvp: true
+      pvp: true,
     });
   }
 
   changeToTutorial() {
     this.setState({
-      tutorial: true
+      tutorial: true,
     });
   }
 
   changeToLanguage() {
     this.setState({
-      language: true
+      language: true,
     });
   }
 
   changeToHome() {
-    this.setState(this.originalState);
+    this.setState(layoutOriginalState());
   }
 
   changeLocale(locale) {
-    this.props.changeLocale(locale);
+    const { changeLocale } = this.props;
+    changeLocale(locale);
     this.changeToHome();
   }
 
-  originalState() {
-    return {
-      ai: false,
-      pvp: false,
-      tutorial: false,
-      language: false
-    };
-  }
-
   returningComponent() {
-    if (this.state.ai) {
-      return <Game ai={true} back={this.changeToHome} />;
+    const {
+      ai, pvp, tutorial, language,
+    } = this.state;
+
+    if (ai) {
+      return <Game ai back={this.changeToHome} />;
     }
-    if (this.state.pvp) {
+    if (pvp) {
       return <Game ai={false} back={this.changeToHome} />;
     }
-    if (this.state.tutorial) {
+    if (tutorial) {
       return <Tutorial back={this.changeToHome} />;
     }
-    if (this.state.language) {
+    if (language) {
+      const { locale } = this.props;
       return (
         <LanguagePage
-          locale={this.props.locale}
+          locale={locale}
           changeLocale={this.changeLocale}
         />
       );
@@ -94,11 +92,12 @@ class Layout extends Component {
   }
 
   render() {
+    const { locale } = this.props;
     return (
       <div>
         {this.returningComponent()}
         <LanguageFooter
-          locale={this.props.locale}
+          locale={locale}
           changeToLanguage={this.changeToLanguage}
         />
         <NotificationContainer />
