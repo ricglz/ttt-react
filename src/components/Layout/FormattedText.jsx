@@ -1,20 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-export const FormattedParagraph = props => (
+export const FormattedParagraph = ({ locale }) => (
   <p>
-    <FormattedMessage id={props.locale} />
+    <FormattedMessage id={locale} />
   </p>
 );
 
-export const FormattedHeader = props => (
-  <FormattedMessage id={props.locale}>
+FormattedParagraph.propTypes = {
+  locale: PropTypes.string.isRequired,
+};
+
+export const FormattedHeader = ({ locale }) => (
+  <FormattedMessage id={locale}>
     {txt => <h1>{txt}</h1>}
   </FormattedMessage>
 );
 
-export const FormattedHeader2 = props => (
+FormattedHeader.propTypes = {
+  locale: PropTypes.string.isRequired,
+};
+
+export const FormattedHeader2 = ({ locale }) => (
   <h2>
-    <FormattedMessage id={props.locale} />
+    <FormattedMessage id={locale} />
   </h2>
 );
+
+FormattedHeader2.propTypes = {
+  locale: PropTypes.string.isRequired,
+};

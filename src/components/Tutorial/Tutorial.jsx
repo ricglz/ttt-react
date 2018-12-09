@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';
 import DefaultButton from '../Layout/DefaultButton';
 import { FormattedParagraph, FormattedHeader2 } from '../Layout/FormattedText';
 
-const Image = props => (
+const Image = ({ src }) => (
   <div className="col">
-    <img src={props.src} className="img-fluid" alt="example" />
+    <img src={src} className="img-fluid" alt="example" />
   </div>
 );
+
+Image.propTypes = {
+  src: PropTypes.string.isRequired,
+};
 
 function renderParagraphs() {
   const paragraphsTitles = [
@@ -21,7 +26,7 @@ function renderParagraphs() {
   ));
 }
 
-const Tutorial = props => (
+const Tutorial = ({ back }) => (
   <div className="container">
     <div className="row text-center pb-3 border-bottom">
       <div className="col">
@@ -39,9 +44,13 @@ const Tutorial = props => (
     </div>
     <FormattedParagraph locale="tutorial.fifth" />
     <div className="row text-center">
-      <DefaultButton text="shared.back" func={props.back} />
+      <DefaultButton text="shared.back" func={back} />
     </div>
   </div>
 );
+
+Tutorial.propTypes = {
+  back: PropTypes.func.isRequired,
+};
 
 export default Tutorial;

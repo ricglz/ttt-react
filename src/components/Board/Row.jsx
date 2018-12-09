@@ -1,34 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Cell from './Cell';
 
-class Row extends Component {
-  render() {
-    return (
-      <div className="game row cell-row">
-        <Cell
-          cellNum={this.props.rowNum}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-        <Cell
-          cellNum={this.props.rowNum + 1}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-        <Cell
-          cellNum={this.props.rowNum + 2}
-          boardNum={this.props.boardNum}
-          boardGame={this.props.boardGame}
-          currentBoard={this.props.currentBoard}
-          handleClick={this.props.handleClick}
-        />
-      </div>
-    );
-  }
-}
+const Row = ({
+  rowNum, boardNum, boardGame, currentBoard, handleClick,
+}) => (
+  <div className="game row cell-row">
+    <Cell
+      cellNum={rowNum}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
+    />
+    <Cell
+      cellNum={rowNum + 1}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
+    />
+    <Cell
+      cellNum={rowNum + 2}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
+    />
+  </div>
+);
+
+Row.propTypes = {
+  rowNum: PropTypes.number.isRequired,
+  boardNum: PropTypes.number.isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  currentBoard: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Row;

@@ -1,27 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Board from './Board';
 
-const BoardRow = props => (
+const BoardRow = ({
+  rowNum, boardGame, currentBoard, handleClick,
+}) => (
   <div className="game row">
     <Board
-      boardNum={props.rowNum}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={rowNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
     <Board
-      boardNum={props.rowNum + 1}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={rowNum + 1}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
     <Board
-      boardNum={props.rowNum + 2}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={rowNum + 2}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
   </div>
 );
+
+BoardRow.propTypes = {
+  rowNum: PropTypes.number.isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  currentBoard: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default BoardRow;

@@ -1,38 +1,48 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Row from './Row';
 
 function boardClass(boardNum, currentBoard) {
-  let boardClass = 'col-4 big-box';
+  let klass = 'col-4 big-box';
   if (!(boardNum === currentBoard || currentBoard === -1)) {
-    boardClass += ' grey-bg';
+    klass += ' grey-bg';
   }
-  return boardClass;
+  return klass;
 }
 
-const Board = props => (
-  <div className={boardClass(props.boardNum, props.currentBoard)}>
+const Board = ({
+  boardNum, currentBoard, boardGame, handleClick,
+}) => (
+  <div className={boardClass(boardNum, currentBoard)}>
     <Row
       rowNum={0}
-      boardNum={props.boardNum}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
     <Row
       rowNum={3}
-      boardNum={props.boardNum}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
     <Row
       rowNum={6}
-      boardNum={props.boardNum}
-      boardGame={props.boardGame}
-      currentBoard={props.currentBoard}
-      handleClick={props.handleClick}
+      boardNum={boardNum}
+      boardGame={boardGame}
+      currentBoard={currentBoard}
+      handleClick={handleClick}
     />
   </div>
 );
+
+Board.propTypes = {
+  boardNum: PropTypes.number.isRequired,
+  currentBoard: PropTypes.number.isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Board;
