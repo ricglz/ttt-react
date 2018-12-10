@@ -1,43 +1,34 @@
-import { isOccupied } from "./HelperFunctions";
+import { isOccupied, emptyArray } from './HelperFunctions';
 
-var boardCopy = null;
-var currentBoard = null;
-var currentDifficulty = null;
-var amountOccupied = emptyArray();
-var avoidBox = emptyArray();
+let boardCopy = null;
+let currentBoard = null;
+let currentDifficulty = null;
+let amountOccupied = emptyArray();
+let avoidBox = emptyArray();
 
-function aiAction(pos) {
-  this.pos = pos;
-  this.value = getValue(pos);
+function someOneCouldWin(value1, value2, player = false) {
+  const hopedValue = player ? 1 : -1;
+  return (value1 === hopedValue && !isOccupied(value2))
+    || (value2 === hopedValue && !isOccupied(value1));
 }
 
-function emptyArray() {
-  return [0, 0, 0, 0, 0, 0, 0, 0, 0];
-}
-
-//Identifies which letter are the one near it and if it would be more valuable to do the move or not
+// Identifies which letter are the one near it and if it would be more valuable
+// to do the move or not
 function whatAreBoth(column1, column2) {
-  var value1 = boardCopy[column1],
-    value2 = boardCopy[column2];
+  const value1 = boardCopy[column1];
+  const value2 = boardCopy[column2];
   if (value1 === value2) {
     if (value1 === 1) return 50;
     if (value2 === -1) return 9000;
   }
-  var value = 0;
-  if (
-    (value1 === 1 && !isOccupied(value2)) ||
-    (value2 === 1 && !isOccupied(value1))
-  )
-    value += 15;
-  if (
-    (value1 === -1 && !isOccupied(value2)) ||
-    (value2 === -1 && !isOccupied(value1))
-  )
-    value += 40;
+  let value = 0;
+  if (someOneCouldWin(value1, value2, true)) value += 15;
+  if (someOneCouldWin(value1, value2)) value += 40;
   return value;
 }
 
-//Checks if the position chosen could stop a winning of the oponent or if itself could win in diagonal
+// Checks if the position chosen could stop a winning of the oponent or if
+// itself could win in diagonal
 function extraValueDiagonal(div, pos) {
   if (pos === 1 || pos === 3 || pos === 5 || pos === 7) return 0;
   if (pos === 4) return whatAreBoth(0, 8) || whatAreBoth(2, 6);
@@ -49,7 +40,7 @@ function extraValueDiagonal(div, pos) {
   return whatAreBoth(4, 6);
 }
 
-//Checks if the position chosen could stop a winning of the oponent or if itself could win in a row
+// Checks if the position chosen could stop a winning of the oponent or if itself could win in a row
 function extraValueRow(div, mod) {
   switch (div) {
     case 0:
@@ -69,7 +60,8 @@ function extraValueRow(div, mod) {
   }
 }
 
-//Checks if the position chosen could stop a winning of the oponent or if itself could win in a column
+// Checks if the position chosen could stop a winning of the oponent or if
+// itself could win in a column
 function extraValueColumn(div, mod) {
   switch (mod) {
     case 0:
@@ -88,12 +80,14 @@ function extraValueColumn(div, mod) {
 }
 
 function positiveValues(pos) {
-  var div = Math.floor(pos / 3),
-    mod = pos % 3;
+  const div = Math.floor(pos / 3);
+
+
+  const mod = pos % 3;
   return (
-    extraValueColumn(div, mod) +
-    extraValueRow(div, mod) +
-    extraValueDiagonal(div, pos)
+    extraValueColumn(div, mod)
+    + extraValueRow(div, mod)
+    + extraValueDiagonal(div, pos)
   );
 }
 
@@ -107,30 +101,28 @@ function negativeValues(pos) {
 }
 
 function getValue(pos) {
-  var value = positiveValues(pos);
+  let value = positiveValues(pos);
   if (currentDifficulty === 3) value -= negativeValues(pos);
   return value;
 }
 
-//Checks which are the more factible actions to play
+// Checks which are the more factible actions to play
 function different(availableMoves) {
-  var min = availableMoves[0].value,
-    erasePos = 1;
+  const min = availableMoves[0].value;
+  let erasePos = 1;
   while (
-    erasePos < availableMoves.length &&
-    min === availableMoves[erasePos].value
+    erasePos < availableMoves.length
+    && min === availableMoves[erasePos].value
   ) {
-    erasePos++;
+    erasePos += 1;
   }
   return erasePos;
 }
 
 function deleteElements(availableMoves) {
   if (availableMoves.length > 1) {
-    availableMoves.sort(function(a, b) {
-      return b.value - a.value;
-    });
-    var erasePos = different(availableMoves);
+    availableMoves.sort((a, b) => b.value - a.value);
+    const erasePos = different(availableMoves);
     if (erasePos < availableMoves.length) {
       availableMoves.splice(erasePos, availableMoves.length - erasePos);
     }
@@ -138,12 +130,17 @@ function deleteElements(availableMoves) {
   return availableMoves;
 }
 
+function AiAction(pos) {
+  this.pos = pos;
+  this.value = getValue(pos);
+}
+
 function getAvailableMoves() {
-  var availableMoves = [];
-  for (let index = 0; index < boardCopy.length; index++) {
+  const availableMoves = [];
+  for (let index = 0; index < boardCopy.length; index += 1) {
     const element = boardCopy[index];
     if (!isOccupied(element)) {
-      availableMoves.push(new aiAction(index));
+      availableMoves.push(new AiAction(index));
     }
   }
   return availableMoves;
@@ -155,12 +152,16 @@ function areTwoValue(value) {
 }
 
 function areTwo(pos1, pos2, pos3) {
-  var value1 = boardCopy[pos1],
-    value2 = boardCopy[pos2],
-    value3 = boardCopy[pos3];
+  const value1 = boardCopy[pos1];
+
+
+  const value2 = boardCopy[pos2];
+
+
+  const value3 = boardCopy[pos3];
   if (
-    (value1 === value2 && isOccupied(value1) && !isOccupied(value3)) ||
-    (value1 === value3 && isOccupied(value1) && !isOccupied(value2))
+    (value1 === value2 && isOccupied(value1) && !isOccupied(value3))
+    || (value1 === value3 && isOccupied(value1) && !isOccupied(value2))
   ) {
     return areTwoValue(value1);
   }
@@ -193,7 +194,7 @@ export function playerMadeAMove(boardId, board) {
 }
 
 export function aiMadeAMove(boardId, board) {
-  amountOccupied[boardId]++;
+  amountOccupied[boardId] += 1;
   boardCopy = board;
   avoidBox[boardId] = areTwoInTheBoard();
 }
@@ -204,7 +205,7 @@ export function cleanVariables() {
 }
 
 /* function print(availableMoves) {
-  for (let i = 0; i < availableMoves.length; i++) {
+  for (consti = 0; i < availableMoves.length; i++) {
     const element = availableMoves[i];
     console.log(element.pos + ": " + element.value);
   }
@@ -214,7 +215,7 @@ export default function makeMove(board, boardId, difficulty) {
   boardCopy = board;
   currentBoard = boardId;
   currentDifficulty = difficulty;
-  var availableMoves = getAvailableMoves();
+  let availableMoves = getAvailableMoves();
   if (currentDifficulty >= 2) {
     availableMoves = deleteElements(availableMoves);
   }

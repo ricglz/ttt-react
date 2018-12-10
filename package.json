@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-intl": "^2.6.0",
@@ -15,6 +16,24 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && firebase deploy"
-  }
+    "deploy": "react-scripts build && firebase deploy",
+    "lint": "eslint src/*.jsx src/functions/*.jsx src/components/**/*.jsx",
+    "fix-lint": "eslint --fix src/*.jsx src/functions/*.jsx src/components/**/*.jsx",
+    "stylelint": "stylelint src/css/*.css",
+    "stylelint-fix": "stylelint --fix src/*.css src/**/*.css"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "stylelint": "^9.9.0",
+    "stylelint-config-standard": "^18.2.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

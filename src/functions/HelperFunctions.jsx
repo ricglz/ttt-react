@@ -1,24 +1,37 @@
 import { NotificationManager } from 'react-notifications';
 
+let boardCopy = null;
+
 export function alertWinner(winner) {
   const winnerLabel = winner === 1 ? 'X' : 'O';
-  NotificationManager.info('Player ' + winnerLabel + ' has won.');
+  NotificationManager.info(`Player ${winnerLabel} has won.`);
+}
+
+export function layoutOriginalState() {
+  return {
+    ai: false,
+    pvp: false,
+    tutorial: false,
+    language: false,
+  };
+}
+
+export function emptyArray() {
+  return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
 export function isOccupied(value) {
   return value !== 0;
 }
 
-var boardCopy = null;
-
 function allThree(first, second, third) {
   const firstValue = boardCopy[first];
   const secondValue = boardCopy[second];
   const thirdValue = boardCopy[third];
   if (
-    firstValue === secondValue &&
-    secondValue === thirdValue &&
-    isOccupied(firstValue)
+    firstValue === secondValue
+    && secondValue === thirdValue
+    && isOccupied(firstValue)
   ) {
     return firstValue;
   }
@@ -52,16 +65,16 @@ export function newBoard() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 }
 
 export function initialState() {
   return {
     boardGame: newBoard(),
-    currentPlayer: "X",
+    currentPlayer: 'X',
     moveNumber: 0,
-    currentBoard: -1
+    currentBoard: -1,
   };
 }
 
@@ -70,10 +83,10 @@ export function constructorState() {
     selectedOption: null,
     difficulty: 1,
     boardGame: newBoard(),
-    currentPlayer: "X",
+    currentPlayer: 'X',
     moveNumber: 0,
     currentBoard: -1,
     oWins: 0,
-    xWins: 0
+    xWins: 0,
   };
 }

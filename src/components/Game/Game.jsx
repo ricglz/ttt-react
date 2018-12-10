@@ -1,22 +1,28 @@
-import React, { Component } from "react";
-import Header from "./Header";
-import BigBoard from "../Board/BigBoard";
-import ButtonsFooter from "./ButtonsFooter";
-import DifficultySelect from "./DifficultySelect";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import BigBoard from '../Board/BigBoard';
+import ButtonsFooter from './ButtonsFooter';
+import DifficultySelect from './DifficultySelect';
 import {
   isOccupied,
   theresAWinner,
   constructorState,
   initialState,
-  alertWinner
-} from "../../functions/HelperFunctions";
+  alertWinner,
+} from '../../functions/HelperFunctions';
 import makeMove, {
   playerMadeAMove,
   cleanVariables,
-  aiMadeAMove
-} from "../../functions/Ai";
+  aiMadeAMove,
+} from '../../functions/Ai';
 
 class Game extends Component {
+  CONSTANTS = {
+    PLAYER1: 'X',
+    PLAYER2: 'O',
+  }
+
   constructor(props) {
     super();
     this.props = props;
@@ -27,21 +33,19 @@ class Game extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  CONSTANTS = {
-    PLAYER1: "X",
-    PLAYER2: "O"
-  };
-
   canClick(board, id) {
-    const currentValue = this.state.boardGame[board][id];
+    const { boardGame, currentBoard } = this.state;
+    const currentValue = boardGame[board][id];
     if (isOccupied(currentValue)) return false;
-    return board === this.state.currentBoard || this.state.currentBoard === -1;
+    return board === currentBoard || currentBoard === -1;
   }
 
   handleSquareClick(board, id) {
+    const { boardGame, moveNumber } = this.state;
+    const { ai } = this.props;
     if (this.canClick(board, id)) {
-      var boardCopy = [...this.state.boardGame];
-      var newMoveNumber = this.state.moveNumber + 1;
+      const boardCopy = [...boardGame];
+      const newMoveNumber = moveNumber + 1;
       boardCopy[board][id] = this.currentTurn();
       const winner = theresAWinner(boardCopy[board]);
       if (winner) {
@@ -50,43 +54,43 @@ class Game extends Component {
         this.newGame();
       } else if (newMoveNumber === 81) {
         this.newGame();
+      } else if (ai) {
+        playerMadeAMove(board, boardCopy[board]);
+        this.aiMove(boardCopy, id, newMoveNumber);
       } else {
-        if (this.props.ai) {
-          playerMadeAMove(board, boardCopy[board]);
-          this.aiMove(boardCopy, id, newMoveNumber);
-        } else {
-          this.pvpMove(boardCopy, newMoveNumber, id);
-        }
+        this.pvpMove(boardCopy, newMoveNumber, id);
       }
     }
   }
 
   handleChange(selectedOption) {
-    var difficulty = selectedOption.value;
+    const difficulty = selectedOption.value;
     this.setState({
-      selectedOption: selectedOption,
-      difficulty: difficulty
+      selectedOption,
+      difficulty,
     });
-    if (this.state.moveNumber >= 0) {
+    const { moveNumber } = this.state;
+    if (moveNumber >= 0) {
       this.newGame();
     }
   }
 
   aiMove(boardCopy, id, newMoveNumber) {
-    const difficulty = this.state.difficulty;
-    var aiMove = makeMove(boardCopy[id], id, difficulty);
-    boardCopy[id][aiMove] = -1;
-    const winner = theresAWinner(boardCopy[id]);
+    const { difficulty } = this.state;
+    const board = boardCopy;
+    const aiMove = makeMove(board[id], id, difficulty);
+    board[id][aiMove] = -1;
+    const winner = theresAWinner(board[id]);
     if (winner) {
       alertWinner(winner);
       this.changeScore(winner);
       this.newGame();
     } else {
-      aiMadeAMove(id, boardCopy[id]);
+      aiMadeAMove(id, board[id]);
       this.setState({
-        boardGame: boardCopy,
+        boardGame: board,
         moveNumber: newMoveNumber + 1,
-        currentBoard: aiMove
+        currentBoard: aiMove,
       });
     }
   }
@@ -95,35 +99,34 @@ class Game extends Component {
     this.setState({
       boardGame: boardCopy,
       moveNumber: newMoveNumber,
-      currentBoard: id
+      currentBoard: id,
     });
-    if (this.state.currentPlayer === this.CONSTANTS.PLAYER1) {
+    const { currentPlayer } = this.state;
+    if (currentPlayer === this.CONSTANTS.PLAYER1) {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER2
+        currentPlayer: this.CONSTANTS.PLAYER2,
       });
     } else {
       this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER1
+        currentPlayer: this.CONSTANTS.PLAYER1,
       });
     }
   }
 
   currentTurn() {
-    return this.state.currentPlayer === this.CONSTANTS.PLAYER1 ? 1 : -1;
+    const { currentPlayer } = this.state;
+    return currentPlayer === this.CONSTANTS.PLAYER1 ? 1 : -1;
   }
 
   changeScore(value) {
-    var newCount;
     if (value === -1) {
-      newCount = this.state.oWins + 1;
-      this.setState({
-        oWins: newCount
-      });
+      this.setState(({ oWins }) => ({
+        oWins: oWins + 1,
+      }));
     } else {
-      newCount = this.state.xWins + 1;
-      this.setState({
-        xWins: newCount
-      });
+      this.setState(({ xWins }) => ({
+        xWins: xWins + 1,
+      }));
     }
   }
 
@@ -133,36 +136,35 @@ class Game extends Component {
   }
 
   render() {
-    let difficulty;
-    if (this.props.ai) {
-      difficulty = (
-        <DifficultySelect
-          selectedOption={this.state.selectedOption}
-          handleChange={this.handleChange}
-        />
-      );
-    } else {
-      difficulty = <div />;
-    }
+    const { ai, back } = this.props;
+    const {
+      selectedOption, oWins, xWins, boardGame, currentBoard,
+    } = this.state;
     return (
       <div className="container text-center">
-        <Header
-          ai={this.props.ai}
-          oScore={this.state.oWins}
-          xScore={this.state.xWins}
-        />
+        <Header ai={ai} oScore={oWins} xScore={xWins} />
         <hr />
         <BigBoard
           handleClick={this.handleSquareClick}
-          boardGame={this.state.boardGame}
-          currentBoard={this.state.currentBoard}
+          boardGame={boardGame}
+          currentBoard={currentBoard}
         />
         <hr />
-        {difficulty}
-        <ButtonsFooter back={this.props.back} reset={this.newGame} />
+        {ai && (
+        <DifficultySelect
+          selectedOption={selectedOption}
+          handleChange={this.handleChange}
+        />
+        )}
+        <ButtonsFooter back={back} reset={this.newGame} />
       </div>
     );
   }
 }
+
+Game.propTypes = {
+  ai: PropTypes.bool.isRequired,
+  back: PropTypes.func.isRequired,
+};
 
 export default Game;
