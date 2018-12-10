@@ -24,7 +24,7 @@ const Cell = ({
       onClick={() => handleClick(boardNum, cellNum)}
       onKeyDown={() => {}}
       role="button"
-      tabIndex="0"
+      tabIndex="-1"
     >
       <p className={value}>{value}</p>
     </div>

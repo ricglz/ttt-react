@@ -19,15 +19,13 @@ const Header = ({ xScore, oScore, ai }) => (
         <div className="col xScore">
           <p>
             {xScoreMessage}
-
-            {xScore}
+            {` ${xScore}`}
           </p>
         </div>
         <div className="col oScore">
           <p>
             {oScoreMessage}
-
-            {oScore}
+            {` ${oScore}`}
           </p>
         </div>
       </div>

@@ -17,7 +17,7 @@ class Layout extends Component {
   constructor(props) {
     super();
     this.props = props;
-    this.state = this.originalState();
+    this.state = layoutOriginalState();
     this.changeToAi = this.changeToAi.bind(this);
     this.changeToHome = this.changeToHome.bind(this);
     this.changeToPvp = this.changeToPvp.bind(this);
