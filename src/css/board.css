@@ -25,7 +25,7 @@ p {
 }
 
 .oSign,
- .oScore {
+.oScore {
   color: #44e;
   float: right;
 }
@@ -35,7 +35,7 @@ p {
 }
 
 .xScore,
- .xSign {
+.xSign {
   color: #e44;
   float: left;
 }
@@ -93,7 +93,7 @@ button.btn-game {
 }
 
 .game.row .col-6,
- .game .row .col-4 {
+.game.row .col-4 {
   padding-left: 0;
   padding-right: 0;
 }
