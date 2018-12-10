@@ -32,7 +32,7 @@ const Cell = ({
 };
 
 Cell.propTypes = {
-  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   boardNum: PropTypes.number.isRequired,
   cellNum: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,

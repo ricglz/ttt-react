@@ -41,7 +41,7 @@ const Board = ({
 Board.propTypes = {
   boardNum: PropTypes.number.isRequired,
   currentBoard: PropTypes.number.isRequired,
-  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 

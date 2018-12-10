@@ -32,7 +32,10 @@ const DifficultySelect = ({ selectedOption, handleChange }) => (
 );
 
 DifficultySelect.propTypes = {
-  selectedOption: PropTypes.string.isRequired,
+  selectedOption: PropTypes.exact({
+    value: PropTypes.number.isRequired,
+    label: PropTypes.element.isRequired,
+  }),
   handleChange: PropTypes.func.isRequired,
 };
 

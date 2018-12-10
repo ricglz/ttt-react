@@ -28,7 +28,7 @@ const BigBoard = ({ boardGame, currentBoard, handleClick }) => (
 );
 
 BigBoard.propTypes = {
-  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   currentBoard: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };

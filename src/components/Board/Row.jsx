@@ -33,7 +33,7 @@ const Row = ({
 Row.propTypes = {
   rowNum: PropTypes.number.isRequired,
   boardNum: PropTypes.number.isRequired,
-  boardGame: PropTypes.arrayOf(PropTypes.number).isRequired,
+  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   currentBoard: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
