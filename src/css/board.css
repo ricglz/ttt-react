@@ -3,10 +3,11 @@
   font-family: 'Montserrat', 'Roboto', sans-serif;
 }
 
-h1{
+h1 {
   font-size: 32px;
 }
-h2{
+
+h2 {
   font-size: 28px;
 }
 
@@ -15,41 +16,43 @@ h2{
   margin-bottom: 10px;
 }
 
-p{
+p {
   font-size: 18px;
 }
 
-.oScore{
+.oScore {
   margin-right: 2%;
 }
 
-.oSign, .oScore{
-  color: #44E;
+.oSign,
+.oScore {
+  color: #44e;
   float: right;
 }
 
-.xSign{
+.xSign {
   margin-left: 2%;
 }
 
-.xScore, .xSign{
-  color: #E44;
+.xScore,
+.xSign {
+  color: #e44;
   float: left;
 }
 
-a{
+a {
   color: #111;
   font-size: 150%;
 }
 
-hr{
+hr {
   border: 0.38px solid;
 }
 
-.big-box{
+.big-box {
   height: 135px;
   border: 2.5px solid black;
-  padding: 0px;
+  padding: 0;
 }
 
 .box {
@@ -63,20 +66,20 @@ div.box p {
   font-size: 1.5em;
 }
 
-.X{
-  color: #E44;
+.X {
+  color: #e44;
 }
 
-.O{
-  color: #44E;
+.O {
+  color: #44e;
 }
 
 div.cell-row {
-  margin-right: 0px;
-  margin-left: 0px;
+  margin-right: 0;
+  margin-left: 0;
 }
 
-.btn-danger{
+.btn-danger {
   background-color: blue;
   border-color: black;
 }
@@ -89,7 +92,8 @@ button.btn-game {
   background-color: #999;
 }
 
-.game.row .col-6, .game .row .col-4{
-  padding-left: 0px;
-  padding-right: 0px;
+.game.row .col-6,
+.game.row .col-4 {
+  padding-left: 0;
+  padding-right: 0;
 }

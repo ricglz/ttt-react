@@ -22,8 +22,28 @@ import ca from './ca';
 import tr from './tr';
 
 const Messages = {
-  en,  es,  fr,  pt, de, it, hi, mr, ko, ja, da, sr,
-  id, uk, ru, sv, zh, zhCN, ar, ca, cs, tr
-}
+  en,
+  es,
+  fr,
+  pt,
+  de,
+  it,
+  hi,
+  mr,
+  ko,
+  ja,
+  da,
+  sr,
+  id,
+  uk,
+  ru,
+  sv,
+  zh,
+  zhCN,
+  ar,
+  ca,
+  cs,
+  tr,
+};
 
 export default Messages;

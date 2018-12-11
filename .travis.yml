@@ -6,10 +6,8 @@ cache:
   - node_modules
 script:
   - npm run build
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $github_token
-  local_dir: build
-  on:
-    branch: master
+  - npm run lint
+  - npm run stylelint
+after_success:
+  - test $TRAVIS_BRANCH = "master" &&
+    firebase deploy --token "$FIREBASE_TOKEN"

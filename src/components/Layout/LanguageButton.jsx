@@ -1,23 +1,31 @@
-import React from "react";
-import "../../css/language-button.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../../css/language-button.css';
 
-function getClassName(props) {
-  var className = "btn w-100 locale-button";
-  if (props.locale === props.currentLocale) {
-    className += " current-locale";
+function getClassName(locale, currentLocale) {
+  let className = 'btn w-100 locale-button';
+  if (locale === currentLocale) {
+    className += ' current-locale';
   }
   return className;
 }
 
-const LanguageButton = props => (
+const LanguageButton = ({ locale, changeLocale, currentLocale }) => (
   <div className="col-4 col-lg-4 col-xl-4 border-right border-top">
     <button
-      onClick={() => props.changeLocale(props.locale)}
-      className={getClassName(props)}
+      type="button"
+      onClick={() => changeLocale(locale)}
+      className={getClassName(locale, currentLocale)}
     >
-      {props.locale}
+      {locale}
     </button>
   </div>
 );
+
+LanguageButton.propTypes = {
+  locale: PropTypes.string.isRequired,
+  currentLocale: PropTypes.string.isRequired,
+  changeLocale: PropTypes.func.isRequired,
+};
 
 export default LanguageButton;

@@ -1,11 +1,11 @@
 button.locale-button {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 button.locale-button:hover {
-  font-family: 'Roboto-Bold';
+  font-family: 'Roboto-Bold', Arial, sans-serif;
 }
 
 button.locale-button.current-locale {
-  font-family: 'Roboto-Bold';
+  font-family: 'Roboto-Bold', Arial, sans-serif;
 }
