@@ -7,7 +7,7 @@ cache:
 script:
   - npm run build
   - npm run lint
-  - npm run style-lint
+  - npm run stylelint
 after_success:
   - test $TRAVIS_BRANCH = "master" &&
     firebase deploy --token "$FIREBASE_TOKEN"
