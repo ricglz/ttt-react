@@ -39,4 +39,8 @@ DifficultySelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
+DifficultySelect.defaultProps = {
+  selectedOption: null,
+};
+
 export default DifficultySelect;
