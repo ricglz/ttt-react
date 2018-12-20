@@ -6,7 +6,7 @@
     "octokat": "^0.10.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.7.0",
     "react-intl": "^2.6.0",
     "react-notifications": "^1.4.3",
     "react-scripts": "2.1.1",
