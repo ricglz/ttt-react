@@ -4,23 +4,24 @@ import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
+import OnlineGame from './components/OnlineGame/OnlineGame';
+import Tutorial from './components/Tutorial/Tutorial';
 import LanguageFooter from './components/Layout/LanguageFooter';
+import LanguagePage from './components/Languages/LanguagePage';
+import { layoutOriginalState } from './functions/HelperFunctions';
 import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
-import { layoutOriginalState } from './functions/HelperFunctions';
-import Tutorial from './components/Tutorial/Tutorial';
-import LanguagePage from './components/Languages/LanguagePage';
 
 class Layout extends Component {
   constructor(props) {
-    super();
-    this.props = props;
+    super(props);
     this.state = layoutOriginalState();
     this.changeToAi = this.changeToAi.bind(this);
     this.changeToHome = this.changeToHome.bind(this);
     this.changeToPvp = this.changeToPvp.bind(this);
+    this.changeToOnline = this.changeToOnline.bind(this);
     this.changeToTutorial = this.changeToTutorial.bind(this);
     this.changeToLanguage = this.changeToLanguage.bind(this);
     this.changeLocale = this.changeLocale.bind(this);
@@ -35,6 +36,12 @@ class Layout extends Component {
   changeToPvp() {
     this.setState({
       pvp: true,
+    });
+  }
+
+  changeToOnline() {
+    this.setState({
+      online: true,
     });
   }
 
@@ -62,7 +69,7 @@ class Layout extends Component {
 
   returningComponent() {
     const {
-      ai, pvp, tutorial, language,
+      ai, pvp, tutorial, language, online
     } = this.state;
 
     if (ai) {
@@ -70,6 +77,9 @@ class Layout extends Component {
     }
     if (pvp) {
       return <Game ai={false} back={this.changeToHome} />;
+    }
+    if(online) {
+      return <OnlineGame ai={false} back={this.changeToHome} />;
     }
     if (tutorial) {
       return <Tutorial back={this.changeToHome} />;
@@ -85,6 +95,7 @@ class Layout extends Component {
     }
     return (
       <Home
+        changeToOnline={this.changeToOnline}
         changeToAi={this.changeToAi}
         changeToPvp={this.changeToPvp}
         changeToTutorial={this.changeToTutorial}

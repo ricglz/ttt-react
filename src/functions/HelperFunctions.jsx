@@ -11,6 +11,7 @@ export function layoutOriginalState() {
   return {
     ai: false,
     pvp: false,
+    online: false,
     tutorial: false,
     language: false,
   };
