@@ -4,7 +4,7 @@ import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
-import OnlineGame from './components/OnlineGame/OnlineGame';
+import Login from './components/OnlineGame/Login';
 import Tutorial from './components/Tutorial/Tutorial';
 import LanguageFooter from './components/Layout/LanguageFooter';
 import LanguagePage from './components/Languages/LanguagePage';
@@ -79,7 +79,7 @@ class Layout extends Component {
       return <Game ai={false} back={this.changeToHome} />;
     }
     if (online) {
-      return <OnlineGame ai={false} back={this.changeToHome} />;
+      return <Login />;
     }
     if (tutorial) {
       return <Tutorial back={this.changeToHome} />;
