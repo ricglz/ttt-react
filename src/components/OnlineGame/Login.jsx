@@ -1,27 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as firebase from 'firebase';
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
-  authDomain: 'ttt-hl-react.firebaseapp.com',
-  databaseURL: 'https://ttt-hl-react.firebaseio.com',
-  projectId: 'ttt-hl-react',
-  storageBucket: 'ttt-hl-react.appspot.com',
-  messagingSenderId: '870184829747',
-});
-
-firebase.auth().useDeviceLanguage();
-var provider = new firebase.auth.GoogleAuthProvider();
+import { firebaseAuth } from '../../firebase/firebase'
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {}
   }
 
   logIn() {
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    firebaseAuth().then(function(result) {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
       // The signed-in user info.

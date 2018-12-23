@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as firebase from 'firebase';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from '../Game/ButtonsFooter';
 import {
@@ -10,15 +9,7 @@ import {
   initialState,
   alertWinner,
 } from '../../functions/HelperFunctions';
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
-  authDomain: 'ttt-hl-react.firebaseapp.com',
-  databaseURL: 'https://ttt-hl-react.firebaseio.com',
-  projectId: 'ttt-hl-react',
-  storageBucket: 'ttt-hl-react.appspot.com',
-  messagingSenderId: '870184829747',
-});
+import { boardReference } from '../../firebase/firebase'
 
 class OnlineGame extends Component {
   CONSTANTS = {
@@ -36,18 +27,15 @@ class OnlineGame extends Component {
 
   componentDidMount() {
     const that = this;
-    this.boardReference().on('value', (snapshot) => {
+    const { gameId } = this.state;
+    boardReference(gameId).on('value', (snapshot) => {
       that.setState(snapshot.val());
     });
   }
 
   setFirebase(state) {
-    this.boardReference().set(state);
-  }
-
-  boardReference() {
-    const { gameId } = this.props;
-    return firebase.database().ref('/games/' + gameId);
+    const { gameId } = this.state;
+    boardReference(gameId).set(state);
   }
 
   canClick(board, id) {
