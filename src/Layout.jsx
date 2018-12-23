@@ -69,7 +69,7 @@ class Layout extends Component {
 
   returningComponent() {
     const {
-      ai, pvp, tutorial, language, online
+      ai, pvp, tutorial, language, online,
     } = this.state;
 
     if (ai) {
@@ -78,7 +78,7 @@ class Layout extends Component {
     if (pvp) {
       return <Game ai={false} back={this.changeToHome} />;
     }
-    if(online) {
+    if (online) {
       return <OnlineGame ai={false} back={this.changeToHome} />;
     }
     if (tutorial) {

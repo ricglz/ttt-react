@@ -91,3 +91,17 @@ export function constructorState() {
     xWins: 0,
   };
 }
+
+export function fbInitialState(hostUid) {
+  return {
+    boardGame: newBoard(),
+    currentPlayer: 'X',
+    moveNumber: 0,
+    currentBoard: -1,
+    oWins: 0,
+    xWins: 0,
+    hostUid,
+    guestUid: null,
+    nextPlayerUid: hostUid,
+  };
+}

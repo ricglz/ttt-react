@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as firebase from 'firebase';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from '../Game/ButtonsFooter';
 import {
   isOccupied,
   theresAWinner,
-  constructorState,
+  fbInitialState,
   initialState,
   alertWinner,
 } from '../../functions/HelperFunctions';
-import makeMove, {
-  playerMadeAMove,
-  cleanVariables,
-  aiMadeAMove,
-} from '../../functions/Ai';
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
+  authDomain: 'ttt-hl-react.firebaseapp.com',
+  databaseURL: 'https://ttt-hl-react.firebaseio.com',
+  projectId: 'ttt-hl-react',
+  storageBucket: 'ttt-hl-react.appspot.com',
+  messagingSenderId: '870184829747',
+});
 
 class OnlineGame extends Component {
   CONSTANTS = {
@@ -22,25 +27,43 @@ class OnlineGame extends Component {
   }
 
   constructor(props) {
-    super();
-    this.props = props;
-    this.state = constructorState();
+    super(props);
+    this.state = fbInitialState();
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.newGame = this.newGame.bind(this);
     this.changeScore = this.changeScore.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    const that = this;
+    this.boardReference().on('value', (snapshot) => {
+      that.setState(snapshot.val());
+    });
+  }
+
+  setFirebase(state) {
+    this.boardReference().set(state);
+  }
+
+  boardReference() {
+    const { gameId } = this.props;
+    return firebase.database().ref('/games/' + gameId);
   }
 
   canClick(board, id) {
-    const { boardGame, currentBoard } = this.state;
+    const {
+      boardGame, currentBoard, nextPlayerUid,
+    } = this.state;
+    const { userId } = this.props;
     const currentValue = boardGame[board][id];
-    if (isOccupied(currentValue)) return false;
+    if (isOccupied(currentValue)
+      || nextPlayerUid !== userId
+    ) return false;
     return board === currentBoard || currentBoard === -1;
   }
 
   handleSquareClick(board, id) {
     const { boardGame, moveNumber } = this.state;
-    const { ai } = this.props;
     if (this.canClick(board, id)) {
       const boardCopy = [...boardGame];
       const newMoveNumber = moveNumber + 1;
@@ -52,63 +75,25 @@ class OnlineGame extends Component {
         this.newGame();
       } else if (newMoveNumber === 81) {
         this.newGame();
-      } else if (ai) {
-        playerMadeAMove(board, boardCopy[board]);
-        this.aiMove(boardCopy, id, newMoveNumber);
       } else {
         this.pvpMove(boardCopy, newMoveNumber, id);
       }
     }
   }
 
-  handleChange(selectedOption) {
-    const difficulty = selectedOption.value;
-    this.setState({
-      selectedOption,
-      difficulty,
-    });
-    const { moveNumber } = this.state;
-    if (moveNumber >= 0) {
-      this.newGame();
-    }
-  }
-
-  aiMove(boardCopy, id, newMoveNumber) {
-    const { difficulty } = this.state;
-    const board = boardCopy;
-    const aiMove = makeMove(board[id], id, difficulty);
-    board[id][aiMove] = -1;
-    const winner = theresAWinner(board[id]);
-    if (winner) {
-      alertWinner(winner);
-      this.changeScore(winner);
-      this.newGame();
-    } else {
-      aiMadeAMove(id, board[id]);
-      this.setState({
-        boardGame: board,
-        moveNumber: newMoveNumber + 1,
-        currentBoard: aiMove,
-      });
-    }
-  }
-
   pvpMove(boardCopy, newMoveNumber, id) {
-    this.setState({
-      boardGame: boardCopy,
-      moveNumber: newMoveNumber,
-      currentBoard: id,
-    });
-    const { currentPlayer } = this.state;
-    if (currentPlayer === this.CONSTANTS.PLAYER1) {
-      this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER2,
-      });
-    } else {
-      this.setState({
-        currentPlayer: this.CONSTANTS.PLAYER1,
-      });
-    }
+    let state = this.state;
+
+    let { currentPlayer } = state;
+    const { PLAYER1, PLAYER2 } = this.CONSTANTS;
+    currentPlayer = currentPlayer === PLAYER2 ? PLAYER1 : PLAYER2;
+
+    state.boardGame = boardCopy;
+    state.moveNumber = newMoveNumber;
+    state.currentBoard = id;
+    state.currentPlayer = currentPlayer;
+
+    this.setFirebase(state);
   }
 
   currentTurn() {
@@ -117,26 +102,23 @@ class OnlineGame extends Component {
   }
 
   changeScore(value) {
+    let state = this.state;
     if (value === -1) {
-      this.setState(({ oWins }) => ({
-        oWins: oWins + 1,
-      }));
+      state.oWins += 1;
     } else {
-      this.setState(({ xWins }) => ({
-        xWins: xWins + 1,
-      }));
+      state.xWins += 1;
     }
+    this.setFirebase(state);
   }
 
   newGame() {
-    cleanVariables();
-    this.setState(initialState());
+    this.setFirebase(initialState());
   }
 
   render() {
-    const { ai, back } = this.props;
+    const { back } = this.props;
     const {
-      selectedOption, oWins, xWins, boardGame, currentBoard,
+      oWins, xWins, boardGame, currentBoard,
     } = this.state;
     return (
       <div className="container text-center">
@@ -145,7 +127,7 @@ class OnlineGame extends Component {
           boardGame={boardGame}
           currentBoard={currentBoard}
         />
-        <hr/>
+        <hr />
         <ButtonsFooter back={back} reset={this.newGame} />
       </div>
     );
@@ -153,8 +135,9 @@ class OnlineGame extends Component {
 }
 
 OnlineGame.propTypes = {
-  ai: PropTypes.bool.isRequired,
   back: PropTypes.func.isRequired,
+  gameId: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default OnlineGame;
