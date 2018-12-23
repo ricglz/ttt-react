@@ -1,16 +1,16 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
   - node_modules
 script:
-  - npm run build
-  - npm run lint
-  - npm run stylelint
+- npm run build
+- npm run lint
+- npm run stylelint
 deploy:
   provider: firebase
   token:
-    secure: "lWfTIK9Vg6L3ggY5kwJBaA8aFB7yy+t1Ntkis4Wqdnxde0SDrodei71tu0pt8v+/7vPDg3Do9zcTxWEPtoR6qd1gUhjEs1DLkEiq4+e4O/LkdqszC7SRi1EDKQRU8M6owztmrTmEbjuT4On7Ds1NLIics4D18e1xGI1gu7VCdEYOcl7azb2W0IkwleYMfn4dg61l02yp3ilQPfylyc/KQLxULkY87p7fxMT7dBuZVZtFVfY9AA1J5WctiMC3dsagn3oTru+projajEySiirGO5uPd6sI7Eb1LCGFN9DMeuy21ItKVtkPwVGgboBD/wOyrfbkMQySjren4Nmms+RWzWiXuaFtWHDARjxQR7d3nKjStyMX0KQ7iZLOBRYhpnf82PUhD5E6e8VHLCfk9WsHirR1nHykcwG57AUuq3m+1Qlvre6JEwXlJHZY7B1Od89bSxNvL41mhl4INbl3Nx3/H4PcxWxLDt9ZvHLF/SimtO2kA3Q8Z/akMVwa4OmT12ia6JPdLZ/qU9whtOkzEHfr6mpnQBNwuKTNw6tL8I6pnYzS73gQoySWdScFMLUuBIA0YZ2zFeOmNLCSjAKzyEZFrm/cEb4lJiWGVtyUWoI22TShOEzQSvRh715TYyLqlslXKu4R7LvNs3Dhr/9gf6mjIb5t4PlUHJsNpOjYcdq9tjw="
+    secure: "CfwKnxht0YmxDHF6mshm+o7HA4fWbqLJs+qgEPGo5Ow8EkHeFB1olJvr2EhDb0YGBxHke9riPLLaOugW/txrArgYkfaxsYPPNQWQiEJu8XIxwn4hHzE5vr5epZ8vWizNYTZ8QoFEwUpE/xkSGCHyvXXg937e386iLLceXwj9/2z8CLj+OIy0mE5JnkHx0z0kF+ue0xPytKNN8ZA/3NOi9bVycHlQmFVu1n1szCSKLVMiF3bjl0Icy/bpP3nq7mEcWokhvmodmxSmSf70L2CrT/mv/J1hvTPluKXHHcMk6vE3oDjxfTt7o+kQ+TkTGHTC0bIjdOukipMpMxem+xU9/372WfXFlPWelzgAn5nPdora895MYh+A9T2TLgQYAGJH1x3e8cY+ZvKB+bQdBq/CfLMK3dpgQ6PFmhvy69espWfyU9OpNquhJUMP/gnJBeve8S4DMETyhPHNjQgKS1XFj/irkQDzN2yYOGvLGgVUOYtYs05CgdBXGvq9Oukahaf82LbG75FxDBxkrQkEL9F2CT8wKrqoGAT/HypXDRhpFFpPpYZspTw/5V+4Y+4Tx3UqB9N/FcjZhqF873C5vLaogUk0Vohei+rVhOqe2WLMCf7eYN4veqKre3E1pFVqYubFvA9cDjDOVBLnB3OnC6xlKfXb3bWJgYzLj/12QS0jTjg="
   on:
     branch: master
