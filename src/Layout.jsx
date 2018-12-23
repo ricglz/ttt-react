@@ -13,6 +13,7 @@ import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
+import './css/everything.css';
 
 class Layout extends Component {
   constructor(props) {
@@ -106,14 +107,14 @@ class Layout extends Component {
   render() {
     const { locale } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.returningComponent()}
         <LanguageFooter
           locale={locale}
           changeToLanguage={this.changeToLanguage}
         />
         <NotificationContainer />
-      </div>
+      </React.Fragment>
     );
   }
 }

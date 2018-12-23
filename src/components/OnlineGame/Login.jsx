@@ -1,35 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseAuth } from '../../firebase/firebase'
+// import Game from './Game'
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+
+    const cachedUser = localStorage.getItem('user');
+    const user = cachedUser ? JSON.parse(cachedUser) : null;
+
+    this.state = { user };
+    this.logIn = this.logIn.bind(this);
   }
 
   logIn() {
+    const that = this;
     firebaseAuth().then(function(result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
-      // The signed-in user info.
       let {
-        displayName, email, metadata, phoneNumber, photoUrl, uid
+        displayName, email, phoneNumber, photoUrl, uid
       } = result.user;
       let user = {
-        name: displayName, email, metadata, phoneNumber, photoUrl, uid
+        name: displayName, email, phoneNumber, photoUrl, uid
       };
-      console.log(user);
+      that.setState(user);
+      localStorage.setItem('user', JSON.stringify(user));
     }).catch(function(error) {
       alert(error.message);
     });
   }
 
   render() {
+    const { user } = this.state
     return (
-      <button onClick={() => this.logIn()}> Log in plox </button>
+      <React.Fragment>
+      { user ? (
+        <span> yei </span>
+        ) : (
+        <div className="row h-100 justify-content-center align-items-center">
+          <button onClick={() => this.logIn()}> Log in plox </button>
+        </div>
+      )}
+      </React.Fragment>
     )
   }
+}
+
+Login.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    photoUrl: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
+  }),
 }
 
 export default Login;
