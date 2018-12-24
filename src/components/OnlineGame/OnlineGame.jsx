@@ -36,9 +36,9 @@ class OnlineGame extends Component {
     });
   }
 
-  setFirebase(state) {
+  setFirebase(obj) {
     const { gameId } = this.props;
-    boardReference(gameId).set(state);
+    boardReference(gameId).update(obj);
   }
 
   canClick(board, id) {
@@ -72,12 +72,10 @@ class OnlineGame extends Component {
     }
   }
 
-  pvpMove(boardCopy, newMoveNumber, id) {
-    const state = this.state; // eslint-disable-line prefer-destructuring
-
+  pvpMove(boardGame, moveNumber, currentBoard) {
     let {
       currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
-    } = state;
+    } = this.state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
     if (currentPlayer === PLAYER2) {
       currentPlayer = PLAYER1;
@@ -87,11 +85,13 @@ class OnlineGame extends Component {
       nextPlayerUid = guestUid;
     }
 
-    state.boardGame = boardCopy;
-    state.moveNumber = newMoveNumber;
-    state.currentBoard = id;
-    state.currentPlayer = currentPlayer;
-    state.nextPlayerUid = nextPlayerUid;
+    const state = {
+      boardGame,
+      moveNumber,
+      currentBoard,
+      currentPlayer,
+      nextPlayerUid,
+    };
 
     this.setFirebase(state);
   }
@@ -102,13 +102,14 @@ class OnlineGame extends Component {
   }
 
   changeScore(value) {
-    const state = this.state; // eslint-disable-line prefer-destructuring
+    let { oWins, xWins } = this.state;
     if (value === -1) {
-      state.oWins += 1;
+      oWins += 1;
     } else {
-      state.xWins += 1;
+      xWins += 1;
     }
-    this.setFirebase(state);
+    const newState = { oWins, xWins };
+    this.setFirebase(newState);
   }
 
   newGame() {

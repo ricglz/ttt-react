@@ -25,7 +25,7 @@ class Login extends React.Component {
       const user = {
         name: displayName, email, phoneNumber, photoUrl, uid,
       };
-      that.setState(user);
+      that.setState({ user });
       localStorage.setItem('user', JSON.stringify(user));
     }).catch((error) => {
       NotificationManager.error(error.message);

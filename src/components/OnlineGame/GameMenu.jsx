@@ -14,6 +14,8 @@ class GameMenu extends React.Component {
       gameId: null,
     };
     this.joinGame = this.joinGame.bind(this);
+    this.hostNewGame = this.hostNewGame.bind(this);
+    this.surrender = this.surrender.bind(this);
   }
 
   componentDidMount() {
@@ -27,9 +29,9 @@ class GameMenu extends React.Component {
   }
 
   hostNewGame() {
-    const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
-    const newGame = fbInitialState(uid);
-    const ref = gamesReference().push(newGame);
+    const { uid } = this.props.user, // eslint-disable-line react/destructuring-assignment
+          newGame = fbInitialState(uid),
+          ref = gamesReference().push(newGame);
     this.setState({ gameId: ref.key });
   }
 
@@ -39,16 +41,15 @@ class GameMenu extends React.Component {
     this.setState({ gameId: key });
   }
 
-  surrender(gameState) {
-    const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
-    const { gameId } = this.state;
-    const { guestUid, hostuid } = gameState;
-    if (uid === hostuid) {
+  surrender({ guestUid, hostUid }) {
+    const { uid } = this.props.user, // eslint-disable-line react/destructuring-assignment
+          { gameId } = this.state;
+    if (uid === hostUid) {
       if (guestUid === -1) {
         boardReference(gameId).remove();
       } else {
         boardReference(gameId).update({
-          hostuid: guestUid,
+          hostUid: uid,
           guestUid: -1,
         });
       }
@@ -67,9 +68,9 @@ class GameMenu extends React.Component {
   }
 
   render() {
-    const { games, gameId } = this.state;
-    const { user, logOut } = this.props;
-    const { uid } = user;
+    const { games, gameId } = this.state,
+          { user, logOut } = this.props,
+          { uid } = user;
     return (
       <React.Fragment>
         { gameId ? (
