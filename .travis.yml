@@ -1,10 +1,17 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
   - node_modules
 script:
-  - npm run build
-  - npm run lint
-  - npm run stylelint
+- npm run build
+- npm run lint
+- npm run stylelint
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  on:
+    branch: master
+  token:
+    secure: "CfwKnxht0YmxDHF6mshm+o7HA4fWbqLJs+qgEPGo5Ow8EkHeFB1olJvr2EhDb0YGBxHke9riPLLaOugW/txrArgYkfaxsYPPNQWQiEJu8XIxwn4hHzE5vr5epZ8vWizNYTZ8QoFEwUpE/xkSGCHyvXXg937e386iLLceXwj9/2z8CLj+OIy0mE5JnkHx0z0kF+ue0xPytKNN8ZA/3NOi9bVycHlQmFVu1n1szCSKLVMiF3bjl0Icy/bpP3nq7mEcWokhvmodmxSmSf70L2CrT/mv/J1hvTPluKXHHcMk6vE3oDjxfTt7o+kQ+TkTGHTC0bIjdOukipMpMxem+xU9/372WfXFlPWelzgAn5nPdora895MYh+A9T2TLgQYAGJH1x3e8cY+ZvKB+bQdBq/CfLMK3dpgQ6PFmhvy69espWfyU9OpNquhJUMP/gnJBeve8S4DMETyhPHNjQgKS1XFj/irkQDzN2yYOGvLGgVUOYtYs05CgdBXGvq9Oukahaf82LbG75FxDBxkrQkEL9F2CT8wKrqoGAT/HypXDRhpFFpPpYZspTw/5V+4Y+4Tx3UqB9N/FcjZhqF873C5vLaogUk0Vohei+rVhOqe2WLMCf7eYN4veqKre3E1pFVqYubFvA9cDjDOVBLnB3OnC6xlKfXb3bWJgYzLj/12QS0jTjg="
