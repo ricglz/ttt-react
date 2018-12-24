@@ -66,8 +66,15 @@ class GameMenu extends React.Component {
     return Object.keys(games).map((key) => {
       const { hostUid, hostName } = games[key];
       return (
-        <li key={key}>
-          <button type="button" onClick={() => this.joinGame(key, hostUid)}>{hostName}</button>
+        <li className="list-group-item" key={key}>
+          <span>{hostName}</span>
+          <button
+            className="btn ml-5 btn-outline-dark"
+            type="button"
+            onClick={() => this.joinGame(key, hostUid)}
+          >
+            Join Game
+          </button>
         </li>
       );
     });
@@ -83,11 +90,17 @@ class GameMenu extends React.Component {
           <OnlineGame gameId={gameId} userId={uid} back={this.surrender} />
         ) : (
           <React.Fragment>
-            <ul>
+            <div className="row justify-content-center">
+              <h1>Rooms</h1>
+            </div>
+            <hr />
+            <div className="row">
+              <Button text="Host new game" func={this.hostNewGame} />
+              <Button text="Log Out" func={logOut} />
+            </div>
+            <ul className="list-group">
               { this.renderGames(games) }
             </ul>
-            <button type="button" onClick={() => this.hostNewGame()}>Host new game</button>
-            <button type="button" onClick={() => logOut()}>Log Out</button>
           </React.Fragment>
         )
         }
@@ -96,9 +109,22 @@ class GameMenu extends React.Component {
   }
 }
 
+const Button = ({ text, func }) => (
+  <div className="col text-center">
+    <button className="btn btn-outline-dark" type="button" onClick={() => func()}>
+      {text}
+    </button>
+  </div>
+);
+
 GameMenu.propTypes = {
   user: userPropType, // eslint-disable-line react/require-default-props
   logOut: PropTypes.func.isRequired,
+};
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired,
 };
 
 export default GameMenu;

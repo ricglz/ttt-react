@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
+import GoogleButton from 'react-google-button';
 import { firebaseAuth } from '../../firebase/firebase';
 import GameMenu from './GameMenu';
 
@@ -46,8 +47,8 @@ class Login extends React.Component {
           <GameMenu user={user} logOut={this.logOut} />
         ) : (
           <div className="row h-100 justify-content-center align-items-center">
-            <button type="button" onClick={() => this.logIn()}> Log in plox </button>
-            <button type="button" onClick={() => back()}>Back</button>
+            <GoogleButton onClick={() => this.logIn()} />
+            <button className="ml-5 btn btn-danger" type="button" onClick={() => back()}>Back</button>
           </div>
         )}
       </React.Fragment>
