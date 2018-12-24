@@ -101,7 +101,7 @@ export function fbInitialState(hostUid) {
     oWins: 0,
     xWins: 0,
     hostUid,
-    guestUid: null,
+    guestUid: -1,
     nextPlayerUid: hostUid,
   };
 }

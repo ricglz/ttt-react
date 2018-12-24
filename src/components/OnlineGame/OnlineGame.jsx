@@ -27,14 +27,19 @@ class OnlineGame extends Component {
 
   componentDidMount() {
     const that = this;
-    const { gameId } = this.state;
+    const { gameId } = this.props;
     boardReference(gameId).on('value', (snapshot) => {
+      console.log(snapshot);
       that.setState(snapshot.val());
+    }, (err) => {
+      console.log('why?x2');
+      alert(err.message);
     });
   }
 
   setFirebase(state) {
-    const { gameId } = this.state;
+    const { gameId } = this.props;
+    console.log(state);
     boardReference(gameId).set(state);
   }
 
@@ -44,6 +49,7 @@ class OnlineGame extends Component {
     } = this.state;
     const { userId } = this.props;
     const currentValue = boardGame[board][id];
+    console.log(nextPlayerUid, userId);
     if (isOccupied(currentValue)
       || nextPlayerUid !== userId
     ) return false;
@@ -72,14 +78,23 @@ class OnlineGame extends Component {
   pvpMove(boardCopy, newMoveNumber, id) {
     let state = this.state;
 
-    let { currentPlayer } = state;
+    let {
+      currentPlayer, hostUid, guestUid, nextPlayerUid
+    } = state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
-    currentPlayer = currentPlayer === PLAYER2 ? PLAYER1 : PLAYER2;
+    if (currentPlayer === PLAYER2) {
+      currentPlayer = PLAYER1;
+      nextPlayerUid = hostUid;
+    } else {
+      currentPlayer = PLAYER2;
+      nextPlayerUid = guestUid;
+    }
 
     state.boardGame = boardCopy;
     state.moveNumber = newMoveNumber;
     state.currentBoard = id;
     state.currentPlayer = currentPlayer;
+    state.nextPlayerUid = nextPlayerUid;
 
     this.setFirebase(state);
   }

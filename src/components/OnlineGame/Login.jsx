@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { firebaseAuth } from '../../firebase/firebase'
-// import Game from './Game'
+import { firebaseAuth } from '../../firebase/firebase';
+import { userPropType } from '../../constants/props';
+import GameMenu from './GameMenu';
 
 class Login extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class Login extends React.Component {
     return (
       <React.Fragment>
       { user ? (
-        <span> yei </span>
+        <GameMenu user={user} />
         ) : (
         <div className="row h-100 justify-content-center align-items-center">
           <button onClick={() => this.logIn()}> Log in plox </button>
@@ -48,13 +49,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
-    photoUrl: PropTypes.string.isRequired,
-    uid: PropTypes.string.isRequired,
-  }),
+  user: userPropType,
 }
 
 export default Login;

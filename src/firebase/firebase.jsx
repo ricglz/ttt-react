@@ -16,6 +16,10 @@ export function boardReference(gameId) {
   return firebase.database().ref('/games/' + gameId);
 }
 
+export function gamesReference() {
+  return firebase.database().ref('/games');
+}
+
 export function firebaseAuth() {
   return firebase.auth().signInWithPopup(provider);
 }
