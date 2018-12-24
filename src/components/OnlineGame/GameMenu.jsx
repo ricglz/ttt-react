@@ -74,7 +74,7 @@ class GameMenu extends React.Component {
     return (
       <React.Fragment>
         { gameId ? (
-          <OnlineGame gameId={gameId} userId={uid} />
+          <OnlineGame gameId={gameId} userId={uid} back={this.surrender} />
         ) : (
           <React.Fragment>
             <ul>
