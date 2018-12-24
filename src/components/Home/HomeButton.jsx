@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 const HomeButton = ({ func, text, staticText }) => (
   <div className="row justify-content-center border-top py-3">
     <button type="button" onClick={func} className="btn btn-home">
-    { staticText ? (
-      <span>{text}</span>
+      { staticText ? (
+        <span>{text}</span>
       ) : (
         <FormattedMessage id={text} />
       )

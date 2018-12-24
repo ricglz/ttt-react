@@ -37,9 +37,11 @@ class OnlineGame extends Component {
   }
 
   updateFirebase(obj) {
-    const { gameId } = this.props,
-          timestamp = Date.now();
-    boardReference(gameId).update(Object.assign(obj, {timestamp}));
+    const { gameId } = this.props;
+
+
+    const timestamp = Date.now();
+    boardReference(gameId).update(Object.assign(obj, { timestamp }));
   }
 
   canClick(board, id) {
