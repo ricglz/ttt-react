@@ -4,7 +4,7 @@ import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
-import OnlineGame from './components/OnlineGame/OnlineGame';
+import Login from './components/OnlineGame/Login';
 import Tutorial from './components/Tutorial/Tutorial';
 import LanguageFooter from './components/Layout/LanguageFooter';
 import LanguagePage from './components/Languages/LanguagePage';
@@ -13,6 +13,7 @@ import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
+import './css/everything.css';
 
 class Layout extends Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class Layout extends Component {
 
   returningComponent() {
     const {
-      ai, pvp, tutorial, language, online
+      ai, pvp, tutorial, language, online,
     } = this.state;
 
     if (ai) {
@@ -78,8 +79,8 @@ class Layout extends Component {
     if (pvp) {
       return <Game ai={false} back={this.changeToHome} />;
     }
-    if(online) {
-      return <OnlineGame ai={false} back={this.changeToHome} />;
+    if (online) {
+      return <Login />;
     }
     if (tutorial) {
       return <Tutorial back={this.changeToHome} />;
@@ -106,14 +107,14 @@ class Layout extends Component {
   render() {
     const { locale } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.returningComponent()}
         <LanguageFooter
           locale={locale}
           changeToLanguage={this.changeToLanguage}
         />
         <NotificationContainer />
-      </div>
+      </React.Fragment>
     );
   }
 }

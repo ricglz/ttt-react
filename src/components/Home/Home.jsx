@@ -30,7 +30,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      changeToAi, changeToPvp, changeToOnline, changeToTutorial
+      changeToAi, changeToPvp, changeToOnline, changeToTutorial,
     } = this.props;
     const { contributors } = this.state;
     return (
@@ -44,7 +44,7 @@ class Home extends React.Component {
         </div>
         <HomeButton func={changeToAi} text="shared.sp" />
         <HomeButton func={changeToPvp} text="shared.mp" />
-        <HomeButton func={changeToOnline} text="shared.mp"/>
+        <HomeButton func={changeToOnline} text="shared.mp" />
         <HomeButton func={changeToTutorial} text="shared.tutorial" />
         <ul className="contributors">
           {contributors}
@@ -58,6 +58,7 @@ Home.propTypes = {
   changeToTutorial: PropTypes.func.isRequired,
   changeToPvp: PropTypes.func.isRequired,
   changeToAi: PropTypes.func.isRequired,
+  changeToOnline: PropTypes.func.isRequired,
 };
 
 export default Home;
