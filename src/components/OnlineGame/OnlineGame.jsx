@@ -36,9 +36,10 @@ class OnlineGame extends Component {
     });
   }
 
-  setFirebase(obj) {
-    const { gameId } = this.props;
-    boardReference(gameId).update(obj);
+  updateFirebase(obj) {
+    const { gameId } = this.props,
+          timestamp = Date.now();
+    boardReference(gameId).update(Object.assign(obj, {timestamp}));
   }
 
   canClick(board, id) {
@@ -89,7 +90,7 @@ class OnlineGame extends Component {
       nextPlayerUid,
     };
 
-    this.setFirebase(state);
+    this.updateFirebase(state);
   }
 
   currentTurn() {
@@ -105,11 +106,11 @@ class OnlineGame extends Component {
       xWins += 1;
     }
     const newState = { oWins, xWins };
-    this.setFirebase(newState);
+    this.updateFirebase(newState);
   }
 
   newGame() {
-    this.setFirebase(initialState());
+    this.updateFirebase(initialState());
   }
 
   render() {

@@ -92,7 +92,7 @@ export function constructorState() {
   };
 }
 
-export function fbInitialState(hostUid) {
+export function fbInitialState(hostUid, hostName) {
   return {
     boardGame: newBoard(),
     currentPlayer: 'X',
@@ -101,7 +101,9 @@ export function fbInitialState(hostUid) {
     oWins: 0,
     xWins: 0,
     hostUid,
+    hostName,
     guestUid: -1,
     nextPlayerUid: hostUid,
+    timestamp: Date.now(),
   };
 }

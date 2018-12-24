@@ -20,8 +20,9 @@ class GameMenu extends React.Component {
 
   componentDidMount() {
     const that = this;
-    gamesReference().on('value', (snapshot) => {
-      const games = snapshot.val();
+    gamesReference().orderByChild('guestUid').equalTo(-1).on('value', (snapshot) => {
+      let games = snapshot.val();
+      games = games ? games : { };
       that.setState({ games });
     }, (err) => {
       NotificationManager.error(err.message);
@@ -29,15 +30,18 @@ class GameMenu extends React.Component {
   }
 
   hostNewGame() {
-    const { uid } = this.props.user, // eslint-disable-line react/destructuring-assignment
-          newGame = fbInitialState(uid),
+    const { uid, name } = this.props.user, // eslint-disable-line react/destructuring-assignment
+          newGame = fbInitialState(uid, name),
           ref = gamesReference().push(newGame);
     this.setState({ gameId: ref.key });
   }
 
-  joinGame(key) {
+  joinGame(key, hostUid) {
     const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
-    boardReference(key).update({ guestUid: uid });
+    console.log(uid, key);
+    if (hostUid !== uid) {
+      boardReference(key).update({ guestUid: uid });
+    }
     this.setState({ gameId: key });
   }
 
@@ -49,7 +53,7 @@ class GameMenu extends React.Component {
         boardReference(gameId).remove();
       } else {
         boardReference(gameId).update({
-          hostUid: uid,
+          hostUid: guestUid,
           guestUid: -1,
         });
       }
@@ -60,11 +64,14 @@ class GameMenu extends React.Component {
   }
 
   renderGames(games) {
-    return Object.keys(games).map(key => (
-      <li key={key}>
-        <button type="button" onClick={() => this.joinGame(key)}>{key}</button>
-      </li>
-    ));
+    return Object.keys(games).map(key => {
+      const { hostUid, hostName } = games[key];
+      return (
+        <li key={key}>
+          <button type="button" onClick={() => this.joinGame(key, hostUid)}>{hostName}</button>
+        </li>
+      )
+    });
   }
 
   render() {
