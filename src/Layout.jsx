@@ -80,7 +80,7 @@ class Layout extends Component {
       return <Game ai={false} back={this.changeToHome} />;
     }
     if (online) {
-      return <Login />;
+      return <Login back={this.changeToHome} />;
     }
     if (tutorial) {
       return <Tutorial back={this.changeToHome} />;

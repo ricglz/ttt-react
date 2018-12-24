@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NotificationManager } from 'react-notifications';
 import { firebaseAuth } from '../../firebase/firebase';
-import { userPropType } from '../../constants/props';
 import GameMenu from './GameMenu';
 
 class Login extends React.Component {
@@ -13,43 +13,55 @@ class Login extends React.Component {
 
     this.state = { user };
     this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   logIn() {
     const that = this;
-    firebaseAuth().then(function(result) {
-      var token = result.credential.accessToken;
-      let {
-        displayName, email, phoneNumber, photoUrl, uid
+    firebaseAuth().then((result) => {
+      const {
+        displayName, email, phoneNumber, photoUrl, uid,
       } = result.user;
-      let user = {
-        name: displayName, email, phoneNumber, photoUrl, uid
+      const user = {
+        name: displayName, email, phoneNumber, photoUrl, uid,
       };
       that.setState(user);
       localStorage.setItem('user', JSON.stringify(user));
-    }).catch(function(error) {
-      alert(error.message);
+    }).catch((error) => {
+      NotificationManager.error(error.message);
     });
   }
 
+  logOut() {
+    this.setState({ user: null });
+    localStorage.removeItem('user');
+  }
+
   render() {
-    const { user } = this.state
+    const { user } = this.state;
+    const { back } = this.props;
     return (
       <React.Fragment>
-      { user ? (
-        <GameMenu user={user} />
+        { user ? (
+          <GameMenu user={user} logOut={this.logOut} />
         ) : (
-        <div className="row h-100 justify-content-center align-items-center">
-          <button onClick={() => this.logIn()}> Log in plox </button>
-        </div>
-      )}
+          <div className="row h-100 justify-content-center align-items-center">
+            <button type="button" onClick={() => this.logIn()}> Log in plox </button>
+            <span>
+              {' '}
+              {"If it doesn't show games lists refresh the page"}
+              {' '}
+            </span>
+            <button type="button" onClick={() => back()}>Back</button>
+          </div>
+        )}
       </React.Fragment>
-    )
+    );
   }
 }
 
 Login.propTypes = {
-  user: userPropType,
-}
+  back: PropTypes.func.isRequired,
+};
 
 export default Login;

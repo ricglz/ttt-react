@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { NotificationManager } from 'react-notifications';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from '../Game/ButtonsFooter';
 import {
@@ -9,7 +10,7 @@ import {
   initialState,
   alertWinner,
 } from '../../functions/HelperFunctions';
-import { boardReference } from '../../firebase/firebase'
+import { boardReference } from '../../firebase/firebase';
 
 class OnlineGame extends Component {
   CONSTANTS = {
@@ -29,17 +30,14 @@ class OnlineGame extends Component {
     const that = this;
     const { gameId } = this.props;
     boardReference(gameId).on('value', (snapshot) => {
-      console.log(snapshot);
       that.setState(snapshot.val());
     }, (err) => {
-      console.log('why?x2');
-      alert(err.message);
+      NotificationManager.error(err.message);
     });
   }
 
   setFirebase(state) {
     const { gameId } = this.props;
-    console.log(state);
     boardReference(gameId).set(state);
   }
 
@@ -49,7 +47,6 @@ class OnlineGame extends Component {
     } = this.state;
     const { userId } = this.props;
     const currentValue = boardGame[board][id];
-    console.log(nextPlayerUid, userId);
     if (isOccupied(currentValue)
       || nextPlayerUid !== userId
     ) return false;
@@ -76,10 +73,10 @@ class OnlineGame extends Component {
   }
 
   pvpMove(boardCopy, newMoveNumber, id) {
-    let state = this.state;
+    const state = this.state; // eslint-disable-line prefer-destructuring
 
     let {
-      currentPlayer, hostUid, guestUid, nextPlayerUid
+      currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
     } = state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
     if (currentPlayer === PLAYER2) {
@@ -105,7 +102,7 @@ class OnlineGame extends Component {
   }
 
   changeScore(value) {
-    let state = this.state;
+    const state = this.state; // eslint-disable-line prefer-destructuring
     if (value === -1) {
       state.oWins += 1;
     } else {
@@ -120,9 +117,7 @@ class OnlineGame extends Component {
 
   render() {
     const { back } = this.props;
-    const {
-      oWins, xWins, boardGame, currentBoard,
-    } = this.state;
+    const { boardGame, currentBoard } = this.state;
     return (
       <div className="container text-center">
         <BigBoard
