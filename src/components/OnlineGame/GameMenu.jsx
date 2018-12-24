@@ -14,12 +14,15 @@ class GameMenu extends React.Component {
       gameId: null,
     };
     this.joinGame = this.joinGame.bind(this);
+    this.hostNewGame = this.hostNewGame.bind(this);
+    this.surrender = this.surrender.bind(this);
   }
 
   componentDidMount() {
     const that = this;
-    gamesReference().on('value', (snapshot) => {
-      const games = snapshot.val();
+    gamesReference().orderByChild('guestUid').equalTo(-1).on('value', (snapshot) => {
+      let games = snapshot.val();
+      games = games || { };
       that.setState({ games });
     }, (err) => {
       NotificationManager.error(err.message);
@@ -27,28 +30,29 @@ class GameMenu extends React.Component {
   }
 
   hostNewGame() {
-    const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
-    const newGame = fbInitialState(uid);
+    const { uid, name } = this.props.user; // eslint-disable-line react/destructuring-assignment
+    const newGame = fbInitialState(uid, name);
     const ref = gamesReference().push(newGame);
     this.setState({ gameId: ref.key });
   }
 
-  joinGame(key) {
+  joinGame(key, hostUid) {
     const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
-    boardReference(key).update({ guestUid: uid });
+    if (hostUid !== uid) {
+      boardReference(key).update({ guestUid: uid });
+    }
     this.setState({ gameId: key });
   }
 
-  surrender(gameState) {
+  surrender({ guestUid, hostUid }) {
     const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
     const { gameId } = this.state;
-    const { guestUid, hostuid } = gameState;
-    if (uid === hostuid) {
+    if (uid === hostUid) {
       if (guestUid === -1) {
         boardReference(gameId).remove();
       } else {
         boardReference(gameId).update({
-          hostuid: guestUid,
+          hostUid: guestUid,
           guestUid: -1,
         });
       }
@@ -59,11 +63,14 @@ class GameMenu extends React.Component {
   }
 
   renderGames(games) {
-    return Object.keys(games).map(key => (
-      <li key={key}>
-        <button type="button" onClick={() => this.joinGame(key)}>{key}</button>
-      </li>
-    ));
+    return Object.keys(games).map((key) => {
+      const { hostUid, hostName } = games[key];
+      return (
+        <li key={key}>
+          <button type="button" onClick={() => this.joinGame(key, hostUid)}>{hostName}</button>
+        </li>
+      );
+    });
   }
 
   render() {
@@ -73,7 +80,7 @@ class GameMenu extends React.Component {
     return (
       <React.Fragment>
         { gameId ? (
-          <OnlineGame gameId={gameId} userId={uid} />
+          <OnlineGame gameId={gameId} userId={uid} back={this.surrender} />
         ) : (
           <React.Fragment>
             <ul>

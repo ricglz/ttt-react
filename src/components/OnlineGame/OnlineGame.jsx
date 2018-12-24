@@ -36,9 +36,12 @@ class OnlineGame extends Component {
     });
   }
 
-  setFirebase(state) {
+  updateFirebase(obj) {
     const { gameId } = this.props;
-    boardReference(gameId).set(state);
+
+
+    const timestamp = Date.now();
+    boardReference(gameId).update(Object.assign(obj, { timestamp }));
   }
 
   canClick(board, id) {
@@ -72,28 +75,24 @@ class OnlineGame extends Component {
     }
   }
 
-  pvpMove(boardCopy, newMoveNumber, id) {
-    const state = this.state; // eslint-disable-line prefer-destructuring
-
+  pvpMove(boardGame, moveNumber, currentBoard) {
     let {
       currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
-    } = state;
+    } = this.state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
-    if (currentPlayer === PLAYER2) {
-      currentPlayer = PLAYER1;
-      nextPlayerUid = hostUid;
-    } else {
-      currentPlayer = PLAYER2;
-      nextPlayerUid = guestUid;
-    }
 
-    state.boardGame = boardCopy;
-    state.moveNumber = newMoveNumber;
-    state.currentBoard = id;
-    state.currentPlayer = currentPlayer;
-    state.nextPlayerUid = nextPlayerUid;
+    currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+    nextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
 
-    this.setFirebase(state);
+    const state = {
+      boardGame,
+      moveNumber,
+      currentBoard,
+      currentPlayer,
+      nextPlayerUid,
+    };
+
+    this.updateFirebase(state);
   }
 
   currentTurn() {
@@ -102,17 +101,18 @@ class OnlineGame extends Component {
   }
 
   changeScore(value) {
-    const state = this.state; // eslint-disable-line prefer-destructuring
+    let { oWins, xWins } = this.state;
     if (value === -1) {
-      state.oWins += 1;
+      oWins += 1;
     } else {
-      state.xWins += 1;
+      xWins += 1;
     }
-    this.setFirebase(state);
+    const newState = { oWins, xWins };
+    this.updateFirebase(newState);
   }
 
   newGame() {
-    this.setFirebase(initialState());
+    this.updateFirebase(initialState());
   }
 
   render() {

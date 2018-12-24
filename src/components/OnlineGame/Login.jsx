@@ -25,7 +25,7 @@ class Login extends React.Component {
       const user = {
         name: displayName, email, phoneNumber, photoUrl, uid,
       };
-      that.setState(user);
+      that.setState({ user });
       localStorage.setItem('user', JSON.stringify(user));
     }).catch((error) => {
       NotificationManager.error(error.message);
@@ -47,11 +47,6 @@ class Login extends React.Component {
         ) : (
           <div className="row h-100 justify-content-center align-items-center">
             <button type="button" onClick={() => this.logIn()}> Log in plox </button>
-            <span>
-              {' '}
-              {"If it doesn't show games lists refresh the page"}
-              {' '}
-            </span>
             <button type="button" onClick={() => back()}>Back</button>
           </div>
         )}

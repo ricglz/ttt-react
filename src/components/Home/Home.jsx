@@ -44,7 +44,7 @@ class Home extends React.Component {
         </div>
         <HomeButton func={changeToAi} text="shared.sp" />
         <HomeButton func={changeToPvp} text="shared.mp" />
-        <HomeButton func={changeToOnline} text="shared.mp" />
+        <HomeButton func={changeToOnline} staticText text="Online" />
         <HomeButton func={changeToTutorial} text="shared.tutorial" />
         <ul className="contributors">
           {contributors}
