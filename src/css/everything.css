@@ -3,6 +3,10 @@
   font-family: 'Montserrat', 'Roboto', sans-serif;
 }
 
-html, body, div#root, div.text-right, div.text-left {
+html,
+ body,
+ div#root,
+ div.text-right,
+ div.text-left {
   height: 100%;
 }
