@@ -18,6 +18,7 @@ class Home extends React.Component {
       .then(({ items }) => {
         const contributors = items.map(({ avatarUrl, htmlUrl, login }) => (
           <Contributor
+            key={login}
             avatarUrl={avatarUrl}
             htmlUrl={htmlUrl}
             login={login}
@@ -28,7 +29,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { changeToAi, changeToPvp, changeToTutorial } = this.props;
+    const {
+      changeToAi, changeToPvp, changeToOnline, changeToTutorial,
+    } = this.props;
     const { contributors } = this.state;
     return (
       <div className="container text-center">
@@ -41,6 +44,7 @@ class Home extends React.Component {
         </div>
         <HomeButton func={changeToAi} text="shared.sp" />
         <HomeButton func={changeToPvp} text="shared.mp" />
+        <HomeButton func={changeToOnline} staticText text="Online" />
         <HomeButton func={changeToTutorial} text="shared.tutorial" />
         <ul className="contributors">
           {contributors}
@@ -54,6 +58,7 @@ Home.propTypes = {
   changeToTutorial: PropTypes.func.isRequired,
   changeToPvp: PropTypes.func.isRequired,
   changeToAi: PropTypes.func.isRequired,
+  changeToOnline: PropTypes.func.isRequired,
 };
 
 export default Home;

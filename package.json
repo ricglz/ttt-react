@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^5.7.1",
     "octokat": "^0.10.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-google-button": "^0.5.3",
     "react-intl": "^2.6.0",
     "react-notifications": "^1.4.3",
-    "react-scripts": "2.1.1",
+    "react-scripts": "2.1.2",
     "react-select": "^2.1.2"
   },
   "scripts": {

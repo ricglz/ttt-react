@@ -11,6 +11,7 @@ export function layoutOriginalState() {
   return {
     ai: false,
     pvp: false,
+    online: false,
     tutorial: false,
     language: false,
   };
@@ -88,5 +89,21 @@ export function constructorState() {
     currentBoard: -1,
     oWins: 0,
     xWins: 0,
+  };
+}
+
+export function fbInitialState(hostUid, hostName) {
+  return {
+    boardGame: newBoard(),
+    currentPlayer: 'X',
+    moveNumber: 0,
+    currentBoard: -1,
+    oWins: 0,
+    xWins: 0,
+    hostUid,
+    hostName,
+    guestUid: -1,
+    nextPlayerUid: hostUid,
+    timestamp: Date.now(),
   };
 }

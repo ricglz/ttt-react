@@ -7,7 +7,7 @@ The classic tic tac toe game taken to a whole new level.
 2. Then run the app using `yarn start`
 
 ### Play it on line!
-You can test the game [here](https://ricglz0201.github.io/Tic-Tac-Toe-HL/)
+You can test the game [here](https://ttt-hl-react.firebaseapp.com/)
 
 ### Contributing
 1.  Fork it (  [https://github.com/ricglz0201/ttt-react/fork](https://github.com/ricglz0201/TTT-HL-MP/fork)  )
@@ -26,7 +26,7 @@ El clásico juego de tic tac toe llevado a un nivel completamente nuevo.
 2. Luego ejecuta la aplicación usando `yarn start`
 
 ### ¡Juegalo en línea!
-Puedes probar el juego [Aqui](https://ricglz0201.github.io/Tic-Tac-Toe-HL/)
+Puedes probar el juego [Aqui](https://ttt-hl-react.firebaseapp.com/)
 
 ### Contribuciones
 1.  Echa un vistazo (  [https://github.com/ricglz0201/ttt-react/fork](https://github.com/ricglz0201/TTT-HL-MP/fork)  )
