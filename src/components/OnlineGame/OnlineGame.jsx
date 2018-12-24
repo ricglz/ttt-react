@@ -77,13 +77,9 @@ class OnlineGame extends Component {
       currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
     } = this.state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
-    if (currentPlayer === PLAYER2) {
-      currentPlayer = PLAYER1;
-      nextPlayerUid = hostUid;
-    } else {
-      currentPlayer = PLAYER2;
-      nextPlayerUid = guestUid;
-    }
+
+    currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+    nextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
 
     const state = {
       boardGame,
