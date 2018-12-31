@@ -12,7 +12,7 @@
     "react-intl": "^2.6.0",
     "react-notifications": "^1.4.3",
     "react-scripts": "2.1.2",
-    "react-select": "^2.1.2"
+    "react-select": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
