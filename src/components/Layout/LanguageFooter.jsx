@@ -1,21 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LanguageButton from './LanguageButton';
+import { Link } from 'react-router-dom';
 
-const LanguageFooter = ({ changeToLanguage, locale }) => (
-  <div
-    className="row justify-content-center mt-5"
-  >
-    <LanguageButton
-      changeLocale={changeToLanguage}
-      currentLocale={locale}
-      locale={locale}
-    />
+const LanguageFooter = ({ locale }) => (
+  <div className="row justify-content-center mt-5">
+    <div className="col-4 col-lg-4 col-xl-4 border-right border-top">
+      <Link to="/language" className="btn w-100 locale-button">
+        {locale}
+      </Link>
+    </div>
   </div>
 );
 
 LanguageFooter.propTypes = {
-//  changeToLanguage: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired,
 };
 

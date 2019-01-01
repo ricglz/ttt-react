@@ -10,11 +10,16 @@ function getClassName(locale, currentLocale) {
   return className;
 }
 
-const LanguageButton = ({ locale, changeLocale, currentLocale }) => (
+function handleClick(changeLocale, locale, history) {
+  changeLocale(locale);
+  history.push('/')
+}
+
+const LanguageButton = ({ locale, changeLocale, currentLocale, history }) => (
   <div className="col-4 col-lg-4 col-xl-4 border-right border-top">
     <button
       type="button"
-      onClick={() => changeLocale(locale)}
+      onClick={() => handleClick(changeLocale, locale, history)}
       className={getClassName(locale, currentLocale)}
     >
       {locale}

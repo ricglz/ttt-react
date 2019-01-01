@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';
-import DefaultButton from '../Layout/DefaultButton';
+import BackButton from '../Layout/BackButton';
 import { FormattedParagraph, FormattedHeader2 } from '../Layout/FormattedText';
 
 const Image = ({ src }) => (
@@ -44,7 +44,7 @@ const Tutorial = ({ back }) => (
     </div>
     <FormattedParagraph locale="tutorial.fifth" />
     <div className="row text-center">
-      <DefaultButton text="shared.back" url="/" />
+      <BackButton text="shared.back" url="/" />
     </div>
   </div>
 );

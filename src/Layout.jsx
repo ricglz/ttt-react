@@ -33,58 +33,33 @@ class Layout extends Component {
     this.changeToHome();
   }
 
-  returningComponent() {
-    const {
-      ai, pvp, tutorial, language, online,
-    } = this.state;
-
-    if (ai) {
-      return <Game ai back={this.changeToHome} />;
-    }
-    if (pvp) {
-      return <Game ai={false} back={this.changeToHome} />;
-    }
-    if (online) {
-      return <Login back={this.changeToHome} />;
-    }
-    if (tutorial) {
-      return <Tutorial back={this.changeToHome} />;
-    }
-    if (language) {
-      const { locale } = this.props;
-      return (
-        <LanguagePage
-          locale={locale}
-          changeLocale={this.changeLocale}
-        />
-      );
-    }
-    return (
-      <Home
-        changeToOnline={this.changeToOnline}
-        changeToAi={this.changeToAi}
-        changeToPvp={this.changeToPvp}
-        changeToTutorial={this.changeToTutorial}
-      />
-    );
-  }
-
   render() {
-    const { locale } = this.props;
+    const { locale, changeLocale } = this.props;
     return (
       <React.Fragment>
         <Router>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/tutorial" component={Tutorial} />
-          </Switch>
+          <React.Fragment>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/tutorial" component={Tutorial} />
+              <Route path="/singleplayer" render={() => <Game ai />} />
+              <Route path="/multiplayer" render={() => <Game />} />
+              <Route
+                path="/language"
+                render={({ history }) => (
+                  <LanguagePage
+                    locale={locale}
+                    changeLocale={changeLocale}
+                    history={history}
+                  />
+                )}
+              />
+            </Switch>
+            <LanguageFooter locale={locale} />
+          </React.Fragment>
         </Router>
-        <LanguageFooter
-          locale={locale}
-          changeToLanguage={this.changeToLanguage}
-        />
         <NotificationContainer />
-      </React.Fragment>
+      </React.Fragment >
     );
   }
 }
