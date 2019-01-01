@@ -13,9 +13,7 @@ function renderText(staticText, text) {
 
 const HomeButton = ({ text, staticText, url }) => (
   <div className="row justify-content-center border-top py-3">
-    <button type="button" className="btn btn-home">
-      <Link to={url} >{renderText(staticText, text)}</Link>
-    </button>
+    <Link className="btn btn-home" to={url} >{renderText(staticText, text)}</Link>
   </div>
 );
 
