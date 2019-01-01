@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Octokat from 'octokat';
 import { FormattedMessage } from 'react-intl';
 import HomeButton from './HomeButton';
 import Contributor from './Contributor';
-import '../../css/contributor.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const octo = new Octokat();
+    /*const octo = new Octokat();
     octo.repos('ricglz0201', 'ttt-react').contributors.fetch()
       .then(({ items }) => {
         const contributors = items.map(({ avatarUrl, htmlUrl, login }) => (
@@ -26,6 +25,7 @@ class Home extends React.Component {
         ));
         this.setState({ contributors });
       });
+    */
   }
 
   render() {
@@ -42,10 +42,10 @@ class Home extends React.Component {
             </FormattedMessage>
           </div>
         </div>
-        <HomeButton func={changeToAi} text="shared.sp" />
-        <HomeButton func={changeToPvp} text="shared.mp" />
-        <HomeButton func={changeToOnline} staticText text="Online" />
-        <HomeButton func={changeToTutorial} text="shared.tutorial" />
+        <HomeButton text="shared.sp" url="/singleplayer" />
+        <HomeButton text="shared.mp" url="/multiplayer" />
+        <HomeButton staticText text="Online" url="/login" />
+        <HomeButton text="shared.tutorial" url="/tutorial" />
         <ul className="contributors">
           {contributors}
         </ul>
@@ -53,12 +53,5 @@ class Home extends React.Component {
     );
   }
 }
-
-Home.propTypes = {
-  changeToTutorial: PropTypes.func.isRequired,
-  changeToPvp: PropTypes.func.isRequired,
-  changeToAi: PropTypes.func.isRequired,
-  changeToOnline: PropTypes.func.isRequired,
-};
 
 export default Home;

@@ -25,7 +25,7 @@ const LanguageButton = ({ locale, changeLocale, currentLocale }) => (
 LanguageButton.propTypes = {
   locale: PropTypes.string.isRequired,
   currentLocale: PropTypes.string.isRequired,
-  changeLocale: PropTypes.func.isRequired,
+//  changeLocale: PropTypes.func.isRequired,
 };
 
 export default LanguageButton;

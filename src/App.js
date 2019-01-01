@@ -30,49 +30,39 @@ addLocaleData(
    ...ca]
 );
 
+function getDirection(locale) {
+  return locale === 'ar' ? 'rtl' : 'ltr';
+}
+
+function getLocaleClass(locale) {
+  return locale === 'ar' ? 'text-right' : 'text-left';
+}
+
+function originalState() {
+  return { locale: "en" };
+}
+
 class App extends Component {
   constructor(props) {
-    super();
-    this.props = props;
-    this.state = this.originalState();
+    super(props);
+    this.state = originalState();
     this.changeLocale = this.changeLocale.bind(this);
-    this.getDirection = this.getDirection.bind(this);
   }
 
-  changeLocale(newLocale) {
-    this.setState({
-      locale: newLocale
-    });
-  }
-
-  originalState() {
-    return {
-      locale: "en",
-      flag: "US"
-    };
-  }
-
-  getDirection() {
-    return this.state.locale === 'ar' ? 'rtl' : 'ltr';
-  }
-
-  getLocaleClass() {
-    return this.state.locale === 'ar' ? 'text-right' : 'text-left';
+  changeLocale(locale) {
+    this.setState({ locale });
   }
 
   render() {
+    const { locale } = this.state;
     return (
-      <IntlProvider
-        locale={this.state.locale}
-        messages={Messages[this.state.locale]}
-      >
-        <div dir={this.getDirection()} className={this.getLocaleClass()}>
-          <Layout changeLocale={this.changeLocale} locale={this.state.locale} />
+      <IntlProvider locale={locale} messages={Messages[locale]}>
+        <div dir={getDirection(locale)} className={getLocaleClass(locale)}>
+          <Layout changeLocale={this.changeLocale} locale={locale} />
         </div>
       </IntlProvider>
     );
   }
 }
 
-//
 export default App;

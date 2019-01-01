@@ -15,7 +15,7 @@ const LanguageFooter = ({ changeToLanguage, locale }) => (
 );
 
 LanguageFooter.propTypes = {
-  changeToLanguage: PropTypes.func.isRequired,
+//  changeToLanguage: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired,
 };
 

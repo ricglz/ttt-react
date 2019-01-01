@@ -44,13 +44,9 @@ const Tutorial = ({ back }) => (
     </div>
     <FormattedParagraph locale="tutorial.fifth" />
     <div className="row text-center">
-      <DefaultButton text="shared.back" func={back} />
+      <DefaultButton text="shared.back" url="/" />
     </div>
   </div>
 );
-
-Tutorial.propTypes = {
-  back: PropTypes.func.isRequired,
-};
 
 export default Tutorial;

@@ -1,22 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
-const DefaultButton = ({ func, text }) => (
+const DefaultButton = ({ text, url }) => (
   <div className="col">
-    <button
-      type="button"
-      className="btn btn-game btn-lg btn-danger"
-      onClick={func}
-    >
+    <Link className="btn btn-game btn-lg btn-danger" to={url}>
       <FormattedMessage id={text} default="Back" />
-    </button>
+    </Link>
   </div>
 );
 
 DefaultButton.propTypes = {
-  func: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default DefaultButton;

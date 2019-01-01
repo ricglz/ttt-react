@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import Login from './components/OnlineGame/Login';
@@ -19,43 +20,7 @@ class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = layoutOriginalState();
-    this.changeToAi = this.changeToAi.bind(this);
-    this.changeToHome = this.changeToHome.bind(this);
-    this.changeToPvp = this.changeToPvp.bind(this);
-    this.changeToOnline = this.changeToOnline.bind(this);
-    this.changeToTutorial = this.changeToTutorial.bind(this);
-    this.changeToLanguage = this.changeToLanguage.bind(this);
     this.changeLocale = this.changeLocale.bind(this);
-  }
-
-  changeToAi() {
-    this.setState({
-      ai: true,
-    });
-  }
-
-  changeToPvp() {
-    this.setState({
-      pvp: true,
-    });
-  }
-
-  changeToOnline() {
-    this.setState({
-      online: true,
-    });
-  }
-
-  changeToTutorial() {
-    this.setState({
-      tutorial: true,
-    });
-  }
-
-  changeToLanguage() {
-    this.setState({
-      language: true,
-    });
   }
 
   changeToHome() {
@@ -108,7 +73,12 @@ class Layout extends Component {
     const { locale } = this.props;
     return (
       <React.Fragment>
-        {this.returningComponent()}
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/tutorial" component={Tutorial} />
+          </Switch>
+        </Router>
         <LanguageFooter
           locale={locale}
           changeToLanguage={this.changeToLanguage}
