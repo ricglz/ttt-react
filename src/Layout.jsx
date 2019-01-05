@@ -2,117 +2,101 @@ import React, { Component } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import Login from './components/OnlineGame/Login';
+import GameMenu from './components/OnlineGame/GameMenu';
 import Tutorial from './components/Tutorial/Tutorial';
 import LanguageFooter from './components/Layout/LanguageFooter';
 import LanguagePage from './components/Languages/LanguagePage';
-import { layoutOriginalState } from './functions/HelperFunctions';
 import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
 import './css/everything.css';
+import { getRedirect } from './firebase/firebase';
 
 class Layout extends Component {
   constructor(props) {
     super(props);
-    this.state = layoutOriginalState();
-    this.changeToAi = this.changeToAi.bind(this);
-    this.changeToHome = this.changeToHome.bind(this);
-    this.changeToPvp = this.changeToPvp.bind(this);
-    this.changeToOnline = this.changeToOnline.bind(this);
-    this.changeToTutorial = this.changeToTutorial.bind(this);
-    this.changeToLanguage = this.changeToLanguage.bind(this);
-    this.changeLocale = this.changeLocale.bind(this);
+    const cachedUser = localStorage.getItem('user');
+    const user = cachedUser ? JSON.parse(cachedUser) : {};
+    this.state = { user };
+    this.logOut = this.logOut.bind(this);
   }
 
-  changeToAi() {
-    this.setState({
-      ai: true,
+  componentDidMount() {
+    getRedirect().then(({ user }) => {
+      if (user) {
+        const {
+          displayName, email, phoneNumber, photoUrl, uid,
+        } = user;
+        const newUser = {
+          name: displayName, email, phoneNumber, photoUrl, uid,
+        };
+        this.setState({ user: newUser });
+        localStorage.setItem('user', JSON.stringify(newUser));
+      }
     });
   }
 
-  changeToPvp() {
-    this.setState({
-      pvp: true,
-    });
-  }
-
-  changeToOnline() {
-    this.setState({
-      online: true,
-    });
-  }
-
-  changeToTutorial() {
-    this.setState({
-      tutorial: true,
-    });
-  }
-
-  changeToLanguage() {
-    this.setState({
-      language: true,
-    });
-  }
-
-  changeToHome() {
-    this.setState(layoutOriginalState());
-  }
-
-  changeLocale(locale) {
-    const { changeLocale } = this.props;
-    changeLocale(locale);
-    this.changeToHome();
-  }
-
-  returningComponent() {
-    const {
-      ai, pvp, tutorial, language, online,
-    } = this.state;
-
-    if (ai) {
-      return <Game ai back={this.changeToHome} />;
-    }
-    if (pvp) {
-      return <Game ai={false} back={this.changeToHome} />;
-    }
-    if (online) {
-      return <Login back={this.changeToHome} />;
-    }
-    if (tutorial) {
-      return <Tutorial back={this.changeToHome} />;
-    }
-    if (language) {
-      const { locale } = this.props;
-      return (
-        <LanguagePage
-          locale={locale}
-          changeLocale={this.changeLocale}
-        />
-      );
-    }
-    return (
-      <Home
-        changeToOnline={this.changeToOnline}
-        changeToAi={this.changeToAi}
-        changeToPvp={this.changeToPvp}
-        changeToTutorial={this.changeToTutorial}
-      />
-    );
+  logOut() {
+    this.setState({ user: {} });
+    localStorage.removeItem('user');
   }
 
   render() {
-    const { locale } = this.props;
+    const { locale, changeLocale } = this.props;
+    const { user } = this.state;
     return (
       <React.Fragment>
-        {this.returningComponent()}
-        <LanguageFooter
-          locale={locale}
-          changeToLanguage={this.changeToLanguage}
-        />
+        <Router>
+          <React.Fragment>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/tutorial" component={Tutorial} />
+              <Route path="/singleplayer" render={() => <Game ai />} />
+              <Route path="/multiplayer" render={() => <Game />} />
+              { Object.keys(user).length === 0 ? (
+                <Route path="/login" component={Login} />
+              ) : (
+                <Route
+                  path="/login"
+                  render={({ history }) => (
+                    <GameMenu
+                      logOut={this.logOut}
+                      user={user}
+                      history={history}
+                    />
+                  )}
+                />
+              )
+              }
+              <Route
+                path="/online"
+                render={({ history }) => (
+                  <GameMenu
+                    logOut={this.logOut}
+                    user={user}
+                    history={history}
+                  />
+                )}
+              />
+              <Route
+                path="/language"
+                render={({ history }) => (
+                  <LanguagePage
+                    locale={locale}
+                    changeLocale={changeLocale}
+                    history={history}
+                  />
+                )}
+              />
+            </Switch>
+            <LanguageFooter locale={locale} />
+          </React.Fragment>
+        </Router>
         <NotificationContainer />
       </React.Fragment>
     );

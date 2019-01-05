@@ -2,10 +2,11 @@ import React from 'react';
 import LanguageButton from '../Layout/LanguageButton';
 import LANGUAGES from './Languages';
 
-const renderButtons = props => LANGUAGES.map(lang => (
+const renderButtons = ({ changeLocale, locale, history }) => LANGUAGES.map(lang => (
   <LanguageButton
-    changeLocale={props.changeLocale}
-    currentLocale={props.locale}
+    changeLocale={changeLocale}
+    currentLocale={locale}
+    history={history}
     locale={lang}
     key={lang}
   />

@@ -7,16 +7,6 @@ export function alertWinner(winner) {
   NotificationManager.info(`Player ${winnerLabel} has won.`);
 }
 
-export function layoutOriginalState() {
-  return {
-    ai: false,
-    pvp: false,
-    online: false,
-    tutorial: false,
-    language: false,
-  };
-}
-
 export function emptyArray() {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
