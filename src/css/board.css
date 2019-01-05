@@ -79,8 +79,18 @@ div.cell-row {
   border-color: black;
 }
 
-button.btn-game {
+.btn-game {
   height: 100%;
+}
+
+.btn-game a {
+  font-size: 100%;
+}
+
+.btn-game a:hover {
+  font-size: 100%;
+  color: #111;
+  text-decoration: none;
 }
 
 .grey-bg {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';
-import DefaultButton from '../Layout/DefaultButton';
+import BackButton from '../Layout/BackButton';
 import { FormattedParagraph, FormattedHeader2 } from '../Layout/FormattedText';
 
 const Image = ({ src }) => (
@@ -26,7 +26,7 @@ function renderParagraphs() {
   ));
 }
 
-const Tutorial = ({ back }) => (
+const Tutorial = () => (
   <div className="container">
     <div className="row text-center pb-3 border-bottom">
       <div className="col">
@@ -44,13 +44,9 @@ const Tutorial = ({ back }) => (
     </div>
     <FormattedParagraph locale="tutorial.fifth" />
     <div className="row text-center">
-      <DefaultButton text="shared.back" func={back} />
+      <BackButton text="shared.back" url="/" />
     </div>
   </div>
 );
-
-Tutorial.propTypes = {
-  back: PropTypes.func.isRequired,
-};
 
 export default Tutorial;

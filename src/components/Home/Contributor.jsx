@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../css/contributor.css';
 
 const Contributor = ({ login, htmlUrl, avatarUrl }) => (
   <li className="contributor">

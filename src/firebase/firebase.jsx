@@ -1,4 +1,6 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
@@ -13,17 +15,17 @@ firebase.auth().useDeviceLanguage();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export function boardReference(gameId) {
-  return firebase.database().ref('/games/' + gameId);
-}
-
-export function makeGuestTheHost(gameId, uid) {
-  boardReference(gameId).u();
+  return firebase.database().ref(`/games/${gameId}`);
 }
 
 export function gamesReference() {
   return firebase.database().ref('/games');
 }
 
+export function getRedirect() {
+  return firebase.auth().getRedirectResult();
+}
+
 export function firebaseAuth() {
-  return firebase.auth().signInWithPopup(provider);
+  return firebase.auth().signInWithRedirect(provider);
 }

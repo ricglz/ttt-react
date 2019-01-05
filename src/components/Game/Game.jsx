@@ -136,7 +136,7 @@ class Game extends Component {
   }
 
   render() {
-    const { ai, back } = this.props;
+    const { ai } = this.props;
     const {
       selectedOption, oWins, xWins, boardGame, currentBoard,
     } = this.state;
@@ -156,7 +156,7 @@ class Game extends Component {
           handleChange={this.handleChange}
         />
         )}
-        <ButtonsFooter back={back} reset={this.newGame} />
+        <ButtonsFooter back="/" reset={this.newGame} />
       </div>
     );
   }
@@ -164,7 +164,6 @@ class Game extends Component {
 
 Game.propTypes = {
   ai: PropTypes.bool.isRequired,
-  back: PropTypes.func.isRequired,
 };
 
 export default Game;

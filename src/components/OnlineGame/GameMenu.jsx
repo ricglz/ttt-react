@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import OnlineGame from './OnlineGame';
 import { gamesReference, boardReference } from '../../firebase/firebase';
-import { userPropType } from '../../constants/props';
+import { userPropType, historyProps } from '../../constants/props';
 import { fbInitialState } from '../../functions/HelperFunctions';
 
 class GameMenu extends React.Component {
@@ -19,14 +19,19 @@ class GameMenu extends React.Component {
   }
 
   componentDidMount() {
-    const that = this;
+    const { user, history } = this.props;
+    if (Object.keys(user).length === 0) {
+      history.push('/login');
+      return;
+    }
     gamesReference().orderByChild('guestUid').equalTo(-1).on('value', (snapshot) => {
       let games = snapshot.val();
       games = games || { };
-      that.setState({ games });
+      this.setState({ games });
     }, (err) => {
       NotificationManager.error(err.message);
-    });
+    })
+      .bind(this);
   }
 
   hostNewGame() {
@@ -120,6 +125,7 @@ const Button = ({ text, func }) => (
 GameMenu.propTypes = {
   user: userPropType, // eslint-disable-line react/require-default-props
   logOut: PropTypes.func.isRequired,
+  history: historyProps.isRequired,
 };
 
 Button.propTypes = {
