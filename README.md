@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-HL
+# Tic-Tac-Toe-HL [![Build Status](https://travis-ci.com/ricglz0201/ttt-react.svg?branch=master)](https://travis-ci.com/ricglz0201/ttt-react)
 
 The classic tic tac toe game taken to a whole new level.
 
