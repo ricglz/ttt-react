@@ -27,7 +27,7 @@ const CUT_OFF_TIME = 2 * 60 * 60 * 1000; // 2 Hours in milliseconds.
  * This database triggered function will check for child nodes that are older than the
  * cut-off time. Each child needs to have a `timestamp` attribute.
  */
-exports.deleteOldItems = functions.database.ref('games/{pushId}').onWrite(async (change) => {
+exports.deleteOldItems = functions.database.ref('/games/{pushId}').onWrite((change) => {
   const ref = change.after.ref.parent; // reference to the parent
   const now = Date.now();
   const cutoff = now - CUT_OFF_TIME;
