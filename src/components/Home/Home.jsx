@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import Octokat from 'octokat';
 import { FormattedMessage } from 'react-intl';
 import HomeButton from './HomeButton';
@@ -12,7 +11,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    /*const octo = new Octokat();
+    const octo = new Octokat();
     octo.repos('ricglz0201', 'ttt-react').contributors.fetch()
       .then(({ items }) => {
         const contributors = items.map(({ avatarUrl, htmlUrl, login }) => (
@@ -25,13 +24,9 @@ class Home extends React.Component {
         ));
         this.setState({ contributors });
       });
-    */
   }
 
   render() {
-    const {
-      changeToAi, changeToPvp, changeToOnline, changeToTutorial,
-    } = this.props;
     const { contributors } = this.state;
     return (
       <div className="container text-center">

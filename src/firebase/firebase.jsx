@@ -13,7 +13,7 @@ firebase.auth().useDeviceLanguage();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export function boardReference(gameId) {
-  return firebase.database().ref('/games/' + gameId);
+  return firebase.database().ref(`/games/${gameId}`);
 }
 
 export function gamesReference() {

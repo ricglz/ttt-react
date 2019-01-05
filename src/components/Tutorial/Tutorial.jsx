@@ -26,7 +26,7 @@ function renderParagraphs() {
   ));
 }
 
-const Tutorial = ({ back }) => (
+const Tutorial = () => (
   <div className="container">
     <div className="row text-center pb-3 border-bottom">
       <div className="col">

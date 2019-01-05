@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import OnlineGame from './OnlineGame';
 import { gamesReference, boardReference } from '../../firebase/firebase';
-import { userPropType } from '../../constants/props';
+import { userPropType, historyProps } from '../../constants/props';
 import { fbInitialState } from '../../functions/HelperFunctions';
 
 class GameMenu extends React.Component {
@@ -121,6 +121,12 @@ const Button = ({ text, func }) => (
     </button>
   </div>
 );
+
+GameMenu.propTypes = {
+  user: userPropType, // eslint-disable-line react/require-default-props
+  logOut: PropTypes.func.isRequired,
+  history: historyProps.isRequired,
+};
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,

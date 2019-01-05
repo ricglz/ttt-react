@@ -6,7 +6,7 @@ import DefaultButton from '../Layout/BackButton';
 const ButtonsFooter = ({ reset, back }) => (
   <div className="row justify-content-center">
     <div className="col">
-      <button className="btn btn-game btn-lg btn-danger" onClick={reset}>
+      <button type="button" className="btn btn-game btn-lg btn-danger" onClick={reset}>
         <FormattedMessage id="game.reset" default="Back" />
       </button>
     </div>

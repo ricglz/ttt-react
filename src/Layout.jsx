@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import Login from './components/OnlineGame/Login';
@@ -27,7 +27,7 @@ class Layout extends Component {
   }
 
   componentDidMount() {
-    getRedirect().then(function({ user }) {
+    getRedirect().then(({ user }) => {
       if (user) {
         const {
           displayName, email, phoneNumber, photoUrl, uid,
@@ -38,7 +38,7 @@ class Layout extends Component {
         this.setState({ user: newUser });
         localStorage.setItem('user', JSON.stringify(newUser));
       }
-    }.bind(this));
+    });
   }
 
   logOut() {
@@ -59,25 +59,28 @@ class Layout extends Component {
               <Route path="/singleplayer" render={() => <Game ai />} />
               <Route path="/multiplayer" render={() => <Game />} />
               { Object.keys(user).length === 0 ? (
-                  <Route path="/login" component={Login} />
-                ) : (
-                  <Route path="/login"
-                  render={({history}) => (
+                <Route path="/login" component={Login} />
+              ) : (
+                <Route
+                  path="/login"
+                  render={({ history }) => (
                     <GameMenu
                       logOut={this.logOut}
                       user={user}
-                      history={history}/>
+                      history={history}
+                    />
                   )}
-                  />
-                )
+                />
+              )
               }
               <Route
                 path="/online"
-                render={({history}) => (
+                render={({ history }) => (
                   <GameMenu
                     logOut={this.logOut}
                     user={user}
-                    history={history}/>
+                    history={history}
+                  />
                 )}
               />
               <Route
@@ -95,7 +98,7 @@ class Layout extends Component {
           </React.Fragment>
         </Router>
         <NotificationContainer />
-      </React.Fragment >
+      </React.Fragment>
     );
   }
 }
