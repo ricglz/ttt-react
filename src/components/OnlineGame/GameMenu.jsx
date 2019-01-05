@@ -19,7 +19,6 @@ class GameMenu extends React.Component {
   }
 
   componentDidMount() {
-    const that = this;
     const { user, history } = this.props;
     if (Object.keys(user).length === 0) {
       history.push('/login');
@@ -28,10 +27,11 @@ class GameMenu extends React.Component {
     gamesReference().orderByChild('guestUid').equalTo(-1).on('value', (snapshot) => {
       let games = snapshot.val();
       games = games || { };
-      that.setState({ games });
+      this.setState({ games });
     }, (err) => {
       NotificationManager.error(err.message);
-    });
+    })
+      .bind(this);
   }
 
   hostNewGame() {
