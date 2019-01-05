@@ -44,7 +44,7 @@ class Home extends React.Component {
         </div>
         <HomeButton text="shared.sp" url="/singleplayer" />
         <HomeButton text="shared.mp" url="/multiplayer" />
-        <HomeButton staticText text="Online" url="/login" />
+        <HomeButton staticText text="Online" url="/online" />
         <HomeButton text="shared.tutorial" url="/tutorial" />
         <ul className="contributors">
           {contributors}

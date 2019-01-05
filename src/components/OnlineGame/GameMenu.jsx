@@ -20,6 +20,11 @@ class GameMenu extends React.Component {
 
   componentDidMount() {
     const that = this;
+    const { user, history } = this.props;
+    if (Object.keys(user).length === 0) {
+      history.push('/login');
+      return;
+    }
     gamesReference().orderByChild('guestUid').equalTo(-1).on('value', (snapshot) => {
       let games = snapshot.val();
       games = games || { };
@@ -116,11 +121,6 @@ const Button = ({ text, func }) => (
     </button>
   </div>
 );
-
-GameMenu.propTypes = {
-  user: userPropType, // eslint-disable-line react/require-default-props
-  logOut: PropTypes.func.isRequired,
-};
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,

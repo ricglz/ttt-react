@@ -6,35 +6,49 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import Login from './components/OnlineGame/Login';
+import GameMenu from './components/OnlineGame/GameMenu';
 import Tutorial from './components/Tutorial/Tutorial';
 import LanguageFooter from './components/Layout/LanguageFooter';
 import LanguagePage from './components/Languages/LanguagePage';
-import { layoutOriginalState } from './functions/HelperFunctions';
 import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
 import './css/everything.css';
+import { getRedirect } from './firebase/firebase';
 
 class Layout extends Component {
   constructor(props) {
     super(props);
-    this.state = layoutOriginalState();
-    this.changeLocale = this.changeLocale.bind(this);
+    const cachedUser = localStorage.getItem('user');
+    const user = cachedUser ? JSON.parse(cachedUser) : {};
+    this.state = { user };
+    this.logOut = this.logOut.bind(this);
   }
 
-  changeToHome() {
-    this.setState(layoutOriginalState());
+  componentDidMount() {
+    getRedirect().then(function({ user }) {
+      if (user) {
+        const {
+          displayName, email, phoneNumber, photoUrl, uid,
+        } = user;
+        const newUser = {
+          name: displayName, email, phoneNumber, photoUrl, uid,
+        };
+        this.setState({ user: newUser });
+        localStorage.setItem('user', JSON.stringify(newUser));
+      }
+    }.bind(this));
   }
 
-  changeLocale(locale) {
-    const { changeLocale } = this.props;
-    changeLocale(locale);
-    this.changeToHome();
+  logOut() {
+    this.setState({ user: {} });
+    localStorage.removeItem('user');
   }
 
   render() {
     const { locale, changeLocale } = this.props;
+    const { user } = this.state;
     return (
       <React.Fragment>
         <Router>
@@ -44,6 +58,28 @@ class Layout extends Component {
               <Route path="/tutorial" component={Tutorial} />
               <Route path="/singleplayer" render={() => <Game ai />} />
               <Route path="/multiplayer" render={() => <Game />} />
+              { Object.keys(user).length === 0 ? (
+                  <Route path="/login" component={Login} />
+                ) : (
+                  <Route path="/login"
+                  render={({history}) => (
+                    <GameMenu
+                      logOut={this.logOut}
+                      user={user}
+                      history={history}/>
+                  )}
+                  />
+                )
+              }
+              <Route
+                path="/online"
+                render={({history}) => (
+                  <GameMenu
+                    logOut={this.logOut}
+                    user={user}
+                    history={history}/>
+                )}
+              />
               <Route
                 path="/language"
                 render={({ history }) => (
