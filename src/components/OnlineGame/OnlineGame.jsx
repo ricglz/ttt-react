@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
+import { FormattedMessage } from 'react-intl';
 import BigBoard from '../Board/BigBoard';
-import ButtonsFooter from '../Game/ButtonsFooter';
 import {
   isOccupied,
   theresAWinner,
@@ -27,13 +27,12 @@ class OnlineGame extends Component {
   }
 
   componentDidMount() {
-    const that = this;
     const { gameId } = this.props;
     boardReference(gameId).on('value', (snapshot) => {
-      that.setState(snapshot.val());
+      this.setState(snapshot.val());
     }, (err) => {
       NotificationManager.error(err.message);
-    });
+    }).bind(this);
   }
 
   updateFirebase(obj) {
@@ -131,6 +130,26 @@ class OnlineGame extends Component {
     );
   }
 }
+
+const ButtonsFooter = ({ reset, back }) => (
+  <div className="row justify-content-center">
+    <div className="col">
+      <button type="button" className="btn btn-game btn-lg btn-danger" onClick={reset}>
+        <FormattedMessage id="game.reset" default="Back" />
+      </button>
+    </div>
+    <div className="col">
+      <button type="button" className="btn btn-game btn-lg btn-danger" onClick={back}>
+        <FormattedMessage id="shared.back" default="Back" />
+      </button>
+    </div>
+  </div>
+);
+
+ButtonsFooter.propTypes = {
+  reset: PropTypes.func.isRequired,
+  back: PropTypes.func.isRequired,
+};
 
 OnlineGame.propTypes = {
   back: PropTypes.func.isRequired,
