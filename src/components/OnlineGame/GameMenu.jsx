@@ -57,16 +57,16 @@ class GameMenu extends React.Component {
       if (guestUid === -1) {
         boardReference(gameId).remove();
       } else {
-        let state = initialState();
-        state['hostUid'] = guestUid;
-        state['guestUid'] = -1;
-        state['nextPlayerUid'] = guestUid;
+        const state = initialState();
+        state.hostUid = guestUid;
+        state.guestUid = -1;
+        state.nextPlayerUid = guestUid;
         boardReference(gameId).update(state);
       }
     } else {
-      let state = initialState();
-      state['guestUid'] = -1;
-      state['nextPlayerUid'] = hostUid;
+      const state = initialState();
+      state.guestUid = -1;
+      state.nextPlayerUid = hostUid;
       boardReference(gameId).update(state);
     }
     this.setState({ gameId: null });
