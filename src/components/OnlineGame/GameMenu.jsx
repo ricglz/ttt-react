@@ -16,6 +16,7 @@ class GameMenu extends React.Component {
     this.joinGame = this.joinGame.bind(this);
     this.hostNewGame = this.hostNewGame.bind(this);
     this.surrender = this.surrender.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +68,12 @@ class GameMenu extends React.Component {
     this.setState({ gameId: null });
   }
 
+  handleLogOut() {
+    const { logOut, history } = this.props;
+    logOut();
+    history.push('/login');
+  }
+
   renderGames(games) {
     return Object.keys(games).map((key) => {
       const { hostUid, hostName } = games[key];
@@ -87,8 +94,7 @@ class GameMenu extends React.Component {
 
   render() {
     const { games, gameId } = this.state;
-    const { user, logOut } = this.props;
-    const { uid } = user;
+    const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
     return (
       <React.Fragment>
         { gameId ? (
@@ -101,14 +107,13 @@ class GameMenu extends React.Component {
             <hr />
             <div className="row">
               <Button text="Host new game" func={this.hostNewGame} />
-              <Button text="Log Out" func={logOut} />
+              <Button text="Log Out" func={this.handleLogOut} />
             </div>
             <ul className="list-group">
               { this.renderGames(games) }
             </ul>
           </React.Fragment>
-        )
-        }
+        )}
       </React.Fragment>
     );
   }
@@ -116,7 +121,7 @@ class GameMenu extends React.Component {
 
 const Button = ({ text, func }) => (
   <div className="col text-center">
-    <button className="btn btn-outline-dark" type="button" onClick={() => func()}>
+    <button className="btn btn-outline-dark" type="button" onClick={func}>
       {text}
     </button>
   </div>

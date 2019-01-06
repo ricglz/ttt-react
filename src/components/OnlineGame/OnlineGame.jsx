@@ -37,8 +37,6 @@ class OnlineGame extends Component {
 
   updateFirebase(obj) {
     const { gameId } = this.props;
-
-
     const timestamp = Date.now();
     boardReference(gameId).update(Object.assign(obj, { timestamp }));
   }
@@ -79,10 +77,8 @@ class OnlineGame extends Component {
       currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
     } = this.state;
     const { PLAYER1, PLAYER2 } = this.CONSTANTS;
-
     currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
     nextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
-
     const state = {
       boardGame,
       moveNumber,
@@ -90,7 +86,6 @@ class OnlineGame extends Component {
       currentPlayer,
       nextPlayerUid,
     };
-
     this.updateFirebase(state);
   }
 
