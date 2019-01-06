@@ -24,6 +24,7 @@ class OnlineGame extends Component {
     this.handleSquareClick = this.handleSquareClick.bind(this);
     this.newGame = this.newGame.bind(this);
     this.changeScore = this.changeScore.bind(this);
+    this.handleBack = this.handleBack.bind(this);
   }
 
   componentDidMount() {
@@ -105,23 +106,33 @@ class OnlineGame extends Component {
     this.updateFirebase(newState);
   }
 
+  handleBack() {
+    const { back } = this.props;
+    back(this.state);
+  }
+
   newGame() {
     this.updateFirebase(initialState());
   }
 
   render() {
-    const { back } = this.props;
-    const { boardGame, currentBoard } = this.state;
+    const { boardGame, currentBoard, guestUid } = this.state;
     return (
-      <div className="container text-center">
-        <BigBoard
-          handleClick={this.handleSquareClick}
-          boardGame={boardGame}
-          currentBoard={currentBoard}
-        />
-        <hr />
-        <ButtonsFooter back={back} reset={this.newGame} />
-      </div>
+      <React.Fragment>
+        { guestUid === -1 ? (
+          <h1 className="text-center"> Please wait until someone enters the room </h1>
+        ) : (
+          <div className="container text-center">
+            <BigBoard
+              handleClick={this.handleSquareClick}
+              boardGame={boardGame}
+              currentBoard={currentBoard}
+            />
+            <hr />
+            <ButtonsFooter back={this.handleBack} reset={this.newGame} />
+          </div>
+        )}
+      </React.Fragment>
     );
   }
 }
