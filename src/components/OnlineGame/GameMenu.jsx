@@ -4,7 +4,7 @@ import { NotificationManager } from 'react-notifications';
 import OnlineGame from './OnlineGame';
 import { gamesReference, boardReference } from '../../firebase/firebase';
 import { userPropType, historyProps } from '../../constants/props';
-import { fbInitialState } from '../../functions/HelperFunctions';
+import { fbInitialState, initialState } from '../../functions/HelperFunctions';
 
 class GameMenu extends React.Component {
   constructor(props) {
@@ -42,12 +42,12 @@ class GameMenu extends React.Component {
     this.setState({ gameId: ref.key });
   }
 
-  joinGame(key, hostUid) {
+  joinGame(gameId, hostUid) {
     const { uid } = this.props.user; // eslint-disable-line react/destructuring-assignment
     if (hostUid !== uid) {
-      boardReference(key).update({ guestUid: uid });
+      boardReference(gameId).update({ guestUid: uid });
     }
-    this.setState({ gameId: key });
+    this.setState({ gameId });
   }
 
   surrender({ guestUid, hostUid }) {
@@ -57,13 +57,17 @@ class GameMenu extends React.Component {
       if (guestUid === -1) {
         boardReference(gameId).remove();
       } else {
-        boardReference(gameId).update({
-          hostUid: guestUid,
-          guestUid: -1,
-        });
+        let state = initialState();
+        state['hostUid'] = guestUid;
+        state['guestUid'] = -1;
+        state['nextPlayerUid'] = guestUid;
+        boardReference(gameId).update(state);
       }
     } else {
-      boardReference(gameId).update({ guestUid: -1 });
+      let state = initialState();
+      state['guestUid'] = -1;
+      state['nextPlayerUid'] = hostUid;
+      boardReference(gameId).update(state);
     }
     this.setState({ gameId: null });
   }
