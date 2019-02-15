@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^5.8.2",
+    "firebase": "^5.8.3",
     "octokat": "^0.10.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
