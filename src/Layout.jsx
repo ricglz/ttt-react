@@ -3,6 +3,7 @@ import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Contributors from './components/Contributors/Contributors';
 import Home from './components/Home/Home';
 import Game from './components/Game/Game';
 import Login from './components/OnlineGame/Login';
@@ -84,6 +85,7 @@ function Layout({ locale, changeLocale }) {
               path="/language"
               render={renderLanguage}
             />
+            <Route path="/contributors" component={Contributors} />
           </Switch>
           <LanguageFooter locale={locale} />
         </>
