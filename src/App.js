@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useCallback } from "react";
 import { addLocaleData, IntlProvider } from "react-intl";
 import en from "react-intl/locale-data/en";
 import fr from "react-intl/locale-data/fr";
@@ -26,43 +26,33 @@ import Layout from "./Layout";
 
 addLocaleData(
   [...en, ...fr, ...es, ...pt, ...it, ...hi, ...mr, ...ko, ...ja, ...da,
-   ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh, ...ar, ...cs, ...tr,
-   ...ca]
+  ...sr, ...id, ...uk, ...de, ...ru, ...sv, ...zh, ...ar, ...cs, ...tr,
+  ...ca]
 );
 
-function getDirection(locale) {
-  return locale === 'ar' ? 'rtl' : 'ltr';
-}
+function App() {
+  const [locale, setLocale] = useState("en");
 
-function getLocaleClass(locale) {
-  return locale === 'ar' ? 'text-right' : 'text-left';
-}
+  const changeLocale = useCallback(
+    (locale) => {
+      setLocale(locale)
+    },
+    [setLocale],
+  )
+  
+  let direction = 'ltr', klass = 'text-left';
+  if (locale === 'ar') {
+    direction = 'rtl';
+    klass = 'text-right';
+  } 
 
-function originalState() {
-  return { locale: "en" };
-}
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = originalState();
-    this.changeLocale = this.changeLocale.bind(this);
-  }
-
-  changeLocale(locale) {
-    this.setState({ locale });
-  }
-
-  render() {
-    const { locale } = this.state;
-    return (
-      <IntlProvider locale={locale} messages={Messages[locale]}>
-        <div dir={getDirection(locale)} className={getLocaleClass(locale)}>
-          <Layout changeLocale={this.changeLocale} locale={locale} />
-        </div>
-      </IntlProvider>
-    );
-  }
+  return (
+    <IntlProvider locale={locale} messages={Messages[locale]}>
+      <div dir={direction} className={klass}>
+        <Layout changeLocale={changeLocale} locale={locale} />
+      </div>
+    </IntlProvider>
+  );
 }
 
 export default App;

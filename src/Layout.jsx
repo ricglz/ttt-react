@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
@@ -17,16 +17,14 @@ import './css/fonts.css';
 import './css/everything.css';
 import { getRedirect } from './firebase/firebase';
 
-class Layout extends Component {
-  constructor(props) {
-    super(props);
-    const cachedUser = localStorage.getItem('user');
-    const user = cachedUser ? JSON.parse(cachedUser) : {};
-    this.state = { user };
-    this.logOut = this.logOut.bind(this);
-  }
+const renderSinglePlayer = () => <Game ai />;
 
-  componentDidMount() {
+function Layout({ locale, changeLocale }) {
+  const cachedUser = localStorage.getItem('user');
+  const initialUser = cachedUser ? JSON.parse(cachedUser) : {};
+  const [user, setUser] = useState(initialUser);
+
+  useEffect(() => {
     getRedirect().then(({ user }) => {
       if (user) {
         const {
@@ -35,72 +33,64 @@ class Layout extends Component {
         const newUser = {
           name: displayName, email, phoneNumber, photoUrl, uid,
         };
-        this.setState({ user: newUser });
+        setUser(newUser);
         localStorage.setItem('user', JSON.stringify(newUser));
       }
     });
-  }
+  }, [setUser])
 
-  logOut() {
-    this.setState({ user: {} });
+  const logOut = useCallback(() => {
+    setUser({});
     localStorage.removeItem('user');
-  }
+  }, [setUser])
 
-  render() {
-    const { locale, changeLocale } = this.props;
-    const { user } = this.state;
-    return (
-      <React.Fragment>
-        <Router>
-          <React.Fragment>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/tutorial" component={Tutorial} />
-              <Route path="/singleplayer" render={() => <Game ai />} />
-              <Route path="/multiplayer" render={() => <Game />} />
-              { Object.keys(user).length === 0 ? (
-                <Route path="/login" component={Login} />
-              ) : (
+  const renderGameMenu = React.useCallback(({ history }) => (
+    <GameMenu
+      logOut={logOut}
+      user={user}
+      history={history}
+    />
+  ), [logOut, user]);
+  const renderLanguage = useCallback(({ history }) => (
+    <LanguagePage
+      locale={locale}
+      changeLocale={changeLocale}
+      history={history}
+    />
+  ), [changeLocale, locale])
+  return (
+    <>
+      <Router>
+        <>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/tutorial" component={Tutorial} />
+            <Route path="/singleplayer" render={renderSinglePlayer} />
+            <Route path="/multiplayer" component={Game} />
+            {Object.keys(user).length === 0 ? (
+              <Route path="/login" component={Login} />
+            ) : (
                 <Route
                   path="/login"
-                  render={({ history }) => (
-                    <GameMenu
-                      logOut={this.logOut}
-                      user={user}
-                      history={history}
-                    />
-                  )}
+                  render={renderGameMenu}
                 />
               )
-              }
-              <Route
-                path="/online"
-                render={({ history }) => (
-                  <GameMenu
-                    logOut={this.logOut}
-                    user={user}
-                    history={history}
-                  />
-                )}
-              />
-              <Route
-                path="/language"
-                render={({ history }) => (
-                  <LanguagePage
-                    locale={locale}
-                    changeLocale={changeLocale}
-                    history={history}
-                  />
-                )}
-              />
-            </Switch>
-            <LanguageFooter locale={locale} />
-          </React.Fragment>
-        </Router>
-        <NotificationContainer />
-      </React.Fragment>
-    );
-  }
+            }
+            <Route
+              path="/online"
+              render={renderGameMenu}
+            />
+            <Route
+              path="/language"
+              render={renderLanguage}
+            />
+          </Switch>
+          <LanguageFooter locale={locale} />
+        </>
+      </Router>
+      <NotificationContainer />
+    </>
+  );
 }
 
 Layout.propTypes = {
