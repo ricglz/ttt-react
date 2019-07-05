@@ -1,6 +1,6 @@
-import Contributor from './Contributor';
 import Octokat from 'octokat';
-import React from 'react'
+import React from 'react';
+import Contributor from './Contributor';
 
 export default function Contributors() {
   const [contributors, setContributors] = React.useState(null);
@@ -8,7 +8,7 @@ export default function Contributors() {
     const octo = new Octokat();
     octo.repos('ricglz0201', 'ttt-react').contributors.fetch()
       .then(({ items }) => {
-        const contributors = items.map(({ avatarUrl, htmlUrl, login }) => (
+        const newContributors = items.map(({ avatarUrl, htmlUrl, login }) => (
           <Contributor
             key={login}
             avatarUrl={avatarUrl}
@@ -16,7 +16,7 @@ export default function Contributors() {
             login={login}
           />
         ));
-        setContributors(contributors);
+        setContributors(newContributors);
       });
   }, [setContributors]);
   return (
@@ -25,5 +25,5 @@ export default function Contributors() {
         {contributors}
       </ul>
     </div>
-  )
+  );
 }

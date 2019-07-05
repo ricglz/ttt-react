@@ -26,11 +26,12 @@ function Layout({ locale, changeLocale }) {
   const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
-    getRedirect().then(({ user }) => {
-      if (user) {
+    getRedirect().then((response) => {
+      const tempUser = response.user;
+      if (tempUser) {
         const {
           displayName, email, phoneNumber, photoUrl, uid,
-        } = user;
+        } = tempUser;
         const newUser = {
           name: displayName, email, phoneNumber, photoUrl, uid,
         };
@@ -38,12 +39,12 @@ function Layout({ locale, changeLocale }) {
         localStorage.setItem('user', JSON.stringify(newUser));
       }
     });
-  }, [setUser])
+  }, [setUser]);
 
   const logOut = useCallback(() => {
     setUser({});
     localStorage.removeItem('user');
-  }, [setUser])
+  }, [setUser]);
 
   const renderGameMenu = React.useCallback(({ history }) => (
     <GameMenu
@@ -58,7 +59,7 @@ function Layout({ locale, changeLocale }) {
       changeLocale={changeLocale}
       history={history}
     />
-  ), [changeLocale, locale])
+  ), [changeLocale, locale]);
   return (
     <>
       <Router>
@@ -71,12 +72,11 @@ function Layout({ locale, changeLocale }) {
             {Object.keys(user).length === 0 ? (
               <Route path="/login" component={Login} />
             ) : (
-                <Route
-                  path="/login"
-                  render={renderGameMenu}
-                />
-              )
-            }
+              <Route
+                path="/login"
+                render={renderGameMenu}
+              />
+            )}
             <Route
               path="/online"
               render={renderGameMenu}
