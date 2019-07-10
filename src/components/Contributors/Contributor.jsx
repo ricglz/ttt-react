@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../../css/contributor.css';
+import { contributorProps } from '../../constants/props';
 
 const Contributor = ({ login, htmlUrl, avatarUrl }) => (
   <li className="contributor">
@@ -11,10 +11,6 @@ const Contributor = ({ login, htmlUrl, avatarUrl }) => (
   </li>
 );
 
-Contributor.propTypes = {
-  login: PropTypes.string.isRequired,
-  htmlUrl: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-};
+Contributor.propTypes = contributorProps;
 
 export default Contributor;

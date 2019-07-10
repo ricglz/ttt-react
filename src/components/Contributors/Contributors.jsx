@@ -1,6 +1,6 @@
 import Octokat from 'octokat';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { contributorProps } from '../../constants/props';
 import Contributor from './Contributor';
 
 function mapContributors({ avatarUrl, htmlUrl, login }) {
@@ -14,11 +14,7 @@ function mapContributors({ avatarUrl, htmlUrl, login }) {
   );
 }
 
-mapContributors.propTypes = {
-  login: PropTypes.string.isRequired,
-  htmlUrl: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-};
+mapContributors.propTypes = contributorProps;
 
 function updateContributors(setContributors) {
   const octo = new Octokat();
