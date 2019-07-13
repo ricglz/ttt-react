@@ -8,6 +8,7 @@ import {
 import makeMove, {
   cleanVariables,
   aiMadeAMove,
+  playerMadeAMove,
 } from './Ai';
 
 const CONSTANTS = {
@@ -48,12 +49,7 @@ export function useGameHooks(game, setGame) {
 }
 
 export function useAIHooks({
-  moveNumber,
-  selectedOption,
-  setGame,
-  changeScore,
-  newGame,
-  setSelectedOption,
+  moveNumber, selectedOption, setGame, changeScore, newGame, setSelectedOption,
   game,
 }) {
   const aiMove = React.useCallback((boardCopy, id, newMoveNumber) => {
@@ -85,4 +81,54 @@ export function useAIHooks({
   }, [setSelectedOption, moveNumber, newGame]);
 
   return [aiMove, handleChange];
+}
+
+export function useScore() {
+  const [oWins, setOWins] = React.useState(0);
+  const [xWins, setXWins] = React.useState(0);
+  const changeScore = React.useCallback((value) => {
+    if (value === -1) {
+      setOWins(oWins + 1);
+    } else {
+      setXWins(xWins + 1);
+    }
+  }, [setOWins, setXWins, oWins, xWins]);
+  return [oWins, xWins, changeScore];
+}
+
+export function useAfterMove({
+  ai, aiMove, changeScore, newGame, pvpMove,
+}) {
+  const afterMove = React.useCallback(
+    (winner, newMoveNumber, board, boardCopy, id) => {
+      if (winner) {
+        alertWinner(winner);
+        changeScore(winner);
+        newGame();
+      } else if (newMoveNumber === 81) {
+        newGame();
+      } else if (ai) {
+        playerMadeAMove(board, boardCopy[board]);
+        aiMove(boardCopy, id, newMoveNumber);
+      } else {
+        pvpMove(boardCopy, newMoveNumber, id);
+      }
+    }, [ai, aiMove, changeScore, newGame, pvpMove],
+  );
+  return afterMove;
+}
+
+export function useHandleClick({
+  canClick, boardGame, moveNumber, currentPlayer, afterMove,
+}) {
+  const handleSquareClick = React.useCallback((board, id) => {
+    if (canClick(board, id)) {
+      const boardCopy = [...boardGame];
+      const newMoveNumber = moveNumber + 1;
+      boardCopy[board][id] = currentPlayer === 'X' ? 1 : -1;
+      const winner = theresAWinner(boardCopy[board]);
+      afterMove(winner, newMoveNumber, board, boardCopy, id);
+    }
+  }, [canClick, boardGame, moveNumber, currentPlayer, afterMove]);
+  return handleSquareClick;
 }
