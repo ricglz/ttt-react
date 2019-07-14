@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
@@ -17,29 +17,12 @@ import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
 import './css/everything.css';
-import { getRedirect } from './firebase/firebase';
+import { useUser } from './functions/OtherHooks';
 
-const renderSinglePlayer = () => <Game ai />;
-
-function updateUser(setUser) {
-  getRedirect().then((response) => {
-    const tempUser = response.user;
-    if (tempUser) {
-      const {
-        displayName, email, phoneNumber, photoUrl, uid,
-      } = tempUser;
-      const newUser = {
-        name: displayName, email, phoneNumber, photoUrl, uid,
-      };
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-    }
-  });
-}
-
-function renderLayout({
+const RenderLayout = ({
   user, renderGameMenu, renderLanguage, locale,
-}) {
+}) => {
+  const useSinglePlayer = React.useCallback(() => <Game ai />, []);
   return (
     <>
       <Router>
@@ -47,7 +30,7 @@ function renderLayout({
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/tutorial" component={Tutorial} />
-            <Route path="/singleplayer" render={renderSinglePlayer} />
+            <Route path="/singleplayer" render={useSinglePlayer} />
             <Route path="/multiplayer" component={Game} />
             {Object.keys(user).length === 0 ? (
               <Route path="/login" component={Login} />
@@ -73,9 +56,9 @@ function renderLayout({
       <NotificationContainer />
     </>
   );
-}
+};
 
-renderLayout.propTypes = {
+RenderLayout.propTypes = {
   user: userPropType.isRequired,
   renderGameMenu: PropTypes.func.isRequired,
   renderLanguage: PropTypes.func.isRequired,
@@ -83,18 +66,7 @@ renderLayout.propTypes = {
 };
 
 function Layout({ locale, changeLocale }) {
-  const cachedUser = localStorage.getItem('user');
-  const initialUser = cachedUser ? JSON.parse(cachedUser) : {};
-  const [user, setUser] = useState(initialUser);
-
-  useEffect(() => {
-    updateUser(setUser);
-  }, [setUser]);
-
-  const logOut = useCallback(() => {
-    setUser({});
-    localStorage.removeItem('user');
-  }, [setUser]);
+  const [user, logOut] = useUser();
 
   const renderGameMenu = React.useCallback(({ history }) => (
     <GameMenu
@@ -103,16 +75,18 @@ function Layout({ locale, changeLocale }) {
       history={history}
     />
   ), [logOut, user]);
-  const renderLanguage = useCallback(({ history }) => (
+  const renderLanguage = React.useCallback(({ history }) => (
     <LanguagePage
       locale={locale}
       changeLocale={changeLocale}
       history={history}
     />
   ), [changeLocale, locale]);
-  return renderLayout({
-    user, renderGameMenu, renderLanguage, locale,
-  });
+  return React.useMemo(() => (
+    RenderLayout({
+      user, renderGameMenu, renderLanguage, locale,
+    })
+  ), [user, renderGameMenu, renderLanguage, locale]);
 }
 
 Layout.propTypes = {

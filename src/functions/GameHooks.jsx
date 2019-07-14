@@ -99,22 +99,22 @@ export function useScore() {
 export function useAfterMove({
   ai, aiMove, changeScore, newGame, pvpMove,
 }) {
-  const afterMove = React.useCallback(
-    (winner, newMoveNumber, board, boardCopy, id) => {
-      if (winner) {
-        alertWinner(winner);
-        changeScore(winner);
-        newGame();
-      } else if (newMoveNumber === 81) {
-        newGame();
-      } else if (ai) {
-        playerMadeAMove(board, boardCopy[board]);
-        aiMove(boardCopy, id, newMoveNumber);
-      } else {
-        pvpMove(boardCopy, newMoveNumber, id);
-      }
-    }, [ai, aiMove, changeScore, newGame, pvpMove],
-  );
+  const afterMove = React.useCallback(({
+    winner, newMoveNumber, board, boardCopy, id,
+  }) => {
+    if (winner) {
+      alertWinner(winner);
+      changeScore(winner);
+      newGame();
+    } else if (newMoveNumber === 81) {
+      newGame();
+    } else if (ai) {
+      playerMadeAMove(board, boardCopy[board]);
+      aiMove(boardCopy, id, newMoveNumber);
+    } else {
+      pvpMove(boardCopy, newMoveNumber, id);
+    }
+  }, [ai, aiMove, changeScore, newGame, pvpMove]);
   return afterMove;
 }
 
@@ -127,7 +127,9 @@ export function useHandleClick({
       const newMoveNumber = moveNumber + 1;
       boardCopy[board][id] = currentPlayer === 'X' ? 1 : -1;
       const winner = theresAWinner(boardCopy[board]);
-      afterMove(winner, newMoveNumber, board, boardCopy, id);
+      afterMove({
+        winner, newMoveNumber, board, boardCopy, id,
+      });
     }
   }, [canClick, boardGame, moveNumber, currentPlayer, afterMove]);
   return handleSquareClick;

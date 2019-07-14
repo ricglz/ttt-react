@@ -9,7 +9,7 @@ import {
 } from '../../functions/HelperFunctions';
 import {
   useGameHooks, useAIHooks, useScore, useAfterMove, useHandleClick,
-} from '../../functions/CustomHooks';
+} from '../../functions/GameHooks';
 
 function Game({ ai }) {
   const [game, setGame] = React.useState(initialState());
@@ -18,9 +18,7 @@ function Game({ ai }) {
   const {
     boardGame, currentBoard, moveNumber, currentPlayer,
   } = game;
-
   const [canClick, pvpMove, newGame] = useGameHooks(game, setGame);
-
   const [aiMove, handleChange] = useAIHooks({
     moveNumber,
     selectedOption,
@@ -30,11 +28,9 @@ function Game({ ai }) {
     newGame,
     setSelectedOption,
   });
-
   const afterMove = useAfterMove({
     ai, aiMove, changeScore, newGame, pvpMove,
   });
-
   const handleSquareClick = useHandleClick({
     canClick, boardGame, moveNumber, currentPlayer, afterMove,
   });

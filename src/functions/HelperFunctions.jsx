@@ -71,10 +71,7 @@ export function initialState() {
 
 export function fbInitialState(hostUid, hostName) {
   return {
-    boardGame: newBoard(),
-    currentPlayer: 'X',
-    moveNumber: 0,
-    currentBoard: -1,
+    ...initialState(),
     oWins: 0,
     xWins: 0,
     hostUid,
