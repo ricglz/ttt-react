@@ -25,5 +25,5 @@ Room.propTypes = {
   joinGame: PropTypes.func.isRequired,
   hostUid: PropTypes.string.isRequired,
   hostName: PropTypes.string.isRequired,
-  id: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  id: PropTypes.string.isRequired,
 };
