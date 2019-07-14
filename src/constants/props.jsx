@@ -38,3 +38,9 @@ export const historyProps = PropTypes.shape({
   push: PropTypes.func.isRequired,
   replace: PropTypes.func.isRequired,
 });
+
+export const contributorProps = {
+  login: PropTypes.string.isRequired,
+  htmlUrl: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
+};
