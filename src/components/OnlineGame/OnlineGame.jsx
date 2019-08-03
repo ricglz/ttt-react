@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { NotificationManager } from 'react-notifications';
 import { FormattedMessage } from 'react-intl';
 import BigBoard from '../Board/BigBoard';
 import {
@@ -9,132 +8,116 @@ import {
   fbInitialState,
   initialState,
   alertWinner,
+  alertError,
 } from '../../functions/HelperFunctions';
 import { boardReference } from '../../firebase/firebase';
 
-class OnlineGame extends Component {
-  CONSTANTS = {
-    PLAYER1: 'X',
-    PLAYER2: 'O',
-  }
+const CONSTANTS = {
+  PLAYER1: 'X',
+  PLAYER2: 'O',
+};
 
-  constructor(props) {
-    super(props);
-    this.state = fbInitialState();
-    this.handleSquareClick = this.handleSquareClick.bind(this);
-    this.newGame = this.newGame.bind(this);
-    this.changeScore = this.changeScore.bind(this);
-    this.handleBack = this.handleBack.bind(this);
-  }
+function OnlineGame({ back, gameId, userId }) {
+  const [state, setState] = React.useState(fbInitialState());
+  const {
+    boardGame, currentBoard, nextPlayerUid, moveNumber, currentPlayer, hostUid,
+    guestUid, oWins, xWins,
+  } = state;
 
-  componentDidMount() {
-    const { gameId } = this.props;
-    boardReference(gameId).on('value', (snapshot) => {
-      this.setState(snapshot.val());
-    }, (err) => {
-      NotificationManager.error(err.message);
-    }).bind(this);
-  }
+  const setPreviousState = React.useCallback((snapshot) => {
+    setState(prevState => ({ ...prevState, ...snapshot.val() }));
+  }, [setState]);
 
-  updateFirebase(obj) {
-    const { gameId } = this.props;
+  React.useEffect(() => {
+    boardReference(gameId).on('value', setPreviousState, alertError);
+  }, [gameId, setPreviousState]);
+
+  const updateFirebase = React.useCallback((obj) => {
     const timestamp = Date.now();
     boardReference(gameId).update(Object.assign(obj, { timestamp }));
-  }
+  }, [gameId]);
 
-  canClick(board, id) {
-    const {
-      boardGame, currentBoard, nextPlayerUid,
-    } = this.state;
-    const { userId } = this.props;
+  const canClick = React.useCallback((board, id) => {
     const currentValue = boardGame[board][id];
-    if (isOccupied(currentValue)
+    if (
+      isOccupied(currentValue)
       || nextPlayerUid !== userId
     ) return false;
     return board === currentBoard || currentBoard === -1;
-  }
+  }, [boardGame, currentBoard, nextPlayerUid, userId]);
 
-  handleSquareClick(board, id) {
-    const { boardGame, moveNumber } = this.state;
-    if (this.canClick(board, id)) {
+  const pvpMove = React.useCallback(
+    (newBoard, newMoveNumber, newCurrentBoard) => {
+      const { PLAYER1, PLAYER2 } = CONSTANTS;
+      const newCurrentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+      const newNextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
+      const newState = {
+        boardGame: newBoard,
+        moveNumber: newMoveNumber,
+        currentBoard: newCurrentBoard,
+        currentPlayer: newCurrentPlayer,
+        nextPlayerUid: newNextPlayerUid,
+      };
+      updateFirebase(newState);
+    },
+    [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase],
+  );
+
+  const changeScore = React.useCallback((value) => {
+    let newOWins = oWins;
+    let newXWins = xWins;
+    if (value === -1) {
+      newOWins += 1;
+    } else {
+      newXWins += 1;
+    }
+    const newState = { oWins: newOWins, xWins: newXWins };
+    updateFirebase(newState);
+  }, [oWins, xWins, updateFirebase]);
+
+  const handleBack = React.useCallback(() => {
+    back(state);
+  }, [back, state]);
+
+  const newGame = React.useCallback(() => {
+    updateFirebase(initialState());
+  }, [updateFirebase]);
+
+  const handleSquareClick = React.useCallback((board, id) => {
+    if (canClick(board, id)) {
       const boardCopy = [...boardGame];
       const newMoveNumber = moveNumber + 1;
-      boardCopy[board][id] = this.currentTurn();
+      boardCopy[board][id] = currentPlayer === CONSTANTS.PLAYER1 ? 1 : -1;
       const winner = theresAWinner(boardCopy[board]);
       if (winner) {
         alertWinner(winner);
-        this.changeScore(winner);
-        this.newGame();
+        changeScore(winner);
+        newGame();
       } else if (newMoveNumber === 81) {
-        this.newGame();
+        newGame();
       } else {
-        this.pvpMove(boardCopy, newMoveNumber, id);
+        pvpMove(boardCopy, newMoveNumber, id);
       }
     }
-  }
+  }, [canClick, boardGame, moveNumber, currentPlayer, changeScore, newGame, pvpMove]);
 
-  pvpMove(boardGame, moveNumber, currentBoard) {
-    let {
-      currentPlayer, hostUid, guestUid, nextPlayerUid, // eslint-disable-line prefer-const
-    } = this.state;
-    const { PLAYER1, PLAYER2 } = this.CONSTANTS;
-    currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
-    nextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
-    const state = {
-      boardGame,
-      moveNumber,
-      currentBoard,
-      currentPlayer,
-      nextPlayerUid,
-    };
-    this.updateFirebase(state);
-  }
-
-  currentTurn() {
-    const { currentPlayer } = this.state;
-    return currentPlayer === this.CONSTANTS.PLAYER1 ? 1 : -1;
-  }
-
-  changeScore(value) {
-    let { oWins, xWins } = this.state;
-    if (value === -1) {
-      oWins += 1;
-    } else {
-      xWins += 1;
-    }
-    const newState = { oWins, xWins };
-    this.updateFirebase(newState);
-  }
-
-  handleBack() {
-    const { back } = this.props;
-    back(this.state);
-  }
-
-  newGame() {
-    this.updateFirebase(initialState());
-  }
-
-  render() {
-    const { boardGame, currentBoard, guestUid } = this.state;
-    return (
-      <React.Fragment>
-        { guestUid === -1 ? (
-          <h1 className="text-center"> Please wait until someone enters the room </h1>
-        ) : (
-          <div className="container text-center">
-            <BigBoard
-              handleClick={this.handleSquareClick}
-              boardGame={boardGame}
-              currentBoard={currentBoard}
-            />
-            <hr />
-            <ButtonsFooter back={this.handleBack} reset={this.newGame} />
-          </div>
-        )}
-      </React.Fragment>
-    );
-  }
+  return (
+    <>
+      {guestUid === -1 ? (
+        <h1 className="text-center"> Please wait until someone enters the room </h1>
+      ) : (
+        <div className="container text-center">
+          <BigBoard
+            handleClick={handleSquareClick}
+            boardGame={boardGame}
+            currentBoard={currentBoard}
+          />
+          <hr />
+          <ButtonsFooter back={handleBack} reset={newGame} />
+        </div>
+      )}
+    </>
+  );
 }
 
 const ButtonsFooter = ({ reset, back }) => (

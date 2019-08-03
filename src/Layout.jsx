@@ -83,9 +83,12 @@ function Layout({ locale, changeLocale }) {
     />
   ), [changeLocale, locale]);
   return React.useMemo(() => (
-    RenderLayout({
-      user, renderGameMenu, renderLanguage, locale,
-    })
+    <RenderLayout
+      user={user}
+      renderGameMenu={renderGameMenu}
+      renderLanguage={renderLanguage}
+      locale={locale}
+    />
   ), [user, renderGameMenu, renderLanguage, locale]);
 }
 

@@ -16,20 +16,20 @@ function mapContributors({ avatarUrl, htmlUrl, login }) {
 
 mapContributors.propTypes = contributorProps;
 
-function updateContributors(setContributors) {
-  const octo = new Octokat();
-  octo.repos('ricglz0201', 'ttt-react').contributors.fetch()
-    .then(({ items }) => {
-      const newContributors = items.map(mapContributors);
-      setContributors(newContributors);
-    });
+function useContributors() {
+  const [contributors, setContributors] = React.useState(null);
+  const updateContributors = React.useCallback(({ items }) => {
+    setContributors(items.map(mapContributors));
+  }, [setContributors]);
+  React.useEffect(() => {
+    (new Octokat()).repos('ricglz0201', 'ttt-react').contributors.fetch()
+      .then(updateContributors);
+  }, [updateContributors]);
+  return [contributors];
 }
 
 export default function Contributors() {
-  const [contributors, setContributors] = React.useState(null);
-  React.useEffect(() => {
-    updateContributors(setContributors);
-  }, [setContributors]);
+  const [contributors] = useContributors();
   return (
     <div>
       <ul className="contributors">
