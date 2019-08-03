@@ -1,49 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OnlineGame from './OnlineGame';
-import { gamesReference, boardReference } from '../../firebase/firebase';
 import { userPropType, historyProps } from '../../constants/props';
-import { fbInitialState, initialState } from '../../functions/HelperFunctions';
-import { useRooms } from '../../functions/OtherHooks';
+import { useRooms, useGameFlow } from '../../functions/OtherHooks';
 
 function GameMenu({ user, logOut, history }) {
-  const [gameId, setGameId] = React.useState(null);
   const { uid, name } = user;
-
-  const hostNewGame = React.useCallback(() => {
-    const newGame = fbInitialState(uid, name);
-    const ref = gamesReference().push(newGame);
-    setGameId(ref.key);
-  }, [setGameId, name, uid]);
-
-  const joinGame = React.useCallback((selectedGameId, hostUid) => {
-    if (hostUid !== uid) {
-      boardReference(selectedGameId).update({ guestUid: uid });
-    }
-    setGameId(selectedGameId);
-  }, [uid, setGameId]);
-
+  const [gameId, hostNewGame, joinGame, surrender] = useGameFlow({ uid, name });
   const [renderGames] = useRooms({ user, history, joinGame });
-
-  const surrender = React.useCallback(({ guestUid, hostUid }) => {
-    if (uid === hostUid) {
-      if (guestUid === -1) {
-        boardReference(gameId).remove();
-      } else {
-        const newState = initialState();
-        newState.hostUid = guestUid;
-        newState.guestUid = -1;
-        newState.nextPlayerUid = guestUid;
-        boardReference(gameId).update(newState);
-      }
-    } else {
-      const newState = initialState();
-      newState.guestUid = -1;
-      newState.nextPlayerUid = hostUid;
-      boardReference(gameId).update(newState);
-    }
-    setGameId(null);
-  }, [uid, gameId, setGameId]);
 
   const handleLogOut = React.useCallback(() => {
     logOut();

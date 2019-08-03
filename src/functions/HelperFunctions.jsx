@@ -6,6 +6,9 @@ export function alertWinner(winner) {
   const winnerLabel = winner === 1 ? 'X' : 'O';
   NotificationManager.info(`Player ${winnerLabel} has won.`);
 }
+export function alertError(err) {
+  NotificationManager.error(err.message);
+}
 
 export function emptyArray() {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];

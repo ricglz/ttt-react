@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NotificationManager } from 'react-notifications';
 import { FormattedMessage } from 'react-intl';
 import BigBoard from '../Board/BigBoard';
 import {
@@ -9,6 +8,7 @@ import {
   fbInitialState,
   initialState,
   alertWinner,
+  alertError,
 } from '../../functions/HelperFunctions';
 import { boardReference } from '../../firebase/firebase';
 
@@ -24,13 +24,13 @@ function OnlineGame({ back, gameId, userId }) {
     guestUid, oWins, xWins,
   } = state;
 
+  const setPreviousState = React.useCallback((snapshot) => {
+    setState(prevState => ({ ...prevState, ...snapshot.val() }));
+  }, [setState]);
+
   React.useEffect(() => {
-    boardReference(gameId).on('value', (snapshot) => {
-      setState(prevState => ({ ...prevState, ...snapshot.val() }));
-    }, (err) => {
-      NotificationManager.error(err.message);
-    });
-  }, [gameId, setState]);
+    boardReference(gameId).on('value', setPreviousState, alertError);
+  }, [gameId, setPreviousState]);
 
   const updateFirebase = React.useCallback((obj) => {
     const timestamp = Date.now();
@@ -102,7 +102,7 @@ function OnlineGame({ back, gameId, userId }) {
   }, [canClick, boardGame, moveNumber, currentPlayer, changeScore, newGame, pvpMove]);
 
   return (
-    <React.Fragment>
+    <>
       {guestUid === -1 ? (
         <h1 className="text-center"> Please wait until someone enters the room </h1>
       ) : (
@@ -116,7 +116,7 @@ function OnlineGame({ back, gameId, userId }) {
           <ButtonsFooter back={handleBack} reset={newGame} />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 }
 
