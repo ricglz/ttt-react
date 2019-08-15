@@ -2,68 +2,26 @@ import React from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Contributors from './components/Contributors/Contributors';
-import Home from './components/Home/Home';
-import Game from './components/Game/Game';
-import Login from './components/OnlineGame/Login';
-import GameMenu from './components/OnlineGame/GameMenu';
-import Tutorial from './components/Tutorial/Tutorial';
+import { BrowserRouter as Router } from 'react-router-dom';
+import loadable from '@loadable/component';
 import LanguageFooter from './components/Layout/LanguageFooter';
-import LanguagePage from './components/Languages/LanguagePage';
-import { userPropType } from './constants/props';
 import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
 import './css/everything.css';
 import { useUser } from './functions/OtherHooks';
+import SwitchWrapper from './SwitchWrapper';
 
-const RenderLayout = ({
-  user, renderGameMenu, renderLanguage, locale,
-}) => {
-  const useSinglePlayer = React.useCallback(() => <Game ai />, []);
-  return (
-    <>
-      <Router>
-        <>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/tutorial" component={Tutorial} />
-            <Route path="/singleplayer" render={useSinglePlayer} />
-            <Route path="/multiplayer" component={Game} />
-            {Object.keys(user).length === 0 ? (
-              <Route path="/login" component={Login} />
-            ) : (
-              <Route
-                path="/login"
-                render={renderGameMenu}
-              />
-            )}
-            <Route
-              path="/online"
-              render={renderGameMenu}
-            />
-            <Route
-              path="/language"
-              render={renderLanguage}
-            />
-            <Route path="/contributors" component={Contributors} />
-          </Switch>
-          <LanguageFooter locale={locale} />
-        </>
-      </Router>
-      <NotificationContainer />
-    </>
-  );
-};
-
-RenderLayout.propTypes = {
-  user: userPropType.isRequired,
-  renderGameMenu: PropTypes.func.isRequired,
-  renderLanguage: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired,
-};
+const Game = loadable(
+  () => import('./components/Game/Game'),
+);
+const GameMenu = loadable(
+  () => import('./components/OnlineGame/GameMenu'),
+);
+const LanguagePage = loadable(
+  () => import('./components/Languages/LanguagePage'),
+);
 
 function Layout({ locale, changeLocale }) {
   const [user, logOut] = useUser();
@@ -82,14 +40,23 @@ function Layout({ locale, changeLocale }) {
       history={history}
     />
   ), [changeLocale, locale]);
+  const renderSinglePlayer = React.useCallback(() => <Game ai />, []);
   return React.useMemo(() => (
-    <RenderLayout
-      user={user}
-      renderGameMenu={renderGameMenu}
-      renderLanguage={renderLanguage}
-      locale={locale}
-    />
-  ), [user, renderGameMenu, renderLanguage, locale]);
+    <>
+      <Router>
+        <>
+          <SwitchWrapper
+            user={user}
+            renderGameMenu={renderGameMenu}
+            renderSinglePlayer={renderSinglePlayer}
+            renderLanguage={renderLanguage}
+          />
+          <LanguageFooter locale={locale} />
+        </>
+      </Router>
+      <NotificationContainer />
+    </>
+  ), [user, renderGameMenu, renderSinglePlayer, renderLanguage, locale]);
 }
 
 Layout.propTypes = {

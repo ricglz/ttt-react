@@ -28,7 +28,7 @@ export function useUser() {
 
   React.useEffect(() => {
     updateUser(setUser);
-  }, [setUser]);
+  }, []);
 
   const logOut = React.useCallback(() => {
     setUser({});
