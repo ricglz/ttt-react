@@ -14,15 +14,22 @@ function drawValue(boardGame, boardNum, cellNum) {
   }
 }
 
+const emptyFunction = () => {
+  // do nothing
+};
+
 const Cell = ({
   boardGame, boardNum, cellNum, handleClick,
 }) => {
   const value = drawValue(boardGame, boardNum, cellNum);
+  const onClick = React.useCallback(() => {
+    handleClick(boardNum, cellNum);
+  }, [boardNum, cellNum, handleClick]);
   return (
     <div
       className="col-4 box"
-      onClick={() => handleClick(boardNum, cellNum)}
-      onKeyDown={() => {}}
+      onClick={onClick}
+      onKeyDown={emptyFunction}
       role="button"
       tabIndex="-1"
     >
