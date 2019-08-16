@@ -16,6 +16,11 @@ function mapContributors({ avatarUrl, htmlUrl, login }) {
 
 mapContributors.propTypes = contributorProps;
 
+function catchError() {
+  // eslint-disable-next-line no-console
+  console.error('Contributors error');
+}
+
 function useContributors() {
   const [contributors, setContributors] = React.useState(null);
   const updateContributors = React.useCallback(({ items }) => {
@@ -23,7 +28,7 @@ function useContributors() {
   }, [setContributors]);
   React.useEffect(() => {
     (new Octokat()).repos('ricglz0201', 'ttt-react').contributors.fetch()
-      .then(updateContributors);
+      .then(updateContributors).catch(catchError);
   }, [updateContributors]);
   return [contributors];
 }

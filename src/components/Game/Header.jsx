@@ -3,8 +3,32 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FormattedHeader, FormattedHeader2 } from '../Layout/FormattedText';
 
-const xScoreMessage = <FormattedMessage id="game.xScore" default="X's score" />;
-const oScoreMessage = <FormattedMessage id="game.oScore" default="O's score" />;
+const XScoreMessage = React.useMemo(
+  () => <FormattedMessage id="game.xScore" default="X's score" />,
+  [],
+);
+const OScoreMessage = React.useMemo(
+  () => <FormattedMessage id="game.oScore" default="O's score" />,
+  [],
+);
+
+const Score = ({ score, klass, Component }) => (
+  <div className={`col ${klass}`}>
+    <p>
+      <Component />
+      {` ${score}`}
+    </p>
+  </div>
+);
+
+const ScoresSection = ({ xScore, oScore }) => (
+  <div className="col-12">
+    <div className="row justify-content-between">
+      <Score score={xScore} klass="xScore" Component={XScoreMessage} />
+      <Score score={oScore} klass="oScore" Component={OScoreMessage} />
+    </div>
+  </div>
+);
 
 const Header = ({ xScore, oScore, ai }) => (
   <div className="row">
@@ -14,24 +38,20 @@ const Header = ({ xScore, oScore, ai }) => (
     <div className="col-12">
       <FormattedHeader2 locale="game.score" />
     </div>
-    <div className="col-12">
-      <div className="row justify-content-between">
-        <div className="col xScore">
-          <p>
-            {xScoreMessage}
-            {` ${xScore}`}
-          </p>
-        </div>
-        <div className="col oScore">
-          <p>
-            {oScoreMessage}
-            {` ${oScore}`}
-          </p>
-        </div>
-      </div>
-    </div>
+    <ScoresSection xScore={xScore} oScore={oScore} />
   </div>
 );
+
+Score.propTypes = {
+  score: PropTypes.number.isRequired,
+  klass: PropTypes.string.isRequired,
+  Component: PropTypes.element.isRequired,
+};
+
+ScoresSection.propTypes = {
+  oScore: PropTypes.number.isRequired,
+  xScore: PropTypes.number.isRequired,
+};
 
 Header.propTypes = {
   ai: PropTypes.bool.isRequired,
