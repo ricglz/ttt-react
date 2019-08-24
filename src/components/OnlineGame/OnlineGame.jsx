@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import BigBoard from '../Board/BigBoard';
 import {
   isOccupied,
@@ -11,6 +10,8 @@ import {
   alertError,
 } from '../../functions/HelperFunctions';
 import { boardReference } from '../../firebase/firebase';
+import ResetButton from '../Layout/ResetButton';
+import DefaultButton from '../Layout/DefaultButton';
 
 const CONSTANTS = {
   PLAYER1: 'X',
@@ -122,16 +123,8 @@ function OnlineGame({ back, gameId, userId }) {
 
 const ButtonsFooter = ({ reset, back }) => (
   <div className="row justify-content-center">
-    <div className="col">
-      <button type="button" className="btn btn-game btn-lg btn-danger" onClick={reset}>
-        <FormattedMessage id="game.reset" default="Back" />
-      </button>
-    </div>
-    <div className="col">
-      <button type="button" className="btn btn-game btn-lg btn-danger" onClick={back}>
-        <FormattedMessage id="shared.back" default="Back" />
-      </button>
-    </div>
+    <ResetButton onClick={reset} />
+    <DefaultButton text="shared.back" defaultText="Back" onClick={back} />
   </div>
 );
 
