@@ -34,7 +34,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "stylelint": "^10.1.0",
-    "stylelint-config-standard": "^18.2.0"
+    "stylelint-config-standard": "^19.0.0"
   },
   "browserslist": [
     ">0.2%",
