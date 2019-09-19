@@ -3,19 +3,10 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FormattedHeader, FormattedHeader2 } from '../Layout/FormattedText';
 
-const XScoreMessage = React.useMemo(
-  () => <FormattedMessage id="game.xScore" default="X's score" />,
-  [],
-);
-const OScoreMessage = React.useMemo(
-  () => <FormattedMessage id="game.oScore" default="O's score" />,
-  [],
-);
-
-const Score = ({ score, klass, Component }) => (
+const Score = ({ score, klass, defaultMessage }) => (
   <div className={`col ${klass}`}>
     <p>
-      <Component />
+      <FormattedMessage id={`game.${klass}`} default={defaultMessage} />
       {` ${score}`}
     </p>
   </div>
@@ -24,8 +15,8 @@ const Score = ({ score, klass, Component }) => (
 const ScoresSection = ({ xScore, oScore }) => (
   <div className="col-12">
     <div className="row justify-content-between">
-      <Score score={xScore} klass="xScore" Component={XScoreMessage} />
-      <Score score={oScore} klass="oScore" Component={OScoreMessage} />
+      <Score score={xScore} klass="xScore" defaultMessage="X's score" />
+      <Score score={oScore} klass="oScore" defaultMessage="O's score" />
     </div>
   </div>
 );
@@ -33,10 +24,10 @@ const ScoresSection = ({ xScore, oScore }) => (
 const Header = ({ xScore, oScore, ai }) => (
   <div className="row">
     <div className="col-12">
-      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} />
+      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} default="Type of game" />
     </div>
     <div className="col-12">
-      <FormattedHeader2 locale="game.score" />
+      <FormattedHeader2 locale="game.score" default="Score" />
     </div>
     <ScoresSection xScore={xScore} oScore={oScore} />
   </div>
@@ -45,7 +36,7 @@ const Header = ({ xScore, oScore, ai }) => (
 Score.propTypes = {
   score: PropTypes.number.isRequired,
   klass: PropTypes.string.isRequired,
-  Component: PropTypes.element.isRequired,
+  defaultMessage: PropTypes.string.isRequired,
 };
 
 ScoresSection.propTypes = {

@@ -46,10 +46,14 @@ const SwitchWrapper = ({
 );
 
 SwitchWrapper.propTypes = {
-  user: userPropType.isRequired,
+  user: userPropType,
   renderGameMenu: PropTypes.func.isRequired,
   renderLanguage: PropTypes.func.isRequired,
   renderSinglePlayer: PropTypes.func.isRequired,
+};
+
+SwitchWrapper.defaultProps = {
+  user: null,
 };
 
 export default SwitchWrapper;
