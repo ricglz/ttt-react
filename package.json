@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@loadable/component": "^5.10.2",
-    "firebase": "^6.6.1",
+    "@loadable/component": "^5.10.3",
+    "firebase": "^7.0.0",
     "octokat": "^0.10.0",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "react-google-button": "^0.5.3",
-    "react-intl": "^2.9.0",
+    "react-intl": "^3.3.2",
     "react-notifications": "^1.4.3",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.1.1",
-    "react-select": "^3.0.4"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.1.2",
+    "react-select": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,8 +31,8 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react": "^7.15.1",
+    "eslint-plugin-react-hooks": "^2.1.1",
     "stylelint": "^11.0.0",
     "stylelint-config-standard": "^19.0.0"
   },
