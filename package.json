@@ -10,7 +10,7 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-google-button": "^0.5.3",
-    "react-intl": "^2.9.0",
+    "react-intl": "^3.3.2",
     "react-notifications": "^1.4.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.1.2",
