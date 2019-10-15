@@ -16,20 +16,24 @@ function mapContributors({ avatarUrl, htmlUrl, login }) {
 
 mapContributors.propTypes = contributorProps;
 
-function catchError() {
-  // eslint-disable-next-line no-console
-  console.error('Contributors error');
+async function fetchContributors(setContributors) {
+  const octokat = new Octokat();
+  let response = null;
+  try {
+    response = await octokat.repos('ricglz0201', 'ttt-react')
+      .contributors.fetch();
+  } catch (error) {
+    return;
+  }
+  const { items } = response;
+  setContributors(items.map(mapContributors));
 }
 
 function useContributors() {
   const [contributors, setContributors] = React.useState(null);
-  const updateContributors = React.useCallback(({ items }) => {
-    setContributors(items.map(mapContributors));
-  }, [setContributors]);
   React.useEffect(() => {
-    (new Octokat()).repos('ricglz0201', 'ttt-react').contributors.fetch()
-      .then(updateContributors).catch(catchError);
-  }, [updateContributors]);
+    fetchContributors(setContributors);
+  }, []);
   return [contributors];
 }
 

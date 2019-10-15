@@ -3,21 +3,20 @@ import { getRedirect, gamesReference, boardReference } from '../firebase/firebas
 import Room from '../components/OnlineGame/Room';
 import { alertError, fbInitialState, initialState } from './HelperFunctions';
 
-function updateUser(setUser) {
-  getRedirect().then((response) => {
-    const tempUser = response.user;
-    if (!tempUser) {
-      return;
-    }
-    const {
-      displayName, email, phoneNumber, photoUrl, uid,
-    } = tempUser;
-    const user = {
-      name: displayName, email, phoneNumber, photoUrl, uid,
-    };
-    setUser(user);
-    localStorage.setItem('user', JSON.stringify(user));
-  });
+async function updateUser(setUser) {
+  const response = await getRedirect();
+  const tempUser = response.user;
+  if (!tempUser) {
+    return;
+  }
+  const {
+    displayName, email, phoneNumber, photoUrl, uid,
+  } = tempUser;
+  const user = {
+    name: displayName, email, phoneNumber, photoUrl, uid,
+  };
+  setUser(user);
+  localStorage.setItem('user', JSON.stringify(user));
 }
 
 export function useUser() {
