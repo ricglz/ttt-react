@@ -8,7 +8,7 @@
     "octokat": "^0.10.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.11.0",
     "react-google-button": "^0.5.3",
     "react-intl": "^3.4.0",
     "react-notifications": "^1.4.3",
