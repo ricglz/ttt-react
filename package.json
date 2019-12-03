@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@loadable/component": "^5.10.3",
+    "@loadable/component": "^5.11.0",
     "firebase": "^7.5.0",
     "octokat": "^0.10.0",
     "prop-types": "^15.7.2",
