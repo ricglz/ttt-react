@@ -9907,10 +9907,10 @@ react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-i
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-notifications@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/react-notifications/-/react-notifications-1.7.0.tgz#ded8e625d2e97dad41e4aa54e80e64830b185d19"
-  integrity sha512-dzImPRW2I7BLHVU4aVQMosmfWDGoIK6NcmB5abIrKT8tmLiaTxdhxgug3+i53FvJ+Uvl+MVBcbEn0cXrFcKNEQ==
+react-notifications@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/react-notifications/-/react-notifications-1.7.2.tgz#e70e2c053f86321c0a7fa81ff638922e2fdd572f"
+  integrity sha512-3mlMiNLDQtp64IP+EnYx3xgmbdpzrLQiSO8AP+8o4LiYQC6HcgdVB+MMdGuYZ1ttfKeLgTgol2ESFQJhmz0O3Q==
   dependencies:
     acorn "6.4.1"
     classnames "^2.1.1"
