@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.14.1",
-    "firebase": "^8.1.2",
+    "firebase": "^8.2.0",
     "octokat": "^0.10.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
