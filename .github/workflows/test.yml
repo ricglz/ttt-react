@@ -1,0 +1,19 @@
+name: Lint and Test
+on: push
+jobs:
+  lint-and-test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Config yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+      - Name: Install dependencies
+        run: yarn install
+      - Name: Lint
+        run: yarn lint-all
+      - Name: Test
+        run: yarn test
