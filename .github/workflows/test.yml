@@ -11,9 +11,9 @@ jobs:
         with:
           node-version: '14'
           cache: 'yarn'
-      - Name: Install dependencies
+      - name: Install dependencies
         run: yarn install
-      - Name: Lint
+      - name: Lint
         run: yarn lint-all
-      - Name: Test
+      - name: Test
         run: yarn test
