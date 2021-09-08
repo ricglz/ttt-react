@@ -8,7 +8,7 @@ function Home() {
       <div className="row">
         <div className="col">
           <FormattedMessage id="homePage.title" default="Home Page">
-            {txt => <h1>{txt}</h1>}
+            {(txt) => <h1>{txt}</h1>}
           </FormattedMessage>
         </div>
       </div>

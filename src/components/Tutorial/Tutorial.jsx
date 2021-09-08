@@ -21,7 +21,7 @@ function renderParagraphs() {
     'tutorial.second',
     'tutorial.third',
   ];
-  return paragraphsTitles.map(title => (
+  return paragraphsTitles.map((title) => (
     <FormattedParagraph key={title} locale={title} />
   ));
 }

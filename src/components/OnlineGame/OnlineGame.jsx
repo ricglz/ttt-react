@@ -26,7 +26,7 @@ function OnlineGame({ back, gameId, userId }) {
   } = state;
 
   const setPreviousState = React.useCallback((snapshot) => {
-    setState(prevState => ({ ...prevState, ...snapshot.val() }));
+    setState((prevState) => ({ ...prevState, ...snapshot.val() }));
   }, [setState]);
 
   React.useEffect(() => {

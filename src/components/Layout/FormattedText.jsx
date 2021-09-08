@@ -14,7 +14,7 @@ FormattedParagraph.propTypes = {
 
 export const FormattedHeader = ({ locale }) => (
   <FormattedMessage id={locale}>
-    {txt => <h1>{txt}</h1>}
+    {(txt) => <h1>{txt}</h1>}
   </FormattedMessage>
 );
 

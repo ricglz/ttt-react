@@ -82,7 +82,6 @@ function extraValueColumn(div, mod) {
 function positiveValues(pos) {
   const div = Math.floor(pos / 3);
 
-
   const mod = pos % 3;
   return (
     extraValueColumn(div, mod)
@@ -154,9 +153,7 @@ function areTwoValue(value) {
 function areTwo(pos1, pos2, pos3) {
   const value1 = boardCopy[pos1];
 
-
   const value2 = boardCopy[pos2];
-
 
   const value3 = boardCopy[pos3];
   if (
