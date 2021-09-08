@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "deploy": "react-scripts build && firebase deploy",
     "lint": "eslint src/*.jsx src/**/*.jsx src/**/**/*.jsx",
-    "lint-all": "lint && stylelint",
+    "lint-all": "yarn lint && yarn stylelint",
     "fix-lint": "eslint --fix src/*.jsx src/**/*.jsx src/**/**/*.jsx",
     "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css"
