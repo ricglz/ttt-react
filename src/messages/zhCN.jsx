@@ -1,8 +1,8 @@
 const zhCN = {
   'homePage.title': '主页面',
   'game.score': '分数',
-  'game.xScore': 'X点数',
-  'game.oScore': 'O点数',
+  'game.x-score': 'X点数',
+  'game.o-score': 'O点数',
   'game.easy': '简单',
   'game.medium': '中等',
   'game.hard': '困难',
