@@ -26,7 +26,7 @@ const auth = getAuth(app);
 useDeviceLanguage(auth);
 const provider = new GoogleAuthProvider();
 
-export function boardReference(gameId) {
+export function boardReference(gameId: string) {
   return ref(database, `/games/${gameId}`);
 }
 
