@@ -1,8 +1,8 @@
 export default {
   'homePage.title': 'Startseite',
   'game.score': 'Punktzahl',
-  'game.xScore': 'Xs Punktzahl',
-  'game.oScore': 'Os Punktzahl',
+  'game.x-score': 'Xs Punktzahl',
+  'game.o-score': 'Os Punktzahl',
   'game.easy': 'Leicht',
   'game.medium': 'Mittel',
   'game.hard': 'Schwer',

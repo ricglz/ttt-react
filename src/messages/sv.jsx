@@ -1,8 +1,8 @@
 const sv = {
   'homePage.title': 'Hemsida',
   'game.score': 'Göra',
-  'game.xScore': 'Xs poäng',
-  'game.oScore': 'Os poäng',
+  'game.x-score': 'Xs poäng',
+  'game.o-score': 'Os poäng',
   'game.easy': 'Lätt',
   'game.medium': 'Medium',
   'game.hard': 'Hård',

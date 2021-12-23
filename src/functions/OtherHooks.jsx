@@ -5,6 +5,9 @@ import { alertError, fbInitialState, initialState } from './HelperFunctions';
 
 async function updateUser(setUser) {
   const response = await getRedirect();
+  if (response == null) {
+    return;
+  }
   const tempUser = response.user;
   if (!tempUser) {
     return;

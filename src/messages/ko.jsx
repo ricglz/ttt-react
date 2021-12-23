@@ -1,8 +1,8 @@
 const ko = {
   'homePage.title': '홈페이지',
   'game.score': '점수',
-  'game.xScore': 'X의 점수',
-  'game.oScore': 'O의 점수',
+  'game.x-score': 'X의 점수',
+  'game.o-score': 'O의 점수',
   'game.easy': '쉬움',
   'game.medium': '중간',
   'game.hard': '어려움',

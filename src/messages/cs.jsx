@@ -1,8 +1,8 @@
 const cs = {
   'homePage.title': 'Domovská stránka',
   'game.score': 'Skóre',
-  'game.xScore': 'Xovo skóre',
-  'game.oScore': 'Oovo skóre',
+  'game.x-score': 'Xovo skóre',
+  'game.o-score': 'Oovo skóre',
   'game.easy': 'Lehká',
   'game.medium': 'Střední',
   'game.hard': 'Těžká',

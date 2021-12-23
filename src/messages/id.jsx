@@ -1,8 +1,8 @@
 const id = {
   'homePage.title': 'Halaman Utama',
   'game.score': 'Skor',
-  'game.xScore': 'Skor X',
-  'game.oScore': 'Skor O',
+  'game.x-score': 'Skor X',
+  'game.o-score': 'Skor O',
   'game.easy': 'Mudah',
   'game.medium': 'Sedang',
   'game.hard': 'Susah',

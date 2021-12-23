@@ -1,8 +1,8 @@
 const en = {
   'homePage.title': 'Home Page',
   'game.score': 'Score',
-  'game.xScore': "X's score",
-  'game.oScore': "O's score",
+  'game.x-score': "X's score",
+  'game.o-score': "O's score",
   'game.easy': 'Easy',
   'game.medium': 'Medium',
   'game.hard': 'Hard',

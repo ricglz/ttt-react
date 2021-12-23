@@ -1,8 +1,8 @@
 const uk = {
   'homePage.title': 'Головна сторінка',
   'game.score': 'Гол',
-  'game.xScore': 'Оцінка X',
-  'game.oScore': 'Оцінка O',
+  'game.x-score': 'Оцінка X',
+  'game.o-score': 'Оцінка O',
   'game.easy': 'Легкий',
   'game.medium': 'Середній',
   'game.hard': 'Важкий',
