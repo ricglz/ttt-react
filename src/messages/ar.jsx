@@ -1,8 +1,8 @@
 const ar = {
   'homePage.title': 'الصفحة الرئيسية',
   'game.score': 'النقاط',
-  'game.xScore': 'نقاط اللاعب اكس',
-  'game.oScore': 'نقاط اللاعب او',
+  'game.x-score': 'نقاط اللاعب اكس',
+  'game.o-score': 'نقاط اللاعب او',
   'game.easy': 'سهل',
   'game.medium': 'متوسط',
   'game.hard': 'صعب',

@@ -1,8 +1,8 @@
 const pt = {
   'homePage.title': 'Pagina Inicial',
   'game.score': 'Pontuação',
-  'game.xScore': "X's pontos",
-  'game.oScore': "O's pontos",
+  'game.x-score': "X's pontos",
+  'game.o-score': "O's pontos",
   'game.easy': 'Fácil',
   'game.medium': 'Médio',
   'game.hard': 'Difícil',

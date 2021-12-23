@@ -1,8 +1,8 @@
 const tr = {
   'homePage.title': 'Ana Sayfa',
   'game.score': 'Skor',
-  'game.xScore': "X'in skoru",
-  'game.oScore': "O'nun skoru",
+  'game.x-score': "X'in skoru",
+  'game.o-score': "O'nun skoru",
   'game.easy': 'Kolay',
   'game.medium': 'Orta',
   'game.hard': 'Zor',

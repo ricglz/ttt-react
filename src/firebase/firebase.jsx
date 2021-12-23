@@ -1,8 +1,17 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import { initializeApp } from 'firebase/app';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  getRedirectResult,
+  signInWithRedirect,
+  useDeviceLanguage,
+} from 'firebase/auth';
+import {
+  getDatabase,
+  ref,
+} from 'firebase/database';
 
-firebase.initializeApp({
+const app = initializeApp({
   apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
   authDomain: 'ttt-hl-react.firebaseapp.com',
   databaseURL: 'https://ttt-hl-react.firebaseio.com',
@@ -10,22 +19,25 @@ firebase.initializeApp({
   storageBucket: 'ttt-hl-react.appspot.com',
   messagingSenderId: '870184829747',
 });
+const database = getDatabase(app);
+const auth = getAuth(app);
 
-firebase.auth().useDeviceLanguage();
-const provider = new firebase.auth.GoogleAuthProvider();
+// eslint-disable-next-line react-hooks/rules-of-hooks
+useDeviceLanguage(auth);
+const provider = new GoogleAuthProvider();
 
 export function boardReference(gameId) {
-  return firebase.database().ref(`/games/${gameId}`);
+  return ref(database, `/games/${gameId}`);
 }
 
 export function gamesReference() {
-  return firebase.database().ref('/games');
+  return ref(database, '/games');
 }
 
 export function getRedirect() {
-  return firebase.auth().getRedirectResult();
+  return getRedirectResult(auth);
 }
 
 export function firebaseAuth() {
-  return firebase.auth().signInWithRedirect(provider);
+  return signInWithRedirect(auth, provider);
 }

@@ -1,8 +1,8 @@
 const mr = {
   'homePage.title': 'मुख पृष्ठ',
   'game.score': 'गुण',
-  'game.xScore': "X's गुण",
-  'game.oScore': "O's गुण",
+  'game.x-score': "X's गुण",
+  'game.o-score': "O's गुण",
   'game.easy': 'सोपे',
   'game.medium': 'मध्यम',
   'game.hard': 'कठीण',

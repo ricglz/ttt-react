@@ -1,8 +1,8 @@
 const da = {
   'homePage.title': 'Forside',
   'game.score': 'Point',
-  'game.xScore': "X's point",
-  'game.oScore': "O's point",
+  'game.x-score': "X's point",
+  'game.o-score': "O's point",
   'game.easy': 'Let',
   'game.medium': 'Mellom',
   'game.hard': 'Vanskelig',

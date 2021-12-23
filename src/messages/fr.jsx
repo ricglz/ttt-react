@@ -1,8 +1,8 @@
 const fr = {
   'homePage.title': 'Page Principale',
   'game.score': 'Score',
-  'game.xScore': 'Score de X',
-  'game.oScore': "Score d'O",
+  'game.x-score': 'Score de X',
+  'game.o-score': "Score d'O",
   'game.easy': 'Facile',
   'game.medium': 'Moyen',
   'game.hard': 'Difficile',

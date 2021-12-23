@@ -1,8 +1,8 @@
 const ja = {
   'homePage.title': 'ホームページ',
   'game.score': '点数',
-  'game.xScore': 'X 点数',
-  'game.oScore': 'O 点数',
+  'game.x-score': 'X 点数',
+  'game.o-score': 'O 点数',
   'game.easy': '易',
   'game.medium': '中間',
   'game.hard': '難儀',

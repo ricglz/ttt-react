@@ -1,8 +1,8 @@
 const ca = {
   'homePage.title': 'Pàgina Principal',
   'game.score': 'Puntuació',
-  'game.xScore': 'Puntuació de X',
-  'game.oScore': 'Puntuació de O',
+  'game.x-score': 'Puntuació de X',
+  'game.o-score': 'Puntuació de O',
   'game.easy': 'Fàcil',
   'game.medium': 'Mitjà',
   'game.hard': 'Difícil',

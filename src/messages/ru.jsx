@@ -1,8 +1,8 @@
 const ru = {
   'homePage.title': 'Главная страница',
   'game.score': 'Гол',
-  'game.xScore': 'Оценка X',
-  'game.oScore': 'Оценка O',
+  'game.x-score': 'Оценка X',
+  'game.o-score': 'Оценка O',
   'game.easy': 'Легко',
   'game.medium': 'Легко',
   'game.hard': 'Жесткий',
