@@ -1,20 +1,20 @@
 import { NotificationManager } from 'react-notifications';
 
-const enum Cell {
+export const enum Cell {
   X = 1,
   O = -1,
   NONE = 0,
 }
-const enum Player {
+export const enum Player {
   PLAYER_1 = 'X',
   PLAYER_2 = 'O',
 }
 
-type GeneralBoard<T> = [T, T, T, T, T, T, T, T, T]
-type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type GeneralBoard<T> = [T, T, T, T, T, T, T, T, T];
+export type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-type Board = GeneralBoard<Cell>;
-type BigBoard = GeneralBoard<Board>;
+export type Board = GeneralBoard<Cell>;
+export type BigBoard = GeneralBoard<Board>;
 
 export function alertWinner(winner: Cell) {
   const winnerLabel = winner === 1 ? Player.PLAYER_1 : Player.PLAYER_2;
@@ -25,7 +25,7 @@ export function alertError(err: Error) {
   NotificationManager.error(err.message);
 }
 
-export function emptyArray() {
+export function emptyArray(): GeneralBoard<0> {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 

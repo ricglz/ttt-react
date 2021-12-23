@@ -1,37 +1,51 @@
-import { isOccupied, emptyArray } from './HelperFunctions';
+import type { Board, GeneralBoardIndex } from './HelperFunctions';
+import { isOccupied, emptyArray, Cell } from './HelperFunctions';
 
-let boardCopy = null;
-let currentBoard = null;
-let currentDifficulty = null;
+const enum Difficulty {
+  EASY = 1,
+  NORMAL = 2,
+  HARD = 3,
+}
+
+// TODO: Create a class to stop using this things
+let boardCopy: Board | null = null;
+let currentBoard: GeneralBoardIndex = 0;
+let currentDifficulty: Difficulty = Difficulty.EASY;
 let amountOccupied = emptyArray();
 let avoidBox = emptyArray();
 
-function someOneCouldWin(value1, value2, player = false) {
-  const hopedValue = player ? 1 : -1;
+function someOneCouldWin(value1: Cell, value2: Cell, player = false) {
+  const hopedValue = player ? Cell.X : Cell.O;
   return (value1 === hopedValue && !isOccupied(value2))
     || (value2 === hopedValue && !isOccupied(value1));
 }
 
+const aiCouldWin = (value1: Cell, value2: Cell) => someOneCouldWin(value1, value2);
+const playerCouldWin = (value1: Cell, value2: Cell) => someOneCouldWin(value1, value2, true);
+
 // Identifies which letter are the one near it and if it would be more valuable
 // to do the move or not
-function whatAreBoth(column1, column2) {
+function whatAreBoth(column1: GeneralBoardIndex, column2: GeneralBoardIndex) {
+  if (boardCopy == null) {
+    throw Error('At this point board should have a copy');
+  }
   const value1 = boardCopy[column1];
   const value2 = boardCopy[column2];
   if (value1 === value2) {
-    if (value1 === 1) return 50;
-    if (value2 === -1) return 9000;
+    if (value1 === Cell.X) return 50;
+    if (value2 === Cell.O) return 9000;
   }
   let value = 0;
-  if (someOneCouldWin(value1, value2, true)) value += 15;
-  if (someOneCouldWin(value1, value2)) value += 40;
+  if (playerCouldWin(value1, value2)) value += 15;
+  if (aiCouldWin(value1, value2)) value += 40;
   return value;
 }
 
 // Checks if the position chosen could stop a winning of the oponent or if
 // itself could win in diagonal
-function extraValueDiagonal(div, pos) {
+function extraValueDiagonal(div: number, pos: GeneralBoardIndex) {
   if (pos === 1 || pos === 3 || pos === 5 || pos === 7) return 0;
-  if (pos === 4) return whatAreBoth(0, 8) || whatAreBoth(2, 6);
+  if (pos === 4) return whatAreBoth(0, 8) + whatAreBoth(2, 6);
   if (div !== 0) {
     if (pos === 8) return whatAreBoth(0, 4);
     return whatAreBoth(2, 4);
@@ -41,7 +55,7 @@ function extraValueDiagonal(div, pos) {
 }
 
 // Checks if the position chosen could stop a winning of the oponent or if itself could win in a row
-function extraValueRow(div, mod) {
+function extraValueRow(div: number, mod: number) {
   switch (div) {
     case 0:
       if (mod === 0) return whatAreBoth(1, 2);
@@ -62,7 +76,7 @@ function extraValueRow(div, mod) {
 
 // Checks if the position chosen could stop a winning of the oponent or if
 // itself could win in a column
-function extraValueColumn(div, mod) {
+function extraValueColumn(div: number, mod: number) {
   switch (mod) {
     case 0:
       if (div === 0) return whatAreBoth(3, 6);
@@ -79,10 +93,9 @@ function extraValueColumn(div, mod) {
   }
 }
 
-function positiveValues(pos) {
-  const div = Math.floor(pos / 3);
-
-  const mod = pos % 3;
+function positiveValues(pos: GeneralBoardIndex) {
+  const div: number = Math.floor(pos / 3);
+  const mod: number = (pos % 3);
   return (
     extraValueColumn(div, mod)
     + extraValueRow(div, mod)
@@ -90,71 +103,73 @@ function positiveValues(pos) {
   );
 }
 
-function recursiveMovement(pos) {
-  if (pos === currentBoard) return 20;
-  return 0;
+function recursiveMovement(pos: GeneralBoardIndex) {
+  return pos === currentBoard ? 20 : 0;
 }
 
-function negativeValues(pos) {
+function negativeValues(pos: GeneralBoardIndex) {
   return recursiveMovement(pos) + amountOccupied[pos] + avoidBox[pos];
 }
 
-function getValue(pos) {
+function getValue(pos: GeneralBoardIndex) {
   let value = positiveValues(pos);
-  if (currentDifficulty === 3) value -= negativeValues(pos);
+  if (currentDifficulty === Difficulty.HARD) value -= negativeValues(pos);
   return value;
 }
 
 // Checks which are the more factible actions to play
-function different(availableMoves) {
+function different(availableMoves: AiAction[]) {
   const min = availableMoves[0].value;
-  let erasePos = 1;
-  while (
-    erasePos < availableMoves.length
-    && min === availableMoves[erasePos].value
-  ) {
-    erasePos += 1;
-  }
-  return erasePos;
+  return availableMoves.findIndex((action) => action.value > min);
 }
 
-function deleteElements(availableMoves) {
-  if (availableMoves.length > 1) {
-    availableMoves.sort((a, b) => b.value - a.value);
-    const erasePos = different(availableMoves);
-    if (erasePos < availableMoves.length) {
-      availableMoves.splice(erasePos, availableMoves.length - erasePos);
-    }
+function deleteElements(availableMoves: AiAction[]) {
+  availableMoves.sort((a, b) => b.value - a.value);
+  const erasePos = different(availableMoves);
+  if (erasePos !== -1) {
+    availableMoves.splice(erasePos, availableMoves.length - erasePos);
   }
   return availableMoves;
 }
 
-function AiAction(pos) {
-  this.pos = pos;
-  this.value = getValue(pos);
+class AiAction {
+  pos: GeneralBoardIndex;
+
+  value: number;
+
+  constructor(pos: GeneralBoardIndex) {
+    this.pos = pos;
+    this.value = getValue(pos);
+  }
+}
+
+function isWithinRange(index: number): index is GeneralBoardIndex {
+  return index >= 0 && index <= 8;
 }
 
 function getAvailableMoves() {
-  const availableMoves = [];
-  for (let index = 0; index < boardCopy.length; index += 1) {
-    const element = boardCopy[index];
-    if (!isOccupied(element)) {
-      availableMoves.push(new AiAction(index));
-    }
+  const availableMoves: AiAction[] = [];
+  if (boardCopy == null) {
+    return [];
   }
+  boardCopy.forEach((element, index) => {
+    if (isOccupied(element) || !isWithinRange(index)) return;
+    availableMoves.push(new AiAction(index));
+  });
   return availableMoves;
 }
 
-function areTwoValue(value) {
-  if (value === 1) return 90;
+function areTwoValue(value: Cell) {
+  if (value === Cell.X) return 90;
   return 40;
 }
 
-function areTwo(pos1, pos2, pos3) {
+function areTwo(pos1: GeneralBoardIndex, pos2: GeneralBoardIndex, pos3: GeneralBoardIndex) {
+  if (boardCopy == null) {
+    return 0;
+  }
   const value1 = boardCopy[pos1];
-
   const value2 = boardCopy[pos2];
-
   const value3 = boardCopy[pos3];
   if (
     (value1 === value2 && isOccupied(value1) && !isOccupied(value3))
@@ -184,13 +199,13 @@ function areTwoInTheBoard() {
   return areTwoInTheColumn() + areTwoInTheDiagonal() + areTwoInTheRow();
 }
 
-export function playerMadeAMove(boardId, board) {
+export function playerMadeAMove(boardId: GeneralBoardIndex, board: Board) {
   amountOccupied[boardId] += 3;
   boardCopy = board;
   avoidBox[boardId] = areTwoInTheBoard();
 }
 
-export function aiMadeAMove(boardId, board) {
+export function aiMadeAMove(boardId: GeneralBoardIndex, board: Board) {
   amountOccupied[boardId] += 1;
   boardCopy = board;
   avoidBox[boardId] = areTwoInTheBoard();
@@ -208,7 +223,7 @@ export function cleanVariables() {
   }
 } */
 
-export default function makeMove(board, boardId, difficulty) {
+export default function makeMove(board: Board, boardId: GeneralBoardIndex, difficulty: Difficulty) {
   boardCopy = board;
   currentBoard = boardId;
   currentDifficulty = difficulty;
