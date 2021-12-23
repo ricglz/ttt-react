@@ -33,7 +33,7 @@ const Cell = ({
       role="button"
       tabIndex="-1"
     >
-      <p className={value}>{value}</p>
+      <p className={value.toLowerCase()}>{value}</p>
     </div>
   );
 };
