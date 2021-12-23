@@ -35,8 +35,8 @@
   font-size: 11px;
   color: #fff;
   background: #000;
-  background: rgba(0, 0, 0, 0.2);
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  background: rgb(0 0 0 / 20%);
+  text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
 }
 
 .contributor-name {
@@ -44,20 +44,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-border-bottom-right-radius: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -moz-border-radius-bottomright: 3px;
-  -moz-border-radius-bottomleft: 3px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
 }
 
 .contributor-contributions {
   top: 0;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
 }

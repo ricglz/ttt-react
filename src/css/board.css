@@ -15,22 +15,22 @@ p {
   font-size: 18px;
 }
 
-.oScore {
+.o-score {
   margin-right: 2%;
 }
 
-.oSign,
-.oScore {
+.o-sign,
+.o-score {
   color: #44e;
   float: right;
 }
 
-.xSign {
+.x-sign {
   margin-left: 2%;
 }
 
-.xScore,
-.xSign {
+.x-score,
+.x-sign {
   color: #e44;
   float: left;
 }
@@ -61,11 +61,11 @@ div.box p {
   font-size: 1.5em;
 }
 
-.X {
+.x {
   color: #e44;
 }
 
-.O {
+.o {
   color: #44e;
 }
 

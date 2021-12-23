@@ -15,8 +15,8 @@ const Score = ({ score, klass, defaultMessage }) => (
 const ScoresSection = ({ xScore, oScore }) => (
   <div className="col-12">
     <div className="row justify-content-between">
-      <Score score={xScore} klass="xScore" defaultMessage="X's score" />
-      <Score score={oScore} klass="oScore" defaultMessage="O's score" />
+      <Score score={xScore} klass="x-score" defaultMessage="X's score" />
+      <Score score={oScore} klass="o-score" defaultMessage="O's score" />
     </div>
   </div>
 );
