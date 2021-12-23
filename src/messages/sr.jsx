@@ -1,8 +1,8 @@
 const sr = {
   'homePage.title': 'Почетна страна',
   'game.score': 'Резултат',
-  'game.xScore': 'Икс резултат',
-  'game.oScore': 'Oкс резултат',
+  'game.x-score': 'Икс резултат',
+  'game.o-score': 'Oкс резултат',
   'game.easy': 'Лако',
   'game.medium': 'Средње',
   'game.hard': 'Тешко',

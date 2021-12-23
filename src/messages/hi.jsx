@@ -1,8 +1,8 @@
 const hi = {
   'homePage.title': 'मुख पृष्ठ',
   'game.score': 'अंक',
-  'game.xScore': "X's अंक",
-  'game.oScore': "O's अंक",
+  'game.x-score': "X's अंक",
+  'game.o-score': "O's अंक",
   'game.easy': 'आसान',
   'game.medium': 'मध्यम',
   'game.hard': 'कठिन',

@@ -1,8 +1,8 @@
 const zh = {
   'homePage.title': '主頁面',
   'game.score': '分數',
-  'game.xScore': 'X點數',
-  'game.oScore': 'O點數',
+  'game.x-score': 'X點數',
+  'game.o-score': 'O點數',
   'game.easy': '簡單',
   'game.medium': '中等',
   'game.hard': '困難',
