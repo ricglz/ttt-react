@@ -4,19 +4,24 @@ import {
   theresAWinner,
   initialState,
   alertWinner,
+  Game,
+  Player,
+  Cell,
+  Board,
+  GeneralBoardIndex,
+  BigBoard,
 } from './HelperFunctions';
 import makeMove, {
   cleanVariables,
   aiMadeAMove,
   playerMadeAMove,
+  Difficulty,
 } from './Ai';
 
-const CONSTANTS = {
-  PLAYER1: 'X',
-  PLAYER2: 'O',
-};
+type SetGameFn = (game: Game) => void;
 
-export function useGameHooks(game, setGame) {
+// TODO: Check to modify all the hooks in this file to be a reducer
+export function useGameHooks(game: Game, setGame: SetGameFn) {
   const {
     boardGame, currentBoard, currentPlayer,
   } = game;
@@ -34,9 +39,9 @@ export function useGameHooks(game, setGame) {
       moveNumber: newMoveNumber,
       currentBoard: id,
       currentPlayer:
-        currentPlayer === CONSTANTS.PLAYER1
-          ? CONSTANTS.PLAYER2
-          : CONSTANTS.PLAYER1,
+        currentPlayer === Player.PLAYER_1
+          ? Player.PLAYER_2
+          : Player.PLAYER_1,
     });
   }, [setGame, game, currentPlayer]);
 
@@ -48,10 +53,27 @@ export function useGameHooks(game, setGame) {
   return [canClick, pvpMove, newGame];
 }
 
+type Option = { value: Difficulty };
+
+type AIHooksProps = {
+  moveNumber: number,
+  selectedOption: Option | null,
+  setGame: SetGameFn,
+  changeScore: (winner: Cell) => void,
+  newGame: () => void,
+  setSelectedOption: (option: Option) => void,
+  game: Game
+};
+
 export function useAIHooks({
-  moveNumber, selectedOption, setGame, changeScore, newGame, setSelectedOption,
+  moveNumber,
+  selectedOption,
+  setGame,
+  changeScore,
+  newGame,
+  setSelectedOption,
   game,
-}) {
+}: AIHooksProps) {
   const aiMove = React.useCallback((boardCopy, id, newMoveNumber) => {
     const board = boardCopy;
     const difficulty = selectedOption === null ? 1 : selectedOption.value;
@@ -96,12 +118,28 @@ export function useScore() {
   return [oWins, xWins, changeScore];
 }
 
+type AfterMoveProps = {
+  ai: boolean,
+  aiMove: (board: BigBoard, id: number, newMoveNumber: number) => void,
+  changeScore: (winner: Cell) => void,
+  newGame: () => void,
+  pvpMove: (board: BigBoard, newMoveNumber: number, id: number) => void,
+};
+
+type AfterMoveCallbackProps = {
+  winner: Cell | null,
+  newMoveNumber: number,
+  board: GeneralBoardIndex,
+  boardCopy: BigBoard,
+  id: number,
+};
+
 export function useAfterMove({
   ai, aiMove, changeScore, newGame, pvpMove,
-}) {
+}: AfterMoveProps) {
   const afterMove = React.useCallback(({
     winner, newMoveNumber, board, boardCopy, id,
-  }) => {
+  }: AfterMoveCallbackProps) => {
     if (winner) {
       alertWinner(winner);
       changeScore(winner);
@@ -118,19 +156,28 @@ export function useAfterMove({
   return afterMove;
 }
 
+type HandleClickProps = {
+  canClick: (board: Board, id: number) => boolean,
+  boardGame: BigBoard,
+  moveNumber: number,
+  currentPlayer: Player,
+  afterMove: (args: AfterMoveCallbackProps) => void,
+};
+
 export function useHandleClick({
   canClick, boardGame, moveNumber, currentPlayer, afterMove,
-}) {
+}: HandleClickProps) {
   const handleSquareClick = React.useCallback((board, id) => {
-    if (canClick(board, id)) {
-      const boardCopy = [...boardGame];
-      const newMoveNumber = moveNumber + 1;
-      boardCopy[board][id] = currentPlayer === 'X' ? 1 : -1;
-      const winner = theresAWinner(boardCopy[board]);
-      afterMove({
-        winner, newMoveNumber, board, boardCopy, id,
-      });
+    if (!canClick(board, id)) {
+      return;
     }
+    const boardCopy: BigBoard = [...boardGame];
+    const newMoveNumber = moveNumber + 1;
+    boardCopy[board][id] = currentPlayer === Player.PLAYER_1 ? Cell.X : Cell.O;
+    const winner = theresAWinner(boardCopy[board]);
+    afterMove({
+      winner, newMoveNumber, board, boardCopy, id,
+    });
   }, [canClick, boardGame, moveNumber, currentPlayer, afterMove]);
   return handleSquareClick;
 }

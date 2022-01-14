@@ -25,7 +25,7 @@ export function alertError(err: Error) {
   NotificationManager.error(err.message);
 }
 
-export function emptyArray(): GeneralBoard<0> {
+export function emptyArray(): GeneralBoard<number> {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
@@ -82,7 +82,14 @@ export function newBoard(): BigBoard {
   ];
 }
 
-export function initialState() {
+interface BaseGame {
+  boardGame: BigBoard;
+  currentPlayer: Player;
+  moveNumber: number;
+  currentBoard: number;
+}
+
+export function initialState(): BaseGame {
   return {
     boardGame: newBoard(),
     currentPlayer: Player.PLAYER_1,
@@ -91,15 +98,27 @@ export function initialState() {
   };
 }
 
-export function fbInitialState(hostUid: string, hostName: string) {
+interface FirebaseGame extends BaseGame {
+  oWins: number;
+  xWins: number;
+  hostUid: string;
+  hostName: string;
+  guestUid: string;
+  nextPlayerUid: string;
+  timestamp: number;
+}
+
+export function fbInitialState(hostUid: string, hostName: string): FirebaseGame {
   return {
     ...initialState(),
     oWins: 0,
     xWins: 0,
     hostUid,
     hostName,
-    guestUid: -1,
+    guestUid: '-1',
     nextPlayerUid: hostUid,
     timestamp: Date.now(),
   };
 }
+
+export type Game = BaseGame | FirebaseGame;

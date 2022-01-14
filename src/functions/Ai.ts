@@ -1,7 +1,7 @@
 import type { Board, GeneralBoardIndex } from './HelperFunctions';
 import { isOccupied, emptyArray, Cell } from './HelperFunctions';
 
-const enum Difficulty {
+export const enum Difficulty {
   EASY = 1,
   NORMAL = 2,
   HARD = 3,
