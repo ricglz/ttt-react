@@ -1,4 +1,5 @@
 import React from 'react';
+import { GeneralBoardIndex } from '../../functions/HelperFunctions';
 import type { BoardProps } from './Board';
 import Cell from './Cell';
 
@@ -18,14 +19,14 @@ const Row = ({
       handleClick={handleClick}
     />
     <Cell
-      cellNum={rowNum + 1}
+      cellNum={rowNum + 1 as GeneralBoardIndex}
       boardNum={boardNum}
       boardGame={boardGame}
       currentBoard={currentBoard}
       handleClick={handleClick}
     />
     <Cell
-      cellNum={rowNum + 2}
+      cellNum={rowNum + 2 as GeneralBoardIndex}
       boardNum={boardNum}
       boardGame={boardGame}
       currentBoard={currentBoard}
