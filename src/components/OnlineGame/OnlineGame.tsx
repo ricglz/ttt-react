@@ -1,25 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import BigBoard from '../Board/BigBoard';
 import {
-  isOccupied,
-  theresAWinner,
+  FirebaseGame,
   fbInitialState,
+  getNextPlayer,
   initialState,
-  alertWinner,
-  alertError,
+  isOccupied,
 } from '../../functions/HelperFunctions';
-import { boardReference } from '../../firebase/firebase';
+import { readGame, updateGame } from '../../firebase/firebase';
 import ResetButton from '../Layout/ResetButton';
 import DefaultButton from '../Layout/DefaultButton';
+import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
 
-const CONSTANTS = {
-  PLAYER1: 'X',
-  PLAYER2: 'O',
+type ButtonsFooterProps = {
+  reset: () => void,
+  back: () => void,
 };
 
-function OnlineGame({ back, gameId, userId }) {
-  const [state, setState] = React.useState(fbInitialState());
+const ButtonsFooter = ({ reset, back }: ButtonsFooterProps) => (
+  <div className="row justify-content-center">
+    <ResetButton onClick={reset} />
+    <DefaultButton text="shared.back" defaultText="Back" onClick={back} />
+  </div>
+);
+
+type Props = {
+  back: (game: FirebaseGame) => void,
+  gameId: string,
+  userId: string,
+};
+
+function OnlineGame({ back, gameId, userId }: Props) {
+  const [state, setState] = React.useState(fbInitialState('', ''));
   const {
     boardGame, currentBoard, nextPlayerUid, moveNumber, currentPlayer, hostUid,
     guestUid, oWins, xWins,
@@ -29,13 +42,10 @@ function OnlineGame({ back, gameId, userId }) {
     setState((prevState) => ({ ...prevState, ...snapshot.val() }));
   }, [setState]);
 
-  React.useEffect(() => {
-    boardReference(gameId).on('value', setPreviousState, alertError);
-  }, [gameId, setPreviousState]);
+  React.useEffect(() => readGame(gameId, setPreviousState), [gameId, setPreviousState]);
 
-  const updateFirebase = React.useCallback((obj) => {
-    const timestamp = Date.now();
-    boardReference(gameId).update(Object.assign(obj, { timestamp }));
+  const updateFirebase = React.useCallback((obj: Partial<FirebaseGame>) => {
+    updateGame(gameId, { ...obj, timestamp: Date.now() });
   }, [gameId]);
 
   const canClick = React.useCallback((board, id) => {
@@ -49,8 +59,7 @@ function OnlineGame({ back, gameId, userId }) {
 
   const pvpMove = React.useCallback(
     (newBoard, newMoveNumber, newCurrentBoard) => {
-      const { PLAYER1, PLAYER2 } = CONSTANTS;
-      const newCurrentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+      const newCurrentPlayer = getNextPlayer(currentPlayer);
       const newNextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
       const newState = {
         boardGame: newBoard,
@@ -84,27 +93,18 @@ function OnlineGame({ back, gameId, userId }) {
     updateFirebase(initialState());
   }, [updateFirebase]);
 
-  const handleSquareClick = React.useCallback((board, id) => {
-    if (canClick(board, id)) {
-      const boardCopy = [...boardGame];
-      const newMoveNumber = moveNumber + 1;
-      boardCopy[board][id] = currentPlayer === CONSTANTS.PLAYER1 ? 1 : -1;
-      const winner = theresAWinner(boardCopy[board]);
-      if (winner) {
-        alertWinner(winner);
-        changeScore(winner);
-        newGame();
-      } else if (newMoveNumber === 81) {
-        newGame();
-      } else {
-        pvpMove(boardCopy, newMoveNumber, id);
-      }
-    }
-  }, [canClick, boardGame, moveNumber, currentPlayer, changeScore, newGame, pvpMove]);
+  const afterMove = useAfterMoveOnline({ changeScore, newGame, pvpMove });
+  const handleSquareClick = useHandleClick({
+    afterMove,
+    boardGame,
+    canClick,
+    currentPlayer,
+    moveNumber,
+  });
 
   return (
     <>
-      {guestUid === -1 ? (
+      {guestUid === '-1' ? (
         <h1 className="text-center"> Please wait until someone enters the room </h1>
       ) : (
         <div className="container text-center">
@@ -120,23 +120,5 @@ function OnlineGame({ back, gameId, userId }) {
     </>
   );
 }
-
-const ButtonsFooter = ({ reset, back }) => (
-  <div className="row justify-content-center">
-    <ResetButton onClick={reset} />
-    <DefaultButton text="shared.back" defaultText="Back" onClick={back} />
-  </div>
-);
-
-ButtonsFooter.propTypes = {
-  reset: PropTypes.func.isRequired,
-  back: PropTypes.func.isRequired,
-};
-
-OnlineGame.propTypes = {
-  back: PropTypes.func.isRequired,
-  gameId: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-};
 
 export default OnlineGame;

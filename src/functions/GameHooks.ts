@@ -10,6 +10,8 @@ import {
   Board,
   GeneralBoardIndex,
   BigBoard,
+  getNextPlayer,
+  getPlayerCellValue,
 } from './HelperFunctions';
 import makeMove, {
   cleanVariables,
@@ -38,10 +40,7 @@ export function useGameHooks(game: Game, setGame: SetGameFn) {
       boardGame: boardCopy,
       moveNumber: newMoveNumber,
       currentBoard: id,
-      currentPlayer:
-        currentPlayer === Player.PLAYER_1
-          ? Player.PLAYER_2
-          : Player.PLAYER_1,
+      currentPlayer: getNextPlayer(currentPlayer),
     });
   }, [setGame, game, currentPlayer]);
 
@@ -118,13 +117,11 @@ export function useScore() {
   return [oWins, xWins, changeScore];
 }
 
-type AfterMoveProps = {
-  ai: boolean,
-  aiMove: (board: BigBoard, id: number, newMoveNumber: number) => void,
+interface AfterMoveOnlineProps {
   changeScore: (winner: Cell) => void,
   newGame: () => void,
   pvpMove: (board: BigBoard, newMoveNumber: number, id: number) => void,
-};
+}
 
 type AfterMoveCallbackProps = {
   winner: Cell | null,
@@ -133,6 +130,30 @@ type AfterMoveCallbackProps = {
   boardCopy: BigBoard,
   id: number,
 };
+
+export function useAfterMoveOnline({
+  changeScore, newGame, pvpMove,
+}: AfterMoveOnlineProps) {
+  const afterMove = React.useCallback(({
+    winner, newMoveNumber, boardCopy, id,
+  }: AfterMoveCallbackProps) => {
+    if (winner) {
+      alertWinner(winner);
+      changeScore(winner);
+      newGame();
+    } else if (newMoveNumber === 81) {
+      newGame();
+    } else {
+      pvpMove(boardCopy, newMoveNumber, id);
+    }
+  }, [changeScore, newGame, pvpMove]);
+  return afterMove;
+}
+
+interface AfterMoveProps extends AfterMoveOnlineProps {
+  ai: boolean,
+  aiMove: (board: BigBoard, id: number, newMoveNumber: number) => void,
+}
 
 export function useAfterMove({
   ai, aiMove, changeScore, newGame, pvpMove,
@@ -173,7 +194,7 @@ export function useHandleClick({
     }
     const boardCopy: BigBoard = [...boardGame];
     const newMoveNumber = moveNumber + 1;
-    boardCopy[board][id] = currentPlayer === Player.PLAYER_1 ? Cell.X : Cell.O;
+    boardCopy[board][id] = getPlayerCellValue(currentPlayer);
     const winner = theresAWinner(boardCopy[board]);
     afterMove({
       winner, newMoveNumber, board, boardCopy, id,

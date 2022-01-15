@@ -7,13 +7,15 @@ import {
   useDeviceLanguage,
 } from 'firebase/auth';
 import {
+  DataSnapshot,
   getDatabase,
+  onValue,
   push,
   ref,
   remove,
   update,
 } from 'firebase/database';
-import { fbInitialState, FirebaseGame } from '../functions/HelperFunctions';
+import { alertError, fbInitialState, FirebaseGame } from '../functions/HelperFunctions';
 
 const app = initializeApp({
   apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
@@ -34,6 +36,9 @@ export const gameReference = (gameId: string) => ref(database, `/games/${gameId}
 export const deleteGame = (gameId: string) => remove(gameReference(gameId));
 export const updateGame = (gameId: string, toUpdateFields: Partial<FirebaseGame>) => (
   update(gameReference(gameId), toUpdateFields)
+);
+export const readGame = (gameId: string, updateFn: (snapshot: DataSnapshot) => void) => (
+  onValue(gameReference(gameId), updateFn, alertError)
 );
 
 export const gamesReference = ref(database, '/games');

@@ -16,8 +16,16 @@ export type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type Board = GeneralBoard<Cell>;
 export type BigBoard = GeneralBoard<Board>;
 
+export const getNextPlayer = (player: Player) => (
+  player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1
+);
+
+export const getPlayerCellValue = (player: Player) => (
+  player === Player.PLAYER_1 ? Cell.X : Cell.O
+);
+
 export function alertWinner(winner: Cell) {
-  const winnerLabel = winner === 1 ? Player.PLAYER_1 : Player.PLAYER_2;
+  const winnerLabel = winner === Cell.X ? Player.PLAYER_1 : Player.PLAYER_2;
   NotificationManager.info(`Player ${winnerLabel} has won.`);
 }
 
