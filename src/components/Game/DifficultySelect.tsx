@@ -25,7 +25,7 @@ const placeholder = (
 );
 
 type Props = {
-  selectedOption: Option,
+  selectedOption: Option | null,
   handleChange: (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => void,
 };
 

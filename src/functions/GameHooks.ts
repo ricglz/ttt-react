@@ -17,7 +17,6 @@ import makeMove, {
   cleanVariables,
   aiMadeAMove,
   playerMadeAMove,
-  Difficulty,
 } from './Ai';
 import { Option } from '../components/Game/DifficultySelect';
 
@@ -50,7 +49,7 @@ export function useGameHooks(game: Game, setGame: SetGameFn) {
     setGame({ ...game, ...initialState() });
   }, [setGame, game]);
 
-  return [canClick, pvpMove, newGame];
+  return { canClick, pvpMove, newGame };
 }
 
 type AIHooksProps = {
@@ -100,20 +99,20 @@ export function useAIHooks({
     }
   }, [setSelectedOption, moveNumber, newGame]);
 
-  return [aiMove, handleChange];
+  return { aiMove, handleChange };
 }
 
 export function useScore() {
   const [oWins, setOWins] = React.useState(0);
   const [xWins, setXWins] = React.useState(0);
-  const changeScore = React.useCallback((value) => {
-    if (value === -1) {
+  const changeScore = React.useCallback((value: Cell) => {
+    if (value === Cell.O) {
       setOWins(oWins + 1);
     } else {
       setXWins(xWins + 1);
     }
   }, [setOWins, setXWins, oWins, xWins]);
-  return [oWins, xWins, changeScore];
+  return { oWins, xWins, changeScore };
 }
 
 interface AfterMoveOnlineProps {

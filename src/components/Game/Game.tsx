@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from './Header';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from './ButtonsFooter';
-import DifficultySelect from './DifficultySelect';
+import DifficultySelect, { Option } from './DifficultySelect';
 import {
   initialState,
 } from '../../functions/HelperFunctions';
@@ -11,15 +10,19 @@ import {
   useGameHooks, useAIHooks, useScore, useAfterMove, useHandleClick,
 } from '../../functions/GameHooks';
 
-function Game({ ai }) {
+type Props = {
+  ai: boolean
+};
+
+function Game({ ai }: Props) {
   const [game, setGame] = React.useState(initialState());
-  const [selectedOption, setSelectedOption] = React.useState(null);
-  const [oWins, xWins, changeScore] = useScore();
+  const [selectedOption, setSelectedOption] = React.useState<Option | null>(null);
+  const { oWins, xWins, changeScore } = useScore();
   const {
     boardGame, currentBoard, moveNumber, currentPlayer,
   } = game;
-  const [canClick, pvpMove, newGame] = useGameHooks(game, setGame);
-  const [aiMove, handleChange] = useAIHooks({
+  const { canClick, pvpMove, newGame } = useGameHooks(game, setGame);
+  const { aiMove, handleChange } = useAIHooks({
     moveNumber,
     selectedOption,
     setGame,
@@ -56,11 +59,4 @@ function Game({ ai }) {
   );
 }
 
-Game.propTypes = {
-  ai: PropTypes.bool,
-};
-
-Game.defaultProps = {
-  ai: false,
-};
 export default Game;
