@@ -1,18 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FormattedHeader, FormattedHeader2 } from '../Layout/FormattedText';
 
-const Score = ({ score, klass, defaultMessage }) => (
+type ScoreProps = {
+  score: number,
+  klass: string,
+  defaultMessage: string,
+};
+
+const Score = ({ score, klass, defaultMessage }: ScoreProps) => (
   <div className={`col ${klass}`}>
     <p>
-      <FormattedMessage id={`game.${klass}`} default={defaultMessage} />
+      <FormattedMessage id={`game.${klass}`} defaultMessage={defaultMessage} />
       {` ${score}`}
     </p>
   </div>
 );
 
-const ScoresSection = ({ xScore, oScore }) => (
+interface ScoresSectionProps {
+  xScore: number,
+  oScore: number,
+}
+
+const ScoresSection = ({ xScore, oScore }: ScoresSectionProps) => (
   <div className="col-12">
     <div className="row justify-content-between">
       <Score score={xScore} klass="x-score" defaultMessage="X's score" />
@@ -21,7 +31,11 @@ const ScoresSection = ({ xScore, oScore }) => (
   </div>
 );
 
-const Header = ({ xScore, oScore, ai }) => (
+interface Props extends ScoresSectionProps {
+  ai: boolean
+}
+
+const Header = ({ xScore, oScore, ai }: Props) => (
   <div className="row">
     <div className="col-12">
       <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} default="Type of game" />
@@ -32,22 +46,5 @@ const Header = ({ xScore, oScore, ai }) => (
     <ScoresSection xScore={xScore} oScore={oScore} />
   </div>
 );
-
-Score.propTypes = {
-  score: PropTypes.number.isRequired,
-  klass: PropTypes.string.isRequired,
-  defaultMessage: PropTypes.string.isRequired,
-};
-
-ScoresSection.propTypes = {
-  oScore: PropTypes.number.isRequired,
-  xScore: PropTypes.number.isRequired,
-};
-
-Header.propTypes = {
-  ai: PropTypes.bool.isRequired,
-  oScore: PropTypes.number.isRequired,
-  xScore: PropTypes.number.isRequired,
-};
 
 export default Header;
