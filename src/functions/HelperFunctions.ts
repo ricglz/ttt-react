@@ -90,11 +90,13 @@ export function newBoard(): BigBoard {
   ];
 }
 
+export type CurrentBoard = GeneralBoardIndex | -1;
+
 interface BaseGame {
   boardGame: BigBoard;
   currentPlayer: Player;
   moveNumber: number;
-  currentBoard: number;
+  currentBoard: CurrentBoard;
 }
 
 export function initialState(): BaseGame {

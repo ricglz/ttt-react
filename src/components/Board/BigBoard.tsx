@@ -1,8 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { BigBoard as BigBoardType, CurrentBoard } from '../../functions/HelperFunctions';
 import BoardRow from './BoardRow';
 
-const BigBoard = ({ boardGame, currentBoard, handleClick }) => (
+type Props = {
+  boardGame: BigBoardType,
+  currentBoard: CurrentBoard,
+  handleClick: (board: number, id: number) => void
+};
+
+const BigBoard = ({ boardGame, currentBoard, handleClick }: Props) => (
   <div className="game row justify-content-center">
     <div className="col-9 col-sm-8 col-md-7 col-lg-6 col-xl-6">
       <BoardRow
@@ -26,11 +32,5 @@ const BigBoard = ({ boardGame, currentBoard, handleClick }) => (
     </div>
   </div>
 );
-
-BigBoard.propTypes = {
-  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  currentBoard: PropTypes.number.isRequired,
-  handleClick: PropTypes.func.isRequired,
-};
 
 export default BigBoard;
