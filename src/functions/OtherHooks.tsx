@@ -16,7 +16,7 @@ import {
   createGame,
 } from '../firebase/firebase';
 
-type User = {
+export type User = {
   email: string,
   name: string,
   phoneNumber: string,
@@ -63,7 +63,6 @@ export function useUser() {
 
 type UseRoomsProps = {
   user: User | null,
-  history: History,
   joinGame: (id: string, hostUid: string) => void,
 };
 
@@ -156,5 +155,10 @@ export function useGameFlow({ uid, name }: UseGameFlowProps) {
     }
   }, [uid, gameId, setGameId]);
 
-  return [gameId, hostNewGame, joinGame, surrender];
+  return {
+    gameId,
+    hostNewGame,
+    joinGame,
+    surrender,
+  };
 }
