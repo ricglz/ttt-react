@@ -1,13 +1,11 @@
 import React from 'react';
-import type { BigBoard, CurrentBoard } from '../../functions/HelperFunctions';
+import type { GeneralBoardIndex } from '../../functions/HelperFunctions';
+import type { BigBoardProps } from './BigBoard';
 import Board from './Board';
 
-type Props = {
+interface Props extends BigBoardProps {
   rowNum: 0 | 3 | 6,
-  boardGame: BigBoard,
-  currentBoard: CurrentBoard,
-  handleClick: () => void,
-};
+}
 
 const BoardRow = ({
   rowNum, boardGame, currentBoard, handleClick,
@@ -20,13 +18,13 @@ const BoardRow = ({
       handleClick={handleClick}
     />
     <Board
-      boardNum={rowNum + 1}
+      boardNum={rowNum + 1 as GeneralBoardIndex}
       boardGame={boardGame}
       currentBoard={currentBoard}
       handleClick={handleClick}
     />
     <Board
-      boardNum={rowNum + 2}
+      boardNum={rowNum + 2 as GeneralBoardIndex}
       boardGame={boardGame}
       currentBoard={currentBoard}
       handleClick={handleClick}

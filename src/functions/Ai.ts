@@ -94,8 +94,8 @@ function extraValueColumn(div: number, mod: number) {
 }
 
 function positiveValues(pos: GeneralBoardIndex) {
-  const div: number = Math.floor(pos / 3);
-  const mod: number = (pos % 3);
+  const div = Math.floor(pos / 3);
+  const mod = (pos % 3);
   return (
     extraValueColumn(div, mod)
     + extraValueRow(div, mod)
@@ -143,18 +143,14 @@ class AiAction {
   }
 }
 
-function isWithinRange(index: number): index is GeneralBoardIndex {
-  return index >= 0 && index <= 8;
-}
-
 function getAvailableMoves() {
   const availableMoves: AiAction[] = [];
   if (boardCopy == null) {
     return [];
   }
   boardCopy.forEach((element, index) => {
-    if (isOccupied(element) || !isWithinRange(index)) return;
-    availableMoves.push(new AiAction(index));
+    if (isOccupied(element)) return;
+    availableMoves.push(new AiAction(index as GeneralBoardIndex));
   });
   return availableMoves;
 }

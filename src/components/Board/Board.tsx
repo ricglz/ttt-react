@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Row from './Row';
+import type { CurrentBoard, GeneralBoardIndex } from '../../functions/HelperFunctions';
+import type { BigBoardProps } from './BigBoard';
 
-function boardClass(boardNum, currentBoard) {
+function boardClass(boardNum: GeneralBoardIndex, currentBoard: CurrentBoard) {
   let klass = 'col-4 big-box';
   if (!(boardNum === currentBoard || currentBoard === -1)) {
     klass += ' grey-bg';
@@ -10,9 +11,13 @@ function boardClass(boardNum, currentBoard) {
   return klass;
 }
 
+export interface BoardProps extends BigBoardProps {
+  boardNum: GeneralBoardIndex,
+}
+
 const Board = ({
   boardNum, currentBoard, boardGame, handleClick,
-}) => (
+}: BoardProps) => (
   <div className={boardClass(boardNum, currentBoard)}>
     <Row
       rowNum={0}
@@ -37,12 +42,5 @@ const Board = ({
     />
   </div>
 );
-
-Board.propTypes = {
-  boardNum: PropTypes.number.isRequired,
-  currentBoard: PropTypes.number.isRequired,
-  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  handleClick: PropTypes.func.isRequired,
-};
 
 export default Board;

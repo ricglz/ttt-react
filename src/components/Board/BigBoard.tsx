@@ -2,13 +2,13 @@ import React from 'react';
 import type { BigBoard as BigBoardType, CurrentBoard } from '../../functions/HelperFunctions';
 import BoardRow from './BoardRow';
 
-type Props = {
+export interface BigBoardProps {
   boardGame: BigBoardType,
   currentBoard: CurrentBoard,
   handleClick: (board: number, id: number) => void
-};
+}
 
-const BigBoard = ({ boardGame, currentBoard, handleClick }: Props) => (
+const BigBoard = ({ boardGame, currentBoard, handleClick }: BigBoardProps) => (
   <div className="game row justify-content-center">
     <div className="col-9 col-sm-8 col-md-7 col-lg-6 col-xl-6">
       <BoardRow
