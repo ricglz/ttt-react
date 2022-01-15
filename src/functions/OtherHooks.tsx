@@ -64,7 +64,7 @@ export function useUser() {
 type UseRoomsProps = {
   user: User | null,
   history: History,
-  joinGame: () => void,
+  joinGame: (id: string, hostUid: string) => void,
 };
 
 type Rooms = {

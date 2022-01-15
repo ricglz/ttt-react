@@ -1,9 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+type Pros = {
+  joinGame: (id: string, hostUid: string) => void,
+  hostUid: string,
+  hostName: string,
+  id: string,
+};
 
 export default function Room({
   joinGame, hostUid, hostName, id,
-}) {
+}: Pros) {
   const onClick = React.useCallback(() => {
     joinGame(id, hostUid);
   }, [joinGame, id, hostUid]);
@@ -20,10 +26,3 @@ export default function Room({
     </li>
   );
 }
-
-Room.propTypes = {
-  joinGame: PropTypes.func.isRequired,
-  hostUid: PropTypes.string.isRequired,
-  hostName: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-};
