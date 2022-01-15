@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import DefaultButton from './DefaultButton';
 
-const ResetButton = ({ onClick }) => (
+type Props = {
+  onClick: () => void
+};
+
+const ResetButton = ({ onClick }: Props) => (
   <DefaultButton text="game.reset" defaultText="Back" onClick={onClick} />
 );
-
-ResetButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
 
 export default ResetButton;
