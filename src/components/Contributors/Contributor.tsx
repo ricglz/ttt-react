@@ -1,8 +1,8 @@
+import type { RepoContributors } from 'octokat';
 import React from 'react';
 import '../../css/contributor.css';
-import { contributorProps } from '../../constants/props';
 
-const Contributor = ({ login, htmlUrl, avatarUrl }) => (
+const Contributor = ({ login, htmlUrl, avatarUrl }: RepoContributors) => (
   <li className="contributor">
     <a className="avatar" href={htmlUrl} title={login}>
       <img className="img-fluid" alt={login} src={avatarUrl} />
@@ -10,7 +10,5 @@ const Contributor = ({ login, htmlUrl, avatarUrl }) => (
     </a>
   </li>
 );
-
-Contributor.propTypes = contributorProps;
 
 export default Contributor;
