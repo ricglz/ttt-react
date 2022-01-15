@@ -98,7 +98,7 @@ export function initialState(): BaseGame {
   };
 }
 
-interface FirebaseGame extends BaseGame {
+export interface FirebaseGame extends BaseGame {
   oWins: number;
   xWins: number;
   hostUid: string;

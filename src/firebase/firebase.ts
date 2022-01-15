@@ -8,8 +8,12 @@ import {
 } from 'firebase/auth';
 import {
   getDatabase,
+  push,
   ref,
+  remove,
+  update,
 } from 'firebase/database';
+import { fbInitialState, FirebaseGame } from '../functions/HelperFunctions';
 
 const app = initializeApp({
   apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
@@ -26,18 +30,20 @@ const auth = getAuth(app);
 useDeviceLanguage(auth);
 const provider = new GoogleAuthProvider();
 
-export function boardReference(gameId: string) {
-  return ref(database, `/games/${gameId}`);
-}
+export const gameReference = (gameId: string) => ref(database, `/games/${gameId}`);
+export const deleteGame = (gameId: string) => remove(gameReference(gameId));
+export const updateGame = (gameId: string, toUpdateFields: Partial<FirebaseGame>) => (
+  update(gameReference(gameId), toUpdateFields)
+);
 
-export function gamesReference() {
-  return ref(database, '/games');
-}
+export const gamesReference = ref(database, '/games');
+export const createGame = ([uid, name]: Parameters<(typeof fbInitialState)>) => (
+  push(gamesReference, fbInitialState(uid, name))
+);
 
 export function getRedirect() {
   return getRedirectResult(auth);
 }
-
 export function firebaseAuth() {
   return signInWithRedirect(auth, provider);
 }
