@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { BigBoard, CurrentBoard } from '../../functions/HelperFunctions';
 import Board from './Board';
+
+type Props = {
+  rowNum: 0 | 3 | 6,
+  boardGame: BigBoard,
+  currentBoard: CurrentBoard,
+  handleClick: () => void,
+};
 
 const BoardRow = ({
   rowNum, boardGame, currentBoard, handleClick,
-}) => (
+}: Props) => (
   <div className="game row">
     <Board
       boardNum={rowNum}
@@ -26,12 +33,5 @@ const BoardRow = ({
     />
   </div>
 );
-
-BoardRow.propTypes = {
-  rowNum: PropTypes.number.isRequired,
-  boardGame: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  currentBoard: PropTypes.number.isRequired,
-  handleClick: PropTypes.func.isRequired,
-};
 
 export default BoardRow;
