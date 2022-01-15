@@ -4,7 +4,7 @@ import ResetButton from '../Layout/ResetButton';
 
 type Props = {
   reset: () => void,
-  back: () => void,
+  back: string,
 };
 
 const ButtonsFooter = ({ reset, back }: Props) => (

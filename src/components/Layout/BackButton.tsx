@@ -1,19 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-const BackButton = ({ text, url }) => (
+type Props = {
+  text: string,
+  url: string,
+};
+
+const BackButton = ({ text, url }: Props) => (
   <div className="col">
     <Link className="btn btn-game btn-lg btn-danger" to={url}>
-      <FormattedMessage id={text} default="Back" />
+      <FormattedMessage id={text} defaultMessage="Back" />
     </Link>
   </div>
 );
-
-BackButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-};
 
 export default BackButton;
