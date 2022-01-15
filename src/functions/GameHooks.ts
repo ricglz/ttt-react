@@ -19,6 +19,7 @@ import makeMove, {
   playerMadeAMove,
   Difficulty,
 } from './Ai';
+import { Option } from '../components/Game/DifficultySelect';
 
 type SetGameFn = (game: Game) => void;
 
@@ -51,8 +52,6 @@ export function useGameHooks(game: Game, setGame: SetGameFn) {
 
   return [canClick, pvpMove, newGame];
 }
-
-type Option = { value: Difficulty };
 
 type AIHooksProps = {
   moveNumber: number,
