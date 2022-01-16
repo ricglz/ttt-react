@@ -3,19 +3,16 @@ import { IntlProvider } from 'react-intl';
 import Messages from './messages/Messages';
 import Layout from './Layout';
 
-function getDirection(locale) {
+function getDirection(locale: string) {
   return locale === 'ar' ? ['rtl', 'text-right'] : ['ltr', 'text-left'];
 }
 
 function App() {
   const [locale, setLocale] = useState('en');
 
-  const changeLocale = useCallback(
-    (newLocale) => {
-      setLocale(newLocale);
-    },
-    [],
-  );
+  const changeLocale = useCallback((newLocale) => {
+    setLocale(newLocale);
+  }, []);
 
   const [direction, klass] = getDirection(locale);
 
