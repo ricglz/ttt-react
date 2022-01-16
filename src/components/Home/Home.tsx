@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHeader } from '../Layout/FormattedText';
 import HomeButton from './HomeButton';
 
 function Home() {
@@ -7,9 +7,7 @@ function Home() {
     <div className="container text-center">
       <div className="row">
         <div className="col">
-          <FormattedMessage id="homePage.title" default="Home Page">
-            {(txt) => <h1>{txt}</h1>}
-          </FormattedMessage>
+          <FormattedHeader locale="homePage.title" defaultMessage="Home Page" />
         </div>
       </div>
       <HomeButton text="shared.sp" url="/singleplayer" />

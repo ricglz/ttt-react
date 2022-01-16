@@ -2,7 +2,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 type SharedProps = {
-  locale: string
+  locale: string,
+  defaultMessage?: string,
 };
 
 export const FormattedParagraph = ({ locale }: SharedProps) => (
@@ -11,8 +12,8 @@ export const FormattedParagraph = ({ locale }: SharedProps) => (
   </p>
 );
 
-export const FormattedHeader = ({ locale }: SharedProps) => (
-  <FormattedMessage id={locale}>
+export const FormattedHeader = ({ locale, defaultMessage }: SharedProps) => (
+  <FormattedMessage id={locale} defaultMessage={defaultMessage}>
     {(txt) => <h1>{txt}</h1>}
   </FormattedMessage>
 );
