@@ -22,21 +22,30 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "react-scripts build && firebase deploy",
-    "lint": "eslint src/*.jsx src/**/*.jsx src/**/**/*.jsx",
+    "lint": "eslint src",
     "lint-all": "yarn lint && yarn stylelint",
-    "fix-lint": "eslint --fix src/*.jsx src/**/*.jsx src/**/**/*.jsx",
+    "fix-lint": "eslint --fix src",
     "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/node": "^17.0.4",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.6.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "stylelint": "^14.0.1",
-    "stylelint-config-standard": "^24.0.0"
+    "stylelint-config-standard": "^24.0.0",
+    "typescript": "^4.5.4"
   },
   "browserslist": [
     ">0.2%",
