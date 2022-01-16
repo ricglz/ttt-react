@@ -19,7 +19,7 @@ const Tutorial = loadable(
   () => import('./components/Tutorial/Tutorial'),
 );
 
-type RenderFn = () => ReactChild;
+type RenderFn = () => ReactChild | null;
 type Props = {
   renderSinglePlayer: RenderFn,
   renderGameMenu: RenderFn,

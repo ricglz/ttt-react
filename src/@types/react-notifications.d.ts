@@ -52,7 +52,7 @@ declare module 'react-notifications' {
     priority?: boolean
   }
 
-  class NotificationManager extends EventEmitter {
+  export class NotificationManager extends EventEmitter {
     static create(creation: INotificationManagerCreate) : void;
 
     static info(message?: INotificationManagerCreate['message'], title?: INotificationManagerCreate['title'], timeOut?: INotificationManagerCreate['timeout'], onClick?: INotificationManagerCreate['onClick'], priority?: INotificationManagerCreate['priority']) : void;

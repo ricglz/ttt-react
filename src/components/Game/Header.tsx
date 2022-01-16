@@ -38,10 +38,10 @@ interface Props extends ScoresSectionProps {
 const Header = ({ xScore, oScore, ai }: Props) => (
   <div className="row">
     <div className="col-12">
-      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} default="Type of game" />
+      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} defaultMessage="Type of game" />
     </div>
     <div className="col-12">
-      <FormattedHeader2 locale="game.score" default="Score" />
+      <FormattedHeader2 locale="game.score" defaultMessage="Score" />
     </div>
     <ScoresSection xScore={xScore} oScore={oScore} />
   </div>
