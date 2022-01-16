@@ -8,7 +8,7 @@ const Login = () => (
   <div className="row h-100 justify-content-center align-items-center">
     <GoogleButton onClick={firebaseAuth} />
     <Link className="ml-5 btn btn-danger" to="/">
-      <FormattedMessage id="shared.back" default="Back" />
+      <FormattedMessage id="shared.back" defaultMessage="Back" />
     </Link>
   </div>
 );
