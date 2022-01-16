@@ -1,5 +1,5 @@
-
 declare module '@loadable/component' {
-  import { lazy, LazyExoticComponent } from "react";
+  import { lazy } from 'react';
+
   export default lazy;
 }

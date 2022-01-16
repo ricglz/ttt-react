@@ -1,5 +1,4 @@
 declare module 'octokat' {
-
   type SearchResult<T> = {
     items: T[]
   };
@@ -7,7 +6,7 @@ declare module 'octokat' {
     readonly login: string
     readonly avatarUrl: string
     readonly htmlUrl: string
-  }
+  };
   type ContributorObject = {
     fetch: () => Promise<SearchResult<RepoContributors>>
   };
@@ -17,5 +16,5 @@ declare module 'octokat' {
   export default class Octokat {
     constructor();
     repos: (user: string, repo: string) => Repos;
-  };
+  }
 }

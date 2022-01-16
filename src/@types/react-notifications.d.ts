@@ -8,7 +8,7 @@ declare module 'react-notifications' {
     INFO = 'info',
     SUCCESS = 'success',
     WARNING = 'warning',
-    ERROR = 'error'
+    ERROR = 'error',
   }
 
   enum EventType {
@@ -16,7 +16,7 @@ declare module 'react-notifications' {
     INFO = 'info',
     SUCCESS = 'success',
     WARNING = 'warning',
-    ERROR = 'error'
+    ERROR = 'error',
   }
 
   interface NotificationProps {
