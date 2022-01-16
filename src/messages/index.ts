@@ -21,7 +21,32 @@ import cs from './cs';
 import ca from './ca';
 import tr from './tr';
 
-const Messages = {
+type Message = {
+  'homePage.title': string,
+  'game.score': string,
+  'game.x-score': string,
+  'game.o-score': string,
+  'game.easy': string,
+  'game.medium': string,
+  'game.hard': string,
+  'game.placeholder': string,
+  'game.reset': string,
+  'tutorial.first': string,
+  'tutorial.second': string,
+  'tutorial.third': string,
+  'tutorial.fourth': string,
+  'tutorial.fifth': string,
+  'shared.sp': string,
+  'shared.mp': string,
+  'shared.tutorial': string,
+  'shared.back': string,
+};
+
+type Messages = {
+  [locale: string]: Message
+};
+
+const MESSAGES: Messages = {
   en,
   es,
   fr,
@@ -46,4 +71,4 @@ const Messages = {
   tr,
 };
 
-export default Messages;
+export default MESSAGES;

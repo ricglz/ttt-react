@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { IntlProvider } from 'react-intl';
-import Messages from './messages/Messages';
+import messages from './messages';
 import Layout from './Layout';
 
 function getDirection(locale: string) {
@@ -17,7 +17,7 @@ function App() {
   const [direction, klass] = getDirection(locale);
 
   return (
-    <IntlProvider locale={locale} messages={Messages[locale]}>
+    <IntlProvider locale={locale} messages={messages[locale]}>
       <div dir={direction} className={klass}>
         <Layout changeLocale={changeLocale} locale={locale} />
       </div>
