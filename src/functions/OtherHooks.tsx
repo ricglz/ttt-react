@@ -58,7 +58,7 @@ export function useUser() {
     localStorage.removeItem('user');
   }, [setUser]);
 
-  return [user, logOut];
+  return { user, logOut };
 }
 
 type UseRoomsProps = {

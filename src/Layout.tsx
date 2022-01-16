@@ -1,15 +1,16 @@
 import React from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import PropTypes from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 import loadable from '@loadable/component';
 import LanguageFooter from './components/Layout/LanguageFooter';
+
 import './css/bootstrap.css';
 import './css/home.css';
 import './css/board.css';
 import './css/fonts.css';
 import './css/everything.css';
+
 import { useUser } from './functions/OtherHooks';
 import SwitchWrapper from './SwitchWrapper';
 
@@ -23,21 +24,26 @@ const LanguagePage = loadable(
   () => import('./components/Languages/LanguagePage'),
 );
 
-function Layout({ locale, changeLocale }) {
-  const [user, logOut] = useUser();
+type Props = {
+  locale: string,
+  changeLocale: (locale: string) => void,
+};
 
-  const renderGameMenu = React.useCallback(({ history }) => (
-    <GameMenu
-      logOut={logOut}
-      user={user}
-      history={history}
-    />
+function Layout({ locale, changeLocale }: Props) {
+  const { user, logOut } = useUser();
+
+  const renderGameMenu = React.useCallback(() => (
+    user == null ? null : (
+      <GameMenu
+        logOut={logOut}
+        user={user}
+      />
+    )
   ), [logOut, user]);
-  const renderLanguage = React.useCallback(({ history }) => (
+  const renderLanguage = React.useCallback(() => (
     <LanguagePage
-      locale={locale}
+      currentLocale={locale}
       changeLocale={changeLocale}
-      history={history}
     />
   ), [changeLocale, locale]);
   const renderSinglePlayer = React.useCallback(() => <Game ai />, []);
@@ -58,10 +64,5 @@ function Layout({ locale, changeLocale }) {
     </>
   ), [user, renderGameMenu, renderSinglePlayer, renderLanguage, locale]);
 }
-
-Layout.propTypes = {
-  changeLocale: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired,
-};
 
 export default Layout;
