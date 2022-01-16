@@ -1,30 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';
 import BackButton from '../Layout/BackButton';
 import { FormattedParagraph, FormattedHeader2 } from '../Layout/FormattedText';
 
-const Image = ({ src }) => (
+type ImageProps = {
+  src: string
+};
+
+const Image = ({ src }: ImageProps) => (
   <div className="col">
     <img src={src} className="img-fluid" alt="example" />
   </div>
 );
 
-Image.propTypes = {
-  src: PropTypes.string.isRequired,
-};
-
-function renderParagraphs() {
-  const paragraphsTitles = [
-    'tutorial.first',
-    'tutorial.second',
-    'tutorial.third',
-  ];
-  return paragraphsTitles.map((title) => (
-    <FormattedParagraph key={title} locale={title} />
-  ));
-}
+const PARAGRAPHS_TITLES = [
+  'tutorial.first',
+  'tutorial.second',
+  'tutorial.third',
+];
 
 const Tutorial = () => (
   <div className="container">
@@ -34,7 +28,11 @@ const Tutorial = () => (
       </div>
     </div>
     <div className="pt-3" />
-    {renderParagraphs()}
+    {
+      PARAGRAPHS_TITLES.map((title) => (
+        <FormattedParagraph key={title} locale={title} />
+      ))
+    }
     <div className="row text-center">
       <Image src={exImage1} />
     </div>
