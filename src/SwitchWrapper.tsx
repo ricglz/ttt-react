@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactChild } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
-import { userPropType } from './constants/props';
+import type { User } from './functions/OtherHooks';
 
 const Contributors = loadable(
   () => import('./components/Contributors/Contributors'),
@@ -20,15 +19,23 @@ const Tutorial = loadable(
   () => import('./components/Tutorial/Tutorial'),
 );
 
+type RenderFn = () => ReactChild;
+type Props = {
+  renderSinglePlayer: RenderFn,
+  renderGameMenu: RenderFn,
+  renderLanguage: RenderFn,
+  user: User | null
+};
+
 const SwitchWrapper = ({
   renderSinglePlayer, renderGameMenu, renderLanguage, user,
-}) => (
+}: Props) => (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/tutorial" component={Tutorial} />
     <Route path="/singleplayer" render={renderSinglePlayer} />
     <Route path="/multiplayer" component={Game} />
-    {Object.keys(user).length === 0 ? (
+    {user == null ? (
       <Route path="/login" component={Login} />
     ) : (
       <Route path="/login" render={renderGameMenu} />
@@ -44,16 +51,5 @@ const SwitchWrapper = ({
     <Route path="/contributors" component={Contributors} />
   </Switch>
 );
-
-SwitchWrapper.propTypes = {
-  user: userPropType,
-  renderGameMenu: PropTypes.func.isRequired,
-  renderLanguage: PropTypes.func.isRequired,
-  renderSinglePlayer: PropTypes.func.isRequired,
-};
-
-SwitchWrapper.defaultProps = {
-  user: null,
-};
 
 export default SwitchWrapper;
