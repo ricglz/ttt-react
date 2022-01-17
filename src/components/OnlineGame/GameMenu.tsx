@@ -39,25 +39,23 @@ function GameMenu({ user, logOut }: Props) {
   }, [logOut, history]);
 
   return (
-    <>
-      {gameId != null ? (
-        <OnlineGame gameId={gameId} userId={uid} back={surrender} />
-      ) : (
-        <>
-          <div className="row justify-content-center">
-            <h1>Rooms</h1>
-          </div>
-          <hr />
-          <div className="row">
-            <Button text="Host new game" func={hostNewGame} />
-            <Button text="Log Out" func={handleLogOut} />
-          </div>
-          <ul className="list-group">
-            {renderGames()}
-          </ul>
-        </>
-      )}
-    </>
+    gameId != null ? (
+      <OnlineGame gameId={gameId} userId={uid} back={surrender} />
+    ) : (
+      <>
+        <div className="row justify-content-center">
+          <h1>Rooms</h1>
+        </div>
+        <hr />
+        <div className="row">
+          <Button text="Host new game" func={hostNewGame} />
+          <Button text="Log Out" func={handleLogOut} />
+        </div>
+        <ul className="list-group">
+          {renderGames()}
+        </ul>
+      </>
+    )
   );
 }
 
