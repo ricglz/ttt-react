@@ -103,21 +103,19 @@ function OnlineGame({ back, gameId, userId }: Props) {
   });
 
   return (
-    <>
-      {guestUid === '-1' ? (
-        <h1 className="text-center"> Please wait until someone enters the room </h1>
-      ) : (
-        <div className="container text-center">
-          <BigBoard
-            handleClick={handleSquareClick}
-            boardGame={boardGame}
-            currentBoard={currentBoard}
-          />
-          <hr />
-          <ButtonsFooter back={handleBack} reset={newGame} />
-        </div>
-      )}
-    </>
+    guestUid === '-1' ? (
+      <h1 className="text-center"> Please wait until someone enters the room </h1>
+    ) : (
+      <div className="container text-center">
+        <BigBoard
+          handleClick={handleSquareClick}
+          boardGame={boardGame}
+          currentBoard={currentBoard}
+        />
+        <hr />
+        <ButtonsFooter back={handleBack} reset={newGame} />
+      </div>
+    )
   );
 }
 
