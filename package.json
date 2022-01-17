@@ -52,5 +52,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "jest": {
+    "coveragePathIgnorePatterns": ["/node_modules/", "src/messages", "src/index.js", "src/registerServiceWorker.js"]
+  }
 }
