@@ -2,7 +2,7 @@ import { Cell, isOccupied, } from "./HelperFunctions";
 import type { GeneralBoardIndex, Board, NumberBoard } from "./HelperFunctions";
 import { Difficulty } from "../@types/general";
 
-type Args = {
+type AiArgs = {
   pos: GeneralBoardIndex,
   currentDifficulty: Difficulty,
   boardCopy: Board,
@@ -10,7 +10,7 @@ type Args = {
   amountOccupied: NumberBoard,
   avoidBox: NumberBoard,
 }
-type ArgsWithoutDifficulty = Omit<Args, 'currentDifficulty'>
+type ArgsWithoutDifficulty = Omit<AiArgs, 'currentDifficulty'>
 
 function someOneCouldWin(value1: Cell, value2: Cell, player = false) {
   const hopedValue = player ? Cell.X : Cell.O;
@@ -116,12 +116,12 @@ class AiAction {
   pos: GeneralBoardIndex;
   value: number;
 
-  constructor(args: Args) {
+  constructor(args: AiArgs) {
     this.pos = args.pos;
     this.value = this.getValue(args);
   }
 
-  getValue = ({currentDifficulty, ...rest}: Args) => {
+  getValue = ({currentDifficulty, ...rest}: AiArgs) => {
     let value = positiveValues(rest);
     if (currentDifficulty === Difficulty.HARD) value -= negativeValues(rest);
     return value;

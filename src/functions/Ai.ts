@@ -1,14 +1,23 @@
-import { Difficulty } from '../@types/general';
 import AiAction from './AiAction';
-import type { Board, GeneralBoardIndex } from './HelperFunctions';
+import type { Board, GeneralBoardIndex, NumberBoard } from './HelperFunctions';
+import { Difficulty } from '../@types/general';
 import { isOccupied, emptyArray, Cell } from './HelperFunctions';
 
-// TODO: Create a class to stop using this things
-let boardCopy: Board | null = null;
-let currentBoard: GeneralBoardIndex = 0;
-let currentDifficulty: Difficulty = Difficulty.EASY;
-let amountOccupied = emptyArray();
-let avoidBox = emptyArray();
+function areTwoValue(value: Cell) {
+  if (value === Cell.X) return 90;
+  return 40;
+}
+
+interface Args {
+  board: Board,
+  currentBoard: GeneralBoardIndex,
+  currentDifficulty: Difficulty,
+}
+
+interface AiProperties extends Args{
+  amountOccupied: NumberBoard,
+  avoidBox: NumberBoard,
+}
 
 // Checks which are the more factible actions to play
 function different(availableMoves: AiAction[]) {
@@ -25,89 +34,100 @@ function deleteElements(availableMoves: AiAction[]) {
   return availableMoves;
 }
 
-function getAvailableMoves() {
+function getAvailableMoves(props: AiProperties) {
   const availableMoves: AiAction[] = [];
-  if (boardCopy == null) {
-    return [];
-  }
-  boardCopy.forEach((element, index) => {
-    if (isOccupied(element) || boardCopy == null) return;
-    const args = {
-      pos: index as GeneralBoardIndex,
-      currentDifficulty,
-      boardCopy,
-      currentBoard,
-      amountOccupied,
-      avoidBox,
-    };
-    availableMoves.push(new AiAction(args));
+  props.board.forEach((element, index) => {
+    if (isOccupied(element)) return;
+    const pos = index as GeneralBoardIndex;
+    availableMoves.push(new AiAction({ pos, boardCopy: props.board, ...props }));
   });
   return availableMoves;
 }
 
-function areTwoValue(value: Cell) {
-  if (value === Cell.X) return 90;
-  return 40;
-}
+class Ai {
+  board: Board;
 
-function areTwo(pos1: GeneralBoardIndex, pos2: GeneralBoardIndex, pos3: GeneralBoardIndex) {
-  if (boardCopy == null) {
-    return 0;
-  }
-  const value1 = boardCopy[pos1];
-  const value2 = boardCopy[pos2];
-  const value3 = boardCopy[pos3];
-  if (
-    (value1 === value2 && isOccupied(value1) && !isOccupied(value3))
-    || (value1 === value3 && isOccupied(value1) && !isOccupied(value2))
-  ) {
-    return areTwoValue(value1);
-  }
-  if (value2 === value3 && isOccupied(value2) && !isOccupied(value1)) {
-    return areTwoValue(value2);
-  }
-  return 0;
-}
+  currentBoard: GeneralBoardIndex;
 
-function areTwoInTheColumn() {
-  return areTwo(0, 3, 6) + areTwo(1, 4, 7) + areTwo(2, 5, 8);
-}
+  currentDifficulty: Difficulty;
 
-function areTwoInTheRow() {
-  return areTwo(0, 1, 2) + areTwo(3, 4, 5) + areTwo(6, 7, 8);
-}
-
-function areTwoInTheDiagonal() {
-  return areTwo(0, 4, 8) + areTwo(2, 4, 6);
-}
-
-function areTwoInTheBoard() {
-  return areTwoInTheColumn() + areTwoInTheDiagonal() + areTwoInTheRow();
-}
-
-export function playerMadeAMove(boardId: GeneralBoardIndex, board: Board) {
-  amountOccupied[boardId] += 3;
-  boardCopy = board;
-  avoidBox[boardId] = areTwoInTheBoard();
-}
-
-export function aiMadeAMove(boardId: GeneralBoardIndex, board: Board) {
-  amountOccupied[boardId] += 1;
-  boardCopy = board;
-  avoidBox[boardId] = areTwoInTheBoard();
-}
-
-export function cleanVariables() {
   amountOccupied = emptyArray();
+
   avoidBox = emptyArray();
-}
-export default function makeMove(board: Board, boardId: GeneralBoardIndex, difficulty: Difficulty) {
-  boardCopy = board;
-  currentBoard = boardId;
-  currentDifficulty = difficulty;
-  let availableMoves = getAvailableMoves();
-  if (currentDifficulty >= 2) {
-    availableMoves = deleteElements(availableMoves);
+
+  constructor({ board, currentBoard, currentDifficulty }: Args) {
+    this.board = board;
+    this.currentDifficulty = currentDifficulty;
+    this.currentBoard = currentBoard;
   }
-  return availableMoves[Math.floor(Math.random() * availableMoves.length)].pos;
+
+  setVariables = ({ board, currentBoard, currentDifficulty }: Args) => {
+    this.board = board;
+    this.currentDifficulty = currentDifficulty;
+    this.currentBoard = currentBoard;
+  };
+
+  getProperties = (): AiProperties => ({
+    amountOccupied: this.amountOccupied,
+    avoidBox: this.avoidBox,
+    board: this.board,
+    currentBoard: this.currentBoard,
+    currentDifficulty: this.currentDifficulty,
+  });
+
+  areTwo = (pos1: GeneralBoardIndex, pos2: GeneralBoardIndex, pos3: GeneralBoardIndex) => {
+    const value1 = this.board[pos1];
+    const value2 = this.board[pos2];
+    const value3 = this.board[pos3];
+
+    const firstIsOccupied = isOccupied(value1);
+    const secondIsOccupied = isOccupied(value2);
+
+    if ((value1 === value2 && firstIsOccupied && !isOccupied(value3))
+      || (value1 === value3 && firstIsOccupied && !secondIsOccupied)) {
+      return areTwoValue(value1);
+    }
+    if (value2 === value3 && secondIsOccupied && !firstIsOccupied) {
+      return areTwoValue(value2);
+    }
+    return 0;
+  };
+
+  areTwoInTheColumn = () => this.areTwo(0, 3, 6) + this.areTwo(1, 4, 7) + this.areTwo(2, 5, 8);
+
+  areTwoInTheRow = () => this.areTwo(0, 1, 2) + this.areTwo(3, 4, 5) + this.areTwo(6, 7, 8);
+
+  areTwoInTheDiagonal = () => this.areTwo(0, 4, 8) + this.areTwo(2, 4, 6);
+
+  areTwoInTheBoard = () => (
+    this.areTwoInTheColumn() + this.areTwoInTheDiagonal() + this.areTwoInTheRow()
+  );
+
+  playerMadeAMove = (boardId: GeneralBoardIndex, board: Board) => {
+    this.amountOccupied[boardId] += 3;
+    this.board = board;
+    this.avoidBox[boardId] = this.areTwoInTheBoard();
+  };
+
+  aiMadeAMove = (board: Board) => {
+    this.amountOccupied[this.currentBoard] += 1;
+    this.board = board;
+  };
+
+  cleanVariables = () => {
+    this.amountOccupied = emptyArray();
+    this.avoidBox = emptyArray();
+  };
+
+  makeMove = (args: Args) => {
+    this.setVariables(args);
+    const properties = this.getProperties();
+    let availableMoves = getAvailableMoves(properties);
+    if (this.currentDifficulty >= 2) {
+      availableMoves = deleteElements(availableMoves);
+    }
+    return availableMoves[Math.floor(Math.random() * availableMoves.length)].pos;
+  };
 }
+
+export default Ai;
