@@ -9,14 +9,17 @@ import {
 } from './HelperFunctions';
 import { Cell } from '../@types/general_enums';
 
-import type { BigBoard, Board, Game, GeneralBoardIndex } from '../@types/general';
+import type {
+  BigBoard, Board, Game, GeneralBoardIndex,
+} from '../@types/general';
 import type { Option } from '../components/Game/DifficultySelect';
 import type { Player } from '../@types/general_enums';
+import Ai from './Ai';
 
 type SetGameFn = (game: Game) => void;
 
 // TODO: Check to modify all the hooks in this file to be a reducer
-export function useGameHooks(game: Game, setGame: SetGameFn) {
+export function useGameHooks(game: Game, setGame: SetGameFn, ai: Ai) {
   const {
     boardGame, currentBoard, currentPlayer,
   } = game;
@@ -38,7 +41,7 @@ export function useGameHooks(game: Game, setGame: SetGameFn) {
   }, [setGame, game, currentPlayer]);
 
   const newGame = React.useCallback(() => {
-    cleanVariables();
+    ai.cleanVariables();
     setGame({ ...game, ...initialState() });
   }, [setGame, game]);
 
@@ -52,7 +55,8 @@ type AIHooksProps = {
   changeScore: (winner: Cell) => void,
   newGame: () => void,
   setSelectedOption: (option: Option) => void,
-  game: Game
+  game: Game,
+  ai: Ai
 };
 
 export function useAIHooks({
@@ -63,11 +67,12 @@ export function useAIHooks({
   newGame,
   setSelectedOption,
   game,
+  ai,
 }: AIHooksProps) {
   const aiMove = React.useCallback((boardCopy, id, newMoveNumber) => {
     const board = boardCopy;
-    const difficulty = selectedOption === null ? 1 : selectedOption.value;
-    const move = makeMove(board[id], id, difficulty);
+    const currentDifficulty = selectedOption === null ? 1 : selectedOption.value;
+    const move = ai.makeMove({ board, currentBoard: id, currentDifficulty });
     board[id][move] = -1;
     const winner = theresAWinner(board[id]);
     if (winner) {
@@ -75,7 +80,7 @@ export function useAIHooks({
       changeScore(winner);
       newGame();
     } else {
-      aiMadeAMove(id, board[id]);
+      ai.aiMadeAMove(board[id]);
       setGame({
         ...game,
         boardGame: board,
@@ -142,12 +147,13 @@ export function useAfterMoveOnline({
 }
 
 interface AfterMoveProps extends AfterMoveOnlineProps {
-  ai: boolean,
+  ai: Ai,
   aiMove: (board: BigBoard, id: number, newMoveNumber: number) => void,
+  isAi: boolean,
 }
 
 export function useAfterMove({
-  ai, aiMove, changeScore, newGame, pvpMove,
+  ai, aiMove, changeScore, newGame, pvpMove, isAi,
 }: AfterMoveProps) {
   const afterMove = React.useCallback(({
     winner, newMoveNumber, board, boardCopy, id,
@@ -158,8 +164,8 @@ export function useAfterMove({
       newGame();
     } else if (newMoveNumber === 81) {
       newGame();
-    } else if (ai) {
-      playerMadeAMove(board, boardCopy[board]);
+    } else if (isAi) {
+      ai.playerMadeAMove(board, boardCopy[board]);
       aiMove(boardCopy, id, newMoveNumber);
     } else {
       pvpMove(boardCopy, newMoveNumber, id);

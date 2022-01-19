@@ -114,6 +114,7 @@ class Ai {
   aiMadeAMove = (board: Board) => {
     this.amountOccupied[this.currentBoard] += 1;
     this.board = board;
+    this.avoidBox[this.currentBoard] = this.areTwoInTheBoard();
   };
 
   cleanVariables = () => {
