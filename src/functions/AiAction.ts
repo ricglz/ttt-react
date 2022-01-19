@@ -1,6 +1,6 @@
-import { Cell, isOccupied, } from "./HelperFunctions";
-import type { GeneralBoardIndex, Board, NumberBoard } from "./HelperFunctions";
-import { Difficulty } from "../@types/general";
+import { Cell, isOccupied } from './HelperFunctions';
+import type { GeneralBoardIndex, Board, NumberBoard } from './HelperFunctions';
+import { Difficulty } from '../@types/general';
 
 type AiArgs = {
   pos: GeneralBoardIndex,
@@ -9,8 +9,8 @@ type AiArgs = {
   currentBoard: GeneralBoardIndex,
   amountOccupied: NumberBoard,
   avoidBox: NumberBoard,
-}
-type ArgsWithoutDifficulty = Omit<AiArgs, 'currentDifficulty'>
+};
+type ArgsWithoutDifficulty = Omit<AiArgs, 'currentDifficulty'>;
 
 function someOneCouldWin(value1: Cell, value2: Cell, player = false) {
   const hopedValue = player ? Cell.X : Cell.O;
@@ -93,7 +93,7 @@ function extraValueColumn(div: number, mod: number, args: ArgsWithoutDifficulty)
 }
 
 function positiveValues(args: ArgsWithoutDifficulty) {
-  const {pos} = args;
+  const { pos } = args;
   const div = Math.floor(pos / 3);
   const mod = (pos % 3);
   return (
@@ -103,30 +103,30 @@ function positiveValues(args: ArgsWithoutDifficulty) {
   );
 }
 
-const recursiveMovement = ({pos, currentBoard}: ArgsWithoutDifficulty) => (
+const recursiveMovement = ({ pos, currentBoard }: ArgsWithoutDifficulty) => (
   pos === currentBoard ? 20 : 0
 );
 
 function negativeValues(args: ArgsWithoutDifficulty) {
-  const {amountOccupied, avoidBox, pos} = args;
+  const { amountOccupied, avoidBox, pos } = args;
   return recursiveMovement(args) + amountOccupied[pos] + avoidBox[pos];
+}
+
+function getValue({ currentDifficulty, ...rest }: AiArgs) {
+  let value = positiveValues(rest);
+  if (currentDifficulty === Difficulty.HARD) value -= negativeValues(rest);
+  return value;
 }
 
 class AiAction {
   pos: GeneralBoardIndex;
+
   value: number;
 
   constructor(args: AiArgs) {
     this.pos = args.pos;
-    this.value = this.getValue(args);
+    this.value = getValue(args);
   }
-
-  getValue = ({currentDifficulty, ...rest}: AiArgs) => {
-    let value = positiveValues(rest);
-    if (currentDifficulty === Difficulty.HARD) value -= negativeValues(rest);
-    return value;
-  }
-
 }
 
 export default AiAction;

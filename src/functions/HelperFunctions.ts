@@ -1,21 +1,8 @@
 import { NotificationManager } from 'react-notifications';
-
-export const enum Cell {
-  X = 1,
-  O = -1,
-  NONE = 0,
-}
-export const enum Player {
-  PLAYER_1 = 'X',
-  PLAYER_2 = 'O',
-}
-
-type GeneralBoard<T> = [T, T, T, T, T, T, T, T, T];
-export type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
-export type NumberBoard = GeneralBoard<number>;
-export type Board = GeneralBoard<Cell>;
-export type BigBoard = GeneralBoard<Board>;
+import type {
+  BigBoard, Board, GeneralBoardIndex, NumberBoard,
+} from '../@types/general';
+import { Cell, Player } from '../@types/general_enums';
 
 export const getNextPlayer = (player: Player) => (
   player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1
