@@ -13,6 +13,7 @@ export const enum Player {
 type GeneralBoard<T> = [T, T, T, T, T, T, T, T, T];
 export type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
+export type NumberBoard = GeneralBoard<number>;
 export type Board = GeneralBoard<Cell>;
 export type BigBoard = GeneralBoard<Board>;
 
@@ -33,7 +34,7 @@ export function alertError(err: Error) {
   NotificationManager.error(err.message);
 }
 
-export function emptyArray(): GeneralBoard<number> {
+export function emptyArray(): NumberBoard {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
