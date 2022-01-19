@@ -2,7 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import type { ActionMeta, SingleValue } from 'react-select';
 import { FormattedMessage } from 'react-intl';
-import { Difficulty } from '../../functions/Ai';
+
+import type { Difficulty } from '../../@types/general_enums';
 
 export type Option = {
   label: object,

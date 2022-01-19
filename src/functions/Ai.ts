@@ -1,12 +1,9 @@
-import AiAction from './AiAction';
-import type { Board, GeneralBoardIndex, NumberBoard } from './HelperFunctions';
-import { Difficulty } from '../@types/general';
-import { isOccupied, emptyArray, Cell } from './HelperFunctions';
+import type { Board, GeneralBoardIndex, NumberBoard } from '../@types/general';
+import type { Difficulty } from '../@types/general_enums';
 
-function areTwoValue(value: Cell) {
-  if (value === Cell.X) return 90;
-  return 40;
-}
+import AiAction from './AiAction';
+import { Cell } from '../@types/general_enums';
+import { isOccupied, emptyArray } from './HelperFunctions';
 
 interface Args {
   board: Board,
@@ -17,6 +14,11 @@ interface Args {
 interface AiProperties extends Args{
   amountOccupied: NumberBoard,
   avoidBox: NumberBoard,
+}
+
+function areTwoValue(value: Cell) {
+  if (value === Cell.X) return 90;
+  return 40;
 }
 
 // Checks which are the more factible actions to play

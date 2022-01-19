@@ -4,21 +4,14 @@ import {
   theresAWinner,
   initialState,
   alertWinner,
-  Game,
-  Player,
-  Cell,
-  Board,
-  GeneralBoardIndex,
-  BigBoard,
   getNextPlayer,
   getPlayerCellValue,
 } from './HelperFunctions';
-import makeMove, {
-  cleanVariables,
-  aiMadeAMove,
-  playerMadeAMove,
-} from './Ai';
-import { Option } from '../components/Game/DifficultySelect';
+import { Cell } from '../@types/general_enums';
+
+import type { BigBoard, Board, Game, GeneralBoardIndex } from '../@types/general';
+import type { Option } from '../components/Game/DifficultySelect';
+import type { Player } from '../@types/general_enums';
 
 type SetGameFn = (game: Game) => void;
 

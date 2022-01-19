@@ -1,6 +1,6 @@
 import { NotificationManager } from 'react-notifications';
 import type {
-  BigBoard, Board, GeneralBoardIndex, NumberBoard,
+  BigBoard, Board, GeneralBoardIndex, NumberBoard, BaseGame, FirebaseGame,
 } from '../@types/general';
 import { Cell, Player } from '../@types/general_enums';
 
@@ -78,15 +78,6 @@ export function newBoard(): BigBoard {
   ];
 }
 
-export type CurrentBoard = GeneralBoardIndex | -1;
-
-interface BaseGame {
-  boardGame: BigBoard;
-  currentPlayer: Player;
-  moveNumber: number;
-  currentBoard: CurrentBoard;
-}
-
 export function initialState(): BaseGame {
   return {
     boardGame: newBoard(),
@@ -94,16 +85,6 @@ export function initialState(): BaseGame {
     moveNumber: 0,
     currentBoard: -1,
   };
-}
-
-export interface FirebaseGame extends BaseGame {
-  oWins: number;
-  xWins: number;
-  hostUid: string;
-  hostName: string;
-  guestUid: string;
-  nextPlayerUid: string;
-  timestamp: number;
 }
 
 export function fbInitialState(hostUid: string, hostName: string): FirebaseGame {
@@ -118,5 +99,3 @@ export function fbInitialState(hostUid: string, hostName: string): FirebaseGame 
     timestamp: Date.now(),
   };
 }
-
-export type Game = BaseGame | FirebaseGame;

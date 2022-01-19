@@ -1,6 +1,6 @@
-import { Cell, isOccupied } from './HelperFunctions';
-import type { GeneralBoardIndex, Board, NumberBoard } from './HelperFunctions';
-import { Difficulty } from '../@types/general';
+import { isOccupied } from './HelperFunctions';
+import type { GeneralBoardIndex, Board, NumberBoard } from '../@types/general';
+import { Cell, Difficulty } from '../@types/general_enums';
 
 type AiArgs = {
   pos: GeneralBoardIndex,
