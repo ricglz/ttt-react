@@ -15,7 +15,8 @@ import {
   remove,
   update,
 } from 'firebase/database';
-import { alertError, fbInitialState, FirebaseGame } from '../functions/HelperFunctions';
+import type { FirebaseGame } from '../@types/general';
+import { alertError, fbInitialState } from '../functions/HelperFunctions';
 
 const app = initializeApp({
   apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',

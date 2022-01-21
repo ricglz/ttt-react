@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type { BigBoard, GeneralBoardIndex } from '../../functions/HelperFunctions';
+import type { BigBoard, GeneralBoardIndex } from '../../@types/general';
 import type { BoardProps } from './Board';
 
-import { Player, Cell as CellEnum } from '../../functions/HelperFunctions';
+import { Player, Cell as CellEnum } from '../../@types/general_enums';
 
 type Args = {
   boardGame: BigBoard,

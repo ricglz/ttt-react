@@ -2,7 +2,6 @@ import React from 'react';
 
 import BigBoard from '../Board/BigBoard';
 import {
-  FirebaseGame,
   fbInitialState,
   getNextPlayer,
   initialState,
@@ -12,6 +11,7 @@ import { readGame, updateGame } from '../../firebase/firebase';
 import ResetButton from '../Layout/ResetButton';
 import DefaultButton from '../Layout/DefaultButton';
 import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
+import type { FirebaseGame } from '../../@types/general';
 
 type ButtonsFooterProps = {
   reset: () => void,
