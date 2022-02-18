@@ -17,6 +17,7 @@ type ChildrenComponentProps = {
 
 type Props = {
   ChildrenComponent: React.FC<ChildrenComponentProps>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RouterComponent?: any;
 };
 
