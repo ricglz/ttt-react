@@ -1,0 +1,1221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="game row justify-content-center"
+>
+  <div
+    className="col-9 col-sm-8 col-md-7 col-lg-6 col-xl-6"
+  >
+    <div
+      className="game row"
+    >
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="game row"
+    >
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="game row"
+    >
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="col-4 big-box"
+      >
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+        <div
+          className="game row cell-row"
+        >
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+          <div
+            className="col-4 box"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            <p
+              className=""
+            >
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
