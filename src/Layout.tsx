@@ -44,7 +44,7 @@ function Layout({ locale, changeLocale }: Props) {
       changeLocale={changeLocale}
     />
   ), [changeLocale, locale]);
-  const renderSinglePlayer = React.useCallback(() => <Game ai />, []);
+  const renderSinglePlayer = React.useCallback(() => <Game isAi />, []);
   return React.useMemo(() => (
     <>
       <SwitchWrapper

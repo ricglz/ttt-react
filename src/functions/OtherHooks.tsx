@@ -5,7 +5,6 @@ import { onValue } from 'firebase/database';
 import Room from '../components/OnlineGame/Room';
 import {
   alertError,
-  FirebaseGame,
   initialState,
 } from './HelperFunctions';
 import {
@@ -15,6 +14,7 @@ import {
   updateGame,
   createGame,
 } from '../firebase/firebase';
+import type { FirebaseGame } from '../@types/general';
 
 export type User = {
   email: string,

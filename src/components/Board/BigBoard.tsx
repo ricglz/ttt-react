@@ -1,5 +1,5 @@
 import React from 'react';
-import type { BigBoard as BigBoardType, CurrentBoard } from '../../functions/HelperFunctions';
+import type { BigBoard as BigBoardType, CurrentBoard } from '../../@types/general';
 import BoardRow from './BoardRow';
 
 export interface BigBoardProps {

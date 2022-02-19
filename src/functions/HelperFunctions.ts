@@ -1,20 +1,8 @@
 import { NotificationManager } from 'react-notifications';
-
-export const enum Cell {
-  X = 1,
-  O = -1,
-  NONE = 0,
-}
-export const enum Player {
-  PLAYER_1 = 'X',
-  PLAYER_2 = 'O',
-}
-
-type GeneralBoard<T> = [T, T, T, T, T, T, T, T, T];
-export type GeneralBoardIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
-export type Board = GeneralBoard<Cell>;
-export type BigBoard = GeneralBoard<Board>;
+import type {
+  BigBoard, Board, GeneralBoardIndex, NumberBoard, BaseGame, FirebaseGame,
+} from '../@types/general';
+import { Cell, Player } from '../@types/general_enums';
 
 export const getNextPlayer = (player: Player) => (
   player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1
@@ -33,7 +21,7 @@ export function alertError(err: Error) {
   NotificationManager.error(err.message);
 }
 
-export function emptyArray(): GeneralBoard<number> {
+export function emptyArray(): NumberBoard {
   return [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
@@ -90,15 +78,6 @@ export function newBoard(): BigBoard {
   ];
 }
 
-export type CurrentBoard = GeneralBoardIndex | -1;
-
-interface BaseGame {
-  boardGame: BigBoard;
-  currentPlayer: Player;
-  moveNumber: number;
-  currentBoard: CurrentBoard;
-}
-
 export function initialState(): BaseGame {
   return {
     boardGame: newBoard(),
@@ -106,16 +85,6 @@ export function initialState(): BaseGame {
     moveNumber: 0,
     currentBoard: -1,
   };
-}
-
-export interface FirebaseGame extends BaseGame {
-  oWins: number;
-  xWins: number;
-  hostUid: string;
-  hostName: string;
-  guestUid: string;
-  nextPlayerUid: string;
-  timestamp: number;
 }
 
 export function fbInitialState(hostUid: string, hostName: string): FirebaseGame {
@@ -130,5 +99,3 @@ export function fbInitialState(hostUid: string, hostName: string): FirebaseGame 
     timestamp: Date.now(),
   };
 }
-
-export type Game = BaseGame | FirebaseGame;

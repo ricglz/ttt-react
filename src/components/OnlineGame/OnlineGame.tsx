@@ -2,7 +2,6 @@ import React from 'react';
 
 import BigBoard from '../Board/BigBoard';
 import {
-  FirebaseGame,
   fbInitialState,
   getNextPlayer,
   initialState,
@@ -12,6 +11,7 @@ import { readGame, updateGame } from '../../firebase/firebase';
 import ResetButton from '../Layout/ResetButton';
 import DefaultButton from '../Layout/DefaultButton';
 import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
+import type { FirebaseGame } from '../../@types/general';
 
 type ButtonsFooterProps = {
   reset: () => void,
@@ -103,21 +103,19 @@ function OnlineGame({ back, gameId, userId }: Props) {
   });
 
   return (
-    <>
-      {guestUid === '-1' ? (
-        <h1 className="text-center"> Please wait until someone enters the room </h1>
-      ) : (
-        <div className="container text-center">
-          <BigBoard
-            handleClick={handleSquareClick}
-            boardGame={boardGame}
-            currentBoard={currentBoard}
-          />
-          <hr />
-          <ButtonsFooter back={handleBack} reset={newGame} />
-        </div>
-      )}
-    </>
+    guestUid === '-1' ? (
+      <h1 className="text-center"> Please wait until someone enters the room </h1>
+    ) : (
+      <div className="container text-center">
+        <BigBoard
+          handleClick={handleSquareClick}
+          boardGame={boardGame}
+          currentBoard={currentBoard}
+        />
+        <hr />
+        <ButtonsFooter back={handleBack} reset={newGame} />
+      </div>
+    )
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { GeneralBoardIndex } from '../../functions/HelperFunctions';
+import type { GeneralBoardIndex } from '../../@types/general';
 import type { BigBoardProps } from './BigBoard';
 import Board from './Board';
 
