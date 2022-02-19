@@ -1,7 +1,5 @@
 import React from 'react';
-import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import { BrowserRouter as Router } from 'react-router-dom';
 import loadable from '@loadable/component';
 import LanguageFooter from './components/Layout/LanguageFooter';
 
@@ -49,18 +47,13 @@ function Layout({ locale, changeLocale }: Props) {
   const renderSinglePlayer = React.useCallback(() => <Game isAi />, []);
   return React.useMemo(() => (
     <>
-      <Router>
-        <>
-          <SwitchWrapper
-            user={user}
-            renderGameMenu={renderGameMenu}
-            renderSinglePlayer={renderSinglePlayer}
-            renderLanguage={renderLanguage}
-          />
-          <LanguageFooter locale={locale} />
-        </>
-      </Router>
-      <NotificationContainer />
+      <SwitchWrapper
+        user={user}
+        renderGameMenu={renderGameMenu}
+        renderSinglePlayer={renderSinglePlayer}
+        renderLanguage={renderLanguage}
+      />
+      <LanguageFooter locale={locale} />
     </>
   ), [user, renderGameMenu, renderSinglePlayer, renderLanguage, locale]);
 }
