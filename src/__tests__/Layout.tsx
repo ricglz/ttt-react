@@ -9,9 +9,9 @@ jest.mock('../firebase/firebase', () => {
   return {
     __esModule: true,
     ...originalModule,
-    getRedirect: jest.fn(() => null)
-  }
-})
+    getRedirect: jest.fn(() => null),
+  };
+});
 
 function Component() {
   return (
