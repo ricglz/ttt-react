@@ -17,11 +17,13 @@ type ChildrenComponentProps = {
 
 type Props = {
   ChildrenComponent: React.FC<ChildrenComponentProps>;
+  children?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RouterComponent?: any;
 };
 
 export default function ContextsProvider({
+  children,
   ChildrenComponent,
   RouterComponent = Router,
 }: Props) {
@@ -38,6 +40,7 @@ export default function ContextsProvider({
       <div dir={direction} className={klass}>
         <RouterComponent>
           <ChildrenComponent changeLocale={changeLocale} locale={locale} />
+          {children}
         </RouterComponent>
         <NotificationContainer />
       </div>

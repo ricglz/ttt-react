@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import loadable from '@loadable/component';
 
-import OnlineGame from './OnlineGame';
 import { useRooms, useGameFlow, User } from '../../functions/OtherHooks';
+
+const OnlineGame = loadable(() => import('./OnlineGame'));
 
 type ButtonProps = {
   text: string,

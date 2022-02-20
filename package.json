@@ -60,7 +60,7 @@
         "start": "react-scripts start",
         "stylelint": "stylelint src/css/*.css",
         "stylelint-fix": "stylelint --fix src/*.css src/**/*.css",
-        "test": "react-scripts test --env=node"
+        "test": "react-scripts test --env=jsdom"
     },
     "version": "0.1.0"
 }

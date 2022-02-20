@@ -1,0 +1,323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="text-left"
+  dir="ltr"
+>
+  <div
+    className="container text-center"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <h1>
+          Home Page
+        </h1>
+      </div>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/singleplayer"
+        onClick={[Function]}
+      >
+        Single Player
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/multiplayer"
+        onClick={[Function]}
+      >
+        Local Multiplayer
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/online"
+        onClick={[Function]}
+      >
+        <span>
+          Online
+        </span>
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/tutorial"
+        onClick={[Function]}
+      >
+        How to play
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/contributors"
+        onClick={[Function]}
+      >
+        <span>
+          Contributors
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="row justify-content-center mt-5"
+  >
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button current-locale"
+        onClick={[Function]}
+        type="button"
+      >
+        en
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        es
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        fr
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        pt
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        de
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        it
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        hi
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        mr
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        ko
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        ja
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        da
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        sr
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        id
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        uk
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        ru
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        sv
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        zh
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        ar
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        ca
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        cs
+      </button>
+    </div>
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <button
+        className="btn w-100 locale-button"
+        onClick={[Function]}
+        type="button"
+      >
+        tr
+      </button>
+    </div>
+  </div>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <div />
+  </div>
+</div>
+`;

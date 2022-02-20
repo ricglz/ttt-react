@@ -12,10 +12,10 @@ import {
 import Ai from '../../functions/Ai';
 
 type Props = {
-  isAi: boolean
+  isAi?: boolean
 };
 
-function Game({ isAi }: Props) {
+export default function Game({ isAi = true }: Props) {
   const [game, setGame] = React.useState(initialState());
   const [selectedOption, setSelectedOption] = React.useState<Option | null>(null);
   const { oWins, xWins, changeScore } = useScore();
@@ -63,5 +63,3 @@ function Game({ isAi }: Props) {
     </div>
   );
 }
-
-export default Game;
