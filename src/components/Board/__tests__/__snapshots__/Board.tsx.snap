@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Board currentBoard !== boardNum 1`] = `
+exports[`Board currentBoard value currentBoard !== boardNum 1`] = `
 <div
   className="col-4 big-box grey-bg"
 >
@@ -136,7 +136,7 @@ exports[`Board currentBoard !== boardNum 1`] = `
 </div>
 `;
 
-exports[`Board currentBoard === -1 1`] = `
+exports[`Board currentBoard value currentBoard === -1 1`] = `
 <div
   className="col-4 big-box"
 >
@@ -272,7 +272,7 @@ exports[`Board currentBoard === -1 1`] = `
 </div>
 `;
 
-exports[`Board currentBoard === boardNum 1`] = `
+exports[`Board currentBoard value currentBoard === boardNum 1`] = `
 <div
   className="col-4 big-box"
 >

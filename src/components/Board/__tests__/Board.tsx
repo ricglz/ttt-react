@@ -22,15 +22,17 @@ describe('Board', () => {
     expect(tree).toMatchSnapshot();
   })
 
-  test('currentBoard === -1', () => {
-    currentBoard = -1;
-  });
+  describe('currentBoard value', () => {
+    test('currentBoard === -1', () => {
+      currentBoard = -1;
+    });
 
-  test('currentBoard === boardNum', () => {
-    currentBoard = boardNum;
-  });
+    test('currentBoard === boardNum', () => {
+      currentBoard = boardNum;
+    });
 
-  test('currentBoard !== boardNum', () => {
-    currentBoard = boardNum + 1 as CurrentBoard;
+    test('currentBoard !== boardNum', () => {
+      currentBoard = boardNum + 1 as CurrentBoard;
+    });
   });
 })
