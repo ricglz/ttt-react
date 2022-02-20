@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import type { BigBoard as BigBoardType, CurrentBoard } from '../../../@types/general';
-import { emptyArray } from '../../../functions/HelperFunctions';
+import type { CurrentBoard } from '../../../@types/general';
+import { newBoard } from '../../../functions/HelperFunctions';
 import Board from '../Board';
 
 describe('Board', () => {
@@ -9,8 +9,7 @@ describe('Board', () => {
   let currentBoard: CurrentBoard;
 
   afterEach(() => {
-    const arr = emptyArray();
-    const boardGame: BigBoardType = [arr, arr, arr, arr, arr, arr, arr, arr, arr];
+    const boardGame = newBoard();
     const component = (
       <Board
         boardNum={boardNum}

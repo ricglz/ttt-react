@@ -1,12 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import type { BigBoard as BigBoardType } from '../../../@types/general';
-import { emptyArray } from '../../../functions/HelperFunctions';
+import { newBoard } from '../../../functions/HelperFunctions';
 import BigBoard from '../BigBoard';
 
 it('renders without crashing', () => {
-  const arr = emptyArray();
-  const boardGame: BigBoardType = [arr, arr, arr, arr, arr, arr, arr, arr, arr];
+  const boardGame = newBoard();
   const component = (
     <BigBoard
       boardGame={boardGame}
