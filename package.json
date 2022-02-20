@@ -56,7 +56,7 @@
         "eject": "react-scripts eject",
         "fix-lint": "eslint --fix src",
         "lint": "eslint src",
-        "lint-all": "yarn lint && yarn stylelint",
+        "lint-all": "tsc --noEmit && yarn lint && yarn stylelint",
         "start": "react-scripts start",
         "stylelint": "stylelint src/css/*.css",
         "stylelint-fix": "stylelint --fix src/*.css src/**/*.css",

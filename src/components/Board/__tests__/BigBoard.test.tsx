@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { BigBoard as BigBoardType, emptyArray } from '../../../functions/HelperFunctions';
+import type { BigBoard as BigBoardType } from '../../../@types/general';
+import { emptyArray } from '../../../functions/HelperFunctions';
 import BigBoard from '../BigBoard';
 
 it('renders without crashing', () => {

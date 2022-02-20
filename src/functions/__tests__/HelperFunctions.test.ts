@@ -1,15 +1,14 @@
 import { NotificationManager } from 'react-notifications';
 import {
   getNextPlayer,
-  Player,
-  Cell,
   getPlayerCellValue,
   alertWinner,
   alertError,
   isOccupied,
-  Board,
   theresAWinner,
 } from '../HelperFunctions';
+import { Player, Cell } from '../../@types/general_enums';
+import type { Board } from '../../@types/general';
 
 jest.mock('react-notifications');
 
