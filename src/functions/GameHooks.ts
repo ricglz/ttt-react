@@ -70,9 +70,9 @@ export function useAIHooks({
   ai,
 }: AIHooksProps) {
   const aiMove = React.useCallback((boardCopy, id, newMoveNumber) => {
-    const board = boardCopy;
+    const board = [...boardCopy] as BigBoard;
     const currentDifficulty = selectedOption === null ? 1 : selectedOption.value;
-    const move = ai.makeMove({ board, currentBoard: id, currentDifficulty });
+    const move = ai.makeMove({ board: board[id], currentBoard: id, currentDifficulty });
     board[id][move] = -1;
     const winner = theresAWinner(board[id]);
     if (winner) {
