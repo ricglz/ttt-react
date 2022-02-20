@@ -5,7 +5,7 @@ import type { BigBoardProps } from './BigBoard';
 
 function boardClass(boardNum: GeneralBoardIndex, currentBoard: CurrentBoard) {
   let klass = 'col-4 big-box';
-  if (!(boardNum === currentBoard || currentBoard === -1)) {
+  if (currentBoard !== -1 && boardNum !== currentBoard) {
     klass += ' grey-bg';
   }
   return klass;
