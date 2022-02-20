@@ -5,14 +5,11 @@ import { newBoard } from '../../../functions/HelperFunctions';
 import Board from '../Board';
 
 describe('Board', () => {
-  const boardNum = 0;
-  let currentBoard: CurrentBoard;
-
-  afterEach(() => {
+  test.each([-1, 0, 1] as CurrentBoard[])('currentBoard is %s', (currentBoard) => {
     const boardGame = newBoard();
     const component = (
       <Board
-        boardNum={boardNum}
+        boardNum={0}
         boardGame={boardGame}
         currentBoard={currentBoard}
         handleClick={() => {}}
@@ -20,19 +17,5 @@ describe('Board', () => {
     );
     const tree = renderer.create(component).toJSON();
     expect(tree).toMatchSnapshot();
-  })
-
-  describe('currentBoard value', () => {
-    test('currentBoard === -1', () => {
-      currentBoard = -1;
-    });
-
-    test('currentBoard === boardNum', () => {
-      currentBoard = boardNum;
-    });
-
-    test('currentBoard !== boardNum', () => {
-      currentBoard = boardNum + 1 as CurrentBoard;
-    });
   });
-})
+});
