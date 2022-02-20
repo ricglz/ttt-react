@@ -15,7 +15,7 @@ function Component() {
     phoneNumber: 'phoneNumber',
     photoUrl: 'photoUrl',
     uid: 'uid',
-  }
+  };
   return (
     <ContextsProvider
       ChildrenComponent={Home}
