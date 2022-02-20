@@ -11,7 +11,7 @@ interface Args {
   currentDifficulty: Difficulty,
 }
 
-interface AiProperties extends Args{
+interface AiProperties extends Args {
   amountOccupied: NumberBoard,
   avoidBox: NumberBoard,
 }
@@ -39,7 +39,9 @@ function deleteElements(availableMoves: AiAction[]) {
 function getAvailableMoves(props: AiProperties) {
   const availableMoves: AiAction[] = [];
   props.board.forEach((element, index) => {
-    if (isOccupied(element)) return;
+    if (isOccupied(element)) {
+      return;
+    }
     const pos = index as GeneralBoardIndex;
     availableMoves.push(new AiAction({ pos, boardCopy: props.board, ...props }));
   });
@@ -129,7 +131,8 @@ class Ai {
     if (this.currentDifficulty >= 2) {
       availableMoves = deleteElements(availableMoves);
     }
-    return availableMoves[Math.floor(Math.random() * availableMoves.length)].pos;
+    const index = Math.floor(Math.random() * availableMoves.length);
+    return availableMoves[index].pos;
   };
 }
 
