@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import loadable from '@loadable/component';
 import { useUser } from './functions/OtherHooks';
 
-const Contributors = loadable(
+const Contributors = lazy(
   () => import('./components/Contributors/Contributors'),
 );
-const Home = loadable(() => import('./components/Home/Home'));
-const Game = loadable(() => import('./components/Game/Game'));
-const Login = loadable(() => import('./components/OnlineGame/Login'));
-const Tutorial = loadable(() => import('./components/Tutorial/Tutorial'));
-const GameMenu = loadable(() => import('./components/OnlineGame/GameMenu'));
-const LanguagePage = loadable(
-  () => import('./components/Languages/LanguagePage'),
-);
+const Home = lazy(() => import('./components/Home/Home'));
+const Game = lazy(() => import('./components/Game/Game'));
+const Login = lazy(() => import('./components/OnlineGame/Login'));
+const Tutorial = lazy(() => import('./components/Tutorial/Tutorial'));
+const GameMenu = lazy(() => import('./components/OnlineGame/GameMenu'));
+const LanguagePage = lazy(() => import('./components/Languages/LanguagePage'));
 
 type Props = {
   currentLocale: string;
@@ -25,26 +22,66 @@ const SwitchWrapper = (languageProps: Props) => {
   const gameMenu = user == null ? null : <GameMenu logOut={logOut} user={user} />;
   return (
     <Routes>
-      <Route path="/">
-        <Home />
-      </Route>
-      <Route path="tutorial">
-        <Tutorial />
-      </Route>
-      <Route path="singleplayer">
-        <Game isAi />
-      </Route>
-      <Route path="multiplayer">
-        <Game />
-      </Route>
-      <Route path="login">{gameMenu == null ? <Login /> : gameMenu}</Route>
-      <Route path="online">{gameMenu}</Route>
-      <Route path="language">
-        <LanguagePage {...languageProps} />
-      </Route>
-      <Route path="contributors">
-        <Contributors />
-      </Route>
+      <Route
+        path="/"
+        element={(
+          <Suspense fallback="loading">
+            <Home />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="tutorial"
+        element={(
+          <Suspense fallback="loading">
+            <Tutorial />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="singleplayer"
+        element={(
+          <Suspense fallback="loading">
+            <Game isAi />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="multiplayer"
+        element={(
+          <Suspense fallback="loading">
+            <Game />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="login"
+        element={(
+          <Suspense fallback="loading">
+            {gameMenu == null ? <Login /> : gameMenu}
+          </Suspense>
+        )}
+      />
+      <Route
+        path="online"
+        element={<Suspense fallback="loading">{gameMenu}</Suspense>}
+      />
+      <Route
+        path="language"
+        element={(
+          <Suspense fallback="loading">
+            <LanguagePage {...languageProps} />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="contributors"
+        element={(
+          <Suspense fallback="loading">
+            <Contributors />
+          </Suspense>
+        )}
+      />
     </Routes>
   );
 };

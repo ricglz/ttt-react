@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
-import loadable from '@loadable/component';
 
 import { useRooms, useGameFlow, User } from '../../functions/OtherHooks';
 
-const OnlineGame = loadable(() => import('./OnlineGame'));
+const OnlineGame = lazy(() => import('./OnlineGame'));
 
 type ButtonProps = {
   text: string;
