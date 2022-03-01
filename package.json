@@ -6,7 +6,6 @@
         "not op_mini all"
     ],
     "dependencies": {
-        "@loadable/component": "^5.15.0",
         "firebase": "^9.6.7",
         "octokat": "^0.10.0",
         "prop-types": "^15.8.1",
