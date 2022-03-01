@@ -5,6 +5,7 @@ exports[`renders without crashing 1`] = `
   className="text-left"
   dir="ltr"
 >
+  loading
   <div
     className="row justify-content-center mt-5"
   >
