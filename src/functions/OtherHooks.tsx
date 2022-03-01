@@ -1,12 +1,9 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { onValue } from 'firebase/database';
 
 import Room from '../components/OnlineGame/Room';
-import {
-  alertError,
-  initialState,
-} from './HelperFunctions';
+import { alertError, initialState } from './HelperFunctions';
 import {
   getRedirect,
   gamesReference,
@@ -17,11 +14,11 @@ import {
 import type { FirebaseGame } from '../@types/general';
 
 export type User = {
-  email: string,
-  name: string,
-  phoneNumber: string,
-  photoUrl: string,
-  uid: string,
+  email: string;
+  name: string;
+  phoneNumber: string;
+  photoUrl: string;
+  uid: string;
 };
 
 async function updateUser(setUser: (user: User) => void) {
@@ -45,9 +42,13 @@ async function updateUser(setUser: (user: User) => void) {
 }
 
 export function useUser() {
-  const cachedUserString = localStorage.getItem('user');
-  const cachedUser: (User | null) = cachedUserString ? JSON.parse(cachedUserString) : null;
-  const [user, setUser] = React.useState(cachedUser);
+  const [user, setUser] = React.useState(() => {
+    const cachedUserString = localStorage.getItem('user');
+    const cachedUser: User | null = cachedUserString
+      ? JSON.parse(cachedUserString)
+      : null;
+    return cachedUser;
+  });
 
   React.useEffect(() => {
     updateUser(setUser);
@@ -62,40 +63,47 @@ export function useUser() {
 }
 
 type UseRoomsProps = {
-  user: User | null,
-  joinGame: (id: string, hostUid: string) => void,
+  user: User | null;
+  joinGame: (id: string, hostUid: string) => void;
 };
 
 type Rooms = {
-  [key: string]: FirebaseGame
+  [key: string]: FirebaseGame;
 };
 
 export function useRooms({ user, joinGame }: UseRoomsProps) {
   const [rooms, setRooms] = React.useState<Rooms>({});
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (user == null) {
-      history.push('/login');
+      navigate('/login');
       return;
     }
-    onValue(gamesReference, (snapshot) => {
-      setRooms(snapshot.val() || {});
-    }, alertError);
-  }, [user, history, setRooms]);
-
-  const renderRoom = React.useCallback((key) => {
-    const { hostUid, hostName } = rooms[key];
-    return (
-      <Room
-        key={key}
-        id={key}
-        joinGame={joinGame}
-        hostName={hostName}
-        hostUid={hostUid}
-      />
+    onValue(
+      gamesReference,
+      (snapshot) => {
+        setRooms(snapshot.val() || {});
+      },
+      alertError,
     );
-  }, [rooms, joinGame]);
+  }, [user, navigate, setRooms]);
+
+  const renderRoom = React.useCallback(
+    (key) => {
+      const { hostUid, hostName } = rooms[key];
+      return (
+        <Room
+          key={key}
+          id={key}
+          joinGame={joinGame}
+          hostName={hostName}
+          hostUid={hostUid}
+        />
+      );
+    },
+    [rooms, joinGame],
+  );
 
   const renderRooms = React.useCallback(
     () => Object.keys(rooms).map(renderRoom),
@@ -119,8 +127,8 @@ function hostSurrendered(guestUid: string, gameId: string) {
 }
 
 type UseGameFlowProps = {
-  uid: string,
-  name: string,
+  uid: string;
+  name: string;
 };
 
 export function useGameFlow({ uid, name }: UseGameFlowProps) {
@@ -131,29 +139,35 @@ export function useGameFlow({ uid, name }: UseGameFlowProps) {
     setGameId(ref.key);
   }, [setGameId, name, uid]);
 
-  const joinGame = React.useCallback((selectedGameId, hostUid) => {
-    setGameId(selectedGameId);
-    if (hostUid === uid) {
-      return;
-    }
-    updateGame(selectedGameId, { guestUid: uid });
-  }, [uid, setGameId]);
+  const joinGame = React.useCallback(
+    (selectedGameId, hostUid) => {
+      setGameId(selectedGameId);
+      if (hostUid === uid) {
+        return;
+      }
+      updateGame(selectedGameId, { guestUid: uid });
+    },
+    [uid, setGameId],
+  );
 
-  const surrender = React.useCallback(({ guestUid, hostUid }) => {
-    if (gameId == null) {
-      return;
-    }
-    setGameId(null);
-    if (uid === hostUid) {
-      hostSurrendered(guestUid, gameId);
-    } else {
-      updateGame(gameId, {
-        ...initialState(),
-        guestUid: '-1',
-        nextPlayerUid: hostUid,
-      });
-    }
-  }, [uid, gameId, setGameId]);
+  const surrender = React.useCallback(
+    ({ guestUid, hostUid }) => {
+      if (gameId == null) {
+        return;
+      }
+      setGameId(null);
+      if (uid === hostUid) {
+        hostSurrendered(guestUid, gameId);
+      } else {
+        updateGame(gameId, {
+          ...initialState(),
+          guestUid: '-1',
+          nextPlayerUid: hostUid,
+        });
+      }
+    },
+    [uid, gameId, setGameId],
+  );
 
   return {
     gameId,

@@ -1,55 +1,52 @@
-import React, { ReactChild } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import loadable from '@loadable/component';
-import type { User } from './functions/OtherHooks';
+import { useUser } from './functions/OtherHooks';
 
 const Contributors = loadable(
   () => import('./components/Contributors/Contributors'),
 );
-const Home = loadable(
-  () => import('./components/Home/Home'),
-);
-const Game = loadable(
-  () => import('./components/Game/Game'),
-);
-const Login = loadable(
-  () => import('./components/OnlineGame/Login'),
-);
-const Tutorial = loadable(
-  () => import('./components/Tutorial/Tutorial'),
+const Home = loadable(() => import('./components/Home/Home'));
+const Game = loadable(() => import('./components/Game/Game'));
+const Login = loadable(() => import('./components/OnlineGame/Login'));
+const Tutorial = loadable(() => import('./components/Tutorial/Tutorial'));
+const GameMenu = loadable(() => import('./components/OnlineGame/GameMenu'));
+const LanguagePage = loadable(
+  () => import('./components/Languages/LanguagePage'),
 );
 
-type RenderFn = () => ReactChild | null;
 type Props = {
-  renderSinglePlayer: RenderFn,
-  renderGameMenu: RenderFn,
-  renderLanguage: RenderFn,
-  user: User | null
+  currentLocale: string;
+  changeLocale: (locale: string) => void;
 };
 
-const SwitchWrapper = ({
-  renderSinglePlayer, renderGameMenu, renderLanguage, user,
-}: Props) => (
-  <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/tutorial" component={Tutorial} />
-    <Route path="/singleplayer" render={renderSinglePlayer} />
-    <Route path="/multiplayer" component={Game} />
-    {user == null ? (
-      <Route path="/login" component={Login} />
-    ) : (
-      <Route path="/login" render={renderGameMenu} />
-    )}
-    <Route
-      path="/online"
-      render={renderGameMenu}
-    />
-    <Route
-      path="/language"
-      render={renderLanguage}
-    />
-    <Route path="/contributors" component={Contributors} />
-  </Switch>
-);
+const SwitchWrapper = (languageProps: Props) => {
+  const { user, logOut } = useUser();
+  const gameMenu = user == null ? null : <GameMenu logOut={logOut} user={user} />;
+  return (
+    <Routes>
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="tutorial">
+        <Tutorial />
+      </Route>
+      <Route path="singleplayer">
+        <Game isAi />
+      </Route>
+      <Route path="multiplayer">
+        <Game />
+      </Route>
+      <Route path="login">{gameMenu == null ? <Login /> : gameMenu}</Route>
+      <Route path="online">{gameMenu}</Route>
+      <Route path="language">
+        <LanguagePage {...languageProps} />
+      </Route>
+      <Route path="contributors">
+        <Contributors />
+      </Route>
+    </Routes>
+  );
+};
 
 export default SwitchWrapper;
