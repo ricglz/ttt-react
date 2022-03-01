@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../css/language-button.css';
 import type { LanguagePageProps } from './LanguagePage';
 
@@ -11,21 +11,22 @@ function getClassName(locale: string, currentLocale: string) {
   return className;
 }
 
-function useHandleClick(changeLocale: (locale: string) => void, locale: string) {
-  const history = useHistory();
+function useHandleClick(
+  changeLocale: (locale: string) => void,
+  locale: string,
+) {
+  const navigate = useNavigate();
   return () => {
     changeLocale(locale);
-    history.push('/');
+    navigate('/');
   };
 }
 
 interface Props extends LanguagePageProps {
-  locale: string
+  locale: string;
 }
 
-const LanguageButton = ({
-  locale, changeLocale, currentLocale,
-}: Props) => {
+const LanguageButton = ({ locale, changeLocale, currentLocale }: Props) => {
   const handleClick = useHandleClick(changeLocale, locale);
   return (
     <div className="col-4 col-lg-4 col-xl-4 border-right border-top">

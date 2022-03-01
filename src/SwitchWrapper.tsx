@@ -1,55 +1,89 @@
-import React, { ReactChild } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import loadable from '@loadable/component';
-import type { User } from './functions/OtherHooks';
+import React, { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useUser } from './functions/OtherHooks';
 
-const Contributors = loadable(
+const Contributors = lazy(
   () => import('./components/Contributors/Contributors'),
 );
-const Home = loadable(
-  () => import('./components/Home/Home'),
-);
-const Game = loadable(
-  () => import('./components/Game/Game'),
-);
-const Login = loadable(
-  () => import('./components/OnlineGame/Login'),
-);
-const Tutorial = loadable(
-  () => import('./components/Tutorial/Tutorial'),
-);
+const Home = lazy(() => import('./components/Home/Home'));
+const Game = lazy(() => import('./components/Game/Game'));
+const Login = lazy(() => import('./components/OnlineGame/Login'));
+const Tutorial = lazy(() => import('./components/Tutorial/Tutorial'));
+const GameMenu = lazy(() => import('./components/OnlineGame/GameMenu'));
+const LanguagePage = lazy(() => import('./components/Languages/LanguagePage'));
 
-type RenderFn = () => ReactChild | null;
 type Props = {
-  renderSinglePlayer: RenderFn,
-  renderGameMenu: RenderFn,
-  renderLanguage: RenderFn,
-  user: User | null
+  currentLocale: string;
+  changeLocale: (locale: string) => void;
 };
 
-const SwitchWrapper = ({
-  renderSinglePlayer, renderGameMenu, renderLanguage, user,
-}: Props) => (
-  <Switch>
-    <Route exact path="/" component={Home} />
-    <Route path="/tutorial" component={Tutorial} />
-    <Route path="/singleplayer" render={renderSinglePlayer} />
-    <Route path="/multiplayer" component={Game} />
-    {user == null ? (
-      <Route path="/login" component={Login} />
-    ) : (
-      <Route path="/login" render={renderGameMenu} />
-    )}
-    <Route
-      path="/online"
-      render={renderGameMenu}
-    />
-    <Route
-      path="/language"
-      render={renderLanguage}
-    />
-    <Route path="/contributors" component={Contributors} />
-  </Switch>
-);
+const SwitchWrapper = (languageProps: Props) => {
+  const { user, logOut } = useUser();
+  const gameMenu = user == null ? null : <GameMenu logOut={logOut} user={user} />;
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={(
+          <Suspense fallback="loading">
+            <Home />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="tutorial"
+        element={(
+          <Suspense fallback="loading">
+            <Tutorial />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="singleplayer"
+        element={(
+          <Suspense fallback="loading">
+            <Game isAi />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="multiplayer"
+        element={(
+          <Suspense fallback="loading">
+            <Game />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="login"
+        element={(
+          <Suspense fallback="loading">
+            {gameMenu == null ? <Login /> : gameMenu}
+          </Suspense>
+        )}
+      />
+      <Route
+        path="online"
+        element={<Suspense fallback="loading">{gameMenu}</Suspense>}
+      />
+      <Route
+        path="language"
+        element={(
+          <Suspense fallback="loading">
+            <LanguagePage {...languageProps} />
+          </Suspense>
+        )}
+      />
+      <Route
+        path="contributors"
+        element={(
+          <Suspense fallback="loading">
+            <Contributors />
+          </Suspense>
+        )}
+      />
+    </Routes>
+  );
+};
 
 export default SwitchWrapper;
