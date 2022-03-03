@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="text-left"
+  dir="ltr"
+>
+  <div
+    className="container text-center"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <h1>
+          Home Page
+        </h1>
+      </div>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/singleplayer"
+        onClick={[Function]}
+      >
+        Single Player
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/multiplayer"
+        onClick={[Function]}
+      >
+        Local Multiplayer
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/online"
+        onClick={[Function]}
+      >
+        <span>
+          Online
+        </span>
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/tutorial"
+        onClick={[Function]}
+      >
+        How to play
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/contributors"
+        onClick={[Function]}
+      >
+        <span>
+          Contributors
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="container"
+  >
+    <div
+      className="row text-center pb-3 border-bottom"
+    >
+      <div
+        className="col"
+      >
+        <h2>
+          How to play
+        </h2>
+      </div>
+    </div>
+    <div
+      className="pt-3"
+    />
+    <p>
+      The mechanics of the game are simple you have to do a click in any of the cells, in any of the available grids, that are those which have the white background.
+    </p>
+    <p>
+      The objective of the game is to have three of your symbols together in diagonal, row or column in one of the grids.
+    </p>
+    <p>
+      The first move is always in whatever grid and cell you want, after that the next move is decided based on the previous movement. Look at this example:
+    </p>
+    <div
+      className="row text-center"
+    >
+      <div
+        className="col"
+      >
+        <img
+          alt="example"
+          className="img-fluid"
+          src="example1.gif"
+        />
+      </div>
+    </div>
+    <p>
+      In this previous example, the player X could make any move that it wants (the first player is always the X), it chooses the middle cell at the bottom, then the player O has to make a move in the middle grid at the bottom.
+    </p>
+    <div
+      className="row text-center"
+    >
+      <div
+        className="col"
+      >
+        <img
+          alt="example"
+          className="img-fluid"
+          src="example2.png"
+        />
+      </div>
+    </div>
+    <p>
+      In the previous image, we can see that the next move has to be at the left bottom grid because it is the only grid with a white background. And that the previous move was done in the center or top right grid because those are the only ones that have in the bottom left cell an X or an O.
+    </p>
+    <div
+      className="row text-center"
+    >
+      <div
+        className="col"
+      >
+        <a
+          className="btn btn-game btn-lg btn-danger"
+          href="/"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <div />
+  </div>
+</div>
+`;

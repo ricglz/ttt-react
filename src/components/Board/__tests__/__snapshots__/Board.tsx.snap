@@ -1,0 +1,409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board currentBoard is -1 1`] = `
+<div
+  className="col-4 big-box"
+>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Board currentBoard is 0 1`] = `
+<div
+  className="col-4 big-box"
+>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Board currentBoard is 1 1`] = `
+<div
+  className="col-4 big-box grey-bg"
+>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+  <div
+    className="game row cell-row"
+  >
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+    <div
+      className="col-4 box"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <p
+        className=""
+      >
+        
+      </p>
+    </div>
+  </div>
+</div>
+`;

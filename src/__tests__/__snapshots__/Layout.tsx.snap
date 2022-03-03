@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="text-left"
+  dir="ltr"
+>
+  loading
+  <div
+    className="row justify-content-center mt-5"
+  >
+    <div
+      className="col-4 col-lg-4 col-xl-4 border-right border-top"
+    >
+      <a
+        className="btn w-100 locale-button"
+        href="/language"
+        onClick={[Function]}
+      >
+        en
+      </a>
+    </div>
+  </div>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <div />
+  </div>
+</div>
+`;

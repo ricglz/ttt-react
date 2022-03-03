@@ -1,12 +1,13 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import OnlineGame from './OnlineGame';
 import { useRooms, useGameFlow, User } from '../../functions/OtherHooks';
 
+const OnlineGame = lazy(() => import('./OnlineGame'));
+
 type ButtonProps = {
-  text: string,
-  func: () => void,
+  text: string;
+  func: () => void;
 };
 
 const Button = ({ text, func }: ButtonProps) => (
@@ -18,44 +19,40 @@ const Button = ({ text, func }: ButtonProps) => (
 );
 
 type Props = {
-  user: User,
-  logOut: () => void,
+  user: User;
+  logOut: () => void;
 };
 
 function GameMenu({ user, logOut }: Props) {
   const { uid, name } = user;
   const {
-    gameId,
-    hostNewGame,
-    joinGame,
-    surrender,
-  } = useGameFlow({ uid, name });
+    gameId, hostNewGame, joinGame, surrender,
+  } = useGameFlow({
+    uid,
+    name,
+  });
   const [renderGames] = useRooms({ user, joinGame });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogOut = React.useCallback(() => {
     logOut();
-    history.push('/login');
-  }, [logOut, history]);
+    navigate('/login');
+  }, [logOut, navigate]);
 
-  return (
-    gameId != null ? (
-      <OnlineGame gameId={gameId} userId={uid} back={surrender} />
-    ) : (
-      <>
-        <div className="row justify-content-center">
-          <h1>Rooms</h1>
-        </div>
-        <hr />
-        <div className="row">
-          <Button text="Host new game" func={hostNewGame} />
-          <Button text="Log Out" func={handleLogOut} />
-        </div>
-        <ul className="list-group">
-          {renderGames()}
-        </ul>
-      </>
-    )
+  return gameId != null ? (
+    <OnlineGame gameId={gameId} userId={uid} back={surrender} />
+  ) : (
+    <>
+      <div className="row justify-content-center">
+        <h1>Rooms</h1>
+      </div>
+      <hr />
+      <div className="row">
+        <Button text="Host new game" func={hostNewGame} />
+        <Button text="Log Out" func={handleLogOut} />
+      </div>
+      <ul className="list-group">{renderGames()}</ul>
+    </>
   );
 }
 

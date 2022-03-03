@@ -1,19 +1,18 @@
 import type { Board, GeneralBoardIndex, NumberBoard } from '../@types/general';
-import type { Difficulty } from '../@types/general_enums';
 
 import AiAction from './AiAction';
-import { Cell } from '../@types/general_enums';
+import { Cell, Difficulty } from '../@types/general_enums';
 import { isOccupied, emptyArray } from './HelperFunctions';
 
 interface Args {
-  board: Board,
-  currentBoard: GeneralBoardIndex,
-  currentDifficulty: Difficulty,
+  board: Board;
+  currentBoard: GeneralBoardIndex;
+  currentDifficulty: Difficulty;
 }
 
 interface AiProperties extends Args {
-  amountOccupied: NumberBoard,
-  avoidBox: NumberBoard,
+  amountOccupied: NumberBoard;
+  avoidBox: NumberBoard;
 }
 
 function areTwoValue(value: Cell) {
@@ -43,7 +42,9 @@ function getAvailableMoves(props: AiProperties) {
       return;
     }
     const pos = index as GeneralBoardIndex;
-    availableMoves.push(new AiAction({ pos, boardCopy: props.board, ...props }));
+    availableMoves.push(
+      new AiAction({ pos, boardCopy: props.board, ...props }),
+    );
   });
   return availableMoves;
 }
@@ -79,7 +80,11 @@ class Ai {
     currentDifficulty: this.currentDifficulty,
   });
 
-  areTwo = (pos1: GeneralBoardIndex, pos2: GeneralBoardIndex, pos3: GeneralBoardIndex) => {
+  areTwo = (
+    pos1: GeneralBoardIndex,
+    pos2: GeneralBoardIndex,
+    pos3: GeneralBoardIndex,
+  ) => {
     const value1 = this.board[pos1];
     const value2 = this.board[pos2];
     const value3 = this.board[pos3];
@@ -87,8 +92,10 @@ class Ai {
     const firstIsOccupied = isOccupied(value1);
     const secondIsOccupied = isOccupied(value2);
 
-    if ((value1 === value2 && firstIsOccupied && !isOccupied(value3))
-      || (value1 === value3 && firstIsOccupied && !secondIsOccupied)) {
+    if (
+      (value1 === value2 && firstIsOccupied && !isOccupied(value3))
+      || (value1 === value3 && firstIsOccupied && !secondIsOccupied)
+    ) {
       return areTwoValue(value1);
     }
     if (value2 === value3 && secondIsOccupied && !firstIsOccupied) {
@@ -103,9 +110,9 @@ class Ai {
 
   areTwoInTheDiagonal = () => this.areTwo(0, 4, 8) + this.areTwo(2, 4, 6);
 
-  areTwoInTheBoard = () => (
-    this.areTwoInTheColumn() + this.areTwoInTheDiagonal() + this.areTwoInTheRow()
-  );
+  areTwoInTheBoard = () => this.areTwoInTheColumn()
+    + this.areTwoInTheDiagonal()
+    + this.areTwoInTheRow();
 
   playerMadeAMove = (boardId: GeneralBoardIndex, board: Board) => {
     this.amountOccupied[boardId] += 3;
@@ -128,7 +135,7 @@ class Ai {
     this.setVariables(args);
     const properties = this.getProperties();
     let availableMoves = getAvailableMoves(properties);
-    if (this.currentDifficulty >= 2) {
+    if (this.currentDifficulty >= Difficulty.NORMAL) {
       availableMoves = deleteElements(availableMoves);
     }
     const index = Math.floor(Math.random() * availableMoves.length);

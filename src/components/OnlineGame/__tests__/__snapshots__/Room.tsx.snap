@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div
+  className="text-left"
+  dir="ltr"
+>
+  <div
+    className="container text-center"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <h1>
+          Home Page
+        </h1>
+      </div>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/singleplayer"
+        onClick={[Function]}
+      >
+        Single Player
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/multiplayer"
+        onClick={[Function]}
+      >
+        Local Multiplayer
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/online"
+        onClick={[Function]}
+      >
+        <span>
+          Online
+        </span>
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/tutorial"
+        onClick={[Function]}
+      >
+        How to play
+      </a>
+    </div>
+    <div
+      className="row justify-content-center border-top py-3"
+    >
+      <a
+        className="btn btn-home"
+        href="/contributors"
+        onClick={[Function]}
+      >
+        <span>
+          Contributors
+        </span>
+      </a>
+    </div>
+  </div>
+  <li
+    className="list-group-item mt-3"
+  >
+    <span>
+      hostName
+    </span>
+    <button
+      className="btn ml-5 btn-outline-dark"
+      onClick={[Function]}
+      type="button"
+    >
+      Join Game
+    </button>
+  </li>
+  <div
+    className="notification-container notification-container-empty"
+  >
+    <div />
+  </div>
+</div>
+`;
