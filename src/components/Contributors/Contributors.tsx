@@ -1,22 +1,19 @@
-import Octokat from 'octokat';
-import type { RepoContributors } from 'octokat';
+import { request } from '@octokit/request';
 import React from 'react';
 import Contributor from './Contributor';
 
 async function fetchContributors() {
-  const octokat = new Octokat();
-  let response = null;
-  try {
-    response = await octokat.repos('ricglz0201', 'ttt-react')
-      .contributors.fetch();
-  } catch (error) {
-    return [];
-  }
-  return response.items;
+  const response = await request('GET /repos/{owner}/{repo}/contributors', {
+    owner: 'ricglz',
+    repo: 'ttt-react',
+  });
+  return response.data;
 }
 
+type ContributorsType = Awaited<ReturnType<typeof fetchContributors>>;
+
 function useContributors() {
-  const [contributors, setContributors] = React.useState<RepoContributors[]>([]);
+  const [contributors, setContributors] = React.useState<ContributorsType>([]);
   React.useEffect(() => {
     const setData = async () => {
       const newContributors = await fetchContributors();
@@ -24,11 +21,11 @@ function useContributors() {
     };
     setData();
   }, []);
-  return [contributors];
+  return contributors;
 }
 
 export default function Contributors() {
-  const [contributors] = useContributors();
+  const contributors = useContributors();
   return (
     <div>
       <ul className="contributors">
