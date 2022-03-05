@@ -2,12 +2,12 @@ import React from 'react';
 import { FormattedHeader } from '../Layout/FormattedText';
 import HomeButton from './HomeButton';
 
-function Home() {
+export default function Home() {
   return (
     <div className="container text-center">
       <div className="row">
         <div className="col">
-          <FormattedHeader locale="homePage.title" defaultMessage="Home Page" />
+          <FormattedHeader locale="homePage.title" />
         </div>
       </div>
       <HomeButton text="shared.sp" url="/singleplayer" />
@@ -18,5 +18,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

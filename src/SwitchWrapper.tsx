@@ -12,12 +12,7 @@ const Tutorial = lazy(() => import('./components/Tutorial/Tutorial'));
 const GameMenu = lazy(() => import('./components/OnlineGame/GameMenu'));
 const LanguagePage = lazy(() => import('./components/Languages/LanguagePage'));
 
-type Props = {
-  currentLocale: string;
-  changeLocale: (locale: string) => void;
-};
-
-const SwitchWrapper = (languageProps: Props) => {
+const SwitchWrapper = () => {
   const { user, logOut } = useUser();
   const gameMenu = user == null ? <Login /> : <GameMenu logOut={logOut} user={user} />;
   return (
@@ -66,7 +61,7 @@ const SwitchWrapper = (languageProps: Props) => {
         path="language"
         element={(
           <Suspense fallback="loading">
-            <LanguagePage {...languageProps} />
+            <LanguagePage />
           </Suspense>
         )}
       />

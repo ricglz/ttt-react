@@ -1,20 +1,20 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import type { Locale } from 'react-i18next';
+import { FormattedMessage } from './FormattedText';
 
 type Props = {
-  onClick: () => void,
-  text: string,
-  defaultText: string,
+  onClick: () => void;
+  text: Locale;
 };
 
-const DefaultButton = ({ onClick, text, defaultText }: Props) => (
+const DefaultButton = ({ onClick, text }: Props) => (
   <div className="col">
     <button
       type="button"
       className="btn btn-game btn-lg btn-danger"
       onClick={onClick}
     >
-      <FormattedMessage id={text} defaultMessage={defaultText} />
+      <FormattedMessage locale={text} />
     </button>
   </div>
 );
