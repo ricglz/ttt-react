@@ -1,7 +1,8 @@
 import React, { lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRooms, useGameFlow, User } from '../../functions/OtherHooks';
+import type { User } from '../../functions/OtherHooks';
+import { useRooms, useGameFlow } from '../../functions/OtherHooks';
 
 const OnlineGame = lazy(() => import('./OnlineGame'));
 

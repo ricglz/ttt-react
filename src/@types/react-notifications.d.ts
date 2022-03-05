@@ -1,7 +1,7 @@
 /* eslint max-classes-per-file: "off" */
 
 declare module 'react-notifications' {
-  import { ReactNode, StatelessComponent } from 'react';
+  import type { ReactNode, StatelessComponent } from 'react';
   import { EventEmitter } from 'events';
 
   enum NotificationType {
