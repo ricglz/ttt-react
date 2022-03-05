@@ -10,16 +10,11 @@ import './css/everything.css';
 
 import SwitchWrapper from './SwitchWrapper';
 
-type Props = {
-  locale: string;
-  changeLocale: (locale: string) => void;
-};
-
-function Layout({ locale, changeLocale }: Props) {
+function Layout() {
   return (
     <>
-      <SwitchWrapper changeLocale={changeLocale} currentLocale={locale} />
-      <LanguageFooter locale={locale} />
+      <SwitchWrapper />
+      <LanguageFooter />
     </>
   );
 }

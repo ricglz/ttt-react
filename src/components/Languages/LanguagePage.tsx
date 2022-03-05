@@ -1,20 +1,20 @@
+import i18next from 'i18next';
 import React from 'react';
 import LanguageButton from './LanguageButton';
 
-const LANGUAGES = [
-  'en', 'es', 'fr', 'pt', 'de', 'it', 'hi', 'mr', 'ko', 'ja', 'da', 'sr',
-  'id', 'uk', 'ru', 'sv', 'zh', 'ar', 'ca', 'cs', 'tr',
-];
+const LANGUAGES = i18next.languages;
 
-export interface LanguagePageProps {
-  changeLocale: (locale: string) => void,
-  currentLocale: string,
+export default function LanguagePage() {
+  const currentLocale = i18next.language;
+  return (
+    <div className="row justify-content-center mt-5">
+      {LANGUAGES.map((lang) => (
+        <LanguageButton
+          key={lang}
+          locale={lang}
+          currentLocale={currentLocale}
+        />
+      ))}
+    </div>
+  );
 }
-
-const LanguagePage = (props: LanguagePageProps) => (
-  <div className="row justify-content-center mt-5">
-    {LANGUAGES.map((lang) => <LanguageButton key={lang} locale={lang} {...props} />)}
-  </div>
-);
-
-export default LanguagePage;

@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { IntlProvider } from 'react-intl';
+import i18next from 'i18next';
+import React from 'react';
 import { NotificationContainer } from 'react-notifications';
 import { BrowserRouter as Router } from 'react-router-dom';
-import messages from './messages';
 
 type Locale = string;
 
@@ -10,13 +9,8 @@ function getDirection(locale: Locale) {
   return locale === 'ar' ? ['rtl', 'text-right'] : ['ltr', 'text-left'];
 }
 
-type ChildrenComponentProps = {
-  locale: Locale;
-  changeLocale: (locale: Locale) => void;
-};
-
 type Props = {
-  ChildrenComponent: React.FC<ChildrenComponentProps>;
+  ChildrenComponent: React.FC;
   children?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RouterComponent?: any;
@@ -27,23 +21,15 @@ export default function ContextsProvider({
   ChildrenComponent,
   RouterComponent = Router,
 }: Props) {
-  const [locale, setLocale] = useState<Locale>('en');
-
-  const changeLocale = useCallback((newLocale) => {
-    setLocale(newLocale);
-  }, []);
-
-  const [direction, klass] = getDirection(locale);
+  const [direction, klass] = getDirection(i18next.language);
 
   return (
-    <IntlProvider locale={locale} messages={messages[locale]}>
-      <div dir={direction} className={klass}>
-        <RouterComponent>
-          <ChildrenComponent changeLocale={changeLocale} locale={locale} />
-          {children}
-        </RouterComponent>
-        <NotificationContainer />
-      </div>
-    </IntlProvider>
+    <div dir={direction} className={klass}>
+      <RouterComponent>
+        <ChildrenComponent />
+        {children}
+      </RouterComponent>
+      <NotificationContainer />
+    </div>
   );
 }
