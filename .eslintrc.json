@@ -15,16 +15,12 @@
       "jsx": true
     },
     "ecmaVersion": 13,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    "no-shadow": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-shadow": ["error"],
     "import/extensions": [
       "error",
@@ -43,10 +39,11 @@
         "exceptAfterSingleLine": true
       }
     ],
+    "no-shadow": "off",
+    "react/function-component-definition": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off",
-    "react/require-default-props": "off",
     "react/no-unused-prop-types": "off",
-    "react/function-component-definition": "off"
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

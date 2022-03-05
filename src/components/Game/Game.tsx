@@ -2,7 +2,8 @@ import React from 'react';
 import Header from './Header';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from './ButtonsFooter';
-import DifficultySelect, { Option } from './DifficultySelect';
+import type { Option } from './DifficultySelect';
+import DifficultySelect from './DifficultySelect';
 import {
   initialState,
 } from '../../functions/HelperFunctions';
