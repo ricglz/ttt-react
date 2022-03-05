@@ -11,7 +11,7 @@ function Component() {
       ChildrenComponent={Home}
       RouterComponent={MemoryRouter}
     >
-      <LanguagePage changeLocale={() => {}} currentLocale="en" />
+      <LanguagePage />
     </ContextsProvider>
   );
 }
