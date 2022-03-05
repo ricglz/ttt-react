@@ -1,11 +1,12 @@
 import React from 'react';
+import type { Locale } from 'react-i18next';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';
 import BackButton from '../Layout/BackButton';
 import { FormattedParagraph, FormattedHeader2 } from '../Layout/FormattedText';
 
 type ImageProps = {
-  src: string
+  src: string;
 };
 
 const Image = ({ src }: ImageProps) => (
@@ -14,7 +15,7 @@ const Image = ({ src }: ImageProps) => (
   </div>
 );
 
-const PARAGRAPHS_TITLES = [
+const PARAGRAPHS_TITLES: Locale[] = [
   'tutorial.first',
   'tutorial.second',
   'tutorial.third',
@@ -28,11 +29,9 @@ const Tutorial = () => (
       </div>
     </div>
     <div className="pt-3" />
-    {
-      PARAGRAPHS_TITLES.map((title) => (
-        <FormattedParagraph key={title} locale={title} />
-      ))
-    }
+    {PARAGRAPHS_TITLES.map((title) => (
+      <FormattedParagraph key={title as string} locale={title} />
+    ))}
     <div className="row text-center">
       <Image src={exImage1} />
     </div>

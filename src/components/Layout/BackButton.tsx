@@ -1,16 +1,17 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import type { Locale } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from './FormattedText';
 
 type Props = {
-  text: string,
-  url: string,
+  text: Locale;
+  url: string;
 };
 
 const BackButton = ({ text, url }: Props) => (
   <div className="col">
     <Link className="btn btn-game btn-lg btn-danger" to={url}>
-      <FormattedMessage id={text} defaultMessage="Back" />
+      <FormattedMessage locale={text} />
     </Link>
   </div>
 );

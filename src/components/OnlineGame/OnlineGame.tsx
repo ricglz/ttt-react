@@ -14,48 +14,64 @@ import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
 import type { FirebaseGame } from '../../@types/general';
 
 type ButtonsFooterProps = {
-  reset: () => void,
-  back: () => void,
+  reset: () => void;
+  back: () => void;
 };
 
 const ButtonsFooter = ({ reset, back }: ButtonsFooterProps) => (
   <div className="row justify-content-center">
     <ResetButton onClick={reset} />
-    <DefaultButton text="shared.back" defaultText="Back" onClick={back} />
+    <DefaultButton text="shared.back" onClick={back} />
   </div>
 );
 
 type Props = {
-  back: (game: FirebaseGame) => void,
-  gameId: string,
-  userId: string,
+  back: (game: FirebaseGame) => void;
+  gameId: string;
+  userId: string;
 };
 
 function OnlineGame({ back, gameId, userId }: Props) {
   const [state, setState] = React.useState(fbInitialState('', ''));
   const {
-    boardGame, currentBoard, nextPlayerUid, moveNumber, currentPlayer, hostUid,
-    guestUid, oWins, xWins,
+    boardGame,
+    currentBoard,
+    nextPlayerUid,
+    moveNumber,
+    currentPlayer,
+    hostUid,
+    guestUid,
+    oWins,
+    xWins,
   } = state;
 
-  const setPreviousState = React.useCallback((snapshot) => {
-    setState((prevState) => ({ ...prevState, ...snapshot.val() }));
-  }, [setState]);
+  const setPreviousState = React.useCallback(
+    (snapshot) => {
+      setState((prevState) => ({ ...prevState, ...snapshot.val() }));
+    },
+    [setState],
+  );
 
-  React.useEffect(() => readGame(gameId, setPreviousState), [gameId, setPreviousState]);
+  React.useEffect(
+    () => readGame(gameId, setPreviousState),
+    [gameId, setPreviousState],
+  );
 
-  const updateFirebase = React.useCallback((obj: Partial<FirebaseGame>) => {
-    updateGame(gameId, { ...obj, timestamp: Date.now() });
-  }, [gameId]);
+  const updateFirebase = React.useCallback(
+    (obj: Partial<FirebaseGame>) => {
+      updateGame(gameId, { ...obj, timestamp: Date.now() });
+    },
+    [gameId],
+  );
 
-  const canClick = React.useCallback((board, id) => {
-    const currentValue = boardGame[board][id];
-    if (
-      isOccupied(currentValue)
-      || nextPlayerUid !== userId
-    ) return false;
-    return board === currentBoard || currentBoard === -1;
-  }, [boardGame, currentBoard, nextPlayerUid, userId]);
+  const canClick = React.useCallback(
+    (board, id) => {
+      const currentValue = boardGame[board][id];
+      if (isOccupied(currentValue) || nextPlayerUid !== userId) return false;
+      return board === currentBoard || currentBoard === -1;
+    },
+    [boardGame, currentBoard, nextPlayerUid, userId],
+  );
 
   const pvpMove = React.useCallback(
     (newBoard, newMoveNumber, newCurrentBoard) => {
@@ -73,17 +89,20 @@ function OnlineGame({ back, gameId, userId }: Props) {
     [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase],
   );
 
-  const changeScore = React.useCallback((value) => {
-    let newOWins = oWins;
-    let newXWins = xWins;
-    if (value === -1) {
-      newOWins += 1;
-    } else {
-      newXWins += 1;
-    }
-    const newState = { oWins: newOWins, xWins: newXWins };
-    updateFirebase(newState);
-  }, [oWins, xWins, updateFirebase]);
+  const changeScore = React.useCallback(
+    (value) => {
+      let newOWins = oWins;
+      let newXWins = xWins;
+      if (value === -1) {
+        newOWins += 1;
+      } else {
+        newXWins += 1;
+      }
+      const newState = { oWins: newOWins, xWins: newXWins };
+      updateFirebase(newState);
+    },
+    [oWins, xWins, updateFirebase],
+  );
 
   const handleBack = React.useCallback(() => {
     back(state);
@@ -102,20 +121,18 @@ function OnlineGame({ back, gameId, userId }: Props) {
     moveNumber,
   });
 
-  return (
-    guestUid === '-1' ? (
-      <h1 className="text-center"> Please wait until someone enters the room </h1>
-    ) : (
-      <div className="container text-center">
-        <BigBoard
-          handleClick={handleSquareClick}
-          boardGame={boardGame}
-          currentBoard={currentBoard}
-        />
-        <hr />
-        <ButtonsFooter back={handleBack} reset={newGame} />
-      </div>
-    )
+  return guestUid === '-1' ? (
+    <h1 className="text-center"> Please wait until someone enters the room </h1>
+  ) : (
+    <div className="container text-center">
+      <BigBoard
+        handleClick={handleSquareClick}
+        boardGame={boardGame}
+        currentBoard={currentBoard}
+      />
+      <hr />
+      <ButtonsFooter back={handleBack} reset={newGame} />
+    </div>
   );
 }
 

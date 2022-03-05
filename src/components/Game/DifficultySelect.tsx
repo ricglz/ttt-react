@@ -1,33 +1,31 @@
 import React from 'react';
 import Select from 'react-select';
 import type { ActionMeta, SingleValue } from 'react-select';
-import { FormattedMessage } from 'react-intl';
 
 import type { Difficulty } from '../../@types/general_enums';
+import { FormattedMessage } from '../Layout/FormattedText';
 
 export type Option = {
-  label: object,
-  value: Difficulty,
+  label: object;
+  value: Difficulty;
 };
 
-const easy = <FormattedMessage id="game.easy" defaultMessage="Easy" />;
-const medium = <FormattedMessage id="game.medium" defaultMessage="Medium" />;
-const hard = <FormattedMessage id="game.hard" defaultMessage="Hard" />;
+const easy = <FormattedMessage locale="game.easy" />;
+const medium = <FormattedMessage locale="game.medium" />;
+const hard = <FormattedMessage locale="game.hard" />;
 const options: Option[] = [
   { value: 1, label: easy },
   { value: 2, label: medium },
   { value: 3, label: hard },
 ];
-const placeholder = (
-  <FormattedMessage
-    id="game.placeholder"
-    defaultMessage="Choose the difficulty (Default easy)"
-  />
-);
+const placeholder = <FormattedMessage locale="game.placeholder" />;
 
 type Props = {
-  selectedOption: Option | null,
-  handleChange: (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => void,
+  selectedOption: Option | null;
+  handleChange: (
+    newValue: SingleValue<Option>,
+    actionMeta: ActionMeta<Option>
+  ) => void;
 };
 
 const DifficultySelect = ({ selectedOption, handleChange }: Props) => (
