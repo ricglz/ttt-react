@@ -22,28 +22,28 @@ import ca from './ca';
 import tr from './tr';
 
 type Message = {
-  'homePage.title': string,
-  'game.score': string,
-  'game.x-score': string,
-  'game.o-score': string,
-  'game.easy': string,
-  'game.medium': string,
-  'game.hard': string,
-  'game.placeholder': string,
-  'game.reset': string,
-  'tutorial.first': string,
-  'tutorial.second': string,
-  'tutorial.third': string,
-  'tutorial.fourth': string,
-  'tutorial.fifth': string,
-  'shared.sp': string,
-  'shared.mp': string,
-  'shared.tutorial': string,
-  'shared.back': string,
+  'homePage.title': string;
+  'game.score': string;
+  'game.x-score': string;
+  'game.o-score': string;
+  'game.easy': string;
+  'game.medium': string;
+  'game.hard': string;
+  'game.placeholder': string;
+  'game.reset': string;
+  'tutorial.first': string;
+  'tutorial.second': string;
+  'tutorial.third': string;
+  'tutorial.fourth': string;
+  'tutorial.fifth': string;
+  'shared.sp': string;
+  'shared.mp': string;
+  'shared.tutorial': string;
+  'shared.back': string;
 };
 
 type Messages = {
-  [locale: string]: Message
+  [locale: string]: Message;
 };
 
 const MESSAGES: Messages = {
@@ -71,4 +71,7 @@ const MESSAGES: Messages = {
   tr,
 };
 
-export default MESSAGES;
+export default Object.entries(MESSAGES).reduce(
+  (accum, [key, val]) => ({ ...accum, [key]: { translation: val } }),
+  {},
+);

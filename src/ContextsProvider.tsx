@@ -1,5 +1,5 @@
-import i18next from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { NotificationContainer } from 'react-notifications';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -21,7 +21,8 @@ export default function ContextsProvider({
   ChildrenComponent,
   RouterComponent = Router,
 }: Props) {
-  const [direction, klass] = getDirection(i18next.language);
+  const { i18n } = useTranslation();
+  const [direction, klass] = getDirection(i18n.language);
 
   return (
     <div dir={direction} className={klass}>

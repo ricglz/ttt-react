@@ -1,5 +1,5 @@
-import i18next from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import '../../css/language-button.css';
 
@@ -13,8 +13,9 @@ function getClassName(locale: string, currentLocale: string) {
 
 function useHandleClick(locale: string) {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
   return async () => {
-    await i18next.changeLanguage(locale);
+    await i18n.changeLanguage(locale);
     navigate('/');
   };
 }
