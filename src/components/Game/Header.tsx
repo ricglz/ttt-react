@@ -1,47 +1,50 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { FormattedHeader, FormattedHeader2 } from '../Layout/FormattedText';
+import type { Locale } from 'react-i18next';
+import {
+  FormattedHeader,
+  FormattedHeader2,
+  FormattedMessage,
+} from '../Layout/FormattedText';
 
 type ScoreProps = {
-  score: number,
-  klass: string,
-  defaultMessage: string,
+  score: number;
+  klass: string;
 };
 
-const Score = ({ score, klass, defaultMessage }: ScoreProps) => (
+const Score = ({ score, klass }: ScoreProps) => (
   <div className={`col ${klass}`}>
     <p>
-      <FormattedMessage id={`game.${klass}`} defaultMessage={defaultMessage} />
+      <FormattedMessage locale={`game.${klass}` as Locale} />
       {` ${score}`}
     </p>
   </div>
 );
 
 interface ScoresSectionProps {
-  xScore: number,
-  oScore: number,
+  xScore: number;
+  oScore: number;
 }
 
 const ScoresSection = ({ xScore, oScore }: ScoresSectionProps) => (
   <div className="col-12">
     <div className="row justify-content-between">
-      <Score score={xScore} klass="x-score" defaultMessage="X's score" />
-      <Score score={oScore} klass="o-score" defaultMessage="O's score" />
+      <Score score={xScore} klass="x-score" />
+      <Score score={oScore} klass="o-score" />
     </div>
   </div>
 );
 
 interface Props extends ScoresSectionProps {
-  ai: boolean
+  ai: boolean;
 }
 
 const Header = ({ xScore, oScore, ai }: Props) => (
   <div className="row">
     <div className="col-12">
-      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} defaultMessage="Type of game" />
+      <FormattedHeader locale={ai ? 'shared.sp' : 'shared.mp'} />
     </div>
     <div className="col-12">
-      <FormattedHeader2 locale="game.score" defaultMessage="Score" />
+      <FormattedHeader2 locale="game.score" />
     </div>
     <ScoresSection xScore={xScore} oScore={oScore} />
   </div>

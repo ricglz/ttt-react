@@ -6,8 +6,8 @@ import {
   signInWithRedirect,
   useDeviceLanguage,
 } from 'firebase/auth';
+import type { DataSnapshot } from 'firebase/database';
 import {
-  DataSnapshot,
   getDatabase,
   onValue,
   push,

@@ -1,25 +1,30 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import type { Locale } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 type SharedProps = {
-  locale: string,
-  defaultMessage?: string,
+  locale: Locale;
 };
 
-export const FormattedParagraph = ({ locale }: SharedProps) => (
+export const FormattedMessage = ({ locale }: SharedProps) => {
+  const { t } = useTranslation();
+  return <>{t(locale)}</>;
+};
+
+export const FormattedParagraph = (props: SharedProps) => (
   <p>
-    <FormattedMessage id={locale} />
+    <FormattedMessage {...props} />
   </p>
 );
 
-export const FormattedHeader = ({ locale, defaultMessage }: SharedProps) => (
-  <FormattedMessage id={locale} defaultMessage={defaultMessage}>
-    {(txt) => <h1>{txt}</h1>}
-  </FormattedMessage>
+export const FormattedHeader = (props: SharedProps) => (
+  <h1>
+    <FormattedMessage {...props} />
+  </h1>
 );
 
-export const FormattedHeader2 = ({ locale }: SharedProps) => (
+export const FormattedHeader2 = (props: SharedProps) => (
   <h2>
-    <FormattedMessage id={locale} />
+    <FormattedMessage {...props} />
   </h2>
 );

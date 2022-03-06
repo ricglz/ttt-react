@@ -11,7 +11,7 @@ function Component() {
       ChildrenComponent={Home}
       RouterComponent={MemoryRouter}
     >
-      <Contributor login="login" avatarUrl="avatarUrl" htmlUrl="htmlUrl" />
+      <Contributor login="login" avatar_url="avatarUrl" html_url="htmlUrl" />
     </ContextsProvider>
   );
 }
