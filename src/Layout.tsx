@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-notifications/lib/notifications.css';
 import LanguageFooter from './components/Layout/LanguageFooter';
 
 import './css/bootstrap.css';

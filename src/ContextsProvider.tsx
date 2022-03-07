@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NotificationContainer } from 'react-notifications';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 type Locale = string;
@@ -30,7 +30,7 @@ export default function ContextsProvider({
         <ChildrenComponent />
         {children}
       </RouterComponent>
-      <NotificationContainer />
+      <Toaster position="bottom-right" />
     </div>
   );
 }
