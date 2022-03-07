@@ -10,7 +10,6 @@
     "react-hot-toast": "^2.2.0",
     "react-i18next": "^11.15.5",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "^5.0.0",
     "react-select": "^5.2.2"
   },
   "devDependencies": {
@@ -22,6 +21,7 @@
     "@types/react-test-renderer": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
+    "@vitejs/plugin-react": "^1.2.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.1.0",
@@ -35,30 +35,31 @@
     "source-map-explorer": "^2.5.2",
     "stylelint": "^14.5.3",
     "stylelint-config-standard": "^25.0.0",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "src/messages",
-      "src/index.js",
-      "src/registerServiceWorker.js"
+      "src/index.tsx",
+      "src/registerServiceWorker.ts"
     ]
   },
   "name": "react-ttt",
   "private": true,
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "build": "react-scripts build",
-    "deploy": "react-scripts build && firebase deploy",
-    "eject": "react-scripts eject",
+    "analyze": "yarn build && source-map-explorer 'build/static/js/*.js'",
+    "build": "tsc && vite build",
+    "deploy": "yarn build && firebase deploy",
     "fix-lint": "eslint --fix src",
     "lint": "eslint src",
-    "lint-all": "tsc --noEmit && yarn lint && yarn stylelint",
-    "start": "react-scripts start",
+    "lint-all": "yarn typecheck && yarn lint && yarn stylelint",
+    "start": "vite",
     "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css",
-    "test": "react-scripts test --env=jsdom"
+    "test": "jest --env=jsdom",
+    "typecheck": "tsc --noEmit"
   },
   "version": "0.1.0"
 }
