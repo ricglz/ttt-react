@@ -1,15 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { MemoryRouter } from 'react-router-dom';
-import Layout from '../Layout';
-import ContextsProvider from '../ContextsProvider';
+import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
+import Layout from "../Layout";
+import ContextsProvider from "../ContextsProvider";
 
-jest.mock('../firebase/firebase', () => {
-  const originalModule = jest.requireActual('../firebase/firebase');
+vi.mock("../firebase/firebase", () => {
+  const originalModule = vi.importActual("../firebase/firebase");
   return {
     __esModule: true,
     ...originalModule,
-    getRedirect: jest.fn(() => null),
+    getRedirect: vi.fn(() => null),
   };
 });
 
@@ -22,7 +21,7 @@ function Component() {
   );
 }
 
-it('renders without crashing', () => {
+it("renders without crashing", () => {
   const component = <Component />;
   const tree = renderer.create(component).toJSON();
   expect(tree).toMatchSnapshot();

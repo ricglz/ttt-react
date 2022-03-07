@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormattedHeader } from '../Layout/FormattedText';
 import HomeButton from './HomeButton';
 

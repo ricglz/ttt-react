@@ -44,8 +44,10 @@
     "no-shadow": "off",
     "react/function-component-definition": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-uses-react": "off",
     "react/no-unused-prop-types": "off",
     "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [

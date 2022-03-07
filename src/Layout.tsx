@@ -1,4 +1,3 @@
-import React from 'react';
 import LanguageFooter from './components/Layout/LanguageFooter';
 
 import './css/bootstrap.css';

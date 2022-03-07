@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { newBoard } from '../../../functions/HelperFunctions';
 import BigBoard from '../BigBoard';

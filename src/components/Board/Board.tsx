@@ -1,4 +1,3 @@
-import React from 'react';
 import Row from './Row';
 import type { CurrentBoard, GeneralBoardIndex } from '../../@types/general';
 import type { BigBoardProps } from './BigBoard';

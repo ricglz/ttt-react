@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import BigBoard from '../Board/BigBoard';
 import {
@@ -32,7 +32,7 @@ type Props = {
 };
 
 function OnlineGame({ back, gameId, userId }: Props) {
-  const [state, setState] = React.useState(fbInitialState('', ''));
+  const [state, setState] = useState(fbInitialState('', ''));
   const {
     boardGame,
     currentBoard,
@@ -45,26 +45,26 @@ function OnlineGame({ back, gameId, userId }: Props) {
     xWins,
   } = state;
 
-  const setPreviousState = React.useCallback(
+  const setPreviousState = useCallback(
     (snapshot) => {
       setState((prevState) => ({ ...prevState, ...snapshot.val() }));
     },
     [setState],
   );
 
-  React.useEffect(
+  useEffect(
     () => readGame(gameId, setPreviousState),
     [gameId, setPreviousState],
   );
 
-  const updateFirebase = React.useCallback(
+  const updateFirebase = useCallback(
     (obj: Partial<FirebaseGame>) => {
       updateGame(gameId, { ...obj, timestamp: Date.now() });
     },
     [gameId],
   );
 
-  const canClick = React.useCallback(
+  const canClick = useCallback(
     (board, id) => {
       const currentValue = boardGame[board][id];
       if (isOccupied(currentValue) || nextPlayerUid !== userId) return false;
@@ -73,7 +73,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
     [boardGame, currentBoard, nextPlayerUid, userId],
   );
 
-  const pvpMove = React.useCallback(
+  const pvpMove = useCallback(
     (newBoard, newMoveNumber, newCurrentBoard) => {
       const newCurrentPlayer = getNextPlayer(currentPlayer);
       const newNextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
@@ -89,7 +89,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
     [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase],
   );
 
-  const changeScore = React.useCallback(
+  const changeScore = useCallback(
     (value) => {
       let newOWins = oWins;
       let newXWins = xWins;
@@ -104,11 +104,11 @@ function OnlineGame({ back, gameId, userId }: Props) {
     [oWins, xWins, updateFirebase],
   );
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = useCallback(() => {
     back(state);
   }, [back, state]);
 
-  const newGame = React.useCallback(() => {
+  const newGame = useCallback(() => {
     updateFirebase(initialState());
   }, [updateFirebase]);
 

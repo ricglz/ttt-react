@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Locale } from 'react-i18next';
 import {
   FormattedHeader,

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 
 type Pros = {
   joinGame: (id: string, hostUid: string) => void,
@@ -10,7 +10,7 @@ type Pros = {
 export default function Room({
   joinGame, hostUid, hostName, id,
 }: Pros) {
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     joinGame(id, hostUid);
   }, [joinGame, id, hostUid]);
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Header from './Header';
 import BigBoard from '../Board/BigBoard';
 import ButtonsFooter from './ButtonsFooter';
@@ -17,13 +17,13 @@ type Props = {
 };
 
 export default function Game({ isAi = true }: Props) {
-  const [game, setGame] = React.useState(initialState());
-  const [selectedOption, setSelectedOption] = React.useState<Option | null>(null);
+  const [game, setGame] = useState(initialState());
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const { oWins, xWins, changeScore } = useScore();
   const {
     boardGame, currentBoard, moveNumber, currentPlayer,
   } = game;
-  const ai = React.useState(
+  const ai = useState(
     () => new Ai({ board: boardGame[0], currentBoard: 0, currentDifficulty: 1 }),
   )[0];
   const { canClick, pvpMove, newGame } = useGameHooks(game, setGame, ai);
