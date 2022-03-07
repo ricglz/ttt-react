@@ -60,7 +60,7 @@
     "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css",
     "test": "jest --env=jsdom",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc"
   },
   "version": "0.1.0"
 }
