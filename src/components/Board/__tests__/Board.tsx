@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import type { CurrentBoard } from '../../../@types/general';
 import { newBoard } from '../../../functions/HelperFunctions';

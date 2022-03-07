@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import { useCallback, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { User } from '../../functions/OtherHooks';
@@ -35,7 +35,7 @@ function GameMenu({ user, logOut }: Props) {
   const [renderGames] = useRooms({ user, joinGame });
   const navigate = useNavigate();
 
-  const handleLogOut = React.useCallback(() => {
+  const handleLogOut = useCallback(() => {
     logOut();
     navigate('/login');
   }, [logOut, navigate]);

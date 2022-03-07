@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 
 import type { BigBoard, GeneralBoardIndex } from '../../@types/general';
 import type { BoardProps } from './Board';
@@ -40,7 +40,7 @@ const Cell = ({
   boardGame, boardNum, cellNum, handleClick,
 }: Props) => {
   const value = drawValue({ boardGame, boardNum, cellNum });
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     handleClick(boardNum, cellNum);
   }, [boardNum, cellNum, handleClick]);
   return (

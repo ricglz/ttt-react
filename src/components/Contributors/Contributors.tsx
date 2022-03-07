@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import type { ContributorType } from './Contributor';
 import Contributor from './Contributor';
 
@@ -13,8 +13,8 @@ async function fetchContributors() {
 }
 
 function useContributors() {
-  const [contributors, setContributors] = React.useState<ContributorsType>([]);
-  React.useEffect(() => {
+  const [contributors, setContributors] = useState<ContributorsType>([]);
+  useEffect(() => {
     const setData = async () => {
       const newContributors = await fetchContributors();
       setContributors(newContributors);

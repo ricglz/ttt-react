@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import type { BigBoard } from '../../../@types/general';
 import { Cell as CellEnum } from '../../../@types/general_enums';

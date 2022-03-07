@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultButton from './DefaultButton';
 
 type Props = {
