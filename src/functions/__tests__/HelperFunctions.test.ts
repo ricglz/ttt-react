@@ -11,9 +11,10 @@ import { Player, Cell } from "../../@types/general_enums";
 import type { Board } from "../../@types/general";
 
 vi.mock("react-hot-toast", () => {
-  const toast = vi.fn();
-  toast.error = vi.fn();
-  return { toast };
+  const mockedToast = vi.fn();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (mockedToast as any).error = vi.fn();
+  return { toast: mockedToast };
 });
 
 describe("HelperFunctions", () => {

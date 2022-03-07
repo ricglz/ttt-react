@@ -58,6 +58,7 @@
     "stylelint": "stylelint src/css/*.css",
     "stylelint-fix": "stylelint --fix src/*.css src/**/*.css",
     "test": "vitest",
+    "test:ci": "vitest run",
     "typecheck": "tsc"
   },
   "version": "0.1.0"
