@@ -154,9 +154,19 @@ exports[`renders without crashing 1`] = `
     </div>
   </div>
   <div
-    className="notification-container notification-container-empty"
-  >
-    <div />
-  </div>
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />
 </div>
 `;

@@ -1,4 +1,4 @@
-import { NotificationManager } from 'react-notifications';
+import { toast } from 'react-hot-toast';
 import {
   getNextPlayer,
   getPlayerCellValue,
@@ -10,7 +10,7 @@ import {
 import { Player, Cell } from '../../@types/general_enums';
 import type { Board } from '../../@types/general';
 
-jest.mock('react-notifications');
+jest.mock('react-hot-toast');
 
 describe('HelperFunctions', () => {
   describe('getNextPlayer', () => {
@@ -38,17 +38,20 @@ describe('HelperFunctions', () => {
       { value: Cell.X, expected: 'Player X has won.' },
       { value: Cell.O, expected: 'Player O has won.' },
     ];
-    it.each(cases)('Alerts with message "$expected" when value is $value', ({ value, expected }) => {
-      alertWinner(value);
-      expect(NotificationManager.info).toHaveBeenCalledWith(expected);
-    });
+    it.each(cases)(
+      'Alerts with message "$expected" when value is $value',
+      ({ value, expected }) => {
+        alertWinner(value);
+        expect(toast).toHaveBeenCalledWith(expected);
+      },
+    );
   });
 
   test('alertError', () => {
     const errorMsg = 'This is a test!';
     const error = new Error(errorMsg);
     alertError(error);
-    expect(NotificationManager.error).toHaveBeenCalledWith(errorMsg);
+    expect(toast.error).toHaveBeenCalledWith(errorMsg);
   });
 
   describe('isOccupied', () => {
@@ -65,7 +68,7 @@ describe('HelperFunctions', () => {
     const winInColumn: Board = [1, 0, 0, 1, 0, 0, 1, 0, 0];
     const winInRow: Board = [1, 1, 0, 1, 0, 0, 1, 0, 0];
     const winInDiagonal: Board = [1, 0, 0, 0, 1, 0, 0, 0, 1];
-    const boardsWithWinner: ([Board])[] = [
+    const boardsWithWinner: [Board][] = [
       [winInColumn],
       [winInRow],
       [winInDiagonal],
@@ -76,9 +79,7 @@ describe('HelperFunctions', () => {
     });
 
     const emptyBoard: Board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    const boardsWithoutWinner: ([Board])[] = [
-      [emptyBoard],
-    ];
+    const boardsWithoutWinner: [Board][] = [[emptyBoard]];
 
     test.each(boardsWithoutWinner)('%p is not a winner board', (board) => {
       expect(theresAWinner(board)).toBeFalsy();
