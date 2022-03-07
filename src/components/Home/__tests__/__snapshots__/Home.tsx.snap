@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`renders without crashing 1`] = `
 <div
@@ -83,7 +83,7 @@ exports[`renders without crashing 1`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     style={
-      Object {
+      {
         "bottom": 16,
         "left": 16,
         "pointerEvents": "none",
