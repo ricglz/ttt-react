@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import type { FirebaseGame } from "types/general";
 
 import BigBoard from "../Board/BigBoard";
 import {
@@ -11,7 +12,6 @@ import { readGame, updateGame } from "../../firebase/firebase";
 import ResetButton from "../Layout/ResetButton";
 import DefaultButton from "../Layout/DefaultButton";
 import { useAfterMoveOnline, useHandleClick } from "../../functions/GameHooks";
-import type { FirebaseGame } from "types/general";
 
 type ButtonsFooterProps = {
   reset: () => void;

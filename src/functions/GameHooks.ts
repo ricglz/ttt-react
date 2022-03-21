@@ -1,4 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
+
+import { Cell } from "types/general_enums";
+import type { BigBoard, Board, Game, GeneralBoardIndex } from "types/general";
+import type { Player } from "types/general_enums";
 
 import {
   isOccupied,
@@ -7,18 +11,9 @@ import {
   alertWinner,
   getNextPlayer,
   getPlayerCellValue,
-} from './HelperFunctions';
-import { Cell } from 'types/general_enums';
-
-import type {
-  BigBoard,
-  Board,
-  Game,
-  GeneralBoardIndex,
-} from '../@types/general';
-import type { Option } from '../components/Game/DifficultySelect';
-import type { Player } from 'types/general_enums';
-import type Ai from './Ai';
+} from "./HelperFunctions";
+import type { Option } from "../components/Game/DifficultySelect";
+import type Ai from "./Ai";
 
 type SetGameFn = (game: Game) => void;
 
@@ -32,7 +27,7 @@ export function useGameHooks(game: Game, setGame: SetGameFn, ai: Ai) {
       if (isOccupied(currentValue)) return false;
       return board === currentBoard || currentBoard === -1;
     },
-    [boardGame, currentBoard],
+    [boardGame, currentBoard]
   );
 
   const pvpMove = useCallback(
@@ -45,7 +40,7 @@ export function useGameHooks(game: Game, setGame: SetGameFn, ai: Ai) {
         currentPlayer: getNextPlayer(currentPlayer),
       });
     },
-    [setGame, game, currentPlayer],
+    [setGame, game, currentPlayer]
   );
 
   const newGame = useCallback(() => {
@@ -80,7 +75,8 @@ export function useAIHooks({
   const aiMove = useCallback(
     (boardCopy, id, newMoveNumber) => {
       const board = [...boardCopy] as BigBoard;
-      const currentDifficulty = selectedOption === null ? 1 : selectedOption.value;
+      const currentDifficulty =
+        selectedOption === null ? 1 : selectedOption.value;
       const move = ai.makeMove({
         board: board[id],
         currentBoard: id,
@@ -102,7 +98,7 @@ export function useAIHooks({
         });
       }
     },
-    [changeScore, newGame, selectedOption, setGame, game],
+    [changeScore, newGame, selectedOption, setGame, game]
   );
 
   const handleChange = useCallback(
@@ -112,7 +108,7 @@ export function useAIHooks({
         newGame();
       }
     },
-    [setSelectedOption, moveNumber, newGame],
+    [setSelectedOption, moveNumber, newGame]
   );
 
   return { aiMove, handleChange };
@@ -129,7 +125,7 @@ export function useScore() {
         setXWins(xWins + 1);
       }
     },
-    [setOWins, setXWins, oWins, xWins],
+    [setOWins, setXWins, oWins, xWins]
   );
   return { oWins, xWins, changeScore };
 }
@@ -154,9 +150,7 @@ export function useAfterMoveOnline({
   pvpMove,
 }: AfterMoveOnlineProps) {
   const afterMove = useCallback(
-    ({
-      winner, newMoveNumber, boardCopy, id,
-    }: AfterMoveCallbackProps) => {
+    ({ winner, newMoveNumber, boardCopy, id }: AfterMoveCallbackProps) => {
       if (winner) {
         alertWinner(winner);
         changeScore(winner);
@@ -167,7 +161,7 @@ export function useAfterMoveOnline({
         pvpMove(boardCopy, newMoveNumber, id);
       }
     },
-    [changeScore, newGame, pvpMove],
+    [changeScore, newGame, pvpMove]
   );
   return afterMove;
 }
@@ -207,7 +201,7 @@ export function useAfterMove({
         pvpMove(boardCopy, newMoveNumber, id);
       }
     },
-    [ai, aiMove, changeScore, newGame, pvpMove],
+    [ai, aiMove, changeScore, newGame, pvpMove]
   );
   return afterMove;
 }
@@ -244,7 +238,7 @@ export function useHandleClick({
         id,
       });
     },
-    [canClick, boardGame, moveNumber, currentPlayer, afterMove],
+    [canClick, boardGame, moveNumber, currentPlayer, afterMove]
   );
   return handleSquareClick;
 }

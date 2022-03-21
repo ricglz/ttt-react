@@ -7,7 +7,7 @@ import type {
   NumberBoard,
   BaseGame,
   FirebaseGame,
-} from "../@types/general";
+} from "types/general";
 
 export const getNextPlayer = (player: Player) =>
   player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1;

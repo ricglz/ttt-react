@@ -1,5 +1,5 @@
-import Row from "./Row";
 import type { CurrentBoard, GeneralBoardIndex } from "types/general";
+import Row from "./Row";
 import type { BigBoardProps } from "./BigBoard";
 
 function boardClass(boardNum: GeneralBoardIndex, currentBoard: CurrentBoard) {
