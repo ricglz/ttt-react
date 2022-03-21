@@ -1,8 +1,8 @@
-import Select from 'react-select';
-import type { ActionMeta, SingleValue } from 'react-select';
+import Select from "react-select";
+import type { ActionMeta, SingleValue } from "react-select";
 
-import type { Difficulty } from '../../@types/general_enums';
-import { FormattedMessage } from '../Layout/FormattedText';
+import type { Difficulty } from "types/general_enums";
+import { FormattedMessage } from "../Layout/FormattedText";
 
 export type Option = {
   label: object;

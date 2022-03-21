@@ -1,10 +1,10 @@
-import type { BigBoard as BigBoardType, CurrentBoard } from '../../@types/general';
-import BoardRow from './BoardRow';
+import type { BigBoard as BigBoardType, CurrentBoard } from "types/general";
+import BoardRow from "./BoardRow";
 
 export interface BigBoardProps {
-  boardGame: BigBoardType,
-  currentBoard: CurrentBoard,
-  handleClick: (board: number, id: number) => void
+  boardGame: BigBoardType;
+  currentBoard: CurrentBoard;
+  handleClick: (board: number, id: number) => void;
 }
 
 const BigBoard = ({ boardGame, currentBoard, handleClick }: BigBoardProps) => (

@@ -1,17 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { onValue } from 'firebase/database';
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { onValue } from "firebase/database";
 
-import Room from '../components/OnlineGame/Room';
-import { alertError, initialState } from './HelperFunctions';
+import type { FirebaseGame } from "types/general";
+import Room from "../components/OnlineGame/Room";
+import { alertError, initialState } from "./HelperFunctions";
 import {
   getRedirect,
   gamesReference,
   deleteGame,
   updateGame,
   createGame,
-} from '../firebase/firebase';
-import type { FirebaseGame } from '../@types/general';
+} from "../firebase/firebase";
 
 export type User = {
   email: string;
@@ -31,19 +31,19 @@ async function updateUser(setUser: (user: User) => void) {
     return;
   }
   const user: User = {
-    name: tempUser.displayName ?? '',
-    email: tempUser.email ?? '',
-    phoneNumber: tempUser.phoneNumber ?? '',
-    photoUrl: tempUser.photoURL ?? '',
-    uid: tempUser.uid ?? '',
+    name: tempUser.displayName ?? "",
+    email: tempUser.email ?? "",
+    phoneNumber: tempUser.phoneNumber ?? "",
+    photoUrl: tempUser.photoURL ?? "",
+    uid: tempUser.uid ?? "",
   };
   setUser(user);
-  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem("user", JSON.stringify(user));
 }
 
 export function useUser() {
   const [user, setUser] = useState(() => {
-    const cachedUserString = localStorage.getItem('user');
+    const cachedUserString = localStorage.getItem("user");
     const cachedUser: User | null = cachedUserString
       ? JSON.parse(cachedUserString)
       : null;
@@ -56,7 +56,7 @@ export function useUser() {
 
   const logOut = useCallback(() => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
   }, [setUser]);
 
   return { user, logOut };
@@ -77,7 +77,7 @@ export function useRooms({ user, joinGame }: UseRoomsProps) {
 
   useEffect(() => {
     if (user == null) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
     onValue(
@@ -85,7 +85,7 @@ export function useRooms({ user, joinGame }: UseRoomsProps) {
       (snapshot) => {
         setRooms(snapshot.val() || {});
       },
-      alertError,
+      alertError
     );
   }, [user, navigate, setRooms]);
 
@@ -102,25 +102,25 @@ export function useRooms({ user, joinGame }: UseRoomsProps) {
         />
       );
     },
-    [rooms, joinGame],
+    [rooms, joinGame]
   );
 
   const renderRooms = useCallback(
     () => Object.keys(rooms).map(renderRoom),
-    [renderRoom, rooms],
+    [renderRoom, rooms]
   );
 
   return [renderRooms];
 }
 
 function hostSurrendered(guestUid: string, gameId: string) {
-  if (guestUid === '-1') {
+  if (guestUid === "-1") {
     deleteGame(gameId);
   } else {
     updateGame(gameId, {
       ...initialState(),
       hostUid: guestUid,
-      guestUid: '-1',
+      guestUid: "-1",
       nextPlayerUid: guestUid,
     });
   }
@@ -147,7 +147,7 @@ export function useGameFlow({ uid, name }: UseGameFlowProps) {
       }
       updateGame(selectedGameId, { guestUid: uid });
     },
-    [uid, setGameId],
+    [uid, setGameId]
   );
 
   const surrender = useCallback(
@@ -161,12 +161,12 @@ export function useGameFlow({ uid, name }: UseGameFlowProps) {
       } else {
         updateGame(gameId, {
           ...initialState(),
-          guestUid: '-1',
+          guestUid: "-1",
           nextPlayerUid: hostUid,
         });
       }
     },
-    [uid, gameId, setGameId],
+    [uid, gameId, setGameId]
   );
 
   return {

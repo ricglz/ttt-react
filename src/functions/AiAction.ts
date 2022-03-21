@@ -1,32 +1,36 @@
-import { isOccupied } from './HelperFunctions';
-import type { GeneralBoardIndex, Board, NumberBoard } from '../@types/general';
-import { Cell, Difficulty } from '../@types/general_enums';
+import { isOccupied } from "./HelperFunctions";
+import type { GeneralBoardIndex, Board, NumberBoard } from "types/general";
+import { Cell, Difficulty } from "types/general_enums";
 
 type AiArgs = {
-  pos: GeneralBoardIndex,
-  currentDifficulty: Difficulty,
-  boardCopy: Board,
-  currentBoard: GeneralBoardIndex,
-  amountOccupied: NumberBoard,
-  avoidBox: NumberBoard,
+  pos: GeneralBoardIndex;
+  currentDifficulty: Difficulty;
+  boardCopy: Board;
+  currentBoard: GeneralBoardIndex;
+  amountOccupied: NumberBoard;
+  avoidBox: NumberBoard;
 };
-type ArgsWithoutDifficulty = Omit<AiArgs, 'currentDifficulty'>;
+type ArgsWithoutDifficulty = Omit<AiArgs, "currentDifficulty">;
 
 function someOneCouldWin(value1: Cell, value2: Cell, player = false) {
   const hopedValue = player ? Cell.X : Cell.O;
-  return (value1 === hopedValue && !isOccupied(value2))
-    || (value2 === hopedValue && !isOccupied(value1));
+  return (
+    (value1 === hopedValue && !isOccupied(value2)) ||
+    (value2 === hopedValue && !isOccupied(value1))
+  );
 }
 
-const aiCouldWin = (value1: Cell, value2: Cell) => someOneCouldWin(value1, value2);
-const playerCouldWin = (value1: Cell, value2: Cell) => someOneCouldWin(value1, value2, true);
+const aiCouldWin = (value1: Cell, value2: Cell) =>
+  someOneCouldWin(value1, value2);
+const playerCouldWin = (value1: Cell, value2: Cell) =>
+  someOneCouldWin(value1, value2, true);
 
 // Identifies which letter are the one near it and if it would be more valuable
 // to do the move or not
 function whatAreBoth(
   column1: GeneralBoardIndex,
   column2: GeneralBoardIndex,
-  { boardCopy }: ArgsWithoutDifficulty,
+  { boardCopy }: ArgsWithoutDifficulty
 ) {
   const value1 = boardCopy[column1];
   const value2 = boardCopy[column2];
@@ -42,7 +46,11 @@ function whatAreBoth(
 
 // Checks if the position chosen could stop a winning of the oponent or if
 // itself could win in diagonal
-function extraValueDiagonal(div: number, pos: GeneralBoardIndex, args: ArgsWithoutDifficulty) {
+function extraValueDiagonal(
+  div: number,
+  pos: GeneralBoardIndex,
+  args: ArgsWithoutDifficulty
+) {
   if (pos === 1 || pos === 3 || pos === 5 || pos === 7) return 0;
   if (pos === 4) return whatAreBoth(0, 8, args) + whatAreBoth(2, 6, args);
   if (div !== 0) {
@@ -75,7 +83,11 @@ function extraValueRow(div: number, mod: number, args: ArgsWithoutDifficulty) {
 
 // Checks if the position chosen could stop a winning of the oponent or if
 // itself could win in a column
-function extraValueColumn(div: number, mod: number, args: ArgsWithoutDifficulty) {
+function extraValueColumn(
+  div: number,
+  mod: number,
+  args: ArgsWithoutDifficulty
+) {
   switch (mod) {
     case 0:
       if (div === 0) return whatAreBoth(3, 6, args);
@@ -95,17 +107,16 @@ function extraValueColumn(div: number, mod: number, args: ArgsWithoutDifficulty)
 function positiveValues(args: ArgsWithoutDifficulty) {
   const { pos } = args;
   const div = Math.floor(pos / 3);
-  const mod = (pos % 3);
+  const mod = pos % 3;
   return (
-    extraValueColumn(div, mod, args)
-    + extraValueRow(div, mod, args)
-    + extraValueDiagonal(div, pos, args)
+    extraValueColumn(div, mod, args) +
+    extraValueRow(div, mod, args) +
+    extraValueDiagonal(div, pos, args)
   );
 }
 
-const recursiveMovement = ({ pos, currentBoard }: ArgsWithoutDifficulty) => (
-  pos === currentBoard ? 20 : 0
-);
+const recursiveMovement = ({ pos, currentBoard }: ArgsWithoutDifficulty) =>
+  pos === currentBoard ? 20 : 0;
 
 function negativeValues(args: ArgsWithoutDifficulty) {
   const { amountOccupied, avoidBox, pos } = args;

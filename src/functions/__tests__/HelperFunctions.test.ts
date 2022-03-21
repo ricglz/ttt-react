@@ -1,4 +1,6 @@
 import { toast } from "react-hot-toast";
+import { Player, Cell } from "types/general_enums";
+import type { Board } from "types/general";
 import {
   getNextPlayer,
   getPlayerCellValue,
@@ -7,8 +9,6 @@ import {
   isOccupied,
   theresAWinner,
 } from "../HelperFunctions";
-import { Player, Cell } from "../../@types/general_enums";
-import type { Board } from "../../@types/general";
 
 vi.mock("react-hot-toast", () => {
   const mockedToast = vi.fn();

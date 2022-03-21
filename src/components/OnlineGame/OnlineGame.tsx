@@ -1,17 +1,17 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 
-import BigBoard from '../Board/BigBoard';
+import BigBoard from "../Board/BigBoard";
 import {
   fbInitialState,
   getNextPlayer,
   initialState,
   isOccupied,
-} from '../../functions/HelperFunctions';
-import { readGame, updateGame } from '../../firebase/firebase';
-import ResetButton from '../Layout/ResetButton';
-import DefaultButton from '../Layout/DefaultButton';
-import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
-import type { FirebaseGame } from '../../@types/general';
+} from "../../functions/HelperFunctions";
+import { readGame, updateGame } from "../../firebase/firebase";
+import ResetButton from "../Layout/ResetButton";
+import DefaultButton from "../Layout/DefaultButton";
+import { useAfterMoveOnline, useHandleClick } from "../../functions/GameHooks";
+import type { FirebaseGame } from "types/general";
 
 type ButtonsFooterProps = {
   reset: () => void;
@@ -32,7 +32,7 @@ type Props = {
 };
 
 function OnlineGame({ back, gameId, userId }: Props) {
-  const [state, setState] = useState(fbInitialState('', ''));
+  const [state, setState] = useState(fbInitialState("", ""));
   const {
     boardGame,
     currentBoard,
@@ -49,19 +49,19 @@ function OnlineGame({ back, gameId, userId }: Props) {
     (snapshot) => {
       setState((prevState) => ({ ...prevState, ...snapshot.val() }));
     },
-    [setState],
+    [setState]
   );
 
   useEffect(
     () => readGame(gameId, setPreviousState),
-    [gameId, setPreviousState],
+    [gameId, setPreviousState]
   );
 
   const updateFirebase = useCallback(
     (obj: Partial<FirebaseGame>) => {
       updateGame(gameId, { ...obj, timestamp: Date.now() });
     },
-    [gameId],
+    [gameId]
   );
 
   const canClick = useCallback(
@@ -70,7 +70,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
       if (isOccupied(currentValue) || nextPlayerUid !== userId) return false;
       return board === currentBoard || currentBoard === -1;
     },
-    [boardGame, currentBoard, nextPlayerUid, userId],
+    [boardGame, currentBoard, nextPlayerUid, userId]
   );
 
   const pvpMove = useCallback(
@@ -86,7 +86,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
       };
       updateFirebase(newState);
     },
-    [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase],
+    [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase]
   );
 
   const changeScore = useCallback(
@@ -101,7 +101,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
       const newState = { oWins: newOWins, xWins: newXWins };
       updateFirebase(newState);
     },
-    [oWins, xWins, updateFirebase],
+    [oWins, xWins, updateFirebase]
   );
 
   const handleBack = useCallback(() => {
@@ -121,7 +121,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
     moveNumber,
   });
 
-  return guestUid === '-1' ? (
+  return guestUid === "-1" ? (
     <h1 className="text-center"> Please wait until someone enters the room </h1>
   ) : (
     <div className="container text-center">

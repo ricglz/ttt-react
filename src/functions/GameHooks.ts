@@ -8,7 +8,7 @@ import {
   getNextPlayer,
   getPlayerCellValue,
 } from './HelperFunctions';
-import { Cell } from '../@types/general_enums';
+import { Cell } from 'types/general_enums';
 
 import type {
   BigBoard,
@@ -17,7 +17,7 @@ import type {
   GeneralBoardIndex,
 } from '../@types/general';
 import type { Option } from '../components/Game/DifficultySelect';
-import type { Player } from '../@types/general_enums';
+import type { Player } from 'types/general_enums';
 import type Ai from './Ai';
 
 type SetGameFn = (game: Game) => void;
