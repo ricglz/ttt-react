@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Locale } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from './FormattedText';

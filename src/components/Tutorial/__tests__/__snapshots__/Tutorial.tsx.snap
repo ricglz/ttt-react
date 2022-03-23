@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`renders without crashing 1`] = `
 <div
@@ -114,7 +114,7 @@ exports[`renders without crashing 1`] = `
         <img
           alt="example"
           className="img-fluid"
-          src="example1.gif"
+          src="/src/images/example1.gif"
         />
       </div>
     </div>
@@ -130,7 +130,7 @@ exports[`renders without crashing 1`] = `
         <img
           alt="example"
           className="img-fluid"
-          src="example2.png"
+          src="/src/images/example2.png"
         />
       </div>
     </div>
@@ -154,9 +154,19 @@ exports[`renders without crashing 1`] = `
     </div>
   </div>
   <div
-    className="notification-container notification-container-empty"
-  >
-    <div />
-  </div>
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />
 </div>
 `;

@@ -1,12 +1,12 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   getAuth,
   getRedirectResult,
   signInWithRedirect,
   useDeviceLanguage,
-} from 'firebase/auth';
-import type { DataSnapshot } from 'firebase/database';
+} from "firebase/auth";
+import type { DataSnapshot } from "firebase/database";
 import {
   getDatabase,
   onValue,
@@ -14,17 +14,17 @@ import {
   ref,
   remove,
   update,
-} from 'firebase/database';
-import type { FirebaseGame } from '../@types/general';
-import { alertError, fbInitialState } from '../functions/HelperFunctions';
+} from "firebase/database";
+import type { FirebaseGame } from "@/types/general";
+import { alertError, fbInitialState } from "../functions/HelperFunctions";
 
 const app = initializeApp({
-  apiKey: 'AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E',
-  authDomain: 'ttt-hl-react.firebaseapp.com',
-  databaseURL: 'https://ttt-hl-react.firebaseio.com',
-  projectId: 'ttt-hl-react',
-  storageBucket: 'ttt-hl-react.appspot.com',
-  messagingSenderId: '870184829747',
+  apiKey: "AIzaSyAiNpaJDXyBIkHVfLV3aEOhNnYKBWWG82E",
+  authDomain: "ttt-hl-react.firebaseapp.com",
+  databaseURL: "https://ttt-hl-react.firebaseio.com",
+  projectId: "ttt-hl-react",
+  storageBucket: "ttt-hl-react.appspot.com",
+  messagingSenderId: "870184829747",
 });
 const database = getDatabase(app);
 const auth = getAuth(app);
@@ -33,19 +33,21 @@ const auth = getAuth(app);
 useDeviceLanguage(auth);
 const provider = new GoogleAuthProvider();
 
-export const gameReference = (gameId: string) => ref(database, `/games/${gameId}`);
+export const gameReference = (gameId: string) =>
+  ref(database, `/games/${gameId}`);
 export const deleteGame = (gameId: string) => remove(gameReference(gameId));
-export const updateGame = (gameId: string, toUpdateFields: Partial<FirebaseGame>) => (
-  update(gameReference(gameId), toUpdateFields)
-);
-export const readGame = (gameId: string, updateFn: (snapshot: DataSnapshot) => void) => (
-  onValue(gameReference(gameId), updateFn, alertError)
-);
+export const updateGame = (
+  gameId: string,
+  toUpdateFields: Partial<FirebaseGame>
+) => update(gameReference(gameId), toUpdateFields);
+export const readGame = (
+  gameId: string,
+  updateFn: (snapshot: DataSnapshot) => void
+) => onValue(gameReference(gameId), updateFn, alertError);
 
-export const gamesReference = ref(database, '/games');
-export const createGame = ([uid, name]: Parameters<(typeof fbInitialState)>) => (
-  push(gamesReference, fbInitialState(uid, name))
-);
+export const gamesReference = ref(database, "/games");
+export const createGame = ([uid, name]: Parameters<typeof fbInitialState>) =>
+  push(gamesReference, fbInitialState(uid, name));
 
 export function getRedirect() {
   return getRedirectResult(auth);

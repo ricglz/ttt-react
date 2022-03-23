@@ -1,11 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import type { BigBoard } from '../../../@types/general';
-import { Cell as CellEnum } from '../../../@types/general_enums';
-import { newBoard } from '../../../functions/HelperFunctions';
-import Cell from '../Cell';
+import renderer from "react-test-renderer";
+import type { BigBoard } from "@/types/general";
+// eslint-disable-next-line import/extensions
+import { Cell as CellEnum } from "@/types/general_enums";
+import { newBoard } from "../../../functions/HelperFunctions";
+import Cell from "../Cell";
 
-describe('Cell', () => {
+describe("Cell", () => {
   const boardNum = 0;
   const cellNum = 0;
   let boardGame: BigBoard;
@@ -14,7 +14,7 @@ describe('Cell', () => {
     boardGame = newBoard();
   });
 
-  test.each([CellEnum.X, CellEnum.O, CellEnum.NONE])('Value is %s', (value) => {
+  test.each([CellEnum.X, CellEnum.O, CellEnum.NONE])("Value is %s", (value) => {
     boardGame[boardNum][cellNum] = value;
     const component = (
       <Cell

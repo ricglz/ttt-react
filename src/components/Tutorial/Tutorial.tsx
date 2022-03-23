@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Locale } from 'react-i18next';
 import exImage1 from '../../images/example1.gif';
 import exImage2 from '../../images/example2.png';

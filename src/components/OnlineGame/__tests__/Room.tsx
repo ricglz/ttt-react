@@ -1,18 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { MemoryRouter } from 'react-router-dom';
-import Home from '../../Home/Home';
-import Room from '../Room';
-import ContextsProvider from '../../../ContextsProvider';
+import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
+import Home from "../../Home/Home";
+import Room from "../Room";
+import ContextsProvider from "../../../ContextsProvider";
 
-const mockJoinRoom = jest.fn();
+const mockJoinRoom = vi.fn();
 
 function Component() {
   return (
-    <ContextsProvider
-      ChildrenComponent={Home}
-      RouterComponent={MemoryRouter}
-    >
+    <ContextsProvider ChildrenComponent={Home} RouterComponent={MemoryRouter}>
       <Room
         joinGame={mockJoinRoom}
         hostUid="hostUid"
@@ -23,7 +19,7 @@ function Component() {
   );
 }
 
-it('renders without crashing', () => {
+it("renders without crashing", () => {
   const component = <Component />;
   const tree = renderer.create(component).toJSON();
   expect(tree).toMatchSnapshot();

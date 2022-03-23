@@ -1,24 +1,28 @@
-import { NotificationManager } from 'react-notifications';
+import { toast } from "react-hot-toast";
+// eslint-disable-next-line import/extensions
+import { Cell, Player } from "@/types/general_enums";
 import type {
-  BigBoard, Board, GeneralBoardIndex, NumberBoard, BaseGame, FirebaseGame,
-} from '../@types/general';
-import { Cell, Player } from '../@types/general_enums';
+  BigBoard,
+  Board,
+  GeneralBoardIndex,
+  NumberBoard,
+  BaseGame,
+  FirebaseGame,
+} from "@/types/general";
 
-export const getNextPlayer = (player: Player) => (
-  player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1
-);
+export const getNextPlayer = (player: Player) =>
+  player === Player.PLAYER_1 ? Player.PLAYER_2 : Player.PLAYER_1;
 
-export const getPlayerCellValue = (player: Player) => (
-  player === Player.PLAYER_1 ? Cell.X : Cell.O
-);
+export const getPlayerCellValue = (player: Player) =>
+  player === Player.PLAYER_1 ? Cell.X : Cell.O;
 
 export function alertWinner(winner: Cell) {
   const winnerLabel = winner === Cell.X ? Player.PLAYER_1 : Player.PLAYER_2;
-  NotificationManager.info(`Player ${winnerLabel} has won.`);
+  toast(`Player ${winnerLabel} has won.`);
 }
 
 export function alertError(err: Error) {
-  NotificationManager.error(err.message);
+  toast.error(err.message);
 }
 
 export function emptyArray(): NumberBoard {
@@ -33,15 +37,15 @@ function allThree(
   first: GeneralBoardIndex,
   second: GeneralBoardIndex,
   third: GeneralBoardIndex,
-  board: Board,
+  board: Board
 ) {
   const firstValue = board[first];
   const secondValue = board[second];
   const thirdValue = board[third];
   if (
-    firstValue === secondValue
-    && secondValue === thirdValue
-    && isOccupied(firstValue)
+    firstValue === secondValue &&
+    secondValue === thirdValue &&
+    isOccupied(firstValue)
   ) {
     return firstValue;
   }
@@ -49,11 +53,19 @@ function allThree(
 }
 
 function columnWin(board: Board) {
-  return allThree(0, 3, 6, board) || allThree(1, 4, 7, board) || allThree(2, 5, 8, board);
+  return (
+    allThree(0, 3, 6, board) ||
+    allThree(1, 4, 7, board) ||
+    allThree(2, 5, 8, board)
+  );
 }
 
 function rowWin(board: Board) {
-  return allThree(0, 1, 2, board) || allThree(3, 4, 5, board) || allThree(6, 7, 8, board);
+  return (
+    allThree(0, 1, 2, board) ||
+    allThree(3, 4, 5, board) ||
+    allThree(6, 7, 8, board)
+  );
 }
 
 function diagonalWin(board: Board) {
@@ -87,14 +99,17 @@ export function initialState(): BaseGame {
   };
 }
 
-export function fbInitialState(hostUid: string, hostName: string): FirebaseGame {
+export function fbInitialState(
+  hostUid: string,
+  hostName: string
+): FirebaseGame {
   return {
     ...initialState(),
     oWins: 0,
     xWins: 0,
     hostUid,
     hostName,
-    guestUid: '-1',
+    guestUid: "-1",
     nextPlayerUid: hostUid,
     timestamp: Date.now(),
   };

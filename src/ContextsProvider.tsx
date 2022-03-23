@@ -1,17 +1,17 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { NotificationContainer } from 'react-notifications';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router } from "react-router-dom";
+import type { FC, ReactNode } from "react";
 
 type Locale = string;
 
 function getDirection(locale: Locale) {
-  return locale === 'ar' ? ['rtl', 'text-right'] : ['ltr', 'text-left'];
+  return locale === "ar" ? ["rtl", "text-right"] : ["ltr", "text-left"];
 }
 
 type Props = {
-  ChildrenComponent: React.FC;
-  children?: React.ReactNode;
+  ChildrenComponent: FC;
+  children?: ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RouterComponent?: any;
 };
@@ -30,7 +30,7 @@ export default function ContextsProvider({
         <ChildrenComponent />
         {children}
       </RouterComponent>
-      <NotificationContainer />
+      <Toaster position="bottom-right" />
     </div>
   );
 }

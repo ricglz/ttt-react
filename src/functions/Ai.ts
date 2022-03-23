@@ -1,8 +1,9 @@
-import type { Board, GeneralBoardIndex, NumberBoard } from '../@types/general';
+import type { Board, GeneralBoardIndex, NumberBoard } from "@/types/general";
+// eslint-disable-next-line import/extensions
+import { Cell, Difficulty } from "@/types/general_enums";
 
-import AiAction from './AiAction';
-import { Cell, Difficulty } from '../@types/general_enums';
-import { isOccupied, emptyArray } from './HelperFunctions';
+import AiAction from "./AiAction";
+import { isOccupied, emptyArray } from "./HelperFunctions";
 
 interface Args {
   board: Board;
@@ -43,7 +44,7 @@ function getAvailableMoves(props: AiProperties) {
     }
     const pos = index as GeneralBoardIndex;
     availableMoves.push(
-      new AiAction({ pos, boardCopy: props.board, ...props }),
+      new AiAction({ pos, boardCopy: props.board, ...props })
     );
   });
   return availableMoves;
@@ -83,7 +84,7 @@ class Ai {
   areTwo = (
     pos1: GeneralBoardIndex,
     pos2: GeneralBoardIndex,
-    pos3: GeneralBoardIndex,
+    pos3: GeneralBoardIndex
   ) => {
     const value1 = this.board[pos1];
     const value2 = this.board[pos2];
@@ -93,8 +94,8 @@ class Ai {
     const secondIsOccupied = isOccupied(value2);
 
     if (
-      (value1 === value2 && firstIsOccupied && !isOccupied(value3))
-      || (value1 === value3 && firstIsOccupied && !secondIsOccupied)
+      (value1 === value2 && firstIsOccupied && !isOccupied(value3)) ||
+      (value1 === value3 && firstIsOccupied && !secondIsOccupied)
     ) {
       return areTwoValue(value1);
     }
@@ -104,15 +105,18 @@ class Ai {
     return 0;
   };
 
-  areTwoInTheColumn = () => this.areTwo(0, 3, 6) + this.areTwo(1, 4, 7) + this.areTwo(2, 5, 8);
+  areTwoInTheColumn = () =>
+    this.areTwo(0, 3, 6) + this.areTwo(1, 4, 7) + this.areTwo(2, 5, 8);
 
-  areTwoInTheRow = () => this.areTwo(0, 1, 2) + this.areTwo(3, 4, 5) + this.areTwo(6, 7, 8);
+  areTwoInTheRow = () =>
+    this.areTwo(0, 1, 2) + this.areTwo(3, 4, 5) + this.areTwo(6, 7, 8);
 
   areTwoInTheDiagonal = () => this.areTwo(0, 4, 8) + this.areTwo(2, 4, 6);
 
-  areTwoInTheBoard = () => this.areTwoInTheColumn()
-    + this.areTwoInTheDiagonal()
-    + this.areTwoInTheRow();
+  areTwoInTheBoard = () =>
+    this.areTwoInTheColumn() +
+    this.areTwoInTheDiagonal() +
+    this.areTwoInTheRow();
 
   playerMadeAMove = (boardId: GeneralBoardIndex, board: Board) => {
     this.amountOccupied[boardId] += 3;

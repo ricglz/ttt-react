@@ -1,4 +1,3 @@
-import React from 'react';
 import BackButton from '../Layout/BackButton';
 import ResetButton from '../Layout/ResetButton';
 

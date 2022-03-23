@@ -1,17 +1,17 @@
-import React from 'react';
+import { useState, useCallback, useEffect } from "react";
+import type { FirebaseGame } from "@/types/general";
 
-import BigBoard from '../Board/BigBoard';
+import BigBoard from "../Board/BigBoard";
 import {
   fbInitialState,
   getNextPlayer,
   initialState,
   isOccupied,
-} from '../../functions/HelperFunctions';
-import { readGame, updateGame } from '../../firebase/firebase';
-import ResetButton from '../Layout/ResetButton';
-import DefaultButton from '../Layout/DefaultButton';
-import { useAfterMoveOnline, useHandleClick } from '../../functions/GameHooks';
-import type { FirebaseGame } from '../../@types/general';
+} from "../../functions/HelperFunctions";
+import { readGame, updateGame } from "../../firebase/firebase";
+import ResetButton from "../Layout/ResetButton";
+import DefaultButton from "../Layout/DefaultButton";
+import { useAfterMoveOnline, useHandleClick } from "../../functions/GameHooks";
 
 type ButtonsFooterProps = {
   reset: () => void;
@@ -32,7 +32,7 @@ type Props = {
 };
 
 function OnlineGame({ back, gameId, userId }: Props) {
-  const [state, setState] = React.useState(fbInitialState('', ''));
+  const [state, setState] = useState(fbInitialState("", ""));
   const {
     boardGame,
     currentBoard,
@@ -45,35 +45,35 @@ function OnlineGame({ back, gameId, userId }: Props) {
     xWins,
   } = state;
 
-  const setPreviousState = React.useCallback(
+  const setPreviousState = useCallback(
     (snapshot) => {
       setState((prevState) => ({ ...prevState, ...snapshot.val() }));
     },
-    [setState],
+    [setState]
   );
 
-  React.useEffect(
+  useEffect(
     () => readGame(gameId, setPreviousState),
-    [gameId, setPreviousState],
+    [gameId, setPreviousState]
   );
 
-  const updateFirebase = React.useCallback(
+  const updateFirebase = useCallback(
     (obj: Partial<FirebaseGame>) => {
       updateGame(gameId, { ...obj, timestamp: Date.now() });
     },
-    [gameId],
+    [gameId]
   );
 
-  const canClick = React.useCallback(
+  const canClick = useCallback(
     (board, id) => {
       const currentValue = boardGame[board][id];
       if (isOccupied(currentValue) || nextPlayerUid !== userId) return false;
       return board === currentBoard || currentBoard === -1;
     },
-    [boardGame, currentBoard, nextPlayerUid, userId],
+    [boardGame, currentBoard, nextPlayerUid, userId]
   );
 
-  const pvpMove = React.useCallback(
+  const pvpMove = useCallback(
     (newBoard, newMoveNumber, newCurrentBoard) => {
       const newCurrentPlayer = getNextPlayer(currentPlayer);
       const newNextPlayerUid = nextPlayerUid === hostUid ? guestUid : hostUid;
@@ -86,10 +86,10 @@ function OnlineGame({ back, gameId, userId }: Props) {
       };
       updateFirebase(newState);
     },
-    [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase],
+    [currentPlayer, hostUid, guestUid, nextPlayerUid, updateFirebase]
   );
 
-  const changeScore = React.useCallback(
+  const changeScore = useCallback(
     (value) => {
       let newOWins = oWins;
       let newXWins = xWins;
@@ -101,14 +101,14 @@ function OnlineGame({ back, gameId, userId }: Props) {
       const newState = { oWins: newOWins, xWins: newXWins };
       updateFirebase(newState);
     },
-    [oWins, xWins, updateFirebase],
+    [oWins, xWins, updateFirebase]
   );
 
-  const handleBack = React.useCallback(() => {
+  const handleBack = useCallback(() => {
     back(state);
   }, [back, state]);
 
-  const newGame = React.useCallback(() => {
+  const newGame = useCallback(() => {
     updateFirebase(initialState());
   }, [updateFirebase]);
 
@@ -121,7 +121,7 @@ function OnlineGame({ back, gameId, userId }: Props) {
     moveNumber,
   });
 
-  return guestUid === '-1' ? (
+  return guestUid === "-1" ? (
     <h1 className="text-center"> Please wait until someone enters the room </h1>
   ) : (
     <div className="container text-center">

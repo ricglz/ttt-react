@@ -1,20 +1,20 @@
-import { request } from '@octokit/request';
-import React from 'react';
+import { useState, useEffect } from 'react';
+import type { ContributorType } from './Contributor';
 import Contributor from './Contributor';
 
+type ContributorsType = ContributorType[];
+
 async function fetchContributors() {
-  const response = await request('GET /repos/{owner}/{repo}/contributors', {
-    owner: 'ricglz',
-    repo: 'ttt-react',
-  });
-  return response.data;
+  const response = await fetch(
+    'https://api.github.com/repos/ricglz/ttt-react/contributors',
+  );
+  const data = await response.json();
+  return data;
 }
 
-type ContributorsType = Awaited<ReturnType<typeof fetchContributors>>;
-
 function useContributors() {
-  const [contributors, setContributors] = React.useState<ContributorsType>([]);
-  React.useEffect(() => {
+  const [contributors, setContributors] = useState<ContributorsType>([]);
+  useEffect(() => {
     const setData = async () => {
       const newContributors = await fetchContributors();
       setContributors(newContributors);

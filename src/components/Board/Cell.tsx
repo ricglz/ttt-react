@@ -1,23 +1,18 @@
-import React from 'react';
+import { useCallback } from "react";
 
-import type { BigBoard, GeneralBoardIndex } from '../../@types/general';
-import type { BoardProps } from './Board';
-
-import { Player, Cell as CellEnum } from '../../@types/general_enums';
+import type { BigBoard, GeneralBoardIndex } from "@/types/general";
+  // eslint-disable-next-line import/extensions
+import { Player, Cell as CellEnum } from "@/types/general_enums";
+import type { BoardProps } from "./Board";
 
 type Args = {
-  boardGame: BigBoard,
-  boardNum: GeneralBoardIndex,
-  cellNum: GeneralBoardIndex
+  boardGame: BigBoard;
+  boardNum: GeneralBoardIndex;
+  cellNum: GeneralBoardIndex;
 };
 
-const currentValue = ({
-  boardGame,
-  boardNum,
-  cellNum,
-}: Args) => (
-  boardGame[boardNum][cellNum]
-);
+const currentValue = ({ boardGame, boardNum, cellNum }: Args) =>
+  boardGame[boardNum][cellNum];
 
 function drawValue(args: Args) {
   switch (currentValue(args)) {
@@ -26,21 +21,19 @@ function drawValue(args: Args) {
     case CellEnum.O:
       return Player.PLAYER_2;
     default:
-      return '';
+      return "";
   }
 }
 
 const emptyFunction = () => {};
 
 interface Props extends BoardProps {
-  cellNum: GeneralBoardIndex
+  cellNum: GeneralBoardIndex;
 }
 
-const Cell = ({
-  boardGame, boardNum, cellNum, handleClick,
-}: Props) => {
+const Cell = ({ boardGame, boardNum, cellNum, handleClick }: Props) => {
   const value = drawValue({ boardGame, boardNum, cellNum });
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     handleClick(boardNum, cellNum);
   }, [boardNum, cellNum, handleClick]);
   return (
