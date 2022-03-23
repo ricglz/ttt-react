@@ -1,4 +1,5 @@
 import type { Board } from "@/types/general";
+// eslint-disable-next-line import/extensions
 import { Cell, Difficulty } from "@/types/general_enums";
 import Ai from "../Ai";
 import { emptyArray } from "../HelperFunctions";

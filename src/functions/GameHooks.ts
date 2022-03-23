@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 
+// eslint-disable-next-line import/extensions
 import { Cell } from "@/types/general_enums";
 import type { BigBoard, Board, Game, GeneralBoardIndex } from "@/types/general";
 import type { Player } from "@/types/general_enums";

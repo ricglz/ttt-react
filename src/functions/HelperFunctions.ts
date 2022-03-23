@@ -1,4 +1,5 @@
 import { toast } from "react-hot-toast";
+// eslint-disable-next-line import/extensions
 import { Cell, Player } from "@/types/general_enums";
 import type {
   BigBoard,
