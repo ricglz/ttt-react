@@ -1,5 +1,5 @@
-import type { GeneralBoardIndex, Board, NumberBoard } from "types/general";
-import { Cell, Difficulty } from "types/general_enums";
+import type { GeneralBoardIndex, Board, NumberBoard } from "@/types/general";
+import { Cell, Difficulty } from "@/types/general_enums";
 
 import { isOccupied } from "./HelperFunctions";
 

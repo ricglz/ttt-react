@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import type { FirebaseGame } from "types/general";
+import type { FirebaseGame } from "@/types/general";
 
 import BigBoard from "../Board/BigBoard";
 import {

@@ -1,4 +1,4 @@
-import type { CurrentBoard, GeneralBoardIndex } from "types/general";
+import type { CurrentBoard, GeneralBoardIndex } from "@/types/general";
 import Row from "./Row";
 import type { BigBoardProps } from "./BigBoard";
 

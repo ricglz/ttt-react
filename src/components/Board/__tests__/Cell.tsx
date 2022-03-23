@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
-import type { BigBoard } from "types/general";
-import { Cell as CellEnum } from "types/general_enums";
+import type { BigBoard } from "@/types/general";
+import { Cell as CellEnum } from "@/types/general_enums";
 import { newBoard } from "../../../functions/HelperFunctions";
 import Cell from "../Cell";
 

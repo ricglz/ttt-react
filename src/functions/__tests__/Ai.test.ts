@@ -1,5 +1,5 @@
-import type { Board } from "types/general";
-import { Cell, Difficulty } from "types/general_enums";
+import type { Board } from "@/types/general";
+import { Cell, Difficulty } from "@/types/general_enums";
 import Ai from "../Ai";
 import { emptyArray } from "../HelperFunctions";
 

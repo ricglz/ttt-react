@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 
-import { Cell } from "types/general_enums";
-import type { BigBoard, Board, Game, GeneralBoardIndex } from "types/general";
-import type { Player } from "types/general_enums";
+import { Cell } from "@/types/general_enums";
+import type { BigBoard, Board, Game, GeneralBoardIndex } from "@/types/general";
+import type { Player } from "@/types/general_enums";
 
 import {
   isOccupied,

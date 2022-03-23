@@ -15,7 +15,7 @@ import {
   remove,
   update,
 } from "firebase/database";
-import type { FirebaseGame } from "types/general";
+import type { FirebaseGame } from "@/types/general";
 import { alertError, fbInitialState } from "../functions/HelperFunctions";
 
 const app = initializeApp({

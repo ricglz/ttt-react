@@ -1,4 +1,4 @@
-import type { GeneralBoardIndex } from "types/general";
+import type { GeneralBoardIndex } from "@/types/general";
 import type { BoardProps } from "./Board";
 import Cell from "./Cell";
 

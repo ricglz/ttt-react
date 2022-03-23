@@ -1,7 +1,7 @@
 import Select from "react-select";
 import type { ActionMeta, SingleValue } from "react-select";
 
-import type { Difficulty } from "types/general_enums";
+import type { Difficulty } from "@/types/general_enums";
 import { FormattedMessage } from "../Layout/FormattedText";
 
 export type Option = {

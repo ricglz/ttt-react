@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
-import type { BigBoard, GeneralBoardIndex } from "types/general";
-import { Player, Cell as CellEnum } from "types/general_enums";
+import type { BigBoard, GeneralBoardIndex } from "@/types/general";
+import { Player, Cell as CellEnum } from "@/types/general_enums";
 import type { BoardProps } from "./Board";
 
 type Args = {

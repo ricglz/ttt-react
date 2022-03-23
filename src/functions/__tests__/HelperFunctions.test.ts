@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
-import { Player, Cell } from "types/general_enums";
-import type { Board } from "types/general";
+import { Player, Cell } from "@/types/general_enums";
+import type { Board } from "@/types/general";
 import {
   getNextPlayer,
   getPlayerCellValue,

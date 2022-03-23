@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { onValue } from "firebase/database";
 
-import type { FirebaseGame } from "types/general";
+import type { FirebaseGame } from "@/types/general";
 import Room from "../components/OnlineGame/Room";
 import { alertError, initialState } from "./HelperFunctions";
 import {

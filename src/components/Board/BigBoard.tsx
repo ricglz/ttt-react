@@ -1,4 +1,4 @@
-import type { BigBoard as BigBoardType, CurrentBoard } from "types/general";
+import type { BigBoard as BigBoardType, CurrentBoard } from "@/types/general";
 import BoardRow from "./BoardRow";
 
 export interface BigBoardProps {

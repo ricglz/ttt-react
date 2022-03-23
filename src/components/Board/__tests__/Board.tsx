@@ -1,5 +1,5 @@
 import renderer from "react-test-renderer";
-import type { CurrentBoard } from "types/general";
+import type { CurrentBoard } from "@/types/general";
 import { newBoard } from "../../../functions/HelperFunctions";
 import Board from "../Board";
 
