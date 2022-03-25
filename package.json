@@ -40,7 +40,7 @@
     "source-map-explorer": "^2.5.2",
     "stylelint": "^14.6.0",
     "stylelint-config-standard": "^25.0.0",
-    "typescript": "^4.6.2",
+    "typescript": "^4.6.3",
     "vite": "^2.8.6",
     "vite-plugin-svgr": "^1.1.0",
     "vitest": "^0.7.10"
