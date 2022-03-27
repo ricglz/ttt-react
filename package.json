@@ -3,7 +3,7 @@
     "supports es6-module"
   ],
   "dependencies": {
-    "firebase": "^9.6.9",
+    "firebase": "^9.6.10",
     "i18next": "^21.6.14",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -13,12 +13,12 @@
     "react-select": "^5.2.2"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.11.3",
+    "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/node": "^17.0.23",
-    "@types/react": "^17.0.41",
+    "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-test-renderer": "^17.0.1",
@@ -40,7 +40,7 @@
     "source-map-explorer": "^2.5.2",
     "stylelint": "^14.6.0",
     "stylelint-config-standard": "^25.0.0",
-    "typescript": "^4.6.2",
+    "typescript": "^4.6.3",
     "vite": "^2.8.6",
     "vite-plugin-svgr": "^1.1.0",
     "vitest": "^0.7.10"

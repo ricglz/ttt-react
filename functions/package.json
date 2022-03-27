@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "firebase-admin": "^7.0.0",
-    "firebase-functions": "^2.3.1"
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0"
   },
   "description": "Cloud Functions for Firebase",
   "devDependencies": {
-    "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint": "^8.12.0",
+    "eslint-plugin-promise": "^6.0.0"
   },
   "engines": {
-    "node": "8"
+    "node": ">12"
   },
   "name": "functions",
   "private": true,
